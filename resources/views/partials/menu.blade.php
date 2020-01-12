@@ -45,11 +45,27 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="{{ route("admin.products.index") }}" class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
+                <a href="{{ route("admin.itineraries.index") }}" class="nav-link {{ request()->is('admin/itineraries') || request()->is('admin/itineraries/*') ? 'active' : '' }}">
                     <i class="fas fa-cogs nav-icon">
 
                     </i>
-                    {{ trans('global.product.title') }}
+                    {{ trans('global.itinerary.title') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route("admin.destinations.index") }}" class="nav-link {{ request()->is('admin/destinations') || request()->is('admin/destinations/*') ? 'active' : '' }}">
+                    <i class="fa fa-map-marker nav-icon">
+
+                    </i>
+                    {{ trans('global.destination.title') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route("admin.activities.index") }}" class="nav-link {{ request()->is('admin/activities') || request()->is('admin/activities/*') ? 'active' : '' }}">
+                    <i class="fa fa-asl-interpreting nav-icon">
+
+                    </i>
+                    {{ trans('global.activity.title') }}
                 </a>
             </li>
             <li class="nav-item">

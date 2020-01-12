@@ -35,6 +35,11 @@ class User extends Authenticatable
         'deleted_at',
         'remember_token',
         'email_verified_at',
+		'image', 
+		'provider', 
+        'provider_id', 
+        'country_code',
+        'phone'
     ];
 
     public function getEmailVerifiedAtAttribute($value)
@@ -63,4 +68,36 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+	public function hasRole($role)
+	{
+	  return null !== $this->roles()->where('title', $role)->first();
+	}
+
+     /**
+     * User tokens relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tokens()
+    {
+        return $this->hasMany(Token::class);
+    }
+
+    /**
+     * Return the country code and phone number concatenated
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->country_code.$this->phone;
+    }
+
+    public function profile()
+    {
+		return $this->hasOne('App\Profile');
+    }
+   
+
 }
