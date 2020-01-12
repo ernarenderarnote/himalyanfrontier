@@ -149,6 +149,7 @@ $('document').ready(function(){
     $('input[name="itinerary_type"]').on('change', function(){
         $('input[name="activity"]:checked').removeAttr('checked');
         $('input[name="destination"]:checked').removeAttr('checked');
+        $('input[name="date"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
     $('input[name="s"]').on('focusout', function(){
