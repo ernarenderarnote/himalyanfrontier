@@ -156,6 +156,7 @@ $('document').ready(function(){
         $('.advanced_serch_form').submit();
     });
     $('.daate input[name="date"]').on('change', function(){
+        $('input[name="itinerary_type"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
 });    
