@@ -178,7 +178,7 @@ $(function(){
         minHeight : false,
         minWidth : false,
         callback    : function( pages,items ){
-            $("#legend1").html("Page " + pages.current + " of " + pages.count);
+            $(".legend1").html("Page " + pages.current + " of " + pages.count);
                 /* lazy load current images */
             items.showing.find(".img_outer img").trigger("turnPage");
             /* lazy load next page images */

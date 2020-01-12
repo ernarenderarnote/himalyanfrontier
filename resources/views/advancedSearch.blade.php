@@ -87,10 +87,12 @@
          
          <div class="col-md-9 col-sm-12">
             <!-- navigation holder -->
-            <div id="legend1">
+            @if($itineraries->count() > 1)
+            <div class="legend1">
             </div>
             <div class="holder">
             </div>
+            @endif
             <!-- Page oriented legend -->
             <div class="right_side">
                 <div id="itemContainer">
@@ -145,10 +147,12 @@
                 </div>    
             </div>
             <!-- navigation holder -->
-            <div id="legend1">
-            </div>
-            <div class="holder">
-            </div>
+            @if($itineraries->count() > 1)  
+                <div class="legend1">
+                </div>
+                <div class="holder">
+                </div>
+            @endif    
          </div>
       </div>
    </div>
