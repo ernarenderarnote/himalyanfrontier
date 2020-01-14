@@ -45,7 +45,7 @@ class HomeController extends Controller
     }
 
     public function activity(Request $request){
-        $activity = Itinerary::with('destinations','activities')->where('slug',$request->slug)->first();
+        $activity = Itinerary::with('destinations','activities','schedule')->where('slug',$request->slug)->first();
         $similar_tours = Itinerary::where('deleted_at',NULL)->where('status','active')->orderBy('created_at', 'desc')->take(3)->get();
         return view('single',compact('activity', 'similar_tours'));
     }
@@ -114,8 +114,11 @@ class HomeController extends Controller
                     $query->where('slug', $activity);
                 })->whereHas('schedule', function (Builder $query) use ($itinerary_date){
                     $query->whereMonth('from_date', $itinerary_date);
-                })->where('description', 'like', '%' . $search . '%')
-                ->whereBetween('rating', [$ratingFrom, $ratingTo])->get($required_params);
+                })->where(function($q) use($search) {
+                    $q->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('title', 'like', '%' . $search . '%');
+                })->whereBetween('rating', [$ratingFrom, $ratingTo])
+                ->get($required_params);
 
         }elseif($destination != '' && $activity !='' && $itinerary_date ==''){
             $itineraries = Itinerary::with(['destinations', 'activities', 'schedule'])
@@ -123,7 +126,10 @@ class HomeController extends Controller
                     $query->where('slug', $destination);
                 })->whereHas('activities', function (Builder $query) use ($activity){
                     $query->where('slug', $activity);
-                })->where('description', 'like', '%' . $search . '%')
+                })->where(function($q) use($search) {
+                    $q->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('title', 'like', '%' . $search . '%');
+                })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])->get($required_params);
 
         }elseif($destination == '' && $activity !='' && $itinerary_date !=''){
@@ -133,7 +139,23 @@ class HomeController extends Controller
                     $query->where('slug', $activity);
                 })->whereHas('schedule', function (Builder $query) use ($itinerary_date){
                     $query->whereMonth('from_date', $itinerary_date);
-                })->where('description', 'like', '%' . $search . '%')
+                })->where(function($q) use($search) {
+                    $q->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('title', 'like', '%' . $search . '%');
+                })
+                ->whereBetween('rating', [$ratingFrom, $ratingTo])->get($required_params);
+
+        }elseif($destination != '' && $activity =='' && $itinerary_date !=''){
+            
+            $itineraries = Itinerary::with(['destinations', 'activities', 'schedule'])
+                ->whereHas('destinations', function (Builder $query) use ($destination){
+                    $query->where('slug', $destination);
+                })->whereHas('schedule', function (Builder $query) use ($itinerary_date){
+                    $query->whereMonth('from_date', $itinerary_date);
+                })->where(function($q) use($search) {
+                    $q->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('title', 'like', '%' . $search . '%');
+                })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])->get($required_params);
 
         }elseif($destination != '' && $activity == '' && $itinerary_date == ''){
@@ -141,7 +163,10 @@ class HomeController extends Controller
             $itineraries = Itinerary::with(['destinations', 'activities', 'schedule'])
                 ->whereHas('destinations', function (Builder $query) use ($destination){
                     $query->where('slug', $destination);
-                })->where('description', 'like', '%' . $search . '%')
+                })->where(function($q) use($search) {
+                    $q->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('title', 'like', '%' . $search . '%');
+                })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])->get($required_params);
 
         }elseif($destination == '' && $activity != '' && $itinerary_date == ''){
@@ -149,7 +174,10 @@ class HomeController extends Controller
             $itineraries = Itinerary::with(['destinations', 'activities', 'schedule'])
                 ->whereHas('activities', function (Builder $query) use ($activity){
                     $query->where('slug', $activity);
-                })->where('description', 'like', '%' . $search . '%')
+                })->where(function($q) use($search) {
+                    $q->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('title', 'like', '%' . $search . '%');
+                })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])->get($required_params);
 
         }elseif($destination == '' && $activity == '' && $itinerary_date != ''){
@@ -157,7 +185,10 @@ class HomeController extends Controller
             $itineraries = Itinerary::with(['destinations', 'activities', 'schedule'])
                 ->whereHas('schedule', function (Builder $query) use ($itinerary_date){
                     $query->whereMonth('from_date', $itinerary_date);
-                })->where('description', 'like', '%' . $search . '%')
+                })->where(function($q) use($search) {
+                    $q->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('title', 'like', '%' . $search . '%');
+                })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])->get($required_params);
 
         }elseif($itinerary_type != ''){
@@ -170,11 +201,19 @@ class HomeController extends Controller
             }
             $itineraries = Itinerary::with(['destinations', 'activities'])
                 ->where($itinerary_type, $itinerary_type_value)
-                ->where('description', 'like', '%' . $search . '%')
+                ->where(function($q) use($search) {
+                    $q->orWhere('description', 'like', '%' . $search . '%')
+                      ->orWhere('title', 'like', '%' . $search . '%');
+                })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])->get($required_params);
 
         }else{
-            $itineraries = Itinerary::with(['destinations', 'activities'])->where('description', 'like', '%' . $search . '%')->get($required_params);
+            $itineraries = Itinerary::with(['destinations', 'activities'])
+            ->where(function($q) use($search) {
+                $q->orWhere('description', 'like', '%' . $search . '%')
+                  ->orWhere('title', 'like', '%' . $search . '%');
+            })
+            ->get($required_params);
         }
         
         return view('advancedSearch', compact('itineraries', 'destinations', 'activities'));

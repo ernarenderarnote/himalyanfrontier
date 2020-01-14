@@ -129,6 +129,70 @@ $(document).ready(function(){
   $(document).on('click', '.removemore', function () {
     $(this).parents('.dynamic-schedule').remove();
   });
+
+  //add accordian
+  /* var accordian_id =  $('.accordian-card').length;
+  
+  $('.add-accordian').on('click',function(e){
+    e.preventDefault();
+    accordian_id++;
+    var $cloneAccordian = $('#accordionExample').find('.accordian-card:first').clone(true);
+    //$('.collapse').removeData('bs.collapse'); // destroy collapse
+    //$('.collapse').collapse({parent:false});
+    $cloneAccordian.find('.card-link').attr('href','#accordin'+accordian_id);
+    $cloneAccordian.find('.collapse').attr('id','accordin'+accordian_id);
+    $cloneAccordian.find('.collapse').removeAttr('aria-expanded');
+    $cloneAccordian.find('.collapse').attr('data-parent','#accordin'+accordian_id);
+    $cloneAccordian.find('.collapse').removeClass('show');
+    $cloneAccordian.find("input").each(function(){
+      $(this).attr('name',"general_information["+accordian_id+"][title]")
+    });
+    $cloneAccordian.find("textarea").each(function(){
+      $(this).attr('name',"general_information["+accordian_id+"][description]")
+    });
+
+    $('.accordian-card:last').after($cloneAccordian);
+  }); */
+  var $template = $(".template:first");
+  var hash = $('.template').length - 1;
+  $(".btn-add-panel").on("click", function (e) {
+      var $newPanel = $template.clone();
+      $newPanel.find(".collapse").removeClass("in");
+      $newPanel.find(".accordion-toggle").attr("href",  "#accordian" + (++hash));
+      $newPanel.find(".panel-collapse").attr("id", 'accordian'+hash).addClass("collapse").removeClass("in");
+      $newPanel.find("input").each(function(){
+        $(this).attr('name',"general_information["+hash+"][title]");
+        $(this).val('');
+      });
+      $newPanel.find("textarea").each(function(){
+        $(this).attr('name',"general_information["+hash+"][description]");
+        $(this).val('');
+      });
+      $("#accordion").append($newPanel.fadeIn());
+      e.preventDefault();
+  });
+
+  $('#accordion').on('click', '.accordian-close', function(){
+    var $template_length = $('.template').length;
+    if($template_length == 1){
+      var $newPanel = $(".template:first").clone();
+      $newPanel.find(".collapse").removeClass("in");
+      $newPanel.find(".accordion-toggle").attr("href",  "#accordian" + (++hash));
+      $newPanel.find(".panel-collapse").attr("id", 'accordian'+hash).addClass("collapse").removeClass("in");
+      $newPanel.find("input").each(function(){
+        $(this).attr('name',"general_information["+hash+"][title]");
+        $(this).val('');
+      });
+      $newPanel.find("textarea").each(function(){
+        $(this).attr('name',"general_information["+hash+"][description]");
+        $(this).val('');
+      });
+      $(this).parent().parents('.template').remove();
+      $("#accordion").append($newPanel.fadeIn());
+    }else{
+      $(this).parent().parents('.template').remove();
+    }
+  });
 });
  
 

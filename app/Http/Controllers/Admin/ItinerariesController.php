@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyItineraryRequest;
 use App\Http\Requests\StoreItineraryRequest;
 use App\Http\Requests\UpdateItineraryRequest;
+use Illuminate\Support\Facades\Validator;
 use App\Itinerary;
 use App\Destination;
 use App\Activity;
@@ -34,11 +35,27 @@ class ItinerariesController extends Controller
         abort_unless(\Gate::allows('itinerary_create'), 403);
         
         $input = $request->all();
+        
         $format = 'm/d/Y';
         $destination = new Destination();
         
         $input['slug'] = \Str::slug($request->title);
-
+        
+        $general_info = array();
+        foreach($input['general_information'] as $general_infos){
+    
+            if ($general_infos['title'] != '' || $general_infos['description'] != '' ) {
+                $general_info[] = array(
+                    'title' => $general_infos['title'],
+                    'description' => $general_infos['description'],
+                );    
+            }
+        }
+        if(count($general_info) > 1){
+            $input['general_information'] = json_encode($general_info);
+        }else{
+            unset($input['general_information']);
+        }
         if($request->has('feature_img')) {
 
             $image =  $request->file('feature_img');
@@ -84,11 +101,14 @@ class ItinerariesController extends Controller
             if(count($input['schedule']) > 0 ){
                 $schedules = array();
                 foreach($input['schedule'] as $key=>$schedule){
-                    $schedules[] = [
-                        'itinerary_id' => $itinerary->id,
-                        'from_date' => \Carbon\Carbon::createFromFormat($format, $schedule['from_date']),
-                        'to_date'   =>\Carbon\Carbon::createFromFormat($format, $schedule['to_date']),
-                    ];
+                    if($schedule['from_date'] != '' && $schedule['to_date'] != ''){
+                        $schedules[] = [
+                            'itinerary_id' => $itinerary->id,
+                            'from_date' => \Carbon\Carbon::createFromFormat($format, $schedule['from_date']),
+                            'to_date'   =>\Carbon\Carbon::createFromFormat($format, $schedule['to_date']),
+                        ];
+                    }
+                    
                 }
                 $itinerary = $itinerary->schedule()->insert($schedules);
             }
@@ -113,13 +133,27 @@ class ItinerariesController extends Controller
     public function update(UpdateItineraryRequest $request, Itinerary $itinerary)
     {
         abort_unless(\Gate::allows('itinerary_edit'), 403);
-       
+
         $input = $request->all();
         $format = 'm/d/Y';
         $destination = new Destination();
         
         $input['slug'] = \Str::slug($request->title);
-        
+        $general_info = array();
+        foreach($input['general_information'] as $general_infos){
+    
+            if ($general_infos['title'] != '' || $general_infos['description'] != '' ) {
+                $general_info[] = array(
+                    'title' => $general_infos['title'],
+                    'description' => $general_infos['description'],
+                );    
+            }
+        }
+        if(count($general_info) > 1){
+            $input['general_information'] = json_encode($general_info);
+        }else{
+            unset($input['general_information']);
+        }
         if($request->has('feature_img')) {
 
             $image =  $request->file('feature_img');
@@ -173,15 +207,18 @@ class ItinerariesController extends Controller
             $delete_schedule = ItinerarySchedule::where('itinerary_id', $itinerary->id)->delete();
             if(count($input['schedule']) > 0 ){
                 $schedules = array();
-                foreach($input['schedule'] as $key=>$schedule){
-                    if( $schedule['from_date'] !=='' && $schedule['to_date'] !='' ){
-                        $schedules[] = [
-                            'itinerary_id' => $itinerary->id,
-                            'from_date' => \Carbon\Carbon::createFromFormat($format, $schedule['from_date']),
-                            'to_date'   =>\Carbon\Carbon::createFromFormat($format, $schedule['to_date']),
-                        ];
-                    } 
-                }
+                
+                    foreach($input['schedule'] as $key=>$schedule){
+                        if( $schedule['from_date'] !=='' && $schedule['to_date'] !='' ){
+                            $schedules[] = [
+                                'itinerary_id' => $itinerary->id,
+                                'from_date' => \Carbon\Carbon::createFromFormat($format, $schedule['from_date']),
+                                'to_date'   =>\Carbon\Carbon::createFromFormat($format, $schedule['to_date']),
+                            ];
+                        } 
+                    }
+                  
+                    
                 $itinerary = $itinerary->schedule()->insert($schedules);
             }
             $response = ['message' => 'Itinerary Updated Successfully.', 'alert-type' => 'success'];

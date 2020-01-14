@@ -103,7 +103,27 @@
                             </div>
 						</div>
 						<div id="generalInfo" class="container tab-pane fade"><br>
-							{!! $activity->general_information !!}
+							<div class="panel-group" id="accordion">
+                                @if(isset($activity->general_information) && $activity->general_information !='' )
+                                    @foreach(json_decode($activity->general_information) as $key=>$general_info )
+                                        <div class="panel panel-default template">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordian{{$key}}">
+                                                        {{$general_info->title}}
+                                                    </a>
+                                                </h4>
+                                            
+                                            </div>
+                                            <div id="accordian{{$key}}" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    {{$general_info->description}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+								@endif
+							</div>	
 						</div>
 					</div>
 				</div>	
@@ -139,10 +159,16 @@
 							<div class="Date-msain">	
 								<div class="perm">	
 									<p class="pull-left">Per Person</p>
-									<p class="pull-right">$ 1,298.40</p>
+									<p class="pull-right">{{ $activity->price }}</p>
 								</div>		
 							</div>		
 							<div class="Date-msain">
+								<ul class="">
+								  @forelse($activity->schedule as $schedule)
+								  	<li>{{$schedule->from_date}} - {{$schedule->to_date}}</li>
+									@empty
+								  @endforelse
+								</ul>
 								<div class="per">		
 									<button>BOOK NOW</button>	
 								</div>					

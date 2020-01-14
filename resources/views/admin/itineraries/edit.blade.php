@@ -135,7 +135,55 @@
                         
 
                         <div class="tab-pane fade" id="general-information" role="tabpanel" aria-labelledby="general-information-tab">
-                            <textarea  name="general_information" class="form-control summernote ">{{ old('general_information', isset($itinerary) ? $itinerary->general_information : '') }}</textarea>
+                            <!--textarea  name="general_information" class="form-control summernote ">{{ old('general_information', isset($itinerary) ? $itinerary->general_information : '') }}</textarea-->
+                            <div class="panel-group" id="accordion">
+                                @if(isset($itinerary->general_information) && $itinerary->general_information !='' )
+                                    @foreach(json_decode($itinerary->general_information) as $key=>$general_info )
+                                        <div class="panel panel-default template">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordian{{$key}}">
+                                                        <input type="text"  name="general_information[{{$key}}]['title']" value="{{$general_info->title}}">
+                                                    </a>
+                                                    <button type="button" class="close accordian-close pull-right" >
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </h4>
+                                            
+                                            </div>
+                                            <div id="accordian{{$key}}" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <textarea name="general_information['{{$key}}']['description']">{{$general_info->description}}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                <div class="panel panel-default template">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordian0">
+                                                <input type="text"  name="general_information[0][title]">
+                                            </a>
+                                            <button type="button" class="close accordian-close pul-right" >
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </h4>
+                                    
+                                    </div>
+                                    <div id="accordian0" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <textarea name="general_information[0][description]"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+            
+                            </div>
+                            <br />
+                            <button class="btn btn-lg btn-primary btn-add-panel">
+                                <i class="fa fa-plus"></i> Add new panel
+                            </button>
                         </div>
 
                     </div>
