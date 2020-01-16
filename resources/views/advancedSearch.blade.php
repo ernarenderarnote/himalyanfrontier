@@ -87,15 +87,10 @@
          
          <div class="col-md-9 col-sm-12">
             <!-- navigation holder -->
-            @if($itineraries->count() > 1)
-            <div class="legend1">
-            </div>
-            <div class="holder">
-            </div>
-            @endif
+            {{ $itineraries->links() }}
             <!-- Page oriented legend -->
             <div class="right_side">
-                <div id="itemContainer">
+                <div id="">
                     @forelse($itineraries as $itinerary)
                         <div class="row margin_bottom1">
                             <div class="col-md-5 col-sm-5">
@@ -147,12 +142,7 @@
                 </div>    
             </div>
             <!-- navigation holder -->
-            @if($itineraries->count() > 1)  
-                <div class="legend1">
-                </div>
-                <div class="holder">
-                </div>
-            @endif    
+            {{ $itineraries->links() }}    
          </div>
       </div>
    </div>

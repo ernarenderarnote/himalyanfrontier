@@ -153,7 +153,52 @@
 				    </div>
 				</div>
 				<br>				
-				<div class="grand-more tens">				   
+				<div class="grand-more tens">
+					<div class="trak">
+					   <h4>Available Dates</h4>
+				    </div>
+					<div id="accordion" class="itinerary-collaspe">
+						<div class="card">
+							@php
+								$format      = 'Y-m-d'; 
+								$date_months = array();  
+							@endphp
+							@forelse($activity->schedule as $schedule)
+								@php $date_months[] = \Carbon\Carbon::parse($schedule->from_date)->format('M'); @endphp
+							
+							@empty
+							@endforelse
+							@foreach(array_unique($date_months) as $month) 
+						
+								<div class="card-header" id="heading{{$month}}">
+								<h5 class="mb-0">
+									<button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$month}}" aria-expanded="true" aria-controls="collapse{{$month}}">
+										{{$month}}
+									</button>
+								</h5>
+								</div>
+								<div id="collapse{{$month}}" class="collapse" aria-labelledby="heading{{$month}}" data-parent="#accordion">
+									<div class="card-body">
+										<ul>
+											@foreach($activity->schedule as $schedule)
+												@php $date_month = \Carbon\Carbon::parse($schedule->from_date)->format('M'); @endphp
+												@if($date_month == $month)
+													<li>		
+														<a href="\booking?{{$schedule->id}}" >
+															{{\Carbon\Carbon::parse($schedule->from_date)->format('M d')}} to {{\Carbon\Carbon::parse($schedule->from_date)->format('M d Y')}}
+														</a>
+													</li>
+													
+												@endif
+											@endforeach
+										</u>	
+									</div>
+								</div>
+								
+							@endforeach
+						</div>
+					</div>
+				   
 					<div class="nos">					  
 						<div class="tk">							
 							<div class="Date-msain">	
@@ -163,12 +208,6 @@
 								</div>		
 							</div>		
 							<div class="Date-msain">
-								<ul class="">
-								  @forelse($activity->schedule as $schedule)
-								  	<li>{{$schedule->from_date}} - {{$schedule->to_date}}</li>
-									@empty
-								  @endforelse
-								</ul>
 								<div class="per">		
 									<button>BOOK NOW</button>	
 								</div>					

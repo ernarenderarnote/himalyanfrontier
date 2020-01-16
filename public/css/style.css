@@ -3249,3 +3249,58 @@ h4.destinal:after {
     border:0px;
     width:100%;
 }
+.itinerary-collaspe .card-header {
+    padding:0px; 
+    margin-bottom: 0;
+    background-color: #fdb714;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.itinerary-collaspe .btn-link {
+    font-weight: 600;
+    color: #0c0c0c;
+    background-color: transparent;
+    text-transform: uppercase;
+}
+.itinerary-collaspe .btn-link:hover {
+    color: #000;
+    text-decoration: none;
+    background-color: transparent;
+    border-color: transparent;
+}
+.itinerary-collaspe .card-body {
+     padding:0px; 
+}
+.itinerary-collaspe a {
+    text-align: left;
+    color: #000;
+}
+/* .itinerary-collaspe	 li a:after {
+    content: '-';
+    border-bottom: 2px solid #fdb714;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    margin-top: -1px;
+} */
+.itinerary-collaspe .card-body li {
+	text-align: left;
+	cursor: pointer;
+	list-style-type: none;
+}
+.itinerary-collaspe .card-body li:hover {
+	background: #273648;
+    cursor: pointer;
+}
+.itinerary-collaspe .card-body li a:hover {
+    color: #fff;
+    cursor: pointer;
+}
+.itinerary-collaspe .card-body li a {
+    color: #000;
+    cursor: pointer;
+}
+.perm p{
+	color:#000;
+}
