@@ -10,8 +10,10 @@ use App\User;
 class ProfileController extends Controller
 {
     public function index(Request $request){
-		$user = Auth::user()->with('profile')->first();
-		return view('admin.profile',compact('user'));
+
+      $user = User::with('profile')->where('id',Auth::user()->id)->first();
+      
+      return view('admin.profile',compact('user'));
     }
     
     public function store(UserProfileRequest $request){

@@ -98,6 +98,10 @@ class User extends Authenticatable
     {
 		return $this->hasOne('App\Profile');
     }
-   
+    
+    public function getFullNameAttribute()
+    {
+        return $this->name.' '.$this->last_name;
+    }
 
 }

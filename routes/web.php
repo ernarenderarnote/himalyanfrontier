@@ -2,13 +2,6 @@
 
 Route::get('/','HomeController@Index')->name('home');
 
-Route::group([ 'prefix' => 'activity', "as" => "activity."],function()
-{  
-    Route::get('/{slug}', [ "as" =>"slug", 'uses' => "HomeController@activity" ]);
-}); 
-
-Route::match(['get','post'],'/advanced-search', [ "as" =>"advanced-search", 'uses' => "HomeController@advanedSearch" ]);
-
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
@@ -54,6 +47,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('itineraries', 'ItinerariesController');
 
+    Route::delete('itinerarySchedule/destory/', 'ItinerariesController@scheduleDestroy')->name('itineraries.scheduleDestroy');
+
     Route::delete('destinations/destroy', 'DestinationsController@massDestroy')->name('destinations.massDestroy');
     
     Route::resource('destinations', 'DestinationsController');
@@ -61,6 +56,30 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('activities/destroy', 'ActivitiesController@massDestroy')->name('activities.massDestroy');
     
     Route::resource('activities', 'ActivitiesController');
+
+    Route::delete('currencies/destroy', 'CurrenciesController@massDestroy')->name('currencies.massDestroy');
+    
+    Route::match(['post'],'/currencies/default/{id}', [ 'as' => 'currencies.default', "uses" => "CurrenciesController@setDefault"] );
+    
+    Route::resource('currencies', 'CurrenciesController');
 });
-Route::match(['get','post'],'/profile', [ 'as' => 'profile', "uses" => "ProfileController@index"] );
+
+Route::match(['get','post'],'/profile', [ 'as' => 'profile', "uses" => "ProfileController@index",  'middleware' => ['auth'] ] );
+
+Route::match(['post'],'/profile/store', [ 'as' => 'profile.store', "uses" => "ProfileController@store", 'middleware' => ['auth']] );
+
+Route::match(['post'],'/currencySwitcher', [ 'as' => 'currencySwitcher', "uses" => "HomeController@currencySwitcher"] );
+
+Route::group([ 'prefix' => 'activity', "as" => "activity."],function()
+{  
+    Route::get('/{slug}', [ "as" =>"slug", 'uses' => "HomeController@activity" ]);
+}); 
+
+Route::match(['get','post'],'/advanced-search', [ "as" =>"advanced-search", 'uses' => "HomeController@advanedSearch" ]);
+
+Route::match(['get','post'],'/booking', [ "as" =>"booking", 'uses' => "BookingController@index", 'middleware' => ['auth']]);
+
+Route::match(['post'],'/makePayment', [ "as" =>"makePayment", 'uses' => "BookingController@makePayment", 'middleware' => ['auth']]);
+
+Route::match(['post'],'/sendinquery', [ "as" =>"sendinquery", 'uses' => "InqueryController@store"]);
 

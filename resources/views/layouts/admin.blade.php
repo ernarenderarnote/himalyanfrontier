@@ -333,7 +333,7 @@
     <link href="{{ asset('css/toster.css') }}" rel="stylesheet">
     <script src="{{ asset('js/toster.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
     @include('notification')
 
     <script>

@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Itinerary;
 
-class Activity extends Model
+class Currency extends Model
 {
     use SoftDeletes;
 
@@ -17,19 +16,14 @@ class Activity extends Model
     ];
 
     protected $fillable = [
-        'title',
-        'slug',
-        'description',
-        'thumbnails',
-        'gallery_img',
-		'is_active',
+        'name',
+        'code',
+        'symbol',
+        'exchange_rate',
+        'is_default',
 		'created_at',
         'updated_at',
         'deleted_at',
     ];
-
-    public function itinerary()
-    {
-        return $this->belongsToMany(Itinerary::class);
-    }
+	
 }

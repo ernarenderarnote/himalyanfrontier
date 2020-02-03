@@ -44,6 +44,16 @@
                     </li>
                 </ul>
             </li>
+            <!--currency-->
+            <li class="nav-item">
+                <a href="{{ route("admin.currencies.index") }}" class="nav-link {{ request()->is('admin/currencies') || request()->is('admin/currencies/*') ? 'active' : '' }}">
+                    <i class="fas fa-euro nav-icon">
+
+                    </i>
+                    {{ trans('global.currency.title') }}
+                </a>
+            </li>
+            <!--currency end-->
             <li class="nav-item">
                 <a href="{{ route("admin.itineraries.index") }}" class="nav-link {{ request()->is('admin/itineraries') || request()->is('admin/itineraries/*') ? 'active' : '' }}">
                     <i class="fas fa-cogs nav-icon">

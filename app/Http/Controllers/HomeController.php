@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Itinerary;
 use App\Destination;
 use App\Activity;
+use App\Currency;
 
 class HomeController extends Controller
 {
@@ -39,15 +40,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $itineraries   = Itinerary::with('destinations','activities')->where('deleted_at',NULL)->where('status','active')->orderBy('created_at', 'desc')->take(3)->get();
-        $fixedPrograms = Itinerary::with('destinations','activities')->where('deleted_at',NULL)->where('status','active')->where('fixed_diparture', '1')->orderBy('created_at', 'desc')->take(6)->get();
+        $itineraries   = Itinerary::with('destinations','activities','currency')->where('deleted_at',NULL)->where('status','active')->orderBy('created_at', 'desc')->take(3)->get();
+        $fixedPrograms = Itinerary::with('destinations','activities','currency')->where('deleted_at',NULL)->where('status','active')->where('fixed_diparture', '1')->orderBy('created_at', 'desc')->take(6)->get();
         return view('index', compact('itineraries','fixedPrograms'));
     }
 
     public function activity(Request $request){
-        $activity = Itinerary::with('destinations','activities','schedule')->where('slug',$request->slug)->first();
-        $similar_tours = Itinerary::where('deleted_at',NULL)->where('status','active')->orderBy('created_at', 'desc')->take(3)->get();
-        return view('single',compact('activity', 'similar_tours'));
+       
+        $activity = Itinerary::with(['destinations', 'activities', 'currency', 'schedule' => function ($query) {
+            $query->orderBy('from_date','asc');
+            }])->where('slug',$request->slug)
+            ->first();
+        
+        $currencies = Currency::all();
+        
+        $similar_tours = Itinerary::where('deleted_at',NULL)
+            ->where('status','active')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('single',compact('activity', 'similar_tours', 'currencies'));
     }
 
     public function advanedSearch(Request $request){
@@ -60,11 +73,11 @@ class HomeController extends Controller
         $ratingTo    = '4';
         $itinerary_date = '';
         $search = '';
-        $destinations = Destination::all();
-        $activities   = Activity::all();
+        $destinations = Destination::where('deleted_at',NULL)->where('is_active','1')->get(['slug','title']);
+        $activities   = Activity::where('deleted_at',NULL)->where('is_active','1')->get();
         if($request->has('activity') ){
             if(!empty($request->activity )) {
-                $activity = $request->activity;
+                $activity  = $request->activity;
             }  
         }
         if($request->has('destination') && $request->has('destination') !='' ){
@@ -103,7 +116,7 @@ class HomeController extends Controller
             } 
         }
 
-        $required_params = array('title','slug','price','activity_points','feature_img','rating');
+        $required_params = array('id','title','slug','price','activity_points','feature_img','rating','currency_id');
 
         if($destination != '' && $activity !='' && $itinerary_date !='' ){
          
@@ -233,4 +246,14 @@ class HomeController extends Controller
         $itineraries->appends(request()->all())->render();
         return view('advancedSearch', compact('itineraries', 'destinations', 'activities'));
     }
+
+    public function currencySwitcher(Request $request){
+        $set_session = session(['selected_currency' => $request->currency]);
+        return redirect()->back();
+    
+    }
+    public function booking(Request $request){
+        return view('booking');
+    }
+
 }

@@ -13,6 +13,7 @@
       
       <footer>
         @include('layouts.footer')
+        @include('notification')
       </footer>
    </body>
 </html>

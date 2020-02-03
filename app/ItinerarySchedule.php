@@ -8,7 +8,8 @@ use App\Itinerary;
 
 class ItinerarySchedule extends Model
 {
-  
+    use SoftDeletes;
+    
     protected $table = 'itinerary_schedule';
 
     protected $dates = [

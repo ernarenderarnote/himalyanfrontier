@@ -89,7 +89,7 @@ $('document').ready(function(){
 });
 function callDatepicker(){
   $(".from-date").datepicker({
-    //dateFormat: 'dd-mm-yy',
+    minDate: 0,
     onSelect: function (selected) {
       var dt ='';
       dt = new Date(selected);
@@ -107,9 +107,7 @@ $(document).ready(function(){
   $(document).on('click', '.addmore', function (ev) {
     num++;
     $(".datepicker").datepicker("destroy");
-    var $clone = $(this).parents('.dynamic-schedule').clone(true);
-    var $newbuttons = "<button type='button' class='mb-xs mr-xs btn btn-danger removemore'><i class='fa fa-remove'></i></button>";
-    
+    var $clone = $('.dynamic-schedule:first').clone(true);
     $clone.find('.datepicker').each(function(){
       var attrId = $(this).attr('id');
       $(this).val('');
@@ -121,38 +119,78 @@ $(document).ready(function(){
     $clone.find("[data-attr='to-date']").each(function(){
       $(this).attr('name',"schedule["+num+"][to_date]")
     });
-    $clone.find('.input-group-btn').html($newbuttons);
+    $clone.find(".removemore").each(function(){
+      $(this).attr('data-value',"")
+   });
     $('.dynamic-schedule:last').after($clone);
     callDatepicker();
   });
 
-  $(document).on('click', '.removemore', function () {
-    $(this).parents('.dynamic-schedule').remove();
+  $(document).on('click', '.removemore', function (e) {
+    var $this = $(this);
+    var id  = $(this).attr('data-value');
+    var url = $(this).attr('data-url'); 
+    var num = $('.dynamic-schedule').length;
+    $(".datepicker").datepicker("destroy");
+    var $clone = $('.dynamic-schedule:first').clone(true);
+    $clone.find('.datepicker').each(function(){
+      var attrId = $(this).attr('id');
+      $(this).val('');
+      $(this).attr('id',attrId+num );
+    });
+    $clone.find("[data-attr='from-date']").each(function(){
+      $(this).attr('name',"schedule["+num+"][from_date]")
+    });
+    $clone.find("[data-attr='to-date']").each(function(){
+      $(this).attr('name',"schedule["+num+"][to_date]")
+    });
+    $clone.find(".removemore").each(function(){
+        $(this).attr('data-value',"")
+    });
+
+    if(id !== ''){
+      var clone = '';
+      swal({
+        title: 'Are you sure?',
+        text: "It will permanently deleted !",
+        icon: 'warning',
+        buttons: true,
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    headers: {'x-csrf-token': _token},
+                    method: 'POST',
+                    url:url,
+                    data: { id: id, _method: 'DELETE' }
+                })
+                .done(function () { 
+                    if(num == 1){
+                      $('.dynamic-schedule:last').after($clone);
+                      callDatepicker();
+                    }
+                    $this.parents('.dynamic-schedule').remove();
+                    swal("Schedule deleted successfully.", {
+                        icon: "success",
+                    });
+                });
+                swal.close();
+            }
+            
+        });
+    }else{
+      if(num == 1){
+        $('.dynamic-schedule:last').after($clone);
+        callDatepicker();
+      }
+      $(this).parents('.dynamic-schedule').remove();
+    }
+    e.preventDefault(); 
   });
 
   //add accordian
-  /* var accordian_id =  $('.accordian-card').length;
-  
-  $('.add-accordian').on('click',function(e){
-    e.preventDefault();
-    accordian_id++;
-    var $cloneAccordian = $('#accordionExample').find('.accordian-card:first').clone(true);
-    //$('.collapse').removeData('bs.collapse'); // destroy collapse
-    //$('.collapse').collapse({parent:false});
-    $cloneAccordian.find('.card-link').attr('href','#accordin'+accordian_id);
-    $cloneAccordian.find('.collapse').attr('id','accordin'+accordian_id);
-    $cloneAccordian.find('.collapse').removeAttr('aria-expanded');
-    $cloneAccordian.find('.collapse').attr('data-parent','#accordin'+accordian_id);
-    $cloneAccordian.find('.collapse').removeClass('show');
-    $cloneAccordian.find("input").each(function(){
-      $(this).attr('name',"general_information["+accordian_id+"][title]")
-    });
-    $cloneAccordian.find("textarea").each(function(){
-      $(this).attr('name',"general_information["+accordian_id+"][description]")
-    });
-
-    $('.accordian-card:last').after($cloneAccordian);
-  }); */
   var $template = $(".template:first");
   var hash = $('.template').length - 1;
   $(".btn-add-panel").on("click", function (e) {
@@ -193,6 +231,30 @@ $(document).ready(function(){
       $(this).parent().parents('.template').remove();
     }
   });
+
+  //set default currency
+  $('input[name="default_currency"]').on('change',function(e){
+    var $button = $(this);
+    var $form   = $(this).closest('form');  
+    var $currency = $(this).attr('currency-name');
+    swal({
+      title: 'Do you want to set '+$currency+' as default currency',
+      text: "This will change all the price.",
+      icon: 'warning',
+      buttons: [true, "Do it!"],
+      dangerMode: true,
+      })
+      .then((willDelete) => {
+          if (willDelete) {
+            $form.submit();
+          }else{
+            $($button).prop('checked',false);
+          }
+          
+      });
+    e.preventDefault();
+  });
+
 });
  
 

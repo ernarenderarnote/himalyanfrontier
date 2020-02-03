@@ -7,13 +7,13 @@
 		<div class="card-body">
 	
 			<form action="{{ route("admin.profile.store") }}" method="POST" enctype="multipart/form-data">
-          @csrf
+          		@csrf
 				<div class="row">
 				
 				  <div class="col">
 						<label for="firstname">Firstname*</label>
 						<input type="text" value="{{ old('first_name', isset($user->name) ? $user->name : '') }}" class="form-control" id="first-name" placeholder="Enter First Name" name="first_name">
-				  	@if($errors->has('first_name'))
+				  		@if($errors->has('first_name'))
 								<em class="invalid-feedback">
 									{{ $errors->first('first_name') }}
 								</em>

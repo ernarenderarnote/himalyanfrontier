@@ -50,7 +50,8 @@
                         </p>
                     </div>
                     <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
-                        <label for="price">{{ trans('global.itinerary.fields.price') }}</label>
+                        <label for="price">{{ trans('global.itinerary.fields.price') }} {{ $itinerary->currency->symbol }}</label>
+                        <input type="hidden" name="currency_id" value="{{ $itinerary->currency->id }}">
                         <input type="number" id="price" name="price" class="form-control" value="{{ old('price', isset($itinerary) ? $itinerary->price : '') }}" step="0.01">
                         @if($errors->has('price'))
                             <em class="invalid-feedback">
@@ -234,12 +235,8 @@
                         <div class="col-sm-6 nopadding">
                             <div class="input-group">
                                 <input type="text" data-attr="to-date" autocomplete="off" class="form-control datepicker to-date"  id="to_date_1" name="schedule[{{$key}}][to_date]" value="{{ \Carbon\Carbon::parse($schedule->to_date)->format('m/d/Y') }}" placeholder="To Date">
-                                <span class="input-group-btn">
-                                    @if($key == 0)
-                                        <button class="btn btn-success addmore" type="button" > <span class="fa fa-plus" aria-hidden="true"></span> </button>
-                                    @else
-                                        <button type="button" class="mb-xs mr-xs btn btn-danger removemore"><i class="fa fa-remove"></i></button>
-                                    @endif
+                                <span class="input-group-btn">  
+                                    <button type="button" class="mb-xs mr-xs btn btn-danger removemore" data-url="{{ route('admin.itineraries.scheduleDestroy') }}" data-value="{{$schedule->id}}"><i class="fa fa-remove"></i></button> 
                                 </span>
                             </div>
                         </div>
@@ -255,12 +252,13 @@
                             <div class="input-group">
                                 <input type="text" data-attr="to-date" autocomplete="off" class="form-control datepicker to-date"  id="to_date_1" name="schedule[0][to_date]" value="" placeholder="To Date">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-success addmore" type="button" > <span class="fa fa-plus" aria-hidden="true"></span> </button>
+                                    <button type="button" class="mb-xs mr-xs btn btn-danger removemore" data-url="{{ route('admin.itineraries.scheduleDestroy') }}" data-value=""><i class="fa fa-remove"></i></button> 
                                 </span>
                             </div>
                         </div>
                     </div>
                 @endforelse
+                <button class="btn btn-primary addmore" type="button" > <i class="fa fa-plus"></i> Add new schedule </button>
             </div>    
         </div> 
         <!--Schedule end-->

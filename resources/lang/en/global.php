@@ -399,6 +399,31 @@ return [
             'image'              => 'Featured Image',
             'active'             => 'Active',
             'title'              => 'Title',
+            
+        ],
+    ],
+    'currency'                              => [
+        'title'          => 'Currency',
+        'title_singular' => 'Currency',
+        'fields'         => [
+            'id'                 => 'ID',
+            'id_helper'          => '',
+            'name'               => 'Name',
+            'name_helper'        => '',
+            'currency_code'      => 'Currency Code',
+            'currency_code_helper' => '',
+            'currency_symbol'      => 'Currency Symbol',
+            'currency_symbol_helper' => '',
+            'exchange_rate'      => 'Exchange Rate',
+            'currency_exchange_rate_helper' => '',
+            'created_at'         => 'Created At',
+            'created_at_helper'  => '',
+            'updated_at'         => 'Updated At',
+            'updated_at_helper'  => '',
+            'deleted_at'         => 'Deleted at',
+            'deleted_at_helper'  => '',
+            'title'              => 'Title',
+            'default'            => 'Default'
         ],
     ],
 ];

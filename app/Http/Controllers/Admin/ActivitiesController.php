@@ -60,14 +60,26 @@ class ActivitiesController extends Controller
 
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             
-            $image->storeAs('images', $imageName);
+            $image->storeAs('images/activity/featureImages', $imageName);
             
             $input['thumbnails'] = $imageName;
 
         }
+        if($request->has('gallery_img')) {
 
-        Activity::create($input);
-        return redirect()->route('admin.activities.index'); 
+            $gallery_images =  $request->file('gallery_img');
+            $images_name = array();
+            foreach($gallery_images as $gallery_image){
+                $images_name[] = $gallery_image->getClientOriginalName();
+                $imagesname = $gallery_image->getClientOriginalName();
+                $gallery_image->storeAs('images/activity/galleryImages', $imagesname);
+            }
+            $input['gallery_img'] = json_encode($images_name);
+        }
+        if( Activity::create($input) ){
+            $response = ['message' => 'Activity Added Successfully.', 'alert-type' => 'success'];
+        }
+        return redirect()->route('admin.activities.index')->with($response);
     }
 
     /**
@@ -117,14 +129,26 @@ class ActivitiesController extends Controller
 
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             
-            $image->storeAs('images', $imageName);
+            $image->storeAs('images/activity/featureImages', $imageName);
             
             $input['thumbnails'] = $imageName;
 
         }
+        if($request->has('gallery_img')) {
 
-        $activity->update($input);
-        return redirect()->route('admin.activities.index');
+            $gallery_images =  $request->file('gallery_img');
+            $images_name = array();
+            foreach($gallery_images as $gallery_image){
+                $images_name[] = $gallery_image->getClientOriginalName();
+                $imagesname = $gallery_image->getClientOriginalName();
+                $gallery_image->storeAs('images/activity/galleryImages', $imagesname);
+            }
+            $input['gallery_img'] = json_encode($images_name);
+        }
+        if( $activity->update($input) ){
+            $response = ['message' => 'Activity Updated Successfully.', 'alert-type' => 'success'];
+        }
+        return redirect()->route('admin.activities.index')->with($response);
     }
 
     /**
@@ -137,10 +161,10 @@ class ActivitiesController extends Controller
     {
 
         abort_unless(\Gate::allows('activity_delete'), 403);
-
-        $activity->delete();
-
-        return back();
+        if( $activity->delete() ){
+            $response = ['message' => 'Activity Deleted Successfully.', 'alert-type' => 'success'];
+        }
+        return back()->with($response);
     }
 
     public function massDestroy(MassDestroyActivityRequest $request)

@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 use View;
 use App\Activity;
 use App\Destination;
+use App\Currency;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::share('defaultCurrency', Currency::where('is_default','1')->first() );
         View::share('activities', Activity::all() );
         View::share('destinations', Destination::all() );
         $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);

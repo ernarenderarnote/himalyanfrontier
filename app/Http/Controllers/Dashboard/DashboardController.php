@@ -16,15 +16,11 @@ class DashboardController extends Controller
     {
     	if( auth()->user()->hasRole('Admin') )
     	{
-			//dd(auth()->user()->roles->first()->title);
     		return $this->adminDashboard();
     	}
     	else
     	{	
-
-			//dd(auth()->user()->email);
             return $this->userDashboard();
- 
     	}
     	
     }
@@ -37,7 +33,7 @@ class DashboardController extends Controller
 
     public function userDashboard()
     {
-        return view('dashboard.user');
+        return view('userDashboard');
     }
 }
 

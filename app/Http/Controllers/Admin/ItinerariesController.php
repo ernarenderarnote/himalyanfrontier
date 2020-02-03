@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyItineraryRequest;
 use App\Http\Requests\StoreItineraryRequest;
 use App\Http\Requests\UpdateItineraryRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use App\Itinerary;
 use App\Destination;
 use App\Activity;
@@ -18,7 +19,7 @@ class ItinerariesController extends Controller
     {
         abort_unless(\Gate::allows('itinerary_access'), 403);
 
-        $itineraries = Itinerary::with('destinations','activities')->get();
+        $itineraries = Itinerary::with('destinations','activities','currency')->get();
         return view('admin.itineraries.index', compact('itineraries'));
     }
 
@@ -125,7 +126,7 @@ class ItinerariesController extends Controller
         
         $destinations = Destination::all();
         $activities   = Activity::all();
-        $itinerary = Itinerary::with(['destinations', 'activities', 'schedule'])->where('id',$itinerary->id)->first();
+        $itinerary = Itinerary::with(['destinations', 'activities', 'schedule', 'currency'])->where('id',$itinerary->id)->first();
        // dd($itinerary);
         return view('admin.itineraries.edit', compact('itinerary', 'destinations', 'activities'));
     }
@@ -204,7 +205,6 @@ class ItinerariesController extends Controller
                 $activity = Activity::find($request->activity_id);
                 $itinerary->activities()->sync($activity);
             }
-            $delete_schedule = ItinerarySchedule::where('itinerary_id', $itinerary->id)->delete();
             if(count($input['schedule']) > 0 ){
                 $schedules = array();
                 
@@ -249,6 +249,12 @@ class ItinerariesController extends Controller
         $itineraries = new Itinerary();
         Itinerary::whereIn('id', request('ids'))->delete();
 
+        return response(null, 204);
+    }
+
+    public function scheduleDestroy(Request $request){
+        $itinerarySchedule = new ItinerarySchedule();
+        ItinerarySchedule::where('id', $request->id )->delete();
         return response(null, 204);
     }
 }

@@ -159,6 +159,17 @@ $('document').ready(function(){
         $('input[name="itinerary_type"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
+    //currency swither
+    $('.currency-switcher').on('change',function(){
+        $(this).closest('form').submit();
+    });
+
+    //booking form
+    $('.booking-schedule').on('click',function(e){
+        $(this).closest('form').submit();
+        e.preventDefault();
+    });
+
 });    
 /* when document is ready */
 $(function(){
