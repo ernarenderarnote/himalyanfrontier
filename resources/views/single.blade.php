@@ -260,12 +260,40 @@
 				   <div class="nos">
 						<div class="trak-k">
 							<h4>SEND INQUIRY</h4>
-						</div>
+						
 						<form action="{{route('sendinquery')}}" method="post">
+							@csrf
 							<input type="text" id="fname" name="name" placeholder="Your name..">
-							<input type="email" name="email" placeholder="email" >
+							@if($errors->has('name'))
+								<em class="invalid-feedback">
+									{{ $errors->first('name') }}
+								</em>
+							@endif
+							<input type="text" name="email" placeholder="email" >
+							@if($errors->has('email'))
+								<em class="invalid-feedback">
+									{{ $errors->first('email') }}
+								</em>
+							@endif
 							<input type="tel" name="phone" placeholder="phone" >
-							<textarea id="subject" name="subject" placeholder="Description.." style="height:100px"></textarea>
+							@if($errors->has('phone'))
+								<em class="invalid-feedback">
+									{{ $errors->first('phone') }}
+								</em>
+							@endif
+							<input type="text" name="subject" placeholder="subject" >
+							@if($errors->has('subject'))
+								<em class="invalid-feedback">
+									{{ $errors->first('subject') }}
+								</em>
+							@endif
+							<input type="hidden" name="itinerary_id" value="{{$activity->id}}">
+							<textarea id="desc" name="message" placeholder="Description.." style="height:100px"></textarea>
+							@if($errors->has('description'))
+								<em class="invalid-feedback">
+									{{ $errors->first('description') }}
+								</em>
+							@endif
 							<input type="submit" value="Submit" class="btn">
 						 </form>
 				    </div>

@@ -1,9 +1,9 @@
 @extends('layouts.frontend')
 @section('content')
 <section class="single_product7 advanced-search-page">
-@if(isset($_GET['activity'])) 
+@if(isset($_GET['activity']) && $_GET['activity'] != '') 
     @php $activity = $activities->where('slug',$_GET['activity'])->first(); @endphp
-    @if($activity->thumbnails !='' || $activity->gallery_img != '')
+    @if(isset($activity->thumbnails) || isset($activity->gallery_img) )
         <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
             <!-- Wrapper for slides -->
             <div class='carousel-inner'>

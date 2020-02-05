@@ -62,6 +62,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::match(['post'],'/currencies/default/{id}', [ 'as' => 'currencies.default', "uses" => "CurrenciesController@setDefault"] );
     
     Route::resource('currencies', 'CurrenciesController');
+
+    Route::delete('blogs/destroy', 'BlogsController@massDestroy')->name('blogs.massDestroy');
+
+    Route::resource('blogs', 'BlogsController');
+
+    Route::match(['get','post'],'/inqueries', [ 'as' => 'inqueries', "uses" => "InqueriesController@index"] );
 });
 
 Route::match(['get','post'],'/profile', [ 'as' => 'profile', "uses" => "ProfileController@index",  'middleware' => ['auth'] ] );

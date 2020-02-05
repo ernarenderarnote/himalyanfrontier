@@ -8,10 +8,7 @@
             <form method="POST" action="{{ route('login') }}" id="login-form">
                 {{ csrf_field() }}
                 <div class="form-group input-group {{ $errors->has('mobile_number') ? 'has-error' : '' }}" >
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-mobile"></i> </span>
-                    </div>
-                    <input name="mobile_number" class="form-control input-field" placeholder="Enter Mobile Number" type="text">
+                    <input id="phone" name="mobile_number" class="form-control input-field" placeholder="Enter Mobile Number" type="text">
                     @if($errors->has('mobile_number'))
                         <em class="invalid-feedback">
                             {{ $errors->first('mobile_number') }}

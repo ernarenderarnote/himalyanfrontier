@@ -426,4 +426,38 @@ return [
             'default'            => 'Default'
         ],
     ],
+    'blog'                              => [
+        'title'          => 'Blog',
+        'title_singular' => 'Blog',
+        'fields'         => [
+            'id'                 => 'ID',
+            'id_helper'          => '',
+            'name'               => 'Name',
+            'name_helper'        => '',
+            'created_at'         => 'Created At',
+            'created_at_helper'  => '',
+            'updated_at'         => 'Updated At',
+            'updated_at_helper'  => '',
+            'deleted_at'         => 'Deleted at',
+            'deleted_at_helper'  => '',
+            'title'              => 'Title',
+        ],
+    ],
+    'inquery'                              => [
+        'title'          => 'Inquery',
+        'title_singular' => 'Inquery',
+        'fields'         => [
+            'id'                 => 'ID',
+            'id_helper'          => '',
+            'name'               => 'Name',
+            'name_helper'        => '',
+            'created_at'         => 'Created At',
+            'created_at_helper'  => '',
+            'updated_at'         => 'Updated At',
+            'updated_at_helper'  => '',
+            'deleted_at'         => 'Deleted at',
+            'deleted_at_helper'  => '',
+            'title'              => 'Title',
+        ],
+    ],
 ];

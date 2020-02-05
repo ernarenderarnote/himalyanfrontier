@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Builder;
-use Softon\Indipay\Facades\Indipay;  
+use Softon\Indipay\Facades\Indipay; 
 use Validator;
 use App\Itinerary;
 use App\Destination;
@@ -33,14 +33,18 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        $itinerary = Itinerary::with('schedule')->where('id',$request->activity_id)->first();
+        if(session()->get('activity_id')){
+            $activity_id = session()->get('activity_id');
+        }else{
+            $activity_id = $request->activity_id;
+        }
+        $itinerary = Itinerary::with('schedule')->where('id',$activity_id)->first();
         $user      = User::with('profile')->where('id',Auth::user()->id)->first();
+        session(['activity_id' => $activity_id]);   
         return view('booking',compact('itinerary','user'));
     }
 
     public function makePayment(Request $request){
-       $itinerary = Itinerary::with('schedule')->where('id',$request->activity_id)->first();
-        $user      = User::with('profile')->where('id',Auth::user()->id)->first();
         $validation['schedule_id'] = 'required';
         $validation['name'] ='required';
         $validation['mobile']='required';
@@ -60,9 +64,8 @@ class BookingController extends Controller
         $validator = Validator::make($request->all(), $validation);
 
             if($validator->fails()) {
-
                 $response['error'] = $validator->errors()->all();
-                return redirect()->back()->with($itinerary,$user);
+                return redirect()->back()->withErrors($response['error']);
             }
             else{
             $parameters = [

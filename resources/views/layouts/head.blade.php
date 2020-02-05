@@ -32,3 +32,6 @@
 <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/frontendScripts.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('build/css/intlTelInput.css') }}">
+<link href="{{ asset('css/toster.css') }}" rel="stylesheet">
+<script src="{{ asset('js/toster.js') }}"></script>
