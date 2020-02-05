@@ -33,14 +33,18 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        if(session()->get('activity_id')){
-            $activity_id = session()->get('activity_id');
-        }else{
+        if($request->activity_id){
             $activity_id = $request->activity_id;
+        }else{
+            $activity_id = session()->get('activity_id');     
         }
+        
         $itinerary = Itinerary::with('schedule')->where('id',$activity_id)->first();
+        
         $user      = User::with('profile')->where('id',Auth::user()->id)->first();
+        
         session(['activity_id' => $activity_id]);   
+        
         return view('booking',compact('itinerary','user'));
     }
 
