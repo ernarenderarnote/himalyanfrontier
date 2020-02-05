@@ -38,13 +38,18 @@ body a:hover {
 	-o-transition: 0.5s all;
 	-ms-transition: 0.5s all;
 }
-
+.single_product7 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 .bg-li {
 	background-image: url(../images/Stuart_Range.jpg) !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
 }
-
+.sub img {
+    object-fit: cover;
+}
 .main-row {
 	background-color: #171a29;
 	padding: 10px;
@@ -2536,7 +2541,7 @@ i.fa.fa-map-marker {
 
 input[type=text], select, textarea {
   width: 100%;
-  padding: 12px;
+  padding: 12px !important;
   border: 1px solid #ccc !important;
   border-radius: 4px;
   box-sizing: border-box;
@@ -2544,7 +2549,9 @@ input[type=text], select, textarea {
   margin-bottom: 16px;
   resize: vertical;
 }
-
+#cost span b {
+    font-size: 15px;
+}
 input[type=submit] {
   background-color: #4CAF50;
   color: white;
@@ -2591,10 +2598,24 @@ input[type=submit] {
     cursor: pointer;
     width: 100%;
 }
+#cost span {
+    font-size: 16px !important;
+}
 .sub h3 {
-    font-size: 12px;
+    font-size: 14px;
     padding: 10px;
     color: #000;
+    text-align: left;
+    font-weight: bold;
+    padding-bottom: 7px !important;
+}
+.read-more.custom_read a {
+    color: #fff;
+    font-size: 12px;
+}
+.read-more.custom_read {
+    float: left;
+    margin-left: 10px;
 }
 .tim {
     background: #fff;
@@ -2903,12 +2924,12 @@ ul.itinerary-points p:before {
 	padding-right: 3px;
 	float:left;
 }
-.itinerary-points p {
-    color: #000;
-    font-size: 12px;
-}
+
 .checked {
 	color: orange;
+}
+.adit-low p {
+    margin-top: 20px;
 }
 
 .sb-section input[type="submit"] {
@@ -2941,14 +2962,15 @@ ul.itinerary-points p:before {
 	background-color: #273648;
 }
 .left_side h3 {
-	color:#fff;
+    color: #fff;
     text-align: center;
     padding-top: 20px;
+    font-size: 24px;
 }
 .left_side h5 {
-	color:#fff;
+    color: #fff;
     text-align: center;
-
+    font-size: 14px;
 }
 .left_side ul {
 	padding: 0px 0px 0px;
@@ -2958,9 +2980,9 @@ list-style:none;
 
 }
 .search5 input {
-	padding: 9px;
-	width: 92%;
-	margin: 10px;
+    padding: 9px !important;
+    width: 92%;
+    margin: 10px;
 }
 .custom_ul li {
 	border-top: 1px solid #ccc;
@@ -2975,6 +2997,7 @@ list-style:none;
     cursor: pointer;
     padding-top: 9px;
     padding-bottom: 10px;
+    font-size: 18px;
 }
 .destinal .fa {
 
@@ -3027,13 +3050,10 @@ color:
 	padding-bottom: 10px;
 }  
 .date4 {
-
-    color: 
-
-    #fff;
+    color: #fff;
     padding-left: 10px;
-
-
+    font-size: 16px;
+    padding-top: 10px;
 }
 
 .radei.daate li {
@@ -3075,10 +3095,11 @@ color:
   cursor: pointer;
 }
 .slidecontainer {
-	margin-left: 10px;
-	margin-right: 10px;
-	padding-bottom:20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-bottom: 20px;
 }
+
 .slidecontainer p {
 	color: #fff;
 	margin-top: 6px;
@@ -3089,6 +3110,10 @@ color:
 }
 .img_outer img {
 	width: 100%;
+}
+.heading_outer a h3 {
+    margin-top: 0px !important;
+    font-size: 18px;
 }
 
 .btn_ouer.read a {
@@ -3108,9 +3133,11 @@ color:
 	text-align: center;
 }
 .img_outer img {
-	width: 100%;
-	border: 1px solid #ccc;
-	padding: 5px;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 5px;
+    height: 200px;
+    object-fit: cover;
 }
 .heading_outer a h3 {
 	margin-top: 0px !important;
@@ -3123,27 +3150,21 @@ color:
 	color: #98ce44;
 }
 .btn_ouer a {
-
-    background-color: 
-
-#fdb714;
-
-color:
-
-    #fff;
-    padding: 7px 20px;
+    background-color: #fdb714;
+    color: #fff;
+    padding: 5px 20px;
     display: inline-block;
     font-weight: bold;
     border-radius: 4px;
-
+    font-size: 13px;
+}
+.book_now h4 small {
+    font-size: 16px;
 }
 .book_now span {
-
-    color: 
-
-    #194eb0;
+    color: #194eb0;
     margin-left: 10px;
-
+    font-size: 16px;
 }
 .book_now {
 
@@ -3159,7 +3180,7 @@ color:
 }
 .btn_ouer.read a {
 	background-color: red;
-	font-size: 12px;
+	font-size: 13px;
 	width: 100%;
 }
 .fa.fa-star.grey {
@@ -3179,7 +3200,7 @@ h4.destinal:after {
     left: 0;
     right: 0;
     display: inline-block;
-    margin-top: -1px;
+    margin-top: 8px;
 }
 .deprature .fixed{
 	background:none !important;
@@ -3430,3 +3451,4 @@ a.left.carousel-control span {
 iti__flag-container {
    bottom: 31px;
 }
+
