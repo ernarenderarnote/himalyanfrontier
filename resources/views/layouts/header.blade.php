@@ -7,16 +7,17 @@
             <div class="col-xl-8 col-lg-7 top-social-w3pvt-am mt-lg-0 mt-2">
                 <div class="row">
                 <div class="col-9 top-w3layouts" style="text-align: right;">
-                    <p class="team-row">Online Payment | Our Team |  Blog  |  Testimonial |  
-                        @if (Route::has('login'))
+                    <p class="team-row">Online Payment | Our Team |  Blog  |  Testimonial | 
+                    @if (Route::has('login'))
                         
-                            @auth
-                                <a href="" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
-                            @else
-                               
-                                <a href="{{ route('login') }}">Login</a>
-                            @endauth
-                        @endif
+                        @auth
+                            
+                        @else
+                        
+                            <a href="{{ route('login') }}">Login</a>
+                        @endauth
+                    @endif
+
                     </p>
                 </div>
                 <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -113,7 +114,22 @@
                             <li><a href="{{url('advanced-search?itinerary_type=fixed_departure')}}">Fixed Departures</a></li>
                             <li><a href="{{url('advanced-search?itinerary_type=hot_deal')}}">Hot Deals</a></li>
 							<li><a href="#gallery">About Us</a></li>
-							<li><a href="#contact">Contact Us</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                            @if (Route::has('login'))
+                        
+                                @auth
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello,{{Auth::user()->full_name}} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                        <li><a href="">Dashboard</a></li>
+                                        <li><a href="">Booking History</a></li>
+                                        <li><a href="">Transection History</a></li>
+                                        <li><a href="">My Profile</a></li>
+                                        <li><a href="" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li>   
+                                        </ul>
+                                    </li>
+                                @endauth
+                            @endif
 						</ul>
 					</nav>
 				</div>

@@ -7,42 +7,48 @@
                 <div class="entry-title1 custom-heading1">{{$activity->title}}
                     <span class="custom_heading_sub">{{$activity->subtitle}}</span>
                 </div>
-                
+                @if($activity->feature_img !='' || $activity->gallery_img != '')
                 <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
 					<!-- Wrapper for slides -->
 					<div class='carousel-inner'>
 						<div class='carousel-item active'>
-							<img src="{{ url('/storage/images/itinerary/featureImages/'.$activity->feature_img) }}" alt='' />
+							@if($activity->feature_img)
+								<img src="{{ url('/storage/images/itinerary/featureImages/'.$activity->feature_img) }}" alt='' />
+							@endif
 						</div>
-						@forelse(json_decode($activity->gallery_img) as $key=>$gallery)
-							
-							<div class='carousel-item'>
-								<img src="{{ url('/storage/images/itinerary/galleryImages/'.$gallery) }}" >
-							</div>
-							@empty
+						@if($activity->gallery_img)
+							@forelse(json_decode($activity->gallery_img) as $key=>$gallery)
+								
+								<div class='carousel-item'>
+									<img src="{{ url('/storage/images/itinerary/galleryImages/'.$gallery) }}" >
+								</div>
+								@empty
 
-						@endforelse
+							@endforelse
+						@endif
 						<!-- Controls -->
 						<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
-							<span class='glyphicon glyphicon-chevron-left'></span>
+							<span class='fa fa-arrow-circle-left'></span>
 						</a>
 						<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
-							<span class='glyphicon glyphicon-chevron-right'></span>
+							<span class='fa fa-arrow-circle-right'></span>
 						</a>
 						
 					</div>
                     
-                    <!-- Indicators -->
-                    <ol class='carousel-indicators'>
-                        <li data-target='#carousel-custom' data-slide-to='0' class="active" ><img src="{{ url('/storage/images/itinerary/featureImages/'.$activity->feature_img) }}" alt='' height="50" width="100"/></li>
-                        @forelse(json_decode($activity->gallery_img) as $key=>$gallery)
-                            <li data-target='#carousel-custom' data-slide-to='{{($key +1)}}' ><img src="{{ url('/storage/images/itinerary/galleryImages/'.$gallery) }}" height="50" width="100"></li>
-                            @empty
+					<!-- Indicators -->
+					@if($activity->gallery_img)
+						<ol class='carousel-indicators'>
+							<li data-target='#carousel-custom' data-slide-to='0' class="active" ><img src="{{ url('/storage/images/itinerary/featureImages/'.$activity->feature_img) }}" alt='' height="50" width="100"/></li>
+							@forelse(json_decode($activity->gallery_img) as $key=>$gallery)
+								<li data-target='#carousel-custom' data-slide-to='{{($key +1)}}' ><img src="{{ url('/storage/images/itinerary/galleryImages/'.$gallery) }}" height="50" width="100"></li>
+								@empty
 
-                        @endforelse
-                    </ol>
+							@endforelse
+						</ol>
+					@endif
                 </div>
-			
+				@endif
 				<div class="adit-low">
 				   {!! $activity->description !!}
 				</div>
@@ -103,7 +109,27 @@
                             </div>
 						</div>
 						<div id="generalInfo" class="container tab-pane fade"><br>
-							{!! $activity->general_information !!}
+							<div class="panel-group" id="accordion">
+                                @if(isset($activity->general_information) && $activity->general_information !='' )
+                                    @foreach(json_decode($activity->general_information) as $key=>$general_info )
+                                        <div class="panel panel-default template">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordian{{$key}}">
+                                                        {{$general_info->title}}
+                                                    </a>
+                                                </h4>
+                                            
+                                            </div>
+                                            <div id="accordian{{$key}}" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    {{$general_info->description}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+								@endif
+							</div>	
 						</div>
 					</div>
 				</div>	
@@ -133,18 +159,72 @@
 				    </div>
 				</div>
 				<br>				
-				<div class="grand-more tens">				   
+				<div class="grand-more tens">
+					<div class="trak">
+					   <h4>Available Dates</h4>
+				    </div>
+					<div id="accordion" class="itinerary-collaspe">
+						<div class="card">
+							@php
+								$format      = 'Y-m-d'; 
+								$date_months = array();  
+							@endphp
+							@forelse($activity->schedule as $schedule)
+								@php $date_months[] = \Carbon\Carbon::parse($schedule->from_date)->format('M'); @endphp
+							
+							@empty
+							@endforelse
+							@foreach(array_unique($date_months) as $month) 
+						
+								<div class="card-header" id="heading{{$month}}">
+								<h5 class="mb-0">
+									<button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$month}}" aria-expanded="true" aria-controls="collapse{{$month}}">
+										{{$month}}
+									</button>
+								</h5>
+								</div>
+								<div id="collapse{{$month}}" class="collapse" aria-labelledby="heading{{$month}}" data-parent="#accordion">
+									<div class="card-body">
+										<ul>
+											@foreach($activity->schedule as $schedule)
+												@php $date_month = \Carbon\Carbon::parse($schedule->from_date)->format('M'); @endphp
+												@if($date_month == $month)
+													<li>
+														<form method="POST" action="{{route('booking')}}">
+															<input type="hidden" name="_token" value="{{ csrf_token() }}">
+															<input type="hidden" name="activity_id" value="{{$activity->id}}">
+															<input type="hidden" name="schedule_id" value="{{$schedule->id}}">		
+															<a href="" class="booking-schedule">
+																{{\Carbon\Carbon::parse($schedule->from_date)->format('M d')}} to {{\Carbon\Carbon::parse($schedule->to_date)->format('M d Y')}}
+															</a>
+														</form>	
+													</li>
+													
+												@endif
+											@endforeach
+										</u>	
+									</div>
+								</div>
+								
+							@endforeach
+						</div>
+					</div>
+				   
 					<div class="nos">					  
 						<div class="tk">							
 							<div class="Date-msain">	
 								<div class="perm">	
 									<p class="pull-left">Per Person</p>
-									<p class="pull-right">$ 1,298.40</p>
+									<p class="pull-right">{{$activity->currency_symbol}} {{ $activity->converted_price }}</p>
 								</div>		
 							</div>		
 							<div class="Date-msain">
-								<div class="per">		
-									<button>BOOK NOW</button>	
+								<div class="per">
+									<form action="{{route('booking')}}" method="POST">
+										<input type="hidden" name="_token" value="{{ csrf_token() }}">	
+										<input type="hidden" name="activity_id" value="{{$activity->id}}">	
+										<button type="submit">BOOK NOW</button>	
+									</form>	
 								</div>					
 							</div>				
 						</div>				
@@ -157,42 +237,64 @@
 						</div>
 					</div>
 					<div class="custom-select nullo">
-						<select>
-							<option value="0">EUR,C</option>
-							<option value="1">Audi</option>
-							<option value="2">BMW</option>
-							<option value="3">Citroen</option>
-							<option value="4">Ford</option>
-							<option value="5">Honda</option>
-							<option value="6">Jaguar</option>
-							<option value="7">Land Rover</option>
-							<option value="8">Mercedes</option>
-							<option value="9">Mini</option>
-							<option value="10">Nissan</option>
-							<option value="11">Toyota</option>
-							<option value="12">Volvo</option>
-						</select>
+						<form action="{{ route('currencySwitcher') }}" method="POST">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<select class="currency-switcher" name="currency">
+								@forelse($currencies as $currency)
+									@if(Session::has('selected_currency'))
+										<option value="{{$currency->code}}" {{ session()->get('selected_currency') == $currency->code ? 'selected' : '' }}>{{ $currency->code }} {{$currency->symbol}}</option>
+									@else
+										<option value="{{$currency->code}}" {{ $defaultCurrency->code == $currency->code ? 'selected' : '' }}>{{ $currency->code }} {{$currency->symbol}}</option>
+									@endif
+									
+									@empty
+
+								@endforelse	
+							</select>
+						</form>
 					</div>
 				</div>
 				<br>
-				<!--div class="grand-more">
-					<div class="tect">
-						<h4>Deprature Dates</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-					</div>
-				</div>
-				<BR-->
+				
 				<div class="grand-more">
 				   <div class="nos">
 						<div class="trak-k">
 							<h4>SEND INQUIRY</h4>
-						</div>
-						<form action="/action_page.php">
-							<input type="text" id="fname" name="firstname" placeholder="Your name..">
-							<input type="email" name="emailaddress" placeholder="email" >
+						
+						<form action="{{route('sendinquery')}}" method="post">
+							@csrf
+							<input type="text" id="fname" name="name" placeholder="Your name..">
+							@if($errors->has('name'))
+								<em class="invalid-feedback">
+									{{ $errors->first('name') }}
+								</em>
+							@endif
+							<input type="text" name="email" placeholder="email" >
+							@if($errors->has('email'))
+								<em class="invalid-feedback">
+									{{ $errors->first('email') }}
+								</em>
+							@endif
 							<input type="tel" name="phone" placeholder="phone" >
-							<textarea id="subject" name="subject" placeholder="Description.." style="height:100px"></textarea>
-							<input type="submit" value="Submit">
+							@if($errors->has('phone'))
+								<em class="invalid-feedback">
+									{{ $errors->first('phone') }}
+								</em>
+							@endif
+							<input type="text" name="subject" placeholder="subject" >
+							@if($errors->has('subject'))
+								<em class="invalid-feedback">
+									{{ $errors->first('subject') }}
+								</em>
+							@endif
+							<input type="hidden" name="itinerary_id" value="{{$activity->id}}">
+							<textarea id="desc" name="message" placeholder="Description.." style="height:100px"></textarea>
+							@if($errors->has('description'))
+								<em class="invalid-feedback">
+									{{ $errors->first('description') }}
+								</em>
+							@endif
+							<input type="submit" value="Submit" class="btn">
 						 </form>
 				    </div>
 				</div>

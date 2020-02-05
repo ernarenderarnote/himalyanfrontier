@@ -62,7 +62,7 @@ body a:hover {
 
 .mr-lg-auto,
 .mx-lg-auto {
-	padding-left: 50px;
+	padding-left:0px;
 }
 
 .border-left {
@@ -2394,7 +2394,7 @@ input[type="text"] {
     color: #fff;
     /* padding-right: 208px; */
 }
-input[type=text], select, textarea {
+/* input[type=text], select, textarea {
     width: 100%;
    padding:0 !important; 
    border: none !important; 
@@ -2402,8 +2402,8 @@ input[type=text], select, textarea {
     box-sizing: border-box;
     /* margin-top: 6px; */
     /* margin-bottom: 16px; */
-    resize: vertical;
-}
+    /* resize: vertical; 
+} */
 
 
 .custom-select {
@@ -3209,5 +3209,246 @@ h4.destinal:after {
 .slidecontainer label{
 	color:#fff;
 	font-weight: 'bold';
+}
+.panel-group .panel {
+    margin-bottom: 0;
+    overflow: hidden;
+    border-radius: 4px;
+}
+.panel-default {
+    border-color: #ddd;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.panel-group .panel-heading+.panel-collapse .panel-body {
+    border-top: 1px solid #ddd;
+}
+.panel-body {
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+.panel-title>a {
+    color: inherit;
+}
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+.panel-group .panel-heading {
+    border-bottom: 0;
+}
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid #ddd;
+}
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+.panel-heading input {
+    width: 95%;
+    border: 0px;
+    background: #f5f5f5;
+}
+.panel-body textarea{
+    border:0px;
+    width:100%;
+}
+.itinerary-collaspe .card-header {
+    padding:0px; 
+    margin-bottom: 0;
+    background-color: #fdb714;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.itinerary-collaspe .btn-link {
+    font-weight: 600;
+    color: #0c0c0c;
+    background-color: transparent;
+    text-transform: uppercase;
+}
+.itinerary-collaspe .btn-link:hover {
+    color: #000;
+    text-decoration: none;
+    background-color: transparent;
+    border-color: transparent;
+}
+.itinerary-collaspe .card-body {
+     padding:0px; 
+}
+.itinerary-collaspe a {
+    text-align: left;
+    color: #000;
+}
+/* .itinerary-collaspe	 li a:after {
+    content: '-';
+    border-bottom: 2px solid #fdb714;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    margin-top: -1px;
+} */
+.itinerary-collaspe .card-body li {
+	text-align: left;
+	cursor: pointer;
+	list-style-type: none;
+}
+.itinerary-collaspe .card-body li:hover {
+	background: #273648;
+    cursor: pointer;
+}
+.itinerary-collaspe .card-body li a:hover {
+    color: #fff;
+    cursor: pointer;
+}
+.itinerary-collaspe .card-body li a {
+    color: #000;
+    cursor: pointer;
+}
+.perm p{
+	color:#000;
+}
+.payment-div h4 {
+    padding: 10px;
+    background-color: #171a29;
+    margin: 0 0 15px;
+    color: #fff;
+}
+.payment-inner {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+	background-color: #f5f5f5;
+	padding: 0px;
+}
+.p-r-0 {
+    padding-right: 0;
+}
+.p-l-0 {
+    padding-left: 0;
+}
+.m-b-20{
+	margin-bottom:20px;
+}
+.m-t-20{
+	margin-top:20px;
+}
+.btn-booking{
+	background-color: #fdb714;
+    color: #fff;
+    padding: 7px 20px;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 4px;
+}
+.profile-form h4 {
+    padding: 10px;
+    background-color: #171a29;
+    margin: 0 0 15px;
+    color: #fff;
+}
+.invalid-feedback {
+    display: block;
+}
+.box-style {
+    position: relative;
+    height: 100px;
+    padding: 20px;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 25px;
+}
+.box-style .trek-count {
+    float: left;
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+    text-align: center;
+    font-size: 24px;
+    color: #FFF;
+    font-weight: 700;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+.box-style .trek-name {
+    float: left;
+    padding-top: 20px;
+    padding-left: 80px;
+}
+.box-style .trek-icon {
+    position: absolute;
+    right: 2px;
+    bottom: -2px;
+    opacity: .2;
+}
+.box-style2 {
+    background: #f14a5f;
+    background: -moz-linear-gradient(left,#f14a5f 0%,#ff96a5 100%);
+    background: -webkit-linear-gradient(left,#f14a5f 0%,#ff96a5 100%);
+    background: linear-gradient(to right,#f14a5f 0%,#ff96a5 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f14a5f',endColorstr='#ff96a5',GradientType=1);
+}
+.box-style1 {
+    background: #0fab74;
+    background: -moz-linear-gradient(left,#0fab74 0%,#57e0b6 100%);
+    background: -webkit-linear-gradient(left,#0fab74 0%,#57e0b6 100%);
+    background: linear-gradient(to right,#0fab74 0%,#57e0b6 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0fab74',endColorstr='#57e0b6',GradientType=1);
+}
+.box-style3 {
+    background: #f4834d;
+    background: -moz-linear-gradient(left,#f4834d 0%,#fdb892 100%);
+    background: -webkit-linear-gradient(left,#f4834d 0%,#fdb892 100%);
+    background: linear-gradient(to right,#f4834d 0%,#fdb892 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4834d',endColorstr='#fdb892',GradientType=1);
+}
+.advanced-search-page .carousel-item img{
+	width:100%;
+	height:400px;
+}
+a.right.carousel-control span {
+    position: absolute;
+    top: 190px;
+    font-size: 40px;
+}
+a.left.carousel-control span {
+    position: absolute;
+    top: 190px;
+    font-size: 40px;
+}
+.btn_ouer button{
+	width: 50%;
+    color: #fff;
+    padding-top: 7px;
+    padding-bottom: 6px;
+    background-color: #fdb714;
+    border: none;
+}
+iti__flag-container {
+   bottom: 31px;
 }
 

@@ -19,10 +19,10 @@
     <link href="{{ asset('css/adminCss/select2.min.css') }}" rel="stylesheet" />
     <!--link href="{{ asset('css/adminCss/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" /-->
     <link href="{{ asset('css/adminCss/dropzone.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote-bs4.css" rel="stylesheet">
-    @yield('styles')
+	<link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+	@yield('styles')
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
@@ -328,11 +328,12 @@
     <script src="{{ asset('/js/adminJs/select2.full.min.js') }}"></script>
     <script src="{{ asset('/js/adminJs/dropzone.min.js') }}"></script>
     <script src="{{ asset('/js/adminJs/summernote-bs4.min.js') }}"></script>
+	<script src="{{asset('/js/adminJs/summernote_accordian.js')}}"></script>
     <script src="{{ asset('/js/adminJs/custom.js') }}"></script>
     <link href="{{ asset('css/toster.css') }}" rel="stylesheet">
     <script src="{{ asset('js/toster.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
     @include('notification')
 
     <script>
@@ -426,7 +427,18 @@
         $(document).ready(function() {
 
             $('.summernote').summernote({
-                height: 200,
+				height: 200,
+				toolbar: [
+					['style', ['bold', 'italic', 'underline', 'clear']],
+					['font', ['strikethrough', 'superscript', 'subscript']],
+					['fontsize', ['fontsize']],
+					['color', ['color']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['insert', ['link', 'picture', 'video']],
+					['misc', ['accordion', 'codeview']],
+					['height', ['height']],
+			],
+			
             });
 
         });

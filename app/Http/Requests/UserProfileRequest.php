@@ -26,6 +26,7 @@ class UserProfileRequest extends FormRequest
              'phone' => [
                 'required',
                 'numeric',
+                Rule::unique('users')->ignore(Auth::user()->id),
             ],
             'age' => [
                 'required',

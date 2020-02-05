@@ -1,6 +1,43 @@
 @extends('layouts.frontend')
 @section('content')
-<section class="single_product7">
+<section class="single_product7 advanced-search-page">
+@if(isset($_GET['activity']) && $_GET['activity'] != '') 
+    @php $activity = $activities->where('slug',$_GET['activity'])->first(); @endphp
+    @if(isset($activity->thumbnails) || isset($activity->gallery_img) )
+        <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+            <!-- Wrapper for slides -->
+            <div class='carousel-inner'>
+                <div class='carousel-item active'>
+                    @if($activity->thumbnails)
+                        <img src="{{ url('/storage/images/activity/featureImages/'.$activity->thumbnails) }}" alt='' />
+                    @endif
+                </div>
+                @if($activity->gallery_img)
+                    @forelse(json_decode($activity->gallery_img) as $key=>$gallery)
+                        
+                        <div class='carousel-item'>
+                            <img src="{{ url('/storage/images/activity/galleryImages/'.$gallery) }}" >
+                        </div>
+                        @empty
+
+                    @endforelse
+                @endif
+                <!-- Controls -->
+                <a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+                    <span class='fa fa-arrow-circle-left'></span>
+                </a>
+                <a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+                    <span class='fa fa-arrow-circle-right'></span>
+                </a>
+                
+            </div>
+            <div class="col-md-12 activity-description">
+                {!! $activity->description ?? '' !!}
+            </div>
+        </div>
+        @endif
+    @endif
+    <br/>
    <div class="container">
       <div class="row">
          <div class="col-md-3 col-sm-3">
@@ -86,16 +123,14 @@
          </div>
          
          <div class="col-md-9 col-sm-12">
-            <!-- navigation holder -->
-            @if($itineraries->count() > 1)
-            <div class="legend1">
-            </div>
-            <div class="holder">
-            </div>
+            @if($get_activity)
+              
             @endif
+            <!-- navigation holder -->
+            {{ $itineraries->links() }}
             <!-- Page oriented legend -->
             <div class="right_side">
-                <div id="itemContainer">
+                <div id="">
                     @forelse($itineraries as $itinerary)
                         <div class="row margin_bottom1">
                             <div class="col-md-5 col-sm-5">
@@ -112,9 +147,13 @@
                                         {!! $itinerary->activity_points !!}
                                     </ul>
                                     <div class="book_now">
-                                    <h4><small>Per Person</small><span class="">{{$itinerary->price}}</span></h4>
+                                    <h4><small>Per Person</small><span class="">{{$itinerary->currency_symbol}} {{ $itinerary->converted_price }}</span></h4>
                                     <div class="btn_ouer">
-                                        <a href="#">Book Now</a>
+                                        <form action="{{route('booking')}}" method="POST">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">	
+                                            <input type="hidden" name="activity_id" value="{{$itinerary->id}}">	
+                                            <button class="btn" type="submit">BOOK NOW</button>	
+                                        </form>	
                                     </div>
                                     </div>
                                 </div>
@@ -147,12 +186,7 @@
                 </div>    
             </div>
             <!-- navigation holder -->
-            @if($itineraries->count() > 1)  
-                <div class="legend1">
-                </div>
-                <div class="holder">
-                </div>
-            @endif    
+            {{ $itineraries->links() }}    
          </div>
       </div>
    </div>

@@ -131,6 +131,7 @@
 <script src="{{ asset('js/highlight.js') }}"></script>
 <script src="{{ asset('js/jPages.min.js') }}"></script>
 <script src="{{ asset('js/jQuery.lazyload.js') }}"></script>
+<script src="{{ asset('build/js/intlTelInput.js') }}"></script>
 <!--script src="{{ asset('js/app.js') }}"></script-->
 
 <script>

@@ -34,11 +34,11 @@
                     {{ trans('global.activity.fields.description_helper') }}
                 </p>
             </div>
-            <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
+            <div class="form-group {{ $errors->has('thumbnails') ? 'has-error' : '' }}">
                 <label for="image">{{ trans('global.activity.fields.image') }}</label>
                 <div class="img-preview" style="width:300px; height:300px;">
-                    @if( isset($destination->thubnails) )
-                        <img id="ImdID" class="img-thumbnail" src="{{ url('/storage/images/'.$destination->thumbnails) }}" alt="Image" />
+                    @if( isset($activity->thumbnails) )
+                        <img id="ImdID" class="img-thumbnail" src="{{ url('/storage/images/activity/featureImages/'.$activity->thumbnails) }}" alt="Image" />
                     @else
                         <img id="ImdID" class="img-thumbnail" src="{{ url('images/placeholder.png') }}" alt="Image" />
                     @endif
@@ -50,6 +50,30 @@
                     </em>
                 @endif
             </div>
+            <!--Gallery Images-->
+            <div class="card">
+                <div class="card-header">
+                    Gallery Images
+                </div>
+                <div class="card-body">
+                    <div class="preview-images-zone">
+                        @if( isset($activity->gallery_img ) )
+                            @foreach(json_decode($activity->gallery_img) as $key=>$gallery)
+                                <div class="preview-image preview-show-{{$key}}">
+                                    <input type="hidden" name="gallery_upload_img[]" value="{{ $gallery }}">
+                                    <div class="image-cancel" data-no="{{$key}}">x</div>
+                                    <div class="image-zone"><img id="pro-img-{{$key}}" src="{{ url('/storage/images/activity/galleryImages/'.$gallery) }}"></div>
+                               </div>
+                            @endforeach
+                        @endif
+                    </div>
+                    <fieldset class="form-group">
+                        <a href="javascript:void(0)" onclick="$('#pro-image').click()">Upload Image</a>
+                        <input type="file" id="pro-image" value="{{$activity->gallery_img}}" name="gallery_img[]" style="display:none;" class="form-control" multiple>
+                    </fieldset>
+                </div>        
+            </div>
+            <!--Gallery Images End -->
             <div class="form-group">
                 <div class="custom-control custom-switch">
                 <input type="hidden" class="custom-control-input" id="" name="is_active" value="0">    
@@ -67,5 +91,4 @@
         </form>
     </div>
 </div>
-
 @endsection

@@ -54,7 +54,7 @@
                             </td>
                             <td>
                                 @if( isset($activity->thumbnails) )
-                                    <img class="table-thumnbail" src="{{ url('/storage/images/'.$activity->thumbnails) }}">
+                                    <img class="table-thumnbail" src="{{ url('/storage/images/activity/featureImages/'.$activity->thumbnails) }}">
                                 @endif
                             </td>
                             <td>

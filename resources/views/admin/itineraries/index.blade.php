@@ -55,7 +55,7 @@
                             <span class="badge badge-success">{{ $itinerary->status ?? '' }}</span>
                             </td>
                             <td>
-                                {{ $itinerary->price ?? '' }}
+                                {{ $itinerary->price ? $itinerary->currency->symbol.' '.$itinerary->price : ' '  }}
                             </td>
                             <td>
                                 @if(isset($itinerary->destinations))
@@ -66,7 +66,7 @@
                                 @endif
                             </td>
                             <td>
-                                 @if(isset($itinerary->activities))
+                                @if(isset($itinerary->activities))
                                     @foreach($itinerary->activities as $activity)
                                         <span class="badge badge-info">{{$activity->title}}</span>
                                     @endforeach

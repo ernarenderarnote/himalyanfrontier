@@ -49,7 +49,8 @@
                         </p>
                     </div>
                     <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
-                        <label for="price">{{ trans('global.itinerary.fields.price') }}</label>
+                        <label for="price">{{ trans('global.itinerary.fields.price') }} {{ $defaultCurrency->symbol }}</label>
+                        <input type="hidden" name="currency_id" value="{{ $defaultCurrency->id }}">
                         <input type="number" id="price" name="price" class="form-control" value="{{ old('price', isset($itinerary) ? $itinerary->price : '') }}" step="0.01">
                         @if($errors->has('price'))
                             <em class="invalid-feedback">
@@ -128,7 +129,30 @@
                         </div>
                         
                         <div class="tab-pane fade" id="general-information" role="tabpanel" aria-labelledby="general-information-tab">
-                            <textarea  name="general_information" class="form-control summernote ">{{ old('general_information', isset($itinerary) ? $itinerary->general_information : '') }}</textarea>
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default template">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordian0">
+                                                <input type="text"  name="general_information[0][title]">
+                                            </a>
+                                            <button type="button" class="close accordian-close pul-right" >
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </h4>
+                                    
+                                    </div>
+                                    <div id="accordian0" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <textarea name="general_information[0][description]"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <button class="btn btn-lg btn-primary btn-add-panel">
+                                <i class="fa fa-plus"></i> Add new panel
+                            </button>
                         </div>
 
                     </div>
@@ -178,11 +202,12 @@
                             <div class="input-group">
                                 <input type="text" data-attr="to-date" autocomplete="off" class="form-control datepicker to-date"  id="to_date_1" name="schedule[0][to_date]" value="" placeholder="To Date">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-success addmore" type="button" > <span class="fa fa-plus" aria-hidden="true"></span> </button>
+                                    <button type="button" class="mb-xs mr-xs btn btn-danger removemore" data-url="{{ route('admin.itineraries.scheduleDestroy') }}" data-value=""><i class="fa fa-remove"></i></button> 
                                 </span>
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-primary addmore" type="button" > <i class="fa fa-plus"></i> Add new schedule </button>
                 </div>    
             </div> 
             <!--Schedule end-->

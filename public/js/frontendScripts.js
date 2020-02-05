@@ -159,6 +159,17 @@ $('document').ready(function(){
         $('input[name="itinerary_type"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
+    //currency swither
+    $('.currency-switcher').on('change',function(){
+        $(this).closest('form').submit();
+    });
+
+    //booking form
+    $('.booking-schedule').on('click',function(e){
+        $(this).closest('form').submit();
+        e.preventDefault();
+    });
+
 });    
 /* when document is ready */
 $(function(){
@@ -185,5 +196,30 @@ $(function(){
             items.oncoming.find(".img_outer img").trigger("turnPage");
         }
     });
-    
+    //phone number flag script
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+      //allowDropdown: false,
+      // autoHideDialCode: false,
+      // autoPlaceholder: "off",
+      // dropdownContainer: document.body,
+      // excludeCountries: ["us"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+       hiddenInput: "full_number",
+      // initialCountry: "auto",
+      // localizedCountries: { 'de': 'Deutschland' },
+      // nationalMode: false,
+      // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+      // placeholderNumberType: "MOBILE",
+        preferredCountries: ['in', 'us'],
+        separateDialCode: true,
+      utilsScript: "build/js/utils.js",
+    });
+ 
 });
