@@ -111,12 +111,13 @@ span.expert {
 }
 
 .list-unstyled a {
-	color: #000000 !important;
+    color: #000000 !important;
+    line-height: 30px;
 }
 
 .footer {
-	padding-bottom: 50px;
-	padding-top: 50px;
+    padding-bottom: 30px;
+    padding-top: 30px;
 }
 
 .serv-cont-wthree {
@@ -290,7 +291,6 @@ a.contact-email {
 	border-bottom: 1px grey solid;
 	border-left: 1px grey solid;
 	border-right: 1px grey solid;
-	padding-left: 10px;
 	background: #fff;	color: #000000;
 }
 
@@ -327,7 +327,7 @@ i.fa.fa-check {
 .read-btn a {
 	background: #fdb714;
 	border: none;
-	padding: 10px 30px 5px 30px;
+	padding: 6px 30px 5px 30px;
 	color: #fff;
 	border-radius: 5px;
 }
@@ -356,9 +356,10 @@ h2.fixed {
 	border-radius: 5px;
 }
 
-
+     
 .read-btn-ipsum {
-	text-align: center;
+    text-align: center;
+    margin-top: 20px;
 }
 
 h3.say {    padding-top: 14px;    color: #321738;    text-align: center;    font-size: 31px;    font-family: sans-serif;    font-weight: 700;}
@@ -1225,9 +1226,9 @@ li.allow {
 	font-size: 15px;
 }
 
-.mb-3,
-.my-3 {
-	font-size: 20px !important;
+.mb-3, .my-3 {
+    font-size: 22px !important;
+    font-weight: bold;
 }
 
 h2.widgettitle {
@@ -2735,7 +2736,7 @@ On click the images will be displayed at normal size to complete the effect
 	color:#45a049;
 }
 .input-field{
-	width:90% !important;
+	width:100% !important;
 }
 .error{
 	color:red;
@@ -2959,7 +2960,8 @@ ul.itinerary-points p:before {
     line-height: 1em;
 }
 .left_side {
-	background-color: #273648;
+    background-color: #273648;
+    margin-top: 20px;
 }
 .left_side h3 {
     color: #fff;
@@ -3140,7 +3142,8 @@ color:
     object-fit: cover;
 }
 .heading_outer a h3 {
-	margin-top: 0px !important;
+    margin-top: 0px !important;
+    margin-bottom: 16px;
 }
 .heading_outer ul {
 	padding: 0px !important;
@@ -3159,12 +3162,14 @@ color:
     font-size: 13px;
 }
 .book_now h4 small {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: bold;
 }
 .book_now span {
     color: #194eb0;
     margin-left: 10px;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: bold;
 }
 .book_now {
 
@@ -3179,18 +3184,20 @@ color:
 
 }
 .btn_ouer.read a {
-	background-color: red;
-	font-size: 13px;
-	width: 100%;
+    background-color: red;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
 }
 .fa.fa-star.grey {
 	color: #ccc;
 }
 .margin_bottom1 {
-	margin-top: 20px;
-	box-shadow: 1px 1px 10px #aaa;
-	padding: 15px 10px 30px;
-	margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: 1px 1px 10px #aaa;
+    padding: 16px 0px 16px;
+    margin-bottom: 20px;
 }
 h4.destinal:after {
     content: '-';
@@ -3440,15 +3447,59 @@ a.left.carousel-control span {
     top: 190px;
     font-size: 40px;
 }
-.btn_ouer button{
-	width: 50%;
+.btn_ouer button {
+    width: 100%;
     color: #fff;
-    padding-top: 7px;
-    padding-bottom: 6px;
     background-color: #fdb714;
     border: none;
+    font-size: 12px;
+    text-align: center;
+    padding: 3px;
+    margin-top: 8px;
+    margin-bottom: 7px;
 }
 iti__flag-container {
    bottom: 31px;
+}
+
+/*******08-02-2020********/
+#services .form-control:not([size]):not([multiple]) {
+    height: auto !important;
+}
+.itinerary-points {
+    height: 220px;
+    position: relative;
+}
+.yoga {
+    font-size: 16px;
+    font-weight: bold;
+}
+.left_r45 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.itinerary-points li {
+    list-style: none;
+}
+.itinerary-points li .fa {
+    position: absolute;
+    left: 0;
+    margin-top: 5px;
+}
+#phone {
+    padding: 0px 15px 0px 100px !important;
+}
+.iti.iti--allow-dropdown.iti--separate-dial-code {
+    width: 100% !important;
+}
+.no_padding4 {
+    padding-left: 0px !important;
+}
+.itinerary-points p:before{
+    display:none;
+}
+.itinerary-points li p {
+    margin-left: 26px;
+    margin-top: 0;
 }
 

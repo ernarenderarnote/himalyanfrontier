@@ -19,6 +19,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'http://www.newfrontier.himalayanfrontiers.com/payment_success',
+        'http://www.newfrontier.himalayanfrontiers.com/payment_failed',
+        'payment_success/*',
     ];
 }

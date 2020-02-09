@@ -145,7 +145,7 @@
                     @endforelse  
                    
                     <ul class="itinerary-points">
-                       {!! $activity->activity_points !!}
+                        {!! $activity->front_activity_points !!}
                     </ul>   
 				</div>
 				<div class="grand-more">
@@ -154,7 +154,7 @@
 				    </div>
 				    <div class="grand-ore">
 						<ul class="itinerary-points">
-                            {!! $activity->highlights !!}									                               
+						    {!! $activity->front_activity_highlights !!}
 						</ul>
 				    </div>
 				</div>

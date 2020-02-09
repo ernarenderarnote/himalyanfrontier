@@ -106,4 +106,31 @@ class Itinerary extends Model
     {
     	return $this->hasOne(Currency::class,'id', 'currency_id');
     } 
+    
+     public function getFrontActivityPointsAttribute(){
+         
+        $activityPoints = '';
+        
+        if( $this->activity_points != ''){
+            $str = $this->activity_points;
+            $strToReplace   = ["<p>","</p>"];
+            $strFromReplace = ["<li><i class='fa fa-check' aria-hidden='true'></i><p>","</p></li>"];
+            $activityPoints = str_replace($strToReplace, $strFromReplace, $str);
+        }
+        return $activityPoints;
+    }
+
+    public function getFrontActivityHighlightsAttribute(){
+        $hightlights = '';
+        
+        if( $this->highlights != ''){
+            $str = $this->highlights;
+            $strToReplace   = ["<p>","</p>"];
+            $strFromReplace = ["<li><i class='fa fa-check' aria-hidden='true'></i><p>","</p></li>"];
+            $highlights = str_replace($strToReplace, $strFromReplace, $str); 
+        }
+       
+        return $highlights;
+    }
+    
 }

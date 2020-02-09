@@ -49,7 +49,7 @@ class BookingController extends Controller
     }
 
     public function makePayment(Request $request){
-        $validation['schedule_id'] = 'required';
+       /* $validation['schedule_id'] = 'required';
         $validation['name'] ='required';
         $validation['mobile']='required';
         $validation['age'] = 'required';
@@ -71,22 +71,23 @@ class BookingController extends Controller
                 $response['error'] = $validator->errors()->all();
                 return redirect()->back()->withErrors($response['error']);
             }
-            else{
+            else{*/
+$rand_number  = rand(10,100);
             $parameters = [
                 
                 'merchant_id' => 8376,
 
-                'currency' => 'EUR',
+                'currency' => 'INR',
 
-                'redirect_url' => 'http://127.0.0.1:8000/makePayment',
+                'redirect_url' => 'http://www.newfrontier.himalayanfrontiers.com/payment_success',
 
-                'cancel_url' => 'http://127.0.0.1:8000/makePayment',
+                'cancel_url' => 'http://www.newfrontier.himalayanfrontiers.com/payment_failed',
 
                 'language' => 'English',
 
-                'tid' => '1231455',
+                'tid' => $rand_number,
 
-                'order_id' => '123322',
+                'order_id' => $rand_number,
 
                 'amount' => '1234',
                 
@@ -94,7 +95,9 @@ class BookingController extends Controller
             
             $order = Indipay::prepare($parameters);
             return Indipay::process($order);
-        }
+        //}
     }
+    
+        
 
 }

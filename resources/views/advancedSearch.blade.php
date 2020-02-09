@@ -146,19 +146,10 @@
                                     <ul>
                                         {!! $itinerary->activity_points !!}
                                     </ul>
-                                    <div class="book_now">
-                                    <h4><small>Per Person</small><span class="">{{$itinerary->currency_symbol}} {{ $itinerary->converted_price }}</span></h4>
-                                    <div class="btn_ouer">
-                                        <form action="{{route('booking')}}" method="POST">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">	
-                                            <input type="hidden" name="activity_id" value="{{$itinerary->id}}">	
-                                            <button class="btn" type="submit">BOOK NOW</button>	
-                                        </form>	
-                                    </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
-                            <div class="col-md-2 col-sm-2">
+                            <div class="col-md-2 col-sm-2 no_padding4">
                                 <div class="rating_outer">
                                     <div class="star">
                                         <p>
@@ -173,6 +164,17 @@
                                                 <p>Grade</p>
                                             @endif
                                         </p>
+                                    </div>
+                                    
+                                    <div class="book_now">
+                                    <h4><small>Per Person</small><span class="">{{$itinerary->currency_symbol}} {{ $itinerary->converted_price }}</span></h4>
+                                    <div class="btn_ouer">
+                                        <form action="{{route('booking')}}" method="POST">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">	
+                                            <input type="hidden" name="activity_id" value="{{$itinerary->id}}">	
+                                            <button class="btn" type="submit">BOOK NOW</button>	
+                                        </form>	
+                                    </div>
                                     </div>
                                     <div class="btn_ouer read">
                                     <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}">Read More</a>

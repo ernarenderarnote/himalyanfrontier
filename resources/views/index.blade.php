@@ -100,7 +100,9 @@
                                 <div class="true-image"> 
                                 <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}" data-post_id="1641" class="hover-effect popup-gallery"><img src="{{ url('/storage/images/itinerary/featureImages/'.$itinerary->feature_img) }}"></a>                              
                                 </div>
+                                
                                 <div class="amet">
+                                    <div class="left_r45">
                                 <h4 class="yoga">{{$itinerary->title}}</h4>
                                 @forelse($itinerary->destinations as $itineraryDestination)
                                         <small>{{$itineraryDestination->title}}</small>
@@ -122,8 +124,9 @@
                                     </div>
                                 </div>
                                 <ul class="itinerary-points">
-                                    {!! $itinerary->activity_points !!}
+                                    {!! $itinerary->front_activity_points !!}
                                 </ul>
+                                </div>
                                 <div class="read-btn">                                    
                                     <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}">Read More</a>                                 
                                 </div>
@@ -153,6 +156,7 @@
                             </a>
                         </div>
                         <div class="amet">
+                            <div class="left_r45">
                             <h4>{{$fixedProgram->title}}</h4>
                             <ul class="features check">
                                 {!! $fixedProgram->activity_points !!}
@@ -173,6 +177,7 @@
                             </div>
                             <div class="read-btn">
                                 <a href="{{ route('activity.slug', ['slug'=>$fixedProgram->slug]) }}">Read More</a>
+                            </div>
                             </div>
                         </div>
                     </div>

@@ -1,24 +1,7 @@
 <div class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <h2 class="widgettitle">Destinations</h2>
-                <address class="contact-details">
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#">India</a>
-                    </li>
-                    <li>
-                        <a href="#">Nepal</a>
-                    </li>
-                    <li>
-                        <a href="#">Bhutan</a>
-                    </li>
-                    <li>
-                        <a href="#">Customized Tours</a>
-                    </li>
-                </ul>
-                <br>
+            <div class="col-md-3 col-sm-3">
                 <h3 class="mb-sm-4 mb-3 pb-3">Quick Links</h3>
                 <ul class="list-unstyled">
                     <li>
@@ -41,42 +24,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3">
-            <h3 class="mb-sm-4 mb-3 pb-3">Activities</h3>
-            <ul class="list-unstyled">
-            <li>
-            <a href="index.html">Culture tour</a>
-            </li>
-            <li>
-            <a href="#">Festival Tours</a>
-            </li>
-            <li>
-            <a href="#">Home stay trek</a>
-            </li>
-            <li>
-            <a href="#">Motorbike tours</a>
-            </li>
-            <li>
-            <a href="#">Mountain bike tours</a>
-            </li>
-            <li>
-            <a href="#">Off the Beaten Track</a>
-            </li>
-            <li>
-            <a href="#">Trekking in Himalayan India</a>
-            </li>
-            <li>
-            <a href="#">Trekking Peaks</a>
-            </li>
-            <li>
-            <a href="#">Walk and Explore</a>
-            </li>
-            <li>
-            <a href="#">Yoga</a>
-            </li>
-            </ul>
-            </div>
-            <div class="col-md-3">
+            
+            <div class="col-md-3 col-sm-3">
             <h3 class="mb-sm-4 mb-3 pb-3">Useful Links</h3>
             <ul class="list-unstyled">
             <li>
@@ -94,9 +43,11 @@
             </ul>
             <br>
             <br>
+            </div>
+            <div class="col-md-3 col-sm-3">
             <div class="touch">
             <div id="travcontactwidget-2" class="contact-box small-box widget_travcontactwidget">
-            <h2 class="widgettitle">Get in Touch</h2>
+            <h3 class="mb-sm-4 mb-3 pb-3">Get in Touch</h3>
             <address class="contact-details">
             <span class="contact-phone"><i class="fa fa-phone" aria-hidden="true"></i>  91 1902 250384</span>
             <br>
@@ -107,8 +58,8 @@
             </div>
             </div>
             </div>
-            <div class="col-md-3">
-                <h3 class="mb-sm-4 mb-3 pb-3">Our Affiliates</h3>
+            <div class="col-md-3 col-sm-3">
+                <h3 class="mb-sm-4 mb-3 pb-3">Secure Online Payments</h3>
                 <img src="{{url('images/neew.png')}}">
             </div>
         </div>
