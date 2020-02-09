@@ -133,4 +133,5 @@ class Itinerary extends Model
         return $highlights;
     }
     
+
 }

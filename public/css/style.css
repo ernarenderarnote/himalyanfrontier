@@ -3458,7 +3458,7 @@ a.left.carousel-control span {
     margin-top: 8px;
     margin-bottom: 7px;
 }
-iti__flag-container {
+.iti__flag-container {
    bottom: 31px;
 }
 
@@ -3501,5 +3501,12 @@ iti__flag-container {
 .itinerary-points li p {
     margin-left: 26px;
     margin-top: 0;
+}
+
+
+.m-l-10{
+	margin-left:10px;	
+} m-b-10{
+	margin-bottom:10px;
 }
 
