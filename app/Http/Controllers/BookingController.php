@@ -100,9 +100,13 @@ class BookingController extends Controller
             if($request->payment_percentage == 'partial'){
                 $paid_amount      = ($actual_price/100)*20;
                 $remaining_amount = ($actual_price/100)*80; 
+                $payment_percentage = 20;
+                $payment_method     = base64_encode('partial');
             }else{
                 $paid_amount      = $actual_price;
-                $remaining_amount = ''; 
+                $remaining_amount = 0; 
+                $payment_percentage = 100;
+                $payment_method     = base64_encode('full_payment');
             }
             $booking                     = new Booking();
             $booking->user_id            = Auth::user()->id;
@@ -124,7 +128,7 @@ class BookingController extends Controller
             $booking->currency_id        = $request->currency_id;
             $booking->activity_price     = $request->activity_price;
             $booking->actual_price       = $actual_price;
-            $booking->payment_percentage = $request->payment_percentage;
+            $booking->payment_percentage = $payment_percentage;
             $booking->no_of_participants = $request->additional_user + 1; 
             $booking->actual_currency    = $actual_currecny;
             $booking->payment_paid       = $paid_amount;
@@ -132,43 +136,83 @@ class BookingController extends Controller
             $booking->booking_status     = 'pending';
             $booking->payment_status     = 'not_paid';
             if($booking->save()){
-                $this->paymentRequest($booking);
+               $currency_code = Currency::where('id',$booking->currency_id)->first()->code;
+                $rand = rand(10,100);
+                $parameters = [
+                        
+                    'merchant_id' => 8376,
+        
+                    //'currency' => $currency_code,
+                    'currency' => 'INR',
+                    'redirect_url' =>  route('successPayment',[base64_encode($booking->id), $payment_method]),
+                   
+                    'cancel_url' => route('failedPayment',[base64_encode($booking->id), $payment_method]),
+        
+                    'language' => 'English',
+        
+        
+                    'tid' => $rand,
+        
+                    'order_id' => $booking->booking_id,
+                    
+                    'billing_name' => $request->name[0],
+                    
+                    'billing_address' => $booking->address,
+                    
+                    'billing_city' => $booking->city,
+                    
+                    'billing_state' => $booking->state,
+                    
+                    'billing_zip' => $booking->pin_code,
+                    
+                    
+                    'billing_tel' => $request->mobile[0],
+                    
+                    'billing_email' => $request->email[0],
+        
+                    'amount' => $booking->payment_paid,
+                    
+                ];
+                $order = Indipay::prepare($parameters);
+                return Indipay::process($order);
+                
             }
         }
     }
 
     private function paymentRequest($booking){
-        $currency_code = Currency::where('id',$booking->currency_id)->first('code');
-        $parameters = [
-                
-            'merchant_id' => 8376,
-
-            'currency' => $currency_code,
-
-            'redirect_url' =>  route('successPayment',['id',$booking->id]),
-           
-            'cancel_url' => route('failedPayment',['id',$booking->id]),
-
-            'language' => 'English',
-
-
-            'tid' => '1231455',
-
-            'order_id' => $booking->order_id,
-
-            'amount' => $booking->payment_paid,
-            
-        ];
         
-        $order = Indipay::prepare($parameters);
-        return Indipay::process($order);
     } 
 
-    public function paymentSuccess(Request $request){
+    public function paymentSuccess(Request $request, $id, $payment_paid){
         $response = Indipay::response($request);
-        echo"<pre>";
-        print_r($response);
-        die;
+        $transections = new Transections();
+        $transections->booking_id = base64_decode($id);
+        $transections->order_id   = $response['order_id'];
+        $transections->billing_name = $response['billing_name'];
+        $transections->billing_address = $response['billing_address'];
+        $transections->city = $response['billing_city'];
+        $transections->state = $response['billing_state'];
+        $transections->zip = $response['billing_zip'];
+        $transections->country = $response['billing_country'];
+        $transections->telephone = $response['billing_tel'];
+        $transections->email = $response['billing_email'];
+        $transections->trans_date = $response['trans_date'];
+        $transections->tracking_id = $response['tracking_id'];
+        $transections->bank_ref_no = $response['bank_ref_no'];
+        $transections->order_status = $response['order_status'];
+        $transections->payment_mode = $response['payment_mode'];
+        $transections->card_name = $response['card_name'];
+        $transections->currency = $response['currency'];
+        $transections->mer_amount = $response['amount'];
+        if($transections->save()){
+            $booking = Booking::where('id',base64_decode($id))->first();
+            $booking->booking_status = 'completed';
+            $booking->payment_status = base64_decode($payment_paid);
+            $booking->save();
+            $response = ['message' => 'Booking process successfully completed.', 'alert-type' => 'success'];
+            //return redirect()->route('userbooking')->with($response);
+        }
     }
    
     public function paymentFailed(Request $request){

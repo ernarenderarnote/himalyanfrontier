@@ -23,6 +23,7 @@ Route::group(["namespace" => "Dashboard" , "middleware" => ["auth","info"]], fun
 	Route::get('/dashboard', [ "as" =>"dashboard", 'uses' => "DashboardController@index" ]);
 
 });
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
     
     Route::get('/', 'HomeController@index')->name('home');
@@ -89,6 +90,8 @@ Route::match(['post'],'/makePayment', [ "as" =>"makePayment", 'uses' => "Booking
 
 Route::match(['post'],'/sendinquery', [ "as" =>"sendinquery", 'uses' => "InqueryController@store"]);
 
-Route::match(['get','post'],'/payment_success/{id}', [ "as" =>"successPayment", 'uses' => "BookingController@paymentSuccess"]);
+Route::match(['get','post'],'/payment_success/{id}/{payment_mode}', [ "as" =>"successPayment", 'uses' => "BookingController@paymentSuccess"]);
 
-Route::match(['get','post'],'/payment_failed/{id}', [ "as" =>"failedPayment", 'uses' => "BookingController@paymentFailed"]);
+Route::match(['get','post'],'/payment_failed/{id}/{payment_mode}', [ "as" =>"failedPayment", 'uses' => "BookingController@paymentFailed"]);
+
+//Route::match(['get','post'],'/userbooking/{id}/{payment_mode}', [ "as" =>"userbooking", 'middleware' => ['auth'],'uses' => "UserDashboardController@"]]);

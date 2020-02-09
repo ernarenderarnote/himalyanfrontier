@@ -27,7 +27,6 @@ class CreateTransectionsTable extends Migration
             $table->string('email')->nullable();
             $table->string('trans_date')->nullable();
             $table->integer('tracking_id')->nullable();
-            $table->integer('order_id')->nullable();
             $table->string('bank_ref_no')->nullable();
             $table->string('order_status')->nullable();
             $table->string('payment_mode')->nullable();
