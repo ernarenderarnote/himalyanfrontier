@@ -89,3 +89,6 @@ Route::match(['post'],'/makePayment', [ "as" =>"makePayment", 'uses' => "Booking
 
 Route::match(['post'],'/sendinquery', [ "as" =>"sendinquery", 'uses' => "InqueryController@store"]);
 
+Route::match(['get','post'],'/payment_success/{id}', [ "as" =>"successPayment", 'uses' => "BookingController@paymentSuccess"]);
+
+Route::match(['get','post'],'/payment_failed/{id}', [ "as" =>"failedPayment", 'uses' => "BookingController@paymentFailed"]);

@@ -170,6 +170,75 @@ $('document').ready(function(){
         e.preventDefault();
     });
 
+    //booking participant add form
+    $('select[name="additional_user"]').on('change',function(){
+        $('.end-participants').html('');
+        var numCopies = $(this).val();
+        if(numCopies == ''){
+            numCopies = 0;
+        }
+        var participant_count = parseInt(numCopies) + 1;
+        var e = $('.personal-details-data:first');
+        var $clone;
+        var contacts =[];
+        for (var i = 1; i <= numCopies; i++) {
+            $clone = e.clone();
+            $clone.find('.participant-h').html('Participant -'+i);
+            $clone.find("input").each(function(){
+                $(this).val('');
+                var oldName   = $(this).attr('name');
+                var breakname = oldName.split('[');
+                var newName   = breakname[0]+'['+i+']';
+                $(this).attr('name',newName);  
+            });
+            $clone.find("select").each(function(){
+                $(this).val('');
+                var oldName   = $(this).attr('name');
+                var breakname = oldName.split('[');
+                var newName   = breakname[0]+'['+i+']';
+                $(this).attr('name',newName);  
+            });
+            $clone.find('.clear:last').after('<hr/>');
+            $('.end-participants').append($clone);
+            customValidation();
+        }
+        var payment_option = $('select[name="payment_percentage"]').attr('value');
+        if(payment_option  == ''){
+            payment_option = 'full_payment';
+        }
+        var activity_price = $('input[name="activity_price"]').val();
+        $('.participant-number').html(participant_count);
+        if( payment_option == 'partial'  ){
+            var price = calculatePrice(participant_count, activity_price);
+            $('.price-total').html(price.partial_price);
+            $('.activity-price').html(price.total_price_per);
+        }else{
+            $('.activity-price').html(activity_price);
+            $('.price-total').html(participant_count * activity_price);
+        }
+    });
+    
+    $('select[name="payment_percentage"]').change(function(){
+        var participant_count = $('select[name="additional_user"]').val();
+        if(participant_count == ''){
+            participant_count = 0;
+        }
+        participant_count = parseInt(participant_count) + 1;
+        if( participant_count == 'undefined' || participant_count == ''){
+            participant_count = 1;
+        }
+        var payment_option    = $(this).val();
+        var activity_price = $('input[name="activity_price"]').val();
+        if( payment_option == 'partial'  ){
+            var price = calculatePrice(participant_count, activity_price);
+            $('.activity-price').html(price.total_price_per);
+            $('.price-total').html(price.partial_price);
+        }else{
+            $('.activity-price').html(activity_price);
+            $('.price-total').html(participant_count * activity_price);
+        }
+
+    });
 });    
 /* when document is ready */
 $(function(){
@@ -221,5 +290,195 @@ $(function(){
         separateDialCode: true,
       utilsScript: "build/js/utils.js",
     });
- 
+
 });
+
+$(document).ready(function() {   
+    
+    $("#payment-form").validate({
+      ignore: "",
+      rules: {
+        booking_date:{
+          required:true,
+        },
+        "name[0]": {
+          required: true
+        },
+        "email[0]":{
+          required:true,
+          email:true
+        },
+        "mobile[0]":{
+          required:true
+        },
+        "age[0]":{
+          required:true,
+          digits:true
+        },
+        "gender[0]":{
+          required:true
+        },
+        "height[0]":{
+          required:true,
+          digits:true
+        },
+        "weight[0]":{
+          required:true,
+          digits:true
+        },
+        address:{
+          required:true
+        },
+        state:{
+          required:true
+        },
+        city:{
+          required:true
+        },
+        pin_code:{
+          required:true,
+          digits:true
+        },
+        source:{
+          required:true
+        },
+        travelexperiance:{
+          required:true
+        },
+        agree : {
+           required : true
+        },
+        payment_percentage: {
+            required : true
+        },
+     },   
+      messages: { 
+        booking_date:{
+          required:"Please select schedule"
+        },
+       "name[0]": {
+          required: "Please enter name"
+        },
+        "email[0]":{
+          required:"Please enter email",
+          email:"Please enter valid email",
+        },
+        "mobile[0]":{
+          required:"Please enter mobile number"
+        },
+        "age[0]":{
+          required:"Please enter age"
+        },
+        "gender[0]":{
+          required:"Please select gender"
+        },
+        height:{
+          required:"Please enter height"
+        },
+        weight:{
+          required:"Please enter weight"
+        },
+        address:{
+          required:"Please enter address"
+        },
+        state:{
+          required:"Please enter state"
+        },
+        city:{
+          required:"Please enter city"
+        },
+        pin_code:{
+          required:"Please enter pin"
+        },
+        source:{
+          required:"Please select option"
+        },
+        travelexperiance:{
+          required:"Please select option"
+        },
+       
+        agree:{
+          required:"Please check term & conditions"
+        },
+        payment_percentage: {
+            required :"Please select payment mode"
+         },
+      },
+      
+    }); 
+    
+});
+
+function customValidation () {
+    $('.part-name').each(function() {
+        $(this).rules('add', {
+        required: true,
+        messages: {
+            required: "Please enter name",
+        },
+        });
+    });
+    $('.part-email').each(function() {
+        $(this).rules('add', {
+        required: true,
+        email:true,
+        messages: {
+            required: "Please enter email",
+        },
+        });
+    });
+    $('.part-mobile').each(function() {
+        $(this).rules('add', {
+        required: true,
+        digits:true,
+        messages: {
+            required: "Please enter mobile",
+        },
+        });
+    });
+    $('.part-age').each(function() {
+        $(this).rules('add', {
+        required: true,
+        digits:true,
+        messages: {
+            required: "Please enter age",
+        },
+        });
+    });
+    $('.part-gender').each(function() {
+        $(this).rules('add', {
+        required: true,
+        messages: {
+            required: "Please select gender",
+        },
+        });
+    });
+    $('.part-height').each(function() {
+        $(this).rules('add', {
+        required: true,
+        digits:true,
+        messages: {
+            required: "Please enter height",
+        },
+        });
+    });
+    $('.part-weight').each(function() {
+        $(this).rules('add', {
+        required: true,
+        digits:true,
+        messages: {
+            required: "Please enter weight",
+        },
+        });
+    });
+} 
+
+function calculatePrice(participant, activity_price){
+    var total_price     = participant * activity_price;
+    var partial_price   = (total_price/100)*20;
+    var total_price_per = (activity_price/100)*20;
+    return {
+        'partial_price'  : partial_price,
+        'total_price_per' : total_price_per
+    };
+}
