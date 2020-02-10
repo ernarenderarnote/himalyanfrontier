@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Activity;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreDestinationRequest extends FormRequest
 {
@@ -17,6 +18,7 @@ class StoreDestinationRequest extends FormRequest
         return [
             'title' => [
                 'required',
+                Rule::unique('destinations')->whereNull('deleted_at'),
             ],
         ];
     }

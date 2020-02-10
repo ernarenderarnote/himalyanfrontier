@@ -136,7 +136,7 @@
                         
 
                         <div class="tab-pane fade" id="general-information" role="tabpanel" aria-labelledby="general-information-tab">
-                            <!--textarea  name="general_information" class="form-control summernote ">{{ old('general_information', isset($itinerary) ? $itinerary->general_information : '') }}</textarea-->
+                            
                             <div class="panel-group" id="accordion">
                                 @if(isset($itinerary->general_information) && $itinerary->general_information !='' )
                                     @foreach(json_decode($itinerary->general_information) as $key=>$general_info )

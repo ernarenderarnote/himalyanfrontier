@@ -18,7 +18,7 @@ class UpdateItineraryRequest extends FormRequest
         return [
             'title' => [
                 'required',
-                Rule::unique('itineraries')->ignore($this->itinerary),
+                Rule::unique('itineraries')->ignore($this->itinerary)->whereNull('deleted_at'),
             ],
         ];
     }

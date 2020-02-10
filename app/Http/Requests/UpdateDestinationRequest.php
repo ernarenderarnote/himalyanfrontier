@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Destination;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDestinationRequest extends FormRequest
 {
@@ -17,6 +18,7 @@ class UpdateDestinationRequest extends FormRequest
         return [
             'title' => [
                 'required',
+                Rule::unique('destinations')->ignore($this->destination)->whereNull('deleted_at'),
             ],
         ];
     }

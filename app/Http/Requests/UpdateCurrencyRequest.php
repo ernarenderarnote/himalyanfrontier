@@ -18,15 +18,15 @@ class UpdateCurrencyRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique('currencies')->ignore($this->currency),
+                Rule::unique('currencies')->ignore($this->currency)->whereNull('deleted_at'),
             ],
             'code' => [
                 'required',
-                Rule::unique('currencies')->ignore($this->currency),
+                Rule::unique('currencies')->ignore($this->currency)->whereNull('deleted_at'),
             ],
             'symbol' => [
                 'required',
-                Rule::unique('currencies')->ignore($this->currency),
+                Rule::unique('currencies')->ignore($this->currency)->whereNull('deleted_at'),
             ],
             'exchange_rate' => [
                 'required',

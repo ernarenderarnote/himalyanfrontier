@@ -16,7 +16,7 @@ class CreateTransectionsTable extends Migration
         Schema::create('transections', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('booking_id')->unsigned();
-            $table->integer('order_id')->unsigned();
+            $table->string('order_id')->nullable();
             $table->string('billing_name')->nullable();
             $table->longText('billing_address')->nullable();
             $table->string('city')->nullable();
@@ -26,7 +26,7 @@ class CreateTransectionsTable extends Migration
             $table->string('telephone')->nullable();
             $table->string('email')->nullable();
             $table->string('trans_date')->nullable();
-            $table->integer('tracking_id')->nullable();
+            $table->string('tracking_id')->nullable();
             $table->string('bank_ref_no')->nullable();
             $table->string('order_status')->nullable();
             $table->string('payment_mode')->nullable();
