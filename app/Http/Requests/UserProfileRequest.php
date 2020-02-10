@@ -21,12 +21,12 @@ class UserProfileRequest extends FormRequest
             ],
             'email' => [
                 'required',
-                Rule::unique('users')->ignore(Auth::user()->id),
+                Rule::unique('users')->ignore(Auth::user()->id)->whereNull('deleted_at'),
             ],
              'phone' => [
                 'required',
                 'numeric',
-                Rule::unique('users')->ignore(Auth::user()->id),
+                Rule::unique('users')->ignore(Auth::user()->id)->whereNull('deleted_at'),
             ],
             'age' => [
                 'required',

@@ -18,15 +18,15 @@ class StoreCurrencyRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique('currencies'),
+                Rule::unique('currencies')->whereNull('deleted_at'),
             ],
             'code' => [
                 'required',
-                Rule::unique('currencies'),
+                Rule::unique('currencies')->whereNull('deleted_at'),
             ],
             'symbol' => [
                 'required',
-                Rule::unique('currencies'),
+                Rule::unique('currencies')->whereNull('deleted_at'),
             ],
             'exchange_rate' => [
                 'required',

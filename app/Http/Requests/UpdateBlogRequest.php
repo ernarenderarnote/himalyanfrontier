@@ -18,7 +18,7 @@ class UpdateBlogRequest extends FormRequest
         return [
             'title' => [
                 'required',
-                Rule::unique('blogs')->ignore($this->blog),
+                Rule::unique('blogs')->ignore($this->blog)->whereNull('deleted_at'),
             ],
         ];
     }

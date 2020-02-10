@@ -18,7 +18,7 @@ class StoreBlogRequest extends FormRequest
         return [
             'title' => [
                 'required',
-                Rule::unique('blogs'),
+                Rule::unique('blogs')->whereNull('deleted_at'),
             ],
         ];
     }

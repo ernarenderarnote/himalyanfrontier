@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Itinerary;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreItineraryRequest extends FormRequest
 {
@@ -17,6 +18,7 @@ class StoreItineraryRequest extends FormRequest
         return [
             'title' => [
                 'required',
+                Rule::unique('itineraries')->whereNull('deleted_at'),
             ],
             
         ];

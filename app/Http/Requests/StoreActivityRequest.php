@@ -17,6 +17,7 @@ class StoreActivityRequest extends FormRequest
         return [
             'title' => [
                 'required',
+                Rule::unique('activities')->whereNull('deleted_at'),
             ],
         ];
     }
