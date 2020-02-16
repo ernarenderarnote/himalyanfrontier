@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Itinerary;
+use App\Transections;
+use App\ItinerarySchedule;
+use App\Currency;
 
 class Booking extends Model
 {
@@ -44,5 +48,20 @@ class Booking extends Model
         'updated_at',
         'deleted_at',
     ];
-	
+    
+    public function itinerary(){
+        return $this->hasOne(Itinerary::class,'id', 'itinerary_id');
+    }
+
+    public function transection(){
+        return $this->hasOne(Transections::class,'order_id', 'booking_id');
+    }
+
+    public function currency(){
+        return $this->hasOne(Currency::class,'id', 'currency_id');
+    }
+
+    public function schedule(){
+        return $this->hasOne(ItinerarySchedule::class,'id', 'schedule_id');
+    }
 }

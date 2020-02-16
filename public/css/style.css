@@ -3509,4 +3509,143 @@ a.left.carousel-control span {
 } m-b-10{
 	margin-bottom:10px;
 }
+.booking5 h4 {
+    color: #ff0000;
+}
+.Prcening_details h4 {
+    color: #ff0000;
+}
+.table .thead-dark th {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #454d55;
+}
+.dot6 {
+    width: 100px;
+}
+.booking5 table tr td {
+    width: 160px;
+    font-size: 15px;
+    line-height: 30px;
+}
 
+.total_img h4 {
+    font-size: 16px;
+    margin-top: 3px;
+    margin-bottom: 0;
+}
+.total_img p {
+    margin-bottom: 0px;
+}
+.total_img.red3 {
+    background-color: red;
+}
+.total_img {
+    background-color: green;
+    clear: both;
+    display: inline-block;
+    padding: 10px;
+    color: #fff;
+    margin-right: 10px;
+    width: 32%;
+}
+.booking5 {
+    margin-top: 50px;
+}
+.total_img.lighr5 {
+    background-color: #e22525;
+}
+.total_img.pink3 {
+    background-color: blue;
+}
+
+.right_side {
+    margin: 0px auto;
+    text-align: center;
+}
+.right_side {
+    margin: 40px auto;
+    text-align: center;
+}
+.Prcening_details .table.table-bordered tr th {
+    background-color: #f2f2f2;
+}
+.deliver23 tr td {
+    width: 20%;
+}
+.return67.grey99 a {
+    background-color: #ccc;
+    color: #000;
+}
+table.table.table-bordered.table_trevl th {
+    background-color: #ccc;
+}
+.deliver23 {
+    width: 100%;
+}
+.text929 h5 {
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 11px;
+    margin-bottom: 15px;
+}
+.return67 a {
+    background-color: red;
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 7px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 3px;
+}
+.table_uter {
+    background-color: #f1f1f1;
+    padding: 13px;
+	border-bottom: 1px solid #ccc;
+	width: 100%;
+}
+.border_outer37 {
+    border: 1px solid #ccc;
+    margin-top: 30px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.trave_outer h4 {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.trave_outer {
+    margin-top: 50px;
+}
+.inoibe4 {
+    margin-left: 20px;
+}
+.ordr34 {
+    padding: 20px;
+}
+.order2 img {
+    width: 100%;
+    margin-bottom: 30px;
+}
+.ordr34 .col-md-2.col-sm-2 {
+    padding: 0px !important;
+}
+.btton_ou7 a {
+    background-color: #ccc;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+.btton_ou7 a:hover {
+  text-decoration:none;
+}
+.text9290{
+	margin-left: 30%;
+}
+.grey100{
+	margin-left: 86px;
+	margin-right: 92px;
+}

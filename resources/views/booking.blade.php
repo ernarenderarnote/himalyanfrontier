@@ -131,7 +131,7 @@
             </div>
             <div class="col-sm-3 form-group">
               <label>State<span>*</span></label>
-              <input type="text" class="form-control" name="state" placeholder="State" >
+              <input type="text" class="form-control" name="state" placeholder="State" value="{{ old('state') }}" >
               @if($errors->has('state'))
                 <em class="invalid-feedback">
                     {{ $errors->first('state') }}
@@ -191,6 +191,9 @@
               @endif
             </div>
             <div class="col-sm-4 form-group">
+                  <input type="hidden" class="bank-charges"    value="{{$bank_charges}}">
+                  <input type="hidden" class="partial-payment" value="{{$partial_payment}}">
+                  <input type="hidden" class="remaining-payment" value="{{$remaining_payment}}">
               <label>Have you joined activity with us?<span>*</span></label>
               <select class="select-box form-control select-option" name="travelexperiance" tabindex="-1" aria-hidden="true">
                 <option value="">Please Select</option>
@@ -216,7 +219,7 @@
             </div>
             <div class="col-sm-4  form-group">
               <label>Payment Option<span>*</span></label>
-              <select class="select-box form-control select-option" name="payment_percentage" tabindex="-1" aria-hidden="true">
+              <select class="select-box payment_method form-control selectpicker select-option" name="payment_percentage" autocomplete="off">
                 <option value="">Please Select</option>
                 <option value="full_payment">Full Payment</option>
                 <option value="partial">20%</option>
@@ -229,9 +232,18 @@
             </div>
             <div class="col-sm-4  form-group text-center">
               <label>Amount  (persons x activity-fee) </label>
-              <input type="hidden" name="currency_id" value="{{$itinerary->converted_currency_id}}">
+              <input type="hidden" name="currency_id" value="{{ $itinerary->converted_currency_id }}">
               <input type="hidden" name="activity_price" value="{{$itinerary->converted_price}}">
               <p class="fee-div"><strong class="participant-number">1</strong> X <strong class="activity-price">{{$itinerary->converted_price}}</strong> = <strong> {{$itinerary->currency_symbol}}</strong> <strong class="price-total">{{$itinerary->converted_price}}</strong></p>
+              <p>
+                <strong class="bank_charges">Including 3.07 % Bank Charges</strong> 
+                <strong> {{$itinerary->currency_symbol}}</strong>
+                <strong class="amount-including-tax">{{ round( ($itinerary->converted_price/100)*3.07 ,2) }}</strong>
+              </p>
+              <p><strong>Total Amount</strong> 
+                <strong> {{$itinerary->currency_symbol}}</strong>
+                <strong class="total_incl_tax"> {{ round($itinerary->converted_price +  ($itinerary->converted_price/100)*3.07 ,2) }}  </strong>
+              </p>
             </div>
             <div class="col-sm-12 m-b-20">
               <div class="col-sm-12 p-l-0 p-r-0 m-b-10">

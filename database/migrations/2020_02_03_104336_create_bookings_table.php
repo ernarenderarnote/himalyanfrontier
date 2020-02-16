@@ -19,6 +19,7 @@ class CreateBookingsTable extends Migration
             $table->integer('itinerary_id')->unsigned();
             $table->integer('schedule_id')->unsigned();
             $table->string('booking_id')->nullable();
+            $table->string('tracking_booking_id')->nullable();
             $table->longText('name')->nullable();
             $table->longText('email')->nullable();
             $table->longText('mobile')->nullable();
