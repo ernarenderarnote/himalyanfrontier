@@ -96,7 +96,7 @@ class Itinerary extends Model
         $selected_currency = session()->get('selected_currency');
         if( $selected_currency ){
             $currency = Currency::where('code',$selected_currency)->first();
-            $symbol   = $currency->id;
+            $currency_id   = $currency->id;
            
         }
         return $currency_id;

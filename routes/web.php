@@ -69,6 +69,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('blogs', 'BlogsController');
 
     Route::match(['get','post'],'/inqueries', [ 'as' => 'inqueries', "uses" => "InqueriesController@index"] );
+
+    Route::match(['get','post'],'/payment_settings', [ 'as' => 'paymentSettings', "uses" => "PaymentSettingsController@index"] );
+
+    Route::match(['get','post'],'/payment_settings/store', [ 'as' => 'paymentSettings.store', "uses" => "PaymentSettingsController@store"] );
 });
 
 Route::match(['get','post'],'/profile', [ 'as' => 'profile', "uses" => "ProfileController@index",  'middleware' => ['auth'] ] );
@@ -90,8 +94,14 @@ Route::match(['post'],'/makePayment', [ "as" =>"makePayment", 'uses' => "Booking
 
 Route::match(['post'],'/sendinquery', [ "as" =>"sendinquery", 'uses' => "InqueryController@store"]);
 
-Route::match(['get','post'],'/payment_success/{id}/{payment_mode}', [ "as" =>"successPayment", 'uses' => "BookingController@paymentSuccess"]);
+Route::match(['get','post'],'/payment_success/{id}/{itinerary_id}/{payment_mode}/{participant}/{order_status}', [ "as" =>"successPayment", 'uses' => "BookingController@paymentSuccess"]);
 
-Route::match(['get','post'],'/payment_failed/{id}/{payment_mode}', [ "as" =>"failedPayment", 'uses' => "BookingController@paymentFailed"]);
+Route::match(['get','post'],'/payment_failed/{id}/{itinerary_id}/{payment_mode}', [ "as" =>"failedPayment", 'uses' => "BookingController@paymentFailed"]);
 
-//Route::match(['get','post'],'/userbooking/{id}/{payment_mode}', [ "as" =>"userbooking", 'middleware' => ['auth'],'uses' => "UserDashboardController@"]]);
+Route::match(['get','post'],'/booking_history', [ "as" =>"bookingHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@index"]);
+
+Route::match(['get','post'],'/booking_details/{order_id}', [ "as" =>"bookingDetails", 'middleware' => ['auth'],'uses' => "BookingHistoryController@bookingDetails"]);
+
+Route::match(['get','post'],'/complete_payment/{order_id}', [ "as" =>"completePayment", 'middleware' => ['auth'],'uses' => "BookingController@completePayment"]);
+
+Route::match(['get','post'],'/transection_history', [ "as" =>"transectionsHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@transectionHistory"]);

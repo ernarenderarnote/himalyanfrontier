@@ -202,7 +202,7 @@ $('document').ready(function(){
             $('.end-participants').append($clone);
             customValidation();
         }
-        var payment_option = $('select[name="payment_percentage"]').attr('value');
+        var payment_option = $('.payment_method option:selected').attr('value');
         if(payment_option  == ''){
             payment_option = 'full_payment';
         }
@@ -210,12 +210,21 @@ $('document').ready(function(){
         $('.participant-number').html(participant_count);
         if( payment_option == 'partial'  ){
             var price = calculatePrice(participant_count, activity_price);
-            $('.price-total').html(price.partial_price);
-            $('.activity-price').html(price.total_price_per);
+            var total_incl_tax = parseFloat(price.partial_price) + parseFloat(price.tax_price);
+            $('.activity-price').html(parseFloat(price.total_price_per).toFixed(2));
+            $('.price-total').html((price.partial_price).toFixed(2)); 
+            $('.amount-including-tax').html(price.tax_price);
+            $('.total_incl_tax').html(total_incl_tax.toFixed(2));
         }else{
-            $('.activity-price').html(activity_price);
-            $('.price-total').html(participant_count * activity_price);
+            var total_price    = participant_count * activity_price;
+            var bank_charges   = (total_price/100)*3.07;
+            var total_incl_tax = parseFloat(total_price) + parseFloat(bank_charges);
+            $('.activity-price').html(parseFloat(activity_price).toFixed(2));
+            $('.price-total').html( total_price.toFixed(2) );    
+            $('.amount-including-tax').html(parseFloat(bank_charges).toFixed(2)) ;
+            $('.total_incl_tax').html(total_incl_tax.toFixed(2));
         }
+
     });
     
     $('select[name="payment_percentage"]').change(function(){
@@ -231,11 +240,19 @@ $('document').ready(function(){
         var activity_price = $('input[name="activity_price"]').val();
         if( payment_option == 'partial'  ){
             var price = calculatePrice(participant_count, activity_price);
-            $('.activity-price').html(price.total_price_per);
-            $('.price-total').html(price.partial_price);
+            var total_incl_tax = parseFloat(price.partial_price) + parseFloat(price.tax_price);
+            $('.activity-price').html(parseFloat(price.total_price_per).toFixed(2));
+            $('.price-total').html((price.partial_price).toFixed(2)); 
+            $('.amount-including-tax').html(price.tax_price);
+            $('.total_incl_tax').html(total_incl_tax.toFixed(2));
         }else{
-            $('.activity-price').html(activity_price);
-            $('.price-total').html(participant_count * activity_price);
+            var total_price    = participant_count * activity_price;
+            var bank_charges   = (total_price/100)*3.07;
+            var total_incl_tax = parseFloat(total_price) + parseFloat(bank_charges);
+            $('.activity-price').html(parseFloat(activity_price).toFixed(2));
+            $('.price-total').html( total_price.toFixed(2) );    
+            $('.amount-including-tax').html(parseFloat(bank_charges).toFixed(2));
+            $('.total_incl_tax').html(total_incl_tax.toFixed(2));
         }
 
     });
@@ -294,7 +311,6 @@ $(function(){
 });
 
 $(document).ready(function() {   
-    
     $("#payment-form").validate({
       ignore: "",
       rules: {
@@ -471,14 +487,32 @@ function customValidation () {
         },
         });
     });
-} 
 
+   
+} 
+$(window).bind("pageshow", function() {
+   $('select[name="payment_percentage"], select[name="additional_user"]').val('');
+});
 function calculatePrice(participant, activity_price){
+    var bank_charges      = $('.bank-charges').val(); 
+    var partial_payment   = $('.partial-payment').val();
+    var remaining_payment = $('.remaining-payment').val();
+    if( bank_charges == 'undefined' || bank_charges == '' ){
+        bank_charges = 3.07;
+    }
+    if( partial_payment == 'undefined' || partial_payment == '' ){
+        partial_payment = 20;
+    }
+    if( remaining_payment == 'undefined' || remaining_payment == '' ){
+        remaining_payment = 80;
+    }
     var total_price     = participant * activity_price;
-    var partial_price   = (total_price/100)*20;
-    var total_price_per = (activity_price/100)*20;
+    var partial_price   = (total_price/100) * partial_payment;
+    var tax_partial_price = (partial_price/100) * bank_charges;
+    var total_price_per = (activity_price/100) * partial_payment;
     return {
-        'partial_price'  : partial_price,
-        'total_price_per' : total_price_per
+        'partial_price'   : partial_price,
+        'total_price_per' : total_price_per,
+        'tax_price'       : tax_partial_price.toFixed(2)
     };
 }

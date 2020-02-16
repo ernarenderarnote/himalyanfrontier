@@ -12,7 +12,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route("admin.activities.index") }}" class="nav-link {{ request()->is('admin/activities') || request()->is('admin/activities/*') ? 'active' : '' }}">
-                    <i class="fa fa-asl-interpreting nav-icon">
+                    <i class="fa fa-cubes nav-icon">
 
                     </i>
                     {{ trans('global.activity.title') }}
@@ -22,6 +22,14 @@
                 <a href="{{ route("admin.blogs.index") }}" class="nav-link {{ request()->is('admin/blogs') || request()->is('admin/blogs/*') ? 'active' : '' }}">
                     <i class="fa fa-rss-square nav-icon"></i>
                     {{ trans('global.blog.title') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="fa fa-cart-arrow-down nav-icon">
+
+                    </i>
+                    {{ trans('global.booking.title') }}
                 </a>
             </li>
             <!--currency-->
@@ -50,10 +58,26 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route("admin.itineraries.index") }}" class="nav-link {{ request()->is('admin/itineraries') || request()->is('admin/itineraries/*') ? 'active' : '' }}">
-                    <i class="fas fa-cogs nav-icon">
+                    <i class="fa fa-database nav-icon">
 
                     </i>
                     {{ trans('global.itinerary.title') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route("admin.paymentSettings") }}" class="nav-link {{ request()->is('admin/paymentSettings') || request()->is('admin/paymentSettings/*') ? 'active' : '' }}">
+                    <i class="fas fa-wrench nav-icon">
+
+                    </i>
+                    {{ trans('global.paymentSetting.title') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="fas fa-money nav-icon">
+
+                    </i>
+                    {{ trans('global.transection.title') }}
                 </a>
             </li>
             <li class="nav-item nav-dropdown">

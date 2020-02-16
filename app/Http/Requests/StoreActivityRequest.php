@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Activity;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreActivityRequest extends FormRequest
 {
