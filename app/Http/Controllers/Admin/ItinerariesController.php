@@ -44,12 +44,13 @@ class ItinerariesController extends Controller
         
         $general_info = array();
         foreach($input['general_information'] as $general_infos){
-    
-            if ($general_infos['title'] != '' || $general_infos['description'] != '' ) {
-                $general_info[] = array(
-                    'title' => $general_infos['title'],
-                    'description' => $general_infos['description'],
-                );    
+            if ( isset($general_infos['title']) || isset($general_infos['description']) ) {
+                if ($general_infos['title'] != '' || $general_infos['description'] != '' ) {
+                    $general_info[] = array(
+                        'title' => $general_infos['title'],
+                        'description' => $general_infos['description'],
+                    );    
+                }
             }
         }
         if(count($general_info) > 1){
@@ -143,11 +144,13 @@ class ItinerariesController extends Controller
         $general_info = array();
         foreach($input['general_information'] as $general_infos){
     
-            if ($general_infos['title'] != '' || $general_infos['description'] != '' ) {
-                $general_info[] = array(
-                    'title' => $general_infos['title'],
-                    'description' => $general_infos['description'],
-                );    
+            if ( isset($general_infos['title']) || isset($general_infos['description']) ) {
+                if($general_infos['title'] != '' || $general_infos['description'] != ''){
+                    $general_info[] = array(
+                        'title' => $general_infos['title'],
+                        'description' => $general_infos['description'],
+                    );  
+                }    
             }
         }
         if(count($general_info) > 1){
