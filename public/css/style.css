@@ -117,7 +117,8 @@ span.expert {
 
 .footer {
     padding-bottom: 30px;
-    padding-top: 30px;
+	padding-top: 30px;
+	margin-top:30px;
 }
 
 .serv-cont-wthree {
@@ -3749,4 +3750,13 @@ border-color: #000;
 }
 .top-w3layouts a{
 	color:#fff;
+}
+.delover_outer2 h3{
+	font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 28px;
+	color:#e00;
+}
+header#home {
+    margin-bottom: 30px;
 }

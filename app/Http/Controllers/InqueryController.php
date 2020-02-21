@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\InqueryRequest;
+use App\Notifications\NewBooking;
 use Validator;
 use App\Inquery;
 

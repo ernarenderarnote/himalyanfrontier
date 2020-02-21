@@ -123,7 +123,7 @@
                                         </ul>
                                     </li>
                                 @else
-                                    <li><a href="#">Login</a></li>    
+                                    <li><a href="{{ route('login') }}">Login</a></li>    
                                 @endauth
                             @endif
                             

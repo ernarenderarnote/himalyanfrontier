@@ -104,4 +104,13 @@ class User extends Authenticatable
         return $this->name.' '.$this->last_name;
     }
 
+    /**
+     *  Get User with role 
+     */
+    public function scopeGetUserWithRole($q, $role)
+    {
+        return $q->whereHas('roles', function($q) use($role){
+            $q->where('name', $role);
+        });
+    }
 }

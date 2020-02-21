@@ -68,6 +68,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('blogs', 'BlogsController');
 
+    Route::delete('booking/destroy', 'BookingController@massDestroy')->name('booking.massDestroy');
+    
+    Route::resource('booking', 'BookingController');
+
+    Route::delete('transections/destroy', 'TransectionsController@massDestroy')->name('transections.massDestroy');
+    
+    Route::resource('transections', 'TransectionsController');
+
     Route::match(['get','post'],'/inqueries', [ 'as' => 'inqueries', "uses" => "InqueriesController@index"] );
 
     Route::match(['get','post'],'/payment_settings', [ 'as' => 'paymentSettings', "uses" => "PaymentSettingsController@index"] );

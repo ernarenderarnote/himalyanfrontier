@@ -3,7 +3,7 @@
 <div class="container">
     <section class="delover_outer2">
         <div class="container">
-        <h2>Booking History</h2>
+        <h3>Booking History</h3>
             @forelse($booking_history as $booking)
                 <div class="row border_outer37">
                     <div class="table_uter">
@@ -17,7 +17,7 @@
                                     <td>Remaining Payment</td>
                                 @endif    
                                 <td>&nbsp;</td>
-                                <td class="custom_oeder4">ORDER # {{$booking->tracking_booking_id}}</td>
+                                <td class="custom_oeder4"><span class="badge badge-info">ORDER # {{$booking->tracking_booking_id}}</span></td>
                             </tr>
                             <tr>
                                 @php 

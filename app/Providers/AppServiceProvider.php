@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use App\Services\CommonServices;
 use View;
 use App\Activity;
 use App\Destination;
@@ -34,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('defaultCurrency', Currency::where('is_default','1')->first() );
         View::share('activities', Activity::all() );
         View::share('destinations', Destination::all() );
+        View::share('commonServices', new CommonServices);
         $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
         $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
          // Enable pagination
