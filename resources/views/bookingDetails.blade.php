@@ -14,7 +14,7 @@
                          $booker_gender  = json_decode($booking_detail->gender);
                          $booker_city    = $booking_detail->city;
                          $total_price    =  $booking_detail->no_of_participants * $booking_detail->activity_price;
-                         $included_tax   = ($total_price/100 )*3.07; 
+                         $included_tax   = ($total_price/100 ) * $booking_detail->bank_charges; 
                     @endphp
                     <table>
                         <tr>
@@ -109,7 +109,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">No of Person</th>
                     <th scope="col">Per Person Price</th>
-                    <th scope="col">Bank Charges (3.07%)</th>
+                    <th scope="col">Bank Charges ({{$booking_detail->bank_charges}} %)</th>
                     <th scope="col">Ammount</th>
                     </tr>
                 </thead>

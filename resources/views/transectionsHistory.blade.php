@@ -4,7 +4,8 @@
 <section class="trave_outer">
 	<div class="container">
 		<div class="traveler_details">
-			<h4>Travel Details</h4>
+			<h4>Transections Details</h4>
+            <hr/>
 			<table class="table table-bordered table_trevl">
                 <thead>
                     <tr>
@@ -38,6 +39,8 @@
                 @endforelse  
                 </tbody>
         </table>
+
+        {{ $transections->links() }}
 	</div>
 
 </section>

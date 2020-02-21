@@ -8,6 +8,7 @@ use App\Itinerary;
 use App\Transections;
 use App\ItinerarySchedule;
 use App\Currency;
+use App\User;
 
 class Booking extends Model
 {
@@ -63,5 +64,9 @@ class Booking extends Model
 
     public function schedule(){
         return $this->hasOne(ItinerarySchedule::class,'id', 'schedule_id');
+    }
+
+    public function user(){
+        return $this->hasOne(User::class,'id', 'user_id');
     }
 }

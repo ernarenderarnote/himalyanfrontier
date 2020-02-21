@@ -60,14 +60,28 @@ class BlogsController extends Controller
 
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             
-            $image->storeAs('images', $imageName);
+            $image->storeAs('images/blogs/featureImages', $imageName);
             
             $input['thumbnails'] = $imageName;
 
         }
+        if($request->has('gallery_img')) {
 
-        Blog::create($input);
-        return redirect()->route('admin.blogs.index'); 
+            $gallery_images =  $request->file('gallery_img');
+            $images_name = array();
+            foreach($gallery_images as $gallery_image){
+                $images_name[] = $gallery_image->getClientOriginalName();
+                $imagesname = $gallery_image->getClientOriginalName();
+                $gallery_image->storeAs('images/blogs/galleryImages', $imagesname);
+            }
+            $input['gallery_img'] = json_encode($images_name);
+        }
+        if(  Blog::create($input) ){
+            $response = ['message' => 'Blog Added Successfully.', 'alert-type' => 'success'];
+        }
+        return redirect()->route('admin.blogs.index')->with($response);
+       
+        
     }
 
     /**
@@ -117,14 +131,27 @@ class BlogsController extends Controller
 
             $imageName = time().'.'.request()->image->getClientOriginalExtension();
             
-            $image->storeAs('images', $imageName);
+            $image->storeAs('images/blogs/featureImages', $imageName);
             
             $input['thumbnails'] = $imageName;
 
         }
+        if($request->has('gallery_img')) {
 
-        $blog->update($input);
-        return redirect()->route('admin.blogs.index');
+            $gallery_images =  $request->file('gallery_img');
+            $images_name = array();
+            foreach($gallery_images as $gallery_image){
+                $images_name[] = $gallery_image->getClientOriginalName();
+                $imagesname = $gallery_image->getClientOriginalName();
+                $gallery_image->storeAs('images/blogs/galleryImages', $imagesname);
+            }
+            $input['gallery_img'] = json_encode($images_name);
+        }
+        if(  $blog->update($input) ){
+            $response = ['message' => 'Blog Updated Successfully.', 'alert-type' => 'success'];
+        }
+        return redirect()->route('admin.blogs.index')->with($response);
+    
     }
 
     /**

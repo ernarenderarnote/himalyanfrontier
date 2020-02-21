@@ -34,18 +34,34 @@
                     {{ trans('global.blog.fields.description_helper') }}
                 </p>
             </div>
-            <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
-                <label for="price">{{ trans('global.blog.fields.image') }}</label>
+            <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                <label for="image">{{ trans('global.blog.fields.feature_image') }}</label>
                 <div class="img-preview" style="width:300px; height:300px;">
                     <img id="ImdID" class="img-thumbnail" src="{{ url('images/placeholder.png') }}" alt="Image" /><br/>
                 </div>
                 <input type="file" id="image" name="image" class="form-control" onchange="readURL(this);">
-                @if($errors->has('price'))
+                @if($errors->has('image'))
                     <em class="invalid-feedback">
                         {{ $errors->first('image') }}
                     </em>
                 @endif
             </div>
+             <!--Gallery Images-->
+             <div class="card">
+                <div class="card-header">
+                    Gallery Images
+                </div>
+                <div class="card-body">
+                    <div class="preview-images-zone">
+                    
+                    </div>
+                    <fieldset class="form-group">
+                        <a href="javascript:void(0)" onclick="$('#pro-image').click()">Upload Image</a>
+                        <input type="file" id="pro-image" name="gallery_img[]" style="display: none;" class="form-control" multiple>
+                    </fieldset>
+                </div>        
+            </div>
+            <!--Gallery Images End -->
             <div class="form-group">
                 <div class="custom-control custom-switch">
                 <input type="hidden" class="custom-control-input" id="" name="is_active" value="0">    

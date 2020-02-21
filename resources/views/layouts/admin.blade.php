@@ -70,7 +70,7 @@
 		   <li class="nav-item dropdown d-md-down-none">
 			  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 			  <i class="fa fa-bell-o"></i>
-			  <span class="badge badge-pill badge-danger">5</span>
+			  <span class="badge badge-pill badge-danger">{{$commonServices->newOrders()}}</span>
 			  </a>
 			  <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
 				 <div class="dropdown-header text-center">

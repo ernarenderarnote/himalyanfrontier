@@ -60,7 +60,7 @@ class BookingHistoryController extends Controller
         $transections = Transections::where('user_id',Auth::user()->id)
         ->whereNull('deleted_at')
         ->orderBy('id','desc')
-        ->get();
+        ->paginate(10);
 
         return view('transectionsHistory',compact('transections'));
     }

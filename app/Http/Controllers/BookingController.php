@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Builder;
 use Softon\Indipay\Facades\Indipay; 
+use App\Notifications\NewBooking;
 use Validator;
 use App\Itinerary;
 use App\ItinerarySchedule;
@@ -269,7 +270,11 @@ class BookingController extends Controller
         
         if($booking->save()){
 
-           return $booking;
+            $user = User::getUserWithRole('Admin')->first();
+            
+            $user->notify(new NewBooking($booking->toArray()));
+
+            return $booking;
 
         }
         

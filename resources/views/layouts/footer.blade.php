@@ -5,13 +5,13 @@
                 <h3 class="mb-sm-4 mb-3 pb-3">Quick Links</h3>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="{{route('home')}}">Home</a>
                     </li>
                     <li>
-                        <a href="#">About Us</a>
+                        <a href="{{route('aboutUs')}}">About Us</a>
                     </li>
                     <li>
-                        <a href="#">Our Team</a>
+                        <a href="{{route('ourTeam')}}">Our Team</a>
                     </li>
                     <li>
                         <a href="#">Testimonials</a>
@@ -20,7 +20,7 @@
                         <a href="#">Contact Us</a>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="{{route('blogs')}}">Blog</a>
                     </li>
                 </ul>
             </div>
@@ -29,7 +29,7 @@
             <h3 class="mb-sm-4 mb-3 pb-3">Useful Links</h3>
             <ul class="list-unstyled">
             <li>
-            <a href="index.html">Payment Methods</a>
+            <a href="#">Payment Methods</a>
             </li>
             <li>
             <a href="#">Modification of Prices</a>
@@ -38,7 +38,7 @@
             <a href="#">Terms and Conditions</a>
             </li>
             <li>
-            <a href="#">Privacy Policy</a>
+            <a href="{{route('PrivacyPolicy')}}">Privacy Policy</a>
             </li>
             </ul>
             <br>

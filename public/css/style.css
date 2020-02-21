@@ -117,7 +117,8 @@ span.expert {
 
 .footer {
     padding-bottom: 30px;
-    padding-top: 30px;
+	padding-top: 30px;
+	margin-top:30px;
 }
 
 .serv-cont-wthree {
@@ -3178,9 +3179,8 @@ color:
 }
 .heading_outer {
 
-    border-right: 1px solid 
-
-    #ccc;
+	border-right: 1px solid #ccc;
+	text-align: left;
 
 }
 .btn_ouer.read a {
@@ -3648,4 +3648,115 @@ table.table.table-bordered.table_trevl th {
 .grey100{
 	margin-left: 86px;
 	margin-right: 92px;
+}
+.blog_outer {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.blog1_outer img {
+    width: 100%;
+}
+.right_bar4 {
+    background-color: #273648;
+    padding: 20px;
+    border-radius: 7px;
+}
+.img_oit a img {
+    width: 100%;
+}
+.img_oit {
+    margin-bottom: 20px;
+}
+.blog1_outer h3 {
+    font-weight: bold;
+}
+.blog1_outer p {
+    font-size: 17px;
+    text-align: justify;
+}
+.btn_outer99 a {
+    background-color: #ff0100;
+    color: #fff;
+    padding: 10px 20px;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.btn_outer99 a:hover {
+text-decoration:none;
+background-color:#000;
+}
+.btn_outer99 {
+    margin-bottom: 40px;
+}
+.about_us {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.box_outer54 img {
+    width: 100%;
+}
+.box_outer54 {
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0px 2px 3px #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+.box_outer54 h3 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+.box_outer54 .btn-info {
+    color: #fff;
+    background-color: #ff0302;
+    border-color: #ff0302;
+}
+.box_outer54 .btn-info:hover {
+background-color: #000;
+border-color: #000;
+}
+.box_outer54 .btn-group-lg>.btn, .btn-lg {
+    padding: 7px 12px;
+    font-size: 14px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+.about_outer h3 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #e00;
+}
+
+.about_us {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.about_outer p {
+    font-size: 17px;
+}
+.about_outer h3 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 28px;
+	color:#e00;
+}
+.top-w3layouts a{
+	color:#fff;
+}
+.delover_outer2 h3{
+	font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 28px;
+	color:#e00;
+}
+header#home {
+    margin-bottom: 30px;
 }

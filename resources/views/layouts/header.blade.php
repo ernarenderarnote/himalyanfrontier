@@ -7,17 +7,11 @@
             <div class="col-xl-8 col-lg-7 top-social-w3pvt-am mt-lg-0 mt-2">
                 <div class="row">
                 <div class="col-9 top-w3layouts" style="text-align: right;">
-                    <p class="team-row">Online Payment | Our Team |  Blog  |  Testimonial | 
-                    @if (Route::has('login'))
-                        
-                        @auth
-                            
-                        @else
-                        
-                            <a href="{{ route('login') }}">Login</a>
-                        @endauth
-                    @endif
-
+                    <p class="team-row">
+                        <a href="#"> Online Payment</a> |
+                        <a href="{{route('ourTeam')}}"> Our Team</a> | 
+                        <a href="{{route('blogs')}}"> Blog </a>  |  
+                        <a href="#"> Testimonial </a> 
                     </p>
                 </div>
                 <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -113,8 +107,8 @@
 							</li>
                             <li><a href="{{url('advanced-search?itinerary_type=fixed_departure')}}">Fixed Departures</a></li>
                             <li><a href="{{url('advanced-search?itinerary_type=hot_deal')}}">Hot Deals</a></li>
-							<li><a href="#gallery">About Us</a></li>
-                            <li><a href="#contact">Contact Us</a></li>
+							<li><a href="{{route('aboutUs')}}">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
                             @if (Route::has('login'))
                         
                                 @auth
@@ -128,8 +122,11 @@
                                         <li><a href="" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li>   
                                         </ul>
                                     </li>
+                                @else
+                                    <li><a href="{{ route('login') }}">Login</a></li>    
                                 @endauth
                             @endif
+                            
 						</ul>
 					</nav>
 				</div>
