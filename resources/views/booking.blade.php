@@ -222,7 +222,7 @@
               <select class="select-box payment_method form-control selectpicker select-option" name="payment_percentage" autocomplete="off">
                 <option value="">Please Select</option>
                 <option value="full_payment">Full Payment</option>
-                <option value="partial">20%</option>
+                <option value="partial">{{isset($partial_payment) ? $partial_payment  : 20}}%</option>
               </select>
               @if($errors->has('payment_percentage'))
                 <em class="invalid-feedback">
@@ -236,9 +236,9 @@
               <input type="hidden" name="activity_price" value="{{$itinerary->converted_price}}">
               <p class="fee-div"><strong class="participant-number">1</strong> X <strong class="activity-price">{{$itinerary->converted_price}}</strong> = <strong> {{$itinerary->currency_symbol}}</strong> <strong class="price-total">{{$itinerary->converted_price}}</strong></p>
               <p>
-                <strong class="bank_charges">Including 3.07 % Bank Charges</strong> 
+                <strong class="bank_charges">Including {{isset($bank_charges) ? $bank_charges : 3.07}} % Bank Charges</strong> 
                 <strong> {{$itinerary->currency_symbol}}</strong>
-                <strong class="amount-including-tax">{{ round( ($itinerary->converted_price/100)*3.07 ,2) }}</strong>
+                <strong class="amount-including-tax">{{ round( ($itinerary->converted_price/100) * isset($bank_charges) ? $bank_charges : 3.07 ,2) }}</strong>
               </p>
               <p><strong>Total Amount</strong> 
                 <strong> {{$itinerary->currency_symbol}}</strong>

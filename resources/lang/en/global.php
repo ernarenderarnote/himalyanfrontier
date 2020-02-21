@@ -432,6 +432,9 @@ return [
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => '',
+            'description'        => 'Description', 
+            'description_helper' => '',
+            'feature_image'      => 'Feature Image',
             'name'               => 'Name',
             'name_helper'        => '',
             'created_at'         => 'Created At',
@@ -441,6 +444,8 @@ return [
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => '',
             'title'              => 'Title',
+            'image'              => 'Image',
+            'active'             => 'Active',    
         ],
     ],
     'inquery'                              => [

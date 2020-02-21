@@ -105,3 +105,13 @@ Route::match(['get','post'],'/booking_details/{order_id}', [ "as" =>"bookingDeta
 Route::match(['get','post'],'/complete_payment/{order_id}', [ "as" =>"completePayment", 'middleware' => ['auth'],'uses' => "BookingController@completePayment"]);
 
 Route::match(['get','post'],'/transection_history', [ "as" =>"transectionsHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@transectionHistory"]);
+
+Route::match(['get','post'],'/blogs', [ "as" =>"blogs", 'uses' => "BlogsController@index"]);
+
+Route::match(['get','post'],'/blogs/{slug}', [ "as" =>"singleblogs", 'uses' => "BlogsController@blogDetails"]);
+
+Route::match(['get','post'],'/about_us', [ "as" =>"aboutUs", 'uses' => "AboutUsController@index"]);
+
+Route::match(['get','post'],'/our_team', [ "as" =>"ourTeam", 'uses' => "OurTeamController@index"]);
+
+Route::match(['get','post'],'/privacy_policy', [ "as" =>"PrivacyPolicy", 'uses' => "PrivacyPolicyController@index"]);
