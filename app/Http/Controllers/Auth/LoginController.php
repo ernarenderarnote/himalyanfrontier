@@ -53,18 +53,27 @@ class LoginController extends Controller
      * @return void
      */
     public function login(Request $request){
-        
+       
         if ($request->isMethod('post')) {
+
             $this->validate($request, $this->stepOneRules(), $this->stepOneMsg());
+
             $user_exist = User::where('phone',$request->mobile_number)->first();
         
             if( !empty($user_exist) ){
+                
                 $user = $user_exist;
+            
             }else{
                 $user = new user();
+
                 $user->country_code = 91;
+                
                 $user->phone = $request->mobile_number;
+                
                 $user->save();
+                
+                $user->roles()->attach(2);
             }
             
             $token = Token::create([
@@ -72,10 +81,15 @@ class LoginController extends Controller
             ]);
             
             if ($token->sendCode()) {
+                
                 $mobile_number = str_pad(substr($request->mobile_number, -4), strlen($request->mobile_number), '*', STR_PAD_LEFT);
+                
                 session(['token_id' => $token->id]);
+                
                 session(['user_id' => $user->id]);
+                
                 session(['mobile_number' => $request->mobile_number]);
+                
                 return view('auth.otp')->with('mobile_number',$mobile_number);
             }
             $token->delete();// delete token because it can't be sent

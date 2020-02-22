@@ -41,7 +41,7 @@
                 </thead>
                 <tbody>
                     @forelse($bookings as $booking)
-                        <tr>
+                        <tr data-entry-id="{{ $booking->id }}">
                             <td></td>
                             <td>{{$booking->itinerary->title}}</td>
                             <td>{{$booking->user->name}}</td>
@@ -62,23 +62,18 @@
                                 @endif
                             </td>
                             <td>
-                                @can('currency_show')
-                                    <a class="btn btn-xs btn-primary" href="">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-                                @can('currency_edit')
-                                    <a class="btn btn-xs btn-info" href="">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-                                @can('currency_delete')
-                                    <form action="" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
+                               
+                                <a class="btn btn-xs btn-primary" href="{{ route('admin.booking.show', $booking->id) }}">
+                                    {{ trans('global.view') }}
+                                </a>
+                                
+                               
+                                <form action="{{ route('admin.booking.destroy', $booking->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                </form>
+                               
                             </td>
                         </tr>
                     @empty
@@ -98,37 +93,53 @@ $(function () {
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.currencies.massDestroy') }}",
+    url: "{{ route('admin.booking.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
           return $(entry).data('entry-id')
       });
-
       if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
-
+        swal("{{ trans('global.datatables.zero_selected') }}", {
+            buttons: false,
+            timer: 3000,
+        });
         return
       }
-
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
+      swal({
+        title: 'Are you sure?',
+        text: "It will permanently deleted !",
+        icon: 'warning',
+        buttons: true,
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    headers: {'x-csrf-token': _token},
+                    method: 'POST',
+                    url: config.url,
+                    data: { ids: ids, _method: 'DELETE' }
+                })
+                .done(function () { 
+                    swal("Booking deleted successfully.", {
+                        icon: "success",
+                    });
+                    location.reload(); 
+                });
+                
+            }
+            
+        });
     }
   }
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('currency_delete')
+
   dtButtons.push(deleteButton)
-@endcan
 
   $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
 })
-
 </script>
 @endsection
 @endsection

@@ -110,7 +110,7 @@ class User extends Authenticatable
     public function scopeGetUserWithRole($q, $role)
     {
         return $q->whereHas('roles', function($q) use($role){
-            $q->where('name', $role);
+            $q->where('title', $role);
         });
     }
 }

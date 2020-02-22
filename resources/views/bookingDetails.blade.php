@@ -18,7 +18,7 @@
                     @endphp
                     <table>
                         <tr>
-                            <td>Traveller Name</td>
+                            <td>Booker Name</td>
                             <td class="dot6">:</td>
                             <td>{{$booker_name[0]}}</td>
                         </tr>
@@ -33,7 +33,7 @@
                             <td>{{$booker_contact[0]}}</td>
                         </tr>
                         <tr>
-                            <td>Travel Location</td>
+                            <td>Booker Location</td>
                             <td class="dot6">:</td>
                             <td>{{$booker_city}}</td>
                         </tr>

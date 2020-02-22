@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route("admin.inqueries") }}" class="nav-link {{ request()->is('admin/inqueries') || request()->is('admin/inqueries/*') ? 'active' : '' }}">
+                <a href="{{ route("admin.inqueries.index") }}" class="nav-link {{ request()->is('admin/inqueries') || request()->is('admin/inqueries/*') ? 'active' : '' }}">
                     <i class="fa fa-envelope nav-icon"></i>
                     {{ trans('global.inquery.title') }}
                 </a>

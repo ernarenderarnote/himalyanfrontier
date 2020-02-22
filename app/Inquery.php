@@ -26,5 +26,11 @@ class Inquery extends Model
         'deleted_at',
     ];
 
-   
+    public function itinerary(){
+        return $this->hasOne(Itinerary::class,'id', 'itinerary_id');
+    }
+
+    public function user(){
+        return $this->hasOne(User::class,'id', 'user_id');
+    }
 }
