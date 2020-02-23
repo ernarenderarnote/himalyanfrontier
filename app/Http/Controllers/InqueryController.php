@@ -19,7 +19,6 @@ class InqueryController extends Controller
 
     if( Inquery::create($input) ){
         $user = User::where('email','narender2709@gmail.com')->first();
-            
         $user->notify(new NewInquery($input));
         $response = ['message' => 'Inquery Sumbitted successfully.', 'alert-type' => 'success'];
     }

@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewInquery extends Notification
+class InqueryReply extends Notification
 {
     use Queueable;
 
@@ -29,7 +29,7 @@ class NewInquery extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail'];
     }
 
     /**
@@ -41,9 +41,11 @@ class NewInquery extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification new.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->to($this->user->email)
+                    ->subject('Inquery Reponse')
+                    ->line($this->details['greeting'])
+                    ->line($this->details['body'])
+                    ->line($this->details['thanks']);
     }
 
     /**
@@ -55,7 +57,7 @@ class NewInquery extends Notification
     public function toArray($notifiable)
     {
         return [
-            "inquery" => $this->details
+            "inquery_reply" => $this->details
         ];
     }
-}
+}    

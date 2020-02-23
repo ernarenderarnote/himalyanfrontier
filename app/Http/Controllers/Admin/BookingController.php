@@ -53,9 +53,10 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $booking = Booking::with('itinerary','currency','user','currency')->where('id',$id)->first();
+        return view('admin.bookings.show', compact('booking'));
     }
 
     /**
@@ -76,9 +77,14 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Booking $booking)
     {
-        //
+        $input = $request->all();
+
+        if(  $booking->update($input) ){
+            $response = ['message' => 'Order Status Updated Successfully.', 'alert-type' => 'success'];
+        }
+        return redirect()->route('admin.booking.index')->with($response);
     }
 
     /**
@@ -87,8 +93,20 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Booking $booking)
     {
-        //
+
+        if( $booking->delete() ){
+            $response = ['message' => 'Booking Deleted Successfully.', 'alert-type' => 'success'];
+        }
+        return back()->with($response);
+    }
+
+    public function massDestroy(Request $request)
+    {
+        
+        Booking::whereIn('id', request('ids'))->delete();
+
+        return response(null, 204);
     }
 }

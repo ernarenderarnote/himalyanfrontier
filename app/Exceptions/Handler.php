@@ -58,9 +58,7 @@ class Handler extends ExceptionHandler
 
             if($_COOKIE['user_type'] == 'Admin'){
                 $redirectTo = 'administrator';
-            }else{
-                $redirectTo = 'login';
-            } 
+            }
         }
         return $request->expectsJson()
             ? response()->json(['message' => $exception->getMessage()], 401)

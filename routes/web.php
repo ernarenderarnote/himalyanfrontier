@@ -76,7 +76,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     
     Route::resource('transections', 'TransectionsController');
 
-    Route::match(['get','post'],'/inqueries', [ 'as' => 'inqueries', "uses" => "InqueriesController@index"] );
+    Route::delete('inqueries/destroy', 'InqueriesController@massDestroy')->name('inqueries.massDestroy');
+    
+    Route::resource('inqueries', 'InqueriesController');
 
     Route::match(['get','post'],'/payment_settings', [ 'as' => 'paymentSettings', "uses" => "PaymentSettingsController@index"] );
 

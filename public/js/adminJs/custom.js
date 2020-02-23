@@ -255,6 +255,22 @@ $(document).ready(function(){
     e.preventDefault();
   });
 
+  //order status
+  $('select[name="booking_status"]').on('change',function(){
+    var $form   = $(this).closest('form');
+    swal({
+      title: 'Are you sure to change the status.',
+      text: "This will change the status of booking.",
+      icon: 'warning',
+      buttons: [true, "Do it!"],
+      dangerMode: true,
+      })
+      .then((willDelete) => {
+          if (willDelete) {
+            $form.submit();
+          }
+      });
+  });
 });
  
 

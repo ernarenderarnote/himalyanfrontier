@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	//form Submit
     $('#login-form').on("submit", function(e){
-        e.preventDefault(); 
+        
         var form = $(this);
         var data = form.serialize();
         var action = form.attr('action');
@@ -48,9 +48,12 @@ $(document).ready(function(){
                 }
             });
         } 
-          
+        e.preventDefault();  
 	});	
-	
+	$('input[name="mobile_number"]').blur(function() {
+        var mbobileNumber = $(this).val();
+        $('input[name="full_number"]').val(mbobileNumber);
+    });
 	//otpForm
 	$(document).on("submit", ".otp-form", function(e){
         e.preventDefault(); 
