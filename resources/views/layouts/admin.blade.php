@@ -30,7 +30,7 @@
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{route('home')}}">
             <span class="navbar-brand-full">Himalayan Frontiers</span>
             <span class="navbar-brand-minimized">HF</span>
         </a>
@@ -54,13 +54,13 @@
         </ul-->
 		<ul class="nav navbar-nav d-md-down-none">
 		   <li class="nav-item px-3">
-			  <a class="nav-link" href="#">Dashboard</a>
+			  <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
 		   </li>
 		   <li class="nav-item px-3">
-			  <a class="nav-link" href="#">Users</a>
+			  <a class="nav-link" href="{{route('admin.users.index')}}">Users</a>
 		   </li>
 		   <li class="nav-item px-3">
-			  <a class="nav-link" href="#">Settings</a>
+			  <a class="nav-link" href="{{route('admin.paymentSettings')}}">Settings</a>
 		   </li>
 		   <li class="nav-item px-3">
 			  <!--a class="nav-link text-danger" href="https://coreui.io/#sneak-peek"><strong>Sneak Peek! Try CoreUI PRO 3.0.0-alpha</strong></a-->
@@ -286,9 +286,9 @@
 					 <a class="btn" href="#">
 					 <i class="icon-speech"></i>
 					 </a>
-					 <a class="btn" href="./">
+					 <a class="btn" href="{{route('dashboard')}}">
 					 <i class="icon-graph"></i> &nbsp;Dashboard</a>
-					 <a class="btn" href="#">
+					 <a class="btn" href="{{route('admin.paymentSettings')}}">
 					 <i class="icon-settings"></i> &nbsp;Settings</a>
 				  </div>
 			   </li>
