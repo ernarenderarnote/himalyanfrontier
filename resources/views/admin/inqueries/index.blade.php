@@ -44,7 +44,7 @@
                         <td>{{$inquery->email}}</td>
                         <td>{{$inquery->subject}}</td>
                         <td>{{$inquery->message}}</td>
-                        <td>{{$inquery->itinerary->title}}</td>
+                        <td>{{$inquery->itinerary->title ? $inquery->itinerary->title : ''}}</td>
                         <td>{{$inquery->status ? $inquery->status : 'Pending'}}</td>
                         <td>
                                

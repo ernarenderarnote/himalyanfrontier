@@ -50,6 +50,13 @@ body a:hover {
 .sub img {
     object-fit: cover;
 }
+.cost-section li {
+    list-style: none;
+    margin-left: 15px;
+}
+.cost-section li .fa {
+    margin-left: 16px;
+}
 .activity-description {
     margin-top: 50px;
 }
@@ -3249,6 +3256,7 @@ h4.destinal:after {
 .panel-body {
     padding: 15px;
     border: 1px solid #ddd;
+    text-align: justify;
 }
 .panel-title {
     margin-top: 0;
@@ -3767,6 +3775,7 @@ border-color: #000;
 }
 .about_outer p {
     font-size: 17px;
+    text-align: justify;
 }
 .about_outer h3 {
     font-weight: bold;

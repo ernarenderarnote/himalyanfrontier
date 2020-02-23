@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="general_details">
-                    <h3>{{$inquery->itinerary->title}}</h3><hr/>
+                    <h3>{{$inquery->itinerary->title ? $inquery->itinerary->title : ''}}</h3><hr/>
                     <p><span><b>Name:</b> </span>{{$inquery->Name}}</p>
                     <p><span><b>Email:</b> </span>{{$inquery->email}}</p>
                     <p><span><b>Phone:</b> </span>{{$inquery->phone}}</p>
