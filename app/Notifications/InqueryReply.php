@@ -41,7 +41,6 @@ class InqueryReply extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->to($this->user->email)
                     ->subject('Inquery Reponse')
                     ->line($this->details['greeting'])
                     ->line($this->details['body'])
