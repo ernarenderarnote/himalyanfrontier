@@ -53,7 +53,7 @@
                 </div>
                 <div class="right_side">
                     <span class="total_img pink3">
-                    <p>Blance Ammount</p>
+                    <p>Balance Ammount</p>
                     <h4>{{$booking_detail->currency->symbol}}{{ round($booking_detail->remaining_payment,2) }}</h4>
                     </span>
                     @if($booking_detail->booking_status != 'completed')
