@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\User;
+use App\Currency;
+use App\Booking;
 
 class Transections extends Model
 {
@@ -39,5 +42,18 @@ class Transections extends Model
         'updated_at',
         'deleted_at',
     ];
-	
+    
+    public function user(){
+        return $this->hasOne(User::class,'id', 'user_id');
+    }
+
+    public function currency_data()
+    {
+    	return $this->hasOne(Currency::class,'code', 'currency');
+    } 
+
+    public function booking()
+    {
+    	return $this->hasOne(Booking::class,'id', 'booking_id');
+    }
 }

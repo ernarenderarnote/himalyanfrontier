@@ -9,6 +9,7 @@ use App\Itinerary;
 use App\Destination;
 use App\Activity;
 use App\Currency;
+use App\ItinerarySchedule;
 
 class HomeController extends Controller
 {
@@ -40,9 +41,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $itineraries   = Itinerary::with('destinations','activities','currency')->where('deleted_at',NULL)->where('status','active')->orderBy('created_at', 'desc')->take(3)->get();
-        $fixedPrograms = Itinerary::with('destinations','activities','currency')->where('deleted_at',NULL)->where('status','active')->where('fixed_diparture', '1')->orderBy('created_at', 'desc')->take(6)->get();
-        return view('index', compact('itineraries','fixedPrograms'));
+        $itineraries      = Itinerary::with('destinations','activities','currency')
+            ->where('deleted_at',NULL)
+            ->where('status','active')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        $fixedPrograms    = Itinerary::with('destinations','activities','currency')
+                ->where('deleted_at',NULL)
+                ->where('status','active')
+                ->where('fixed_diparture', '1')
+                ->orderBy('created_at', 'desc')
+                ->take(6)
+                ->get();
+        
+        $upcomingPrograms = Itinerary::whereHas('schedule', function($query){
+            $query->where('from_date', '>', date('Y-m-d'));
+             })
+            ->with('destinations','activities','currency')
+            ->where('deleted_at',NULL)
+            ->where('status','active')
+            ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+        
+        return view('index', compact('itineraries','fixedPrograms','upcomingPrograms'));
     }
 
     public function activity(Request $request){

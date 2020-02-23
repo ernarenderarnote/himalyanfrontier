@@ -23,7 +23,7 @@
                 @forelse($itinerary->schedule as $schedule)
                   <option value="{{$schedule->id}}">{{\Carbon\Carbon::parse($schedule->from_date)->format('M d')}} to {{\Carbon\Carbon::parse($schedule->to_date)->format('M d Y')}}</option>
                 @empty
-                <option>No Dates Available</option>
+                <option value="">No Dates Available</option>
                 @endforelse
               </select>
               @if($errors->has('booking_date'))

@@ -58,7 +58,7 @@
                     </span>
                     @if($booking_detail->booking_status != 'completed')
                         <span class="total_img lighr5">
-                            <p>Blance Due Date</p>
+                            <p>Balance Due Date</p>
                             <h4>{{\Carbon\Carbon::parse($booking_detail->balance_due_date)->format('d M Y')}}</h4>
                         </span>
                     @endif  

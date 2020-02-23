@@ -384,14 +384,11 @@ button.mb-xs.mr-xs.btn.btn-danger.removemore {
 	text-align: center;
 }
 .ui-datepicker-prev, .ui-datepicker-next {
-	display: inline-block;
 	width: 30px;
-	height: 30px;
+    height: 30px;
+    color:#fff;
 	text-align: center;
 	cursor: pointer;
-	background-image: url('../img/arrow.png');
-	background-repeat: no-repeat;
-	line-height: 600%;
 	overflow: hidden;
 }
 .ui-datepicker-prev {
@@ -488,4 +485,17 @@ button.mb-xs.mr-xs.btn.btn-danger.removemore {
 .ui-datepicker-calendar tr:last-child .ui-state-active {
 	height: 29px;
 	margin-bottom: 0;
+}
+.widget-icon .nav-icon {
+    font-size: 50px;
+}
+.widget-title {
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+}
+.text-value {
+    padding: 15px;
+    font-size: 25px;
+    font-weight: bold;
 }

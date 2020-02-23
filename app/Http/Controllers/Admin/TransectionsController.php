@@ -15,7 +15,7 @@ class TransectionsController extends Controller
      */
     public function index()
     {
-        $transections = Transections::all();
+        $transections = Transections::with('user','currency_data','booking')->get();
         return view('admin.transections.index',compact('transections'));
     }
 
@@ -46,9 +46,10 @@ class TransectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $transection = Transections::with('user','currency_data','booking')->where('id',$id)->first();
+        return view('admin.transections.show', compact('transection'));
     }
 
     /**
@@ -80,8 +81,20 @@ class TransectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Transections $transection)
     {
-        //
+
+        if( $transection->delete() ){
+            $response = ['message' => 'Transections Deleted Successfully.', 'alert-type' => 'success'];
+        }
+        return back()->with($response);
+    }   
+
+    public function massDestroy(Request $request)
+    {
+        
+        Transections::whereIn('id', request('ids'))->delete();
+
+        return response(null, 204);
     }
 }

@@ -108,20 +108,20 @@ Route::match(['get','post'],'/payment_success/{id}/{itinerary_id}/{payment_mode}
 
 Route::match(['get','post'],'/payment_failed/{id}/{itinerary_id}/{payment_mode}', [ "as" =>"failedPayment", 'uses' => "BookingController@paymentFailed"]);
 
-Route::match(['get','post'],'/booking_history', [ "as" =>"bookingHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@index"]);
+Route::match(['get','post'],'/booking-history', [ "as" =>"bookingHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@index"]);
 
-Route::match(['get','post'],'/booking_details/{order_id}', [ "as" =>"bookingDetails", 'middleware' => ['auth'],'uses' => "BookingHistoryController@bookingDetails"]);
+Route::match(['get','post'],'/booking-details/{order_id}', [ "as" =>"bookingDetails", 'middleware' => ['auth'],'uses' => "BookingHistoryController@bookingDetails"]);
 
-Route::match(['get','post'],'/complete_payment/{order_id}', [ "as" =>"completePayment", 'middleware' => ['auth'],'uses' => "BookingController@completePayment"]);
+Route::match(['get','post'],'/complete-payment/{order_id}', [ "as" =>"completePayment", 'middleware' => ['auth'],'uses' => "BookingController@completePayment"]);
 
-Route::match(['get','post'],'/transection_history', [ "as" =>"transectionsHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@transectionHistory"]);
+Route::match(['get','post'],'/transection-history', [ "as" =>"transectionsHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@transectionHistory"]);
 
 Route::match(['get','post'],'/blogs', [ "as" =>"blogs", 'uses' => "BlogsController@index"]);
 
 Route::match(['get','post'],'/blogs/{slug}', [ "as" =>"singleblogs", 'uses' => "BlogsController@blogDetails"]);
 
-Route::match(['get','post'],'/about_us', [ "as" =>"aboutUs", 'uses' => "AboutUsController@index"]);
+Route::match(['get','post'],'/about-us', [ "as" =>"aboutUs", 'uses' => "AboutUsController@index"]);
 
-Route::match(['get','post'],'/our_team', [ "as" =>"ourTeam", 'uses' => "OurTeamController@index"]);
+Route::match(['get','post'],'/our-team', [ "as" =>"ourTeam", 'uses' => "OurTeamController@index"]);
 
-Route::match(['get','post'],'/privacy_policy', [ "as" =>"PrivacyPolicy", 'uses' => "PrivacyPolicyController@index"]);
+Route::match(['get','post'],'/privacy-policy', [ "as" =>"PrivacyPolicy", 'uses' => "PrivacyPolicyController@index"]);

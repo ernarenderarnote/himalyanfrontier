@@ -3,7 +3,7 @@
 <div class="container">
     <section class="delover_outer2">
         <div class="container">
-       <div class="custom_heding"> <h3>Booking History</h3></div>
+       		<div class="custom_heding"> <h3>Booking History</h3></div>
             @forelse($booking_history as $booking)
                 <div class="row border_outer37">
                     <div class="table_uter">
@@ -60,10 +60,12 @@
                             <div class="col-md-5 col-sm-5 booking_details">
                                 <div class="text9290">
                                     <p>
-                                        <span>Booked BY: {{$booker_name[0]}}</span><br/>
-                                        <span>Email ID: {{$booker_email[0]}}</span><br/>
-                                        <span>Contact Number: {{$booker_contact[0]}}</span><br/>
-                                        <span>Travel Location: {{$booker_city}}</span><br/>
+                                        <span style="font-weight:bold;">Booked BY:</span><span>{{$booker_name[0]}}</span><br/>
+                                        <span style="font-weight:bold;">Email ID: </span><span> {{$booker_email[0]}}</span><br/>
+                                        <span style="font-weight:bold;">Contact Number: </span><span> {{$booker_contact[0]}}</span><br/>
+                                        <span style="font-weight:bold;">Travel Location: </span><span> {{$booker_city}}</span><br/>
+                                        <span style="font-weight:bold;">Activity Start Date: </span><span> @if($booking->activity_from_date) {{\Carbon\Carbon::parse($booking->activity_from_date)->format('d M Y')}} @endif </span><br/>
+                                        <span style="font-weight:bold;">Activity Start Date: </span><span> @if($booking->activity_to_date) {{\Carbon\Carbon::parse($booking->activity_to_date)->format('d M Y')}} @endif </span><br/>
                                     </p>
                                 </div>
                             </div>
@@ -83,12 +85,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    
             @empty
-            no Booking
+            No Bookings
 
             @endforelse
+            </div>
+                </div>
         </div>
     </section>
 </div>

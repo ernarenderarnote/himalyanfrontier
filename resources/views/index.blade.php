@@ -211,79 +211,28 @@
             <section id="demos">
                <div class="row">
                   <div class="large-12 columns">
-                     <div class="owl-carousel owl-theme">
-                        <div class="item">
-                           <img src="images/armenia-sevanavank-monastery.jpg">
-                           <div class="markha">
-                              <h4>Lorem Ipsum</h4>
-                              <p class="dummy-mail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                              </p>
-                              <button class="theme">View More</button>
-                           </div>
+                        <div class="row">
+                            @forelse($upcomingPrograms as $programs)
+                                <div class="col-md-4">
+                                    <div class="item">
+                                        <img src="{{ url('/storage/images/itinerary/featureImages/'.$programs->feature_img) }}">
+                                        <div class="markha">
+                                            <h4>{{$programs->title}}</h4>
+                                            <p class="dummy-mail">{!! substr($programs->description,0,500) !!}</p>
+                                            <div class="read-btn">                                    
+                                                <a href="{{ route('activity.slug', ['slug'=>$programs->slug]) }}">Read More</a>                                 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            @empty
+
+                            @endforelse
                         </div>
-                        <div class="item">
-                           <img src="images/25-1521269446.jpg">
-                           <div class="markha">
-                              <h4>Lorem Ipsum</h4>
-                              <p class="dummy-mail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                              </p>
-                              <button class="theme">View More</button>
-                           </div>
-                        </div>
-                        <div class="item">
-                           <img src="images/lighthouse-reef-atoll_480.jpg">
-                           <div class="markha">
-                              <h4>Lorem Ipsum</h4>
-                              <p class="dummy-mail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                              </p>
-                              <button class="theme">View More</button>
-                           </div>
-                        </div>
-                     </div>
                   </div>
                </div>
             </section>
-         </div>
-      </div>
-      <div class="galleri">
-         <div class="row">
-            <div class="col-md-12">
-               <section id="demos">
-                  <div class="row">
-                     <div class="large-12 columns">
-                        <div class="owl-carousel owl-theme">
-                           <div class="item">
-                              <img src="images/armenia-sevanavank-monastery.jpg">									 
-                              <div class="markha">
-                                 <h4>Lorem Ipsum</h4>
-                                 <p class="dummy-mail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 									 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                 <button class="theme">View More</button>								  
-                              </div>
-                           </div>
-                           <div class="item">
-                              <img src="images/25-1521269446.jpg">									 
-                              <div class="markha">
-                                 <h4>Lorem Ipsum</h4>
-                                 <p class="dummy-mail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 									 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                 <button class="theme">View More</button>								  
-                              </div>
-                           </div>
-                           <div class="item">
-                              <img src="images/lighthouse-reef-atoll_480.jpg">									 
-                              <div class="markha">
-                                 <h4>Lorem Ipsum</h4>
-                                 <p class="dummy-mail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 									 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                 <button class="theme">View More</button>								  
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </section>
-            </div>
          </div>
       </div>
    </div>

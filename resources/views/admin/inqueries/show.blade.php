@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        Inquery Details
+        Inquery Details/Reply
     </div>
     <div class="card-body">
         <div class="row">
