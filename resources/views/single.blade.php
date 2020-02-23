@@ -87,13 +87,13 @@
                                 <div class="col-md-6">
                                     <div class="cost-section">
                                         <h4>COST INCLUDE</h4>
-                                        {!! $activity->cost_include !!}
+                                        {!! $activity->front_costs_included !!}
                                     </div>    
                                 </div>
                                 <div class="col-md-6">
                                     <div class="cost-section">
                                         <h4>COST EXCLUDE</h4>
-                                        {!! $activity->cost_exclude !!}
+                                        {!! $activity->front_costs_excluded !!}
                                     </div>
                                 </div>
                             </div>

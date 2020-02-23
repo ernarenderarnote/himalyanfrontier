@@ -107,7 +107,7 @@ class Itinerary extends Model
     	return $this->hasOne(Currency::class,'id', 'currency_id');
     } 
     
-     public function getFrontActivityPointsAttribute(){
+    public function getFrontActivityPointsAttribute(){
          
         $activityPoints = '';
         
@@ -133,5 +133,29 @@ class Itinerary extends Model
         return $highlights;
     }
     
+    public function getFrontCostsIncludedAttribute(){
+         
+        $costsInclude = '';
+        
+        if( $this->cost_include != ''){
+            $str = $this->cost_include;
+            $strToReplace   = ["<p>","</p>"];
+            $strFromReplace = ["<li><i class='fa fa-check' aria-hidden='true'></i><p>","</p></li>"];
+            $costsInclude = str_replace($strToReplace, $strFromReplace, $str);
+        }
+        return $costsInclude;
+    }
 
+    public function getFrontCostsExcludedAttribute(){
+         
+        $costsExcluded = '';
+        
+        if( $this->cost_exclude != ''){
+            $str = $this->cost_exclude;
+            $strToReplace   = ["<p>","</p>"];
+            $strFromReplace = ["<li><i class='fa fa-check' aria-hidden='true'></i><p>","</p></li>"];
+            $costsExcluded = str_replace($strToReplace, $strFromReplace, $str);
+        }
+        return $costsExcluded;
+    }
 }

@@ -2952,14 +2952,14 @@ ul.itinerary-points p:before {
     margin-top: 10px;
     padding-top: 15px;
 }
-.cost-section p:before {
+/* .cost-section p:before {
     content: "\f00c";
     margin-right: 10px;
     color: #98ce44;
     font-family: FontAwesome;
     font-size: 14px;
     line-height: 1em;
-}
+} */
 .left_side {
     background-color: #273648;
     margin-top: 20px;
@@ -3759,4 +3759,16 @@ border-color: #000;
 }
 header#home {
     margin-bottom: 30px;
+}
+.cost-section li {
+    list-style: none;
+}
+.cost-section li .fa {
+    position: absolute;
+    left: 0;
+    margin-top: 5px;
+}
+.cost-section li p {
+    margin-left: 10px;
+    margin-top: 0;
 }
