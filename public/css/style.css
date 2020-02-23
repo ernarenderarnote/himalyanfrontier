@@ -39,7 +39,7 @@ body a:hover {
 	-ms-transition: 0.5s all;
 }
 .single_product7 {
-    margin-top: 50px;
+   /* margin-top: 50px;*/
     margin-bottom: 50px;
 }
 .bg-li {
@@ -49,6 +49,16 @@ body a:hover {
 }
 .sub img {
     object-fit: cover;
+}
+.activity-description {
+    margin-top: 50px;
+}
+.custom_actity p span br {
+    display: none;
+}
+.full_img img {
+    width: 100%;
+    margin-top: -70px;
 }
 .main-row {
 	background-color: #171a29;
@@ -1412,10 +1422,10 @@ h2.widgettitle {
 /* banner bottom grids */
 
 .banner-bottom-w3layouts {
-    margin-top: -6em;
+    margin-top: 20px;
     padding-right: 5%;
     padding-left: 5%;
-    /* border: 2px solid gray; */
+    margin-bottom: 15px;
 }
 
 .about-in .serv-cont-wthree {
@@ -1780,12 +1790,14 @@ a.btn.button-style-2 {
 /* footer */
 
 footer {
-	background: url(../images/footer.jpg) no-repeat center;
-	background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	-ms-background-size: cover;
+    /* background: url(../images/footer.jpg) no-repeat center; */
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    box-shadow: 6px 6px 9px 5px #ccc;
+    margin-top: 60px;
 }
 
 
@@ -3463,10 +3475,20 @@ a.left.carousel-control span {
 }
 
 /*******08-02-2020********/
+.trak-v .itinerary-points li .fa, .grand-ore .itinerary-points li .fa {
+    position: absolute;
+    left: 30px;
+    margin-top: 5px;
+}
+
+.payment-inner .form-control:not([size]):not([multiple]) {
+    height: auto;
+    padding: 5px !important;
+}
 #services .form-control:not([size]):not([multiple]) {
     height: auto !important;
 }
-.itinerary-points {
+.section-1 .itinerary-points {
     height: 220px;
     position: relative;
 }
@@ -3564,7 +3586,7 @@ a.left.carousel-control span {
     text-align: center;
 }
 .right_side {
-    margin: 40px auto;
+    margin: 20px auto;
     text-align: center;
 }
 .Prcening_details .table.table-bordered tr th {
@@ -3609,7 +3631,7 @@ table.table.table-bordered.table_trevl th {
 }
 .border_outer37 {
     border: 1px solid #ccc;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 0px;
     margin-right: 0px;
 }
@@ -3621,11 +3643,12 @@ table.table.table-bordered.table_trevl th {
 .trave_outer {
     margin-top: 50px;
 }
-.inoibe4 {
+/*.inoibe4 {
     margin-left: 20px;
-}
+}*/
 .ordr34 {
     padding: 20px;
+    width: 100%;
 }
 .order2 img {
     width: 100%;
@@ -3633,6 +3656,9 @@ table.table.table-bordered.table_trevl th {
 }
 .ordr34 .col-md-2.col-sm-2 {
     padding: 0px !important;
+}
+.delover_outer2 {
+    margin-top: 40px;
 }
 .btton_ou7 a {
     background-color: #ccc;
@@ -3642,9 +3668,9 @@ table.table.table-bordered.table_trevl th {
 .btton_ou7 a:hover {
   text-decoration:none;
 }
-.text9290{
+/*.text9290{
 	margin-left: 30%;
-}
+}*/
 .grey100{
 	margin-left: 86px;
 	margin-right: 92px;
@@ -3753,10 +3779,10 @@ border-color: #000;
 }
 .delover_outer2 h3{
 	font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     font-size: 28px;
 	color:#e00;
 }
-header#home {
+/*header#home {
     margin-bottom: 30px;
-}
+}*/

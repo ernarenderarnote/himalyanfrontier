@@ -41,7 +41,7 @@ class NewInquery extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
+                    ->line('The introduction to the notificationwww22.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }

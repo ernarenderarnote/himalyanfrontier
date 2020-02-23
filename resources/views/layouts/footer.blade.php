@@ -65,11 +65,11 @@
         </div>
     </div>
 </div>
-
+<div class="full_img"><img src="{{url('images/footer.png')}}"></div>
 <!-- //footer -->
 <!-- copyright -->
-<div class="copy_right position-relative">
-    <p class="text-center text-wh py-sm-3 py-3">© 2019 Himalaya. All rights reserved</p>
+<div class="copy_right position-relative custom_copy9">
+    <p class="text-center text-wh py-sm-3 py-3">© 2017 - Himalayan Frontiers Culture & Adventure Tours (Pvt.) Ltd. All Rights Reserved.</p>
     <!-- move top icon -->
     <a href="#home" class="move-top text-center">
     <span class="fa fa-level-up" aria-hidden="true"></span>

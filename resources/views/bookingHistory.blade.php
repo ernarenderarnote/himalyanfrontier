@@ -3,7 +3,7 @@
 <div class="container">
     <section class="delover_outer2">
         <div class="container">
-        <h3>Booking History</h3>
+       <div class="custom_heding"> <h3>Booking History</h3></div>
             @forelse($booking_history as $booking)
                 <div class="row border_outer37">
                     <div class="table_uter">
@@ -39,8 +39,8 @@
                     <div class="ordr34">
                         <h4>{{isset($booking->itinerary->title) ? $booking->itinerary->title : ''}}</h4>
                         <p>{{isset($booking->itinerary->subtitle) ? $booking->itinerary->subtitle : ''}}</p>
-                        <div class="row">
-                            <div class="col-md-2 col-sm-2">
+                        </div>
+                            <div class="col-md-4 col-sm-4">
                                 <div class="order2">
                                     <img src="{{ url('/storage/images/itinerary/featureImages/'.$booking->itinerary->feature_img) }}">
                                 </div>
@@ -57,7 +57,7 @@
                                 $booker_contact = json_decode($booking->mobile);
                                 $booker_city    = $booking->city;
                             @endphp
-                            <div class="col-md-7 col-sm-7 booking_details">
+                            <div class="col-md-5 col-sm-5 booking_details">
                                 <div class="text9290">
                                     <p>
                                         <span>Booked BY: {{$booker_name[0]}}</span><br/>

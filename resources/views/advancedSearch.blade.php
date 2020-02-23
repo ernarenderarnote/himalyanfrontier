@@ -31,8 +31,10 @@
                 </a>
                 
             </div>
-            <div class="col-md-12 activity-description">
+            <div class="container">
+            <div class="col-md-12 activity-description custom_actity">
                 {!! $activity->description ?? '' !!}
+            </div>
             </div>
         </div>
         @endif
@@ -127,7 +129,7 @@
               
             @endif
             <!-- navigation holder -->
-            {{ $itineraries->links() }}
+  
             <!-- Page oriented legend -->
             <div class="right_side">
                 <div id="">
