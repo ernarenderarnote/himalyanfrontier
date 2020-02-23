@@ -419,6 +419,7 @@ h4.yoga {
 .item {
 	padding-bottom: 16px;
 	background: #fff;
+	margin-bottom: 20px;
 }
 
 .markha {
@@ -3795,7 +3796,6 @@ border-color: #000;
 /*header#home {
     margin-bottom: 30px;
 }*/
-}
 .cost-section li {
     list-style: none;
 }
@@ -3807,4 +3807,11 @@ border-color: #000;
 .cost-section li p {
     margin-left: 10px;
     margin-top: 0;
+}
+.item img {
+    width: 100%;
+}
+.item p {
+	text-align: justify;
+	padding: 4px 10px;
 }
