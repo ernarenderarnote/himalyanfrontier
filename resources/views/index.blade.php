@@ -218,7 +218,7 @@
                         <div class="amet">
                             <div class="left_r45">
                             <h4>{{$program->title}}</h4><br/>   
-                            <p>{!! substr(strip_tags($program->description),0,300 ) !!}</p>
+                            <p>{!! substr(strip_tags($program->description),0,300 ) !!}...</p>
                             <div class="read-btn">
                                 <a href="{{ route('activity.slug', ['slug'=>$program->slug]) }}">Read More</a>
                             </div>
