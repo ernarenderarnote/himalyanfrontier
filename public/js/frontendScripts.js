@@ -426,6 +426,26 @@ $(document).ready(function() {
       
     }); 
     
+    //sildebar fix script
+    var leftHeight = $('.left_side').offset().top;
+    $(window).scroll(function () {   
+   
+        if($(window).scrollTop() > leftHeight) {
+           $('.left_side').css('position','fixed');
+           $('.left_side').css('top','0'); 
+           $('.left_side h3').css('padding','18px');
+        }
+       
+        else if ($(window).scrollTop() <= leftHeight) {
+           $('.left_side').css('position','');
+           $('.left_side').css('top','');
+           $('.left_side h3').css('padding','');
+        }  
+           if ($('.left_side').offset().top + $(".left_side").height() > $(".footer").offset().top) {
+               $('.left_side').css('top',-($(".left_side").offset().top + $(".left_side").height() - $(".footer").offset().top));
+           }
+       });
+    
 });
 
 function customValidation () {
