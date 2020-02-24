@@ -151,7 +151,7 @@
                 <div class="col-md-4 mb-5">
                     <div class="programs-again">
                         <div class="true-image">
-                            <a href="#" data-post_id="1641" class="hover-effect popup-gallery">
+                            <a href="{{ route('activity.slug', ['slug'=>$fixedProgram->slug]) }}" data-post_id="1641" class="hover-effect popup-gallery">
                                 <img src="{{ url('/storage/images/itinerary/featureImages/'.$fixedProgram->feature_img) }}">
                             </a>
                         </div>
@@ -204,38 +204,33 @@
    </div>
 </div>
 <div class="programs">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <h3 class="nature" style="padding:30px 0px;">Upcoming Programs</h3>
-            <section id="demos">
-               <div class="row">
-                  <div class="large-12 columns">
-                        <div class="row">
-                            @forelse($upcomingPrograms as $programs)
-                                <div class="col-md-4">
-                                    <div class="item">
-                                        <img src="{{ url('/storage/images/itinerary/featureImages/'.$programs->feature_img) }}">
-                                        <div class="markha">
-                                            <h4>{{$programs->title}}</h4>
-                                            <p class="dummy-mail">{!! substr($programs->description,0,500) !!}</p>
-                                            <div class="read-btn">                                    
-                                                <a href="{{ route('activity.slug', ['slug'=>$programs->slug]) }}">Read More</a>                                 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            @empty
-
-                            @endforelse
+<div class="container">
+        <h2 class="upcoming-programs">Upcoming Programs</h2>
+        <div class="row">
+            @forelse($upcomingPrograms as $program)
+                <div class="col-md-4 mb-5">
+                    <div class="programs-again upcoming-class">
+                        <div class="true-image">
+                            <a href="{{ route('activity.slug', ['slug'=>$program->slug]) }}" data-post_id="1641" class="hover-effect popup-gallery">
+                                <img src="{{ url('/storage/images/itinerary/featureImages/'.$program->feature_img) }}">
+                            </a>
                         </div>
-                  </div>
-               </div>
-            </section>
-         </div>
-      </div>
-   </div>
+                        <div class="amet">
+                            <div class="left_r45">
+                            <h4>{{$program->title}}</h4><br/>   
+                            <p>{!! substr(strip_tags($program->description),0,300 ) !!}</p>
+                            <div class="read-btn">
+                                <a href="{{ route('activity.slug', ['slug'=>$program->slug]) }}">Read More</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                
+            @endforelse    
+		</div>
+    </div>
 </div>
 <div class="programs-main">
    <div class="container">

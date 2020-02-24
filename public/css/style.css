@@ -3020,7 +3020,8 @@ list-style:none;
     cursor: pointer;
     padding-top: 9px;
     padding-bottom: 10px;
-    font-size: 18px;
+	font-size: 18px;
+	border-bottom: 2px solid #fff;
 }
 .destinal .fa {
 
@@ -3219,7 +3220,7 @@ color:
     padding: 16px 0px 16px;
     margin-bottom: 20px;
 }
-h4.destinal:after {
+/* h4.destinal:after {
     content: '-';
     border-bottom: 2px solid #fff;
     width: 100%;
@@ -3228,7 +3229,7 @@ h4.destinal:after {
     right: 0;
     display: inline-block;
     margin-top: 8px;
-}
+} */
 .deprature .fixed{
 	background:none !important;
 	color:#fff;
@@ -3814,4 +3815,15 @@ border-color: #000;
 .item p {
 	text-align: justify;
 	padding: 4px 10px;
+}
+.programs-again.upcoming-class {
+    min-height: 500px;
+    max-height: 500px;
+}
+
+h2.upcoming-programs {
+    color: #fff;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 30px;
 }
