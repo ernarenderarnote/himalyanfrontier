@@ -303,9 +303,11 @@ a.contact-email {
 }
 
 .true-image img {
-	vertical-align: middle;
-	border-style: none;
-	width: 100%;
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    min-height: 200px;
+    max-height: 200px;
 }
 
 .amet {
@@ -3510,7 +3512,7 @@ a.left.carousel-control span {
 }
 .left_r45 {
     padding-left: 10px;
-    padding-right: 10px;
+    /* padding-right: 10px; */
 }
 .itinerary-points li {
     list-style: none;
