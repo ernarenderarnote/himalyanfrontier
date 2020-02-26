@@ -2,7 +2,7 @@ body {
 	padding: 0;
 	margin: 0;
 	background: #FFF;
-	font-family: 'Lato';
+	font-family: 'Roboto' !important;
 }
 .custom_nav .dropdown-menu {
     background-color: #171a29 !important;
@@ -367,8 +367,9 @@ h2.fixed {
 }
 
 .amet h4 {
-	font-size: 16px;
+	font-size: 18px;
 	padding-top: 13px;
+	font-weight: bold;
 }
 
 .read-btn-ipsum button {
@@ -393,7 +394,11 @@ p.dummy {
 	border-top: 1px solid #f5f5f5;
 	padding-top: 14px;
 }
-
+.left_r45 p {
+	text-align: justify;
+	padding-right: 10px;
+	height: 220px;
+}
 p.dummy-simply {
 	font-size: 14px;
 	color: #000;
@@ -457,7 +462,7 @@ p.dummy-mail {
 	background-repeat: no-repeat;
 	background-position: right;
 	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-bottom: 70px;
 }
 
 .selected {
