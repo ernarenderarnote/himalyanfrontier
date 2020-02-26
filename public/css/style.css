@@ -397,7 +397,7 @@ p.dummy {
 .left_r45 p {
 	text-align: justify;
 	padding-right: 10px;
-	height: 220px;
+	/* height: 220px; */
 }
 p.dummy-simply {
 	font-size: 14px;
