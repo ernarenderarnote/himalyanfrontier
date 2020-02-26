@@ -14,10 +14,10 @@
                         <a href="{{route('ourTeam')}}">Our Team</a>
                     </li>
                     <li>
-                        <a href="#">Testimonials</a>
+                        <a href="{{route('testimonials')}}">Testimonials</a>
                     </li>
                     <li>
-                        <a href="#">Contact Us</a>
+                        <a href="{{route('ContactUs')}}">Contact Us</a>
                     </li>
                     <li>
                         <a href="{{route('blogs')}}">Blog</a>
@@ -29,13 +29,13 @@
             <h3 class="mb-sm-4 mb-3 pb-3">Useful Links</h3>
             <ul class="list-unstyled">
             <li>
-            <a href="#">Payment Methods</a>
+            <a href="{{route('PaymentMethods')}}">Payment Methods</a>
             </li>
             <li>
-            <a href="#">Modification of Prices</a>
+            <a href="{{route('modificationOfPrices')}}">Modification of Prices</a>
             </li>
             <li>
-            <a href="#">Terms and Conditions</a>
+            <a href="{{route('termsConditions')}}">Terms and Conditions</a>
             </li>
             <li>
             <a href="{{route('PrivacyPolicy')}}">Privacy Policy</a>

@@ -133,3 +133,13 @@ Route::match(['get','post'],'/about-us', [ "as" =>"aboutUs", 'uses' => "AboutUsC
 Route::match(['get','post'],'/our-team', [ "as" =>"ourTeam", 'uses' => "OurTeamController@index"]);
 
 Route::match(['get','post'],'/privacy-policy', [ "as" =>"PrivacyPolicy", 'uses' => "PrivacyPolicyController@index"]);
+
+Route::match(['get','post'],'/testimonials', [ "as" =>"testimonials", 'uses' => "TestimonialController@index"]);
+
+Route::match(['get','post'],'/terms-and-conditions', [ "as" =>"termsConditions", 'uses' => "TermsConditions@index"]);
+
+Route::match(['get','post'],'/modification-of-prices', [ "as" =>"modificationOfPrices", 'uses' => "ModificationOfPricesController@index"]);
+
+Route::match(['get','post'],'/payment-methods', [ "as" =>"PaymentMethods", 'uses' => "PaymentMethodsController@index"]);
+
+Route::match(['get','post'],'/contact-us', [ "as" =>"ContactUs", 'uses' => "ContactUsController@index"]);

@@ -12,7 +12,7 @@
                         <a href="#"> Online Payment</a> |
                         <a href="{{route('ourTeam')}}"> Our Team</a> | 
                         <a href="{{route('blogs')}}"> Blog </a>  |  
-                        <a href="#"> Testimonial </a> 
+                        <a href="{{route('testimonials')}}"> Testimonial </a> 
                     </p>
                 </div>
                 <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
