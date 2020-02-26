@@ -3801,7 +3801,6 @@ border-color: #000;
 /*header#home {
     margin-bottom: 30px;
 }*/
-}
 .cost-section li {
     list-style: none;
 }
@@ -3831,4 +3830,18 @@ h2.upcoming-programs {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 30px;
+}
+input.btn.btn-xs.btn-danger.cancel-order-btn {
+    background-color: red;
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 7px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 3px;
+}
+.disabled{
+	color:red !important;	
 }

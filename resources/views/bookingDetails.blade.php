@@ -63,9 +63,14 @@
                         </span>
                     @endif  
                 </div>
-                    @if($booking_detail->booking_status != 'completed')
+                    @if($booking_detail->booking_status != 'completed' && $booking_detail->booking_status != 'canceled' && $booking_detail->activity_from_date >= date('Y-m-d'))
                         <div class="return67 grey100">
                             <a href="{{ route('completePayment', $booking_detail->tracking_booking_id) }}">Pay Remaining Amount</a>
+                        </div>
+                    @endif    
+                    @if($booking_detail->booking_status == 'canceled')
+                        <div class="return67 grey100">
+                            <a href="#" onclick="return false;">Order Canceled</a>
                         </div>
                     @endif
                

@@ -61,7 +61,9 @@ class BookingController extends Controller
             $activity_id = session()->get('activity_id');     
         }
         
-        $itinerary = Itinerary::with('schedule')->where('id',$activity_id)->first();
+        $itinerary = Itinerary::with(['schedule' => function ($query) {
+                    $query->orderBy('from_date','asc');}])
+                    ->where('id',$activity_id)->first();
         
         $user      = User::with('profile')->where('id',Auth::user()->id)->first();
         
@@ -75,7 +77,11 @@ class BookingController extends Controller
 
         $request->flash();
         
-        return view('booking',compact('itinerary','user','bank_charges','partial_payment','remaining_payment'));
+        $selected_schedule_id = '';
+        if($request->has('schedule_id')){
+            $selected_schedule_id  =  $request->schedule_id;
+        }
+        return view('booking',compact('itinerary','user','bank_charges','partial_payment','remaining_payment','selected_schedule_id'));
     }
 
     public function makePayment(Request $request){
@@ -523,4 +529,17 @@ class BookingController extends Controller
 
     }
 
+    Public function cancelOrder(Request $request, $id){
+
+        $booking = Booking::where('id',base64_decode($id))->first();
+        
+        $booking->booking_status = 'canceled';
+        
+        if( $booking->save() ){
+            
+            $response = ['message' => 'You have canceled your booking.', 'alert-type' => 'danger'];
+        }
+        
+        return redirect()->route('bookingHistory')->with($response);
+    }
 }

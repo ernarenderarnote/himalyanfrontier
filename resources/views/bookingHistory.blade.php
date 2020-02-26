@@ -9,12 +9,12 @@
                     <div class="table_uter">
                         <table class="deliver23">
                             <tr>
-                                <td>ORDER PLACED</td>
-                                <td>TOTAL</td>
+                                <td><b>Order Placed</b></td>
+                                <td><b>TOTAL</b></td>
                                 @if($booking->booking_status == 'completed')
-                                    <td>Payment Completed</td>
+                                    <td><b>Payment Completed</b></td>
                                     @else
-                                    <td>Remaining Payment</td>
+                                    <td><b>Remaining Payment</b></td>
                                 @endif    
                                 <td>&nbsp;</td>
                                 <td class="custom_oeder4"><span class="badge badge-info">ORDER # {{$booking->tracking_booking_id}}</span></td>
@@ -32,7 +32,13 @@
                                     <td>{{$booking->currency->symbol}} {{round($booking->remaining_payment, 2) }}</td>
                                 @endif    
                                 <td>&nbsp;</td>
-                                <td class="custom_oeder4">Order Status <span class="inoibe4">{{isset($booking->booking_status) ? strtoupper($booking->booking_status) : ''}}</span></td>
+                                @if(isset($booking->booking_status) && $booking->booking_status == 'canceled')
+                                    <td class="custom_oeder4"><span class="badge badge-danger">{{isset($booking->booking_status) ? str_replace('_',' ',ucwords($booking->booking_status) ) : ''}}</span></td>
+                                @elseif(isset($booking->booking_status) && $booking->booking_status == 'partial_completed')
+                                    <td class="custom_oeder4"><span class="badge badge-warning">{{isset($booking->booking_status) ? str_replace('_',' ',ucwords($booking->booking_status) ) : ''}}</span></td>
+                                @elseif(isset($booking->booking_status) && $booking->booking_status == 'completed')
+                                    <td class="custom_oeder4"><span class="badge badge-success">{{isset($booking->booking_status) ? str_replace('_',' ',ucwords($booking->booking_status) ) : ''}}</span></td>    
+                                @endif
                             </tr>
                         </table>
                     </div>
@@ -42,7 +48,7 @@
                         </div>
                             <div class="col-md-4 col-sm-4">
                                 <div class="order2">
-                                    <img src="{{ url('/storage/images/itinerary/featureImages/'.$booking->itinerary->feature_img) }}">
+                                    <img class="img-thumbnail" src="{{ url('/storage/images/itinerary/featureImages/'.$booking->itinerary->feature_img) }}">
                                 </div>
                                 
                                 <!--<div class="text929">
@@ -64,8 +70,8 @@
                                         <span style="font-weight:bold;">Email ID: </span><span> {{$booker_email[0]}}</span><br/>
                                         <span style="font-weight:bold;">Contact Number: </span><span> {{$booker_contact[0]}}</span><br/>
                                         <span style="font-weight:bold;">Travel Location: </span><span> {{$booker_city}}</span><br/>
-                                        <span style="font-weight:bold;">Activity Start Date: </span><span> @if($booking->activity_from_date) {{\Carbon\Carbon::parse($booking->activity_from_date)->format('d M Y')}} @endif </span><br/>
-                                        <span style="font-weight:bold;">Activity Start Date: </span><span> @if($booking->activity_to_date) {{\Carbon\Carbon::parse($booking->activity_to_date)->format('d M Y')}} @endif </span><br/>
+                                        <span style="font-weight:bold;">Activity Start Date: </span><span class="badge badge-info"> @if($booking->activity_from_date) {{\Carbon\Carbon::parse($booking->activity_from_date)->format('d M Y')}} @endif </span><br/>
+                                        <span style="font-weight:bold;">Activity End Date: </span><span class="badge badge-info"> @if($booking->activity_to_date) {{\Carbon\Carbon::parse($booking->activity_to_date)->format('d M Y')}} @endif </span><br/>
                                     </p>
                                 </div>
                             </div>
@@ -74,14 +80,24 @@
                                     <div class="return67 grey99">
                                         <a href="{{ route('bookingDetails', $booking->booking_id) }}">View Order Details</a>
                                     </div>
-                                    @if($booking->booking_status != 'completed' && $booking->tracking_booking_id != NULL)
+                                    @if($booking->booking_status != 'completed' && $booking->tracking_booking_id != NULL && $booking->booking_status != 'canceled' && $booking->activity_from_date >= date('Y-m-d'))
                                         <div class="return67 grey99">
                                             <a href="{{ route('completePayment', $booking->tracking_booking_id) }}">Pay Remaining Amount</a>
                                         </div>
+                                    @endif
+                                    @if($booking->booking_status != 'canceled')    
+                                        <div class="return67">
+                                            <form method="post" action="{{route('cancelOrder',base64_encode($booking->id))}}">
+                                                <input type="hidden" name="_method" value="POST">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="submit" class="btn btn-xs btn-danger cancel-order-btn" value="Cancel Order">
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="return67">
+                                            <a href="#" onclick="return false;">Canceled Order</a>
+                                        </div>
                                     @endif    
-                                    <div class="return67">
-                                        <a href="#">Cancel Order</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

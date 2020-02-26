@@ -73,6 +73,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route("admin.slides.index") }}" class="nav-link {{ request()->is('admin/slides/index') || request()->is('admin/slides/*') ? 'active' : '' }}">
+                    <i class="fa fa-sliders nav-icon">
+
+                    </i>
+                    Sliders
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route("admin.transections.index") }}" class="nav-link {{ request()->is('admin/transections') || request()->is('admin/transections/*') ? 'active' : '' }}">
                     <i class="fas fa-money nav-icon">
 
