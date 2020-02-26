@@ -196,6 +196,7 @@ $(document).ready(function(){
   $(".btn-add-panel").on("click", function (e) {
       var $newPanel = $template.clone();
       $newPanel.find(".collapse").removeClass("in");
+      $newPanel.find('.note-editable').html('');
       $newPanel.find(".accordion-toggle").attr("href",  "#accordian" + (++hash));
       $newPanel.find(".panel-collapse").attr("id", 'accordian'+hash).addClass("collapse").removeClass("in");
       $newPanel.find("input").each(function(){
@@ -271,6 +272,29 @@ $(document).ready(function(){
           }
       });
   });
+
+  $('input[name="default_slider"]').on('change',function(e){
+    var $button = $(this);
+    var $form   = $(this).closest('form');  
+    var $slider = $(this).attr('slider-name');
+    swal({
+      title: 'Do you want to set '+$slider+' as default slider?',
+      text: "This will change the home slider.",
+      icon: 'warning',
+      buttons: [true, "Do it!"],
+      dangerMode: true,
+      })
+      .then((willSetDefault) => {
+          if (willSetDefault) {
+            $form.submit();
+          }else{
+            $($button).prop('checked',false);
+          }
+          
+      });
+    e.preventDefault();
+  });
+
 });
  
 

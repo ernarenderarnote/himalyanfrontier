@@ -144,7 +144,7 @@
                                     </div>
                                     <div id="accordian0" class="panel-collapse collapse in">
                                         <div class="panel-body">
-                                            <textarea name="general_information[0][description]"></textarea>
+                                            <textarea name="general_information[0][description]" class="summernote"></textarea>
                                         </div>
                                     </div>
                                 </div>

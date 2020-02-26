@@ -83,6 +83,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::match(['get','post'],'/payment_settings', [ 'as' => 'paymentSettings', "uses" => "PaymentSettingsController@index"] );
 
     Route::match(['get','post'],'/payment_settings/store', [ 'as' => 'paymentSettings.store', "uses" => "PaymentSettingsController@store"] );
+    
+    Route::delete('slides/destroy', 'SliderController@massDestroy')->name('slides.massDestroy');
+    
+    Route::resource('slides', 'SliderController');
+    
+    Route::match(['post'],'/slides/default/{id}', [ 'as' => 'slides.default', "uses" => "SliderController@setDefault"] );
 });
 
 Route::match(['get','post'],'/profile', [ 'as' => 'profile', "uses" => "ProfileController@index",  'middleware' => ['auth'] ] );
@@ -113,6 +119,8 @@ Route::match(['get','post'],'/booking-history', [ "as" =>"bookingHistory", 'midd
 Route::match(['get','post'],'/booking-details/{order_id}', [ "as" =>"bookingDetails", 'middleware' => ['auth'],'uses' => "BookingHistoryController@bookingDetails"]);
 
 Route::match(['get','post'],'/complete-payment/{order_id}', [ "as" =>"completePayment", 'middleware' => ['auth'],'uses' => "BookingController@completePayment"]);
+
+Route::match(['post'],'/cancelorder/{order_id}', [ "as" =>"cancelOrder", 'middleware' => ['auth'],'uses' => "BookingController@cancelOrder"]);
 
 Route::match(['get','post'],'/transection-history', [ "as" =>"transectionsHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@transectionHistory"]);
 

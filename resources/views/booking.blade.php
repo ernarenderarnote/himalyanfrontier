@@ -21,7 +21,13 @@
               <select class="select-box form-control select-option" name="booking_date" id="schedule_id" value="{{ old('booking_date') }}">
                 <option value="">Select Activity Date</option>
                 @forelse($itinerary->schedule as $schedule)
-                  <option value="{{$schedule->id}}">{{\Carbon\Carbon::parse($schedule->from_date)->format('M d')}} to {{\Carbon\Carbon::parse($schedule->to_date)->format('M d Y')}}</option>
+                  @if($schedule->from_date >= date('Y-m-d'))
+                    @if(isset($selected_schedule_id) && $selected_schedule_id != '' )
+                      <option value="{{$schedule->id}}" {{$selected_schedule_id == $schedule->id ? 'selected' : '' }}>{{\Carbon\Carbon::parse($schedule->from_date)->format('M d')}} to {{\Carbon\Carbon::parse($schedule->to_date)->format('M d Y')}}</option>
+                    @else
+                      <option value="{{$schedule->id}}">{{\Carbon\Carbon::parse($schedule->from_date)->format('M d')}} to {{\Carbon\Carbon::parse($schedule->to_date)->format('M d Y')}}</option>
+                    @endif
+                  @endif  
                 @empty
                 <option value="">No Dates Available</option>
                 @endforelse

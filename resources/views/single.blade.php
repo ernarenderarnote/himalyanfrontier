@@ -189,17 +189,24 @@
 											@foreach($activity->schedule as $schedule)
 												@php $date_month = \Carbon\Carbon::parse($schedule->from_date)->format('M'); @endphp
 												@if($date_month == $month)
-													<li>
-														<form method="POST" action="{{route('booking')}}">
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<input type="hidden" name="activity_id" value="{{$activity->id}}">
-															<input type="hidden" name="schedule_id" value="{{$schedule->id}}">		
-															<a href="" class="booking-schedule">
+													@if($schedule->from_date >= date('Y-m-d'))
+														<li>
+															<form method="POST" action="{{route('booking')}}">
+																<input type="hidden" name="_token" value="{{ csrf_token() }}">
+																<input type="hidden" name="activity_id" value="{{$activity->id}}">
+																<input type="hidden" name="schedule_id" value="{{$schedule->id}}">		
+																<a href="" class="booking-schedule" >
+																	{{\Carbon\Carbon::parse($schedule->from_date)->format('M d')}} to {{\Carbon\Carbon::parse($schedule->to_date)->format('M d Y')}}
+																</a>
+															</form>	
+														</li>
+													@else
+														<li>	
+															<a href="" class="booking-schedule disabled" onclick="return false;">
 																{{\Carbon\Carbon::parse($schedule->from_date)->format('M d')}} to {{\Carbon\Carbon::parse($schedule->to_date)->format('M d Y')}}
-															</a>
-														</form>	
-													</li>
-													
+															</a>	
+														</li>
+													@endif	
 												@endif
 											@endforeach
 										</u>	

@@ -10,6 +10,7 @@ use App\Destination;
 use App\Activity;
 use App\Currency;
 use App\ItinerarySchedule;
+use App\Slider;
 
 class HomeController extends Controller
 {
@@ -66,7 +67,11 @@ class HomeController extends Controller
             ->take(6)
             ->get();
         
-        return view('index', compact('itineraries','fixedPrograms','upcomingPrograms'));
+        $slide = Slider::where('is_default','1')
+            ->where('deleted_at',NULL)
+            ->first();
+        
+        return view('index', compact('itineraries','fixedPrograms','upcomingPrograms','slide'));
     }
 
     public function activity(Request $request){
