@@ -154,7 +154,7 @@
                                             </div>
                                             <div id="accordian{{$key}}" class="panel-collapse collapse in">
                                                 <div class="panel-body">
-                                                    <textarea name="general_information['{{$key}}']['description']">{{$general_info->description}}</textarea>
+                                                    <textarea name="general_information['{{$key}}']['description']" class="summernote">{{$general_info->description}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +174,7 @@
                                     </div>
                                     <div id="accordian0" class="panel-collapse collapse in">
                                         <div class="panel-body">
-                                            <textarea name="general_information[0][description]"></textarea>
+                                            <textarea name="general_information[0][description]" class="summernote"></textarea>
                                         </div>
                                     </div>
                                 </div>
