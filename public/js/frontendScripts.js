@@ -19,8 +19,12 @@ $(document).ready(function(){
             messages: {
                 mobile_number : {
                     required : 'Please enter mobile number.',
-                    number   : 'Please enter a vlid number.'
+                    number   : 'Please enter a valid number.'
                 },
+            },
+            errorPlacement: function (error, element) {
+                $('.custom-error').html('');
+                error.appendTo('.custom-error');
             },
        
         });
@@ -39,7 +43,7 @@ $(document).ready(function(){
 						var error  = '<div class="invalid-feedback">';
 							error  += result.msg;
 							error  += '</div>';
-						$('input[name="mobile_number"]').after(error);	
+						$('.custom-error').html(error);	
 					}else{
 						$('.bg-light').remove();
 					    $('.dynamic-container').html(result);
@@ -96,6 +100,7 @@ $(document).ready(function(){
                        // $('input[name="otp"]').next('.invalid-feedback').remove();
 						$('input[name="otp"]').after(error);	
 					}else{
+                        $('.loader').show();
 						window.location.href = result.redirect_url;
 					}
                 }
@@ -115,15 +120,9 @@ $(document).ready(function(){
             success: function(result) {
                 $('.loader').hide();
                 if(result.error == true){
-                    var error  = '<div class="alert alert-danger">';
-                        error  += '<strong>'+result.msg+'</strong>';
-                        error  += '</div>';
-                        $('.card').before(error);
+                    $('input[name="otp"]').after(result.msg);
                 }else{
-                    var message  = '<div class="alert alert-success">';
-                        message  += '<strong>'+result.msg+'</strong>';
-                        message  += '</div>';
-                        $('.card').before(message);
+                   $('input[name="otp"]').after(result.msg);
                 }
             }
         });
@@ -137,6 +136,7 @@ $(document).ready(function(){
     $('.destinal').on('click',function(){
         $(this).next('.radei').slideToggle();
     });
+
 });
 
 //search filter script
@@ -310,7 +310,13 @@ $(function(){
         separateDialCode: true,
       utilsScript: "build/js/utils.js",
     });
-
+     //mobile code selected.
+     var selectedCountryCode = $('.iti__active').attr('data-dial-code');
+     $('.iti__country').on('click',function(){
+        selectedCountryCode = $(this).attr('data-dial-code');
+        $('input[name="country_code"]').val(selectedCountryCode);
+     });
+     $('input[name="country_code"]').val(selectedCountryCode);
 });
 
 $(document).ready(function() {   
@@ -445,7 +451,7 @@ $(document).ready(function() {
                $('.left_side').css('top',-($(".left_side").offset().top + $(".left_side").height() - $(".footer").offset().top));
            }
        });
-    
+
 });
 
 function customValidation () {

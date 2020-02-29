@@ -14,8 +14,10 @@
                             {{ $errors->first('mobile_number') }}
                         </em>
                     @endif
+                    <div class="custom-error" style="text-align:center;"></div>
                 </div> <!-- form-group// -->
-                                                    
+                
+                <input type="hidden" name="country_code" class="form-control input-field">                                 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> Submit </button>
                 </div> <!-- form-group// -->      
