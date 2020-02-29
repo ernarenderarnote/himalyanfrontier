@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewBooking extends Notification
+class PendingBooking extends Notification
 {
     use Queueable;
 
@@ -42,7 +42,7 @@ class NewBooking extends Notification
     {
         return (new MailMessage)
                 ->subject('New Booking')
-                ->markdown('mail.booking.newBooking', ['booking' => $this->details]);
+                ->markdown('mail.booking.pendingBooking', ['booking' => $this->details]);
     }
 
     /**

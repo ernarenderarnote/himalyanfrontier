@@ -69,10 +69,10 @@
 		<ul class="nav navbar-nav ml-auto">
 		   <li class="nav-item dropdown d-md-down-none">
 			  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-			  <i class="fa fa-bell-o"></i>
+			  <i class="fa fa-cart-arrow-down"></i>
 			  <span class="badge badge-pill badge-danger">{{$commonServices->newOrders()}}</span>
 			  </a>
-			  <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+			  <!--div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
 				 <div class="dropdown-header text-center">
 					<strong>You have 5 notifications</strong>
 				 </div>
@@ -86,7 +86,13 @@
 				 <i class="icon-basket-loaded text-primary"></i> New client</a>
 				 <a class="dropdown-item" href="#">
 				 <i class="icon-speedometer text-warning"></i> Server overloaded</a>
-			  </div>
+			  </div-->
+		   </li>
+		   <li class="nav-item dropdown d-md-down-none">
+			  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			  <i class="fa fa-question-circle"></i>
+			  <span class="badge badge-pill badge-danger">{{$commonServices->newInqueries()}}</span>
+			  </a>
 		   </li>
 		   <li class="nav-item dropdown d-md-down-none">
 			  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

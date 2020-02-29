@@ -124,10 +124,10 @@
                      <br>
                      <p>We propose a large array of trips keeping in mind to meet needs and interests of each individual and different age groups of travelers.</p>
                      <br> 
-                     <br>									
+                    <p>We are a team of ex – field men, those started their careers from the beneath of Adventure and culture tourism industry. After 16 years of field experience Himalayan Frontiers has been established in 1996.</p>									
                   </div>
-                  <div class="btn">
-                     <button>Read More</button>
+                  <div class="btn custom_btn8">
+                    <a href="http://newfrontier.himalayanfrontiers.com/about-us">Read More</a>
                   </div>
                </div>
                <br>
@@ -226,20 +226,60 @@
 		</div>
     </div>
 </div>
-<div class="travels">
+<!--div class="travels">
    <div class="container">
       <div class="row">
          <div class="col-md-4">
             <h3 class="say">What travelers <br>say about</h3>
          </div>
          <div class="col-md-8">
-            <p>					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 					laboris nisi ut aliquip ex ea commodo consequat.					</p>
-            <p>					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 					laboris nisi ut aliquip ex ea commodo consequat.					</p>
-            <div class="read-our">							<button>Read More</button>					</div>
-            <!--<img src="images/trip.png" class="responsive">-->
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 					laboris nisi ut aliquip ex ea commodo consequat.					</p>
+            <div class="read-our"><button>Read More</button>					</div>
+          <img src="images/trip.png" class="responsive">
          </div>
       </div>
    </div>
+</div-->
+<div class="custom_silder5">
+    <div class="container">
+        <h3 class="say">What travelers say about</h3>
+        <div class="row">
+            <div class="col-md-2 col-sm-2"></div>
+            <div class="col-md-8 col-sm-8">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div class="carousel-item">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div class="carousel-item">
+     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="programs">
 <div class="container">
@@ -292,6 +332,35 @@
          </div>
       </div>
    </div>
+</div>
+<div class="four_box3">
+  <div class="container">
+      <h3 class="say">Our Affiliates</h3>
+      <div class="row">
+          <div class="col-md-3 col-sm-3">
+              <div class="box1_outer99">
+                 <a href="#"><img src="https://www.himalayanfrontiers.com/wp-content/uploads/2015/12/lato.jpg"> </a>
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-3">
+              <div class="box1_outer99">
+                 <a href="#"><img src="https://www.himalayanfrontiers.com/wp-content/uploads/2015/12/atoai.jpg"> </a>
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-3">
+              <div class="box1_outer99">
+                <a href="#"> <img src="https://www.himalayanfrontiers.com/wp-content/uploads/2015/12/imf_logo1.gif"></a> 
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-3">
+              <div class="box1_outer99">
+                 <a href="#"><img src="https://www.himalayanfrontiers.com/wp-content/uploads/2015/12/hp-tourism-logo.jpg"> </a>
+              </div>
+          </div>
+          
+      </div>
+      
+  </div>  
 </div>
    
 @endsection

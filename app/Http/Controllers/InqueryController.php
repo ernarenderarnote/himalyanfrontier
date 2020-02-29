@@ -7,6 +7,7 @@ use App\Http\Requests\InqueryRequest;
 use App\Notifications\NewInquery;
 use Validator;
 use App\Inquery;
+use App\Itinerary;
 use App\User;
 
 class InqueryController extends Controller
@@ -15,12 +16,14 @@ class InqueryController extends Controller
 
     $input = $request->all();
         
-    $activity = new Inquery();
+    $itinerary = Itinerary::where('id',$request->itinerary_id)->first()->title;
 
     if( Inquery::create($input) ){
-        $user = User::where('email','narender2709@gmail.com')->first();
+        $input['activity_name'] = $itinerary;
+        $user = User::getUserWithRole('Admin')
+                ->first();
         $user->notify(new NewInquery($input));
-        $response = ['message' => 'Inquery Sumbitted successfully.', 'alert-type' => 'success'];
+        $response = ['message' => 'Thank you for submitting a query.', 'alert-type' => 'success'];
     }
     return redirect()->back()->with($response);
    }

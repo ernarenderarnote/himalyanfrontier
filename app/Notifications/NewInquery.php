@@ -41,9 +41,11 @@ class NewInquery extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification new.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('New Inquery about activty '.$this->details['activity_name'])
+                    ->line($this->details['name'].' posted new inquery about activty '.$this->details['activity_name'] )
+                    ->line('Phone Number: '.$this->details['phone'])
+                    ->line('Email: '.$this->details['email'])
+                    ->line('Inquery: '.$this->details['message']);
     }
 
     /**

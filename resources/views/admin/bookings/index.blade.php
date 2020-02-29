@@ -29,10 +29,10 @@
                             Amount Remaining
                         </th>
                         <th>
-                            Booking Status
+                            Booking ID
                         </th>
                         <th>
-                            Booking ID
+                            Booking Status
                         </th>
                         <th>
                             &nbsp;

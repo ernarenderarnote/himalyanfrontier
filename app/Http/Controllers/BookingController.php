@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Builder;
 use Softon\Indipay\Facades\Indipay; 
 use App\Notifications\NewBooking;
+use App\Notifications\PendingBooking;
+use App\Notifications\CancelBooking;
 use Validator;
+use Notification;
 use App\Itinerary;
 use App\ItinerarySchedule;
 use App\Destination;
@@ -63,9 +66,12 @@ class BookingController extends Controller
         
         $itinerary = Itinerary::with(['schedule' => function ($query) {
                     $query->orderBy('from_date','asc');}])
-                    ->where('id',$activity_id)->first();
+                    ->where('id',$activity_id)
+                    ->first();
         
-        $user      = User::with('profile')->where('id',Auth::user()->id)->first();
+        $user      = User::with('profile')
+                    ->where('id',Auth::user()->id)
+                    ->first();
         
         session(['activity_id' => $activity_id]);
 
@@ -273,12 +279,10 @@ class BookingController extends Controller
         $booking->activity_to_date   = $activity_to_date;
 
         $booking->balance_due_date   = $balance_due_date;
-        
+
         if($booking->save()){
 
-            $user = User::getUserWithRole('Admin')->first();
-            
-            $user->notify(new NewBooking($booking->toArray()));
+            $this->sendPendingOrderNotifications($booking);
 
             return $booking;
 
@@ -403,6 +407,8 @@ class BookingController extends Controller
 
             $booking->save();
 
+            $this->sendOrderNotifications( $booking );
+
             $response = ['message' => 'Booking process successfully completed.', 'alert-type' => 'success'];
         
         }
@@ -419,6 +425,8 @@ class BookingController extends Controller
             
             $booking->save();
             
+            $this->sendOrderNotifications( $booking );
+
             $response = ['message' => 'Booking process failed due to aborted payment response.', 'alert-type' => 'danger'];
         
         }
@@ -434,6 +442,8 @@ class BookingController extends Controller
             
             $booking->save();
             
+            $this->sendOrderNotifications( $booking );
+
             $response = ['message' => 'Booking process failed due to the transaction has been declined.', 'alert-type' => 'danger'];
     
     	}
@@ -449,6 +459,8 @@ class BookingController extends Controller
             
             $booking->save();
             
+            $this->sendOrderNotifications( $booking );
+
             $response = ['message' => 'Booking process failed Security Error. Illegal access detected.', 'alert-type' => 'danger'];
         }
         
@@ -538,8 +550,52 @@ class BookingController extends Controller
         if( $booking->save() ){
             
             $response = ['message' => 'You have canceled your booking.', 'alert-type' => 'danger'];
+            $this->sendCancelOrderNotifications($booking);
         }
         
         return redirect()->route('bookingHistory')->with($response);
+    }
+
+    public function sendOrderNotifications( $booking ){
+
+        $admin_user = User::getUserWithRole('Admin')
+                ->first()
+                ->id;
+
+        $users = User::whereIn('id', array(Auth::user()->id, $admin_user))->get();
+        
+        $booking = Booking::with('itinerary')
+                ->where('id',$booking->id)
+                ->first();
+
+        Notification::send($users, new NewBooking($booking));
+    }
+
+    public function sendPendingOrderNotifications( $booking ){
+
+        $user = User::getUserWithRole('Admin')
+                ->first();
+                
+        $booking = Booking::with('itinerary')
+                ->where('id',$booking->id)
+                ->first();
+
+        Notification::send($user, new PendingBooking($booking));
+    }
+
+    public function sendCancelOrderNotifications( $booking ){
+
+         $admin_user = User::getUserWithRole('Admin')
+                ->first()
+                ->id;
+
+        $users = User::whereIn('id', array(Auth::user()->id, $admin_user))
+                ->get();
+
+        $booking = Booking::with('itinerary')
+                ->where('id',$booking->id)
+                ->first();
+                
+        Notification::send($users, new CancelBooking($booking));
     }
 }

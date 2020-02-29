@@ -87,10 +87,11 @@ class InqueriesController extends Controller
             $input['body']         = $request->reply_message;
             
             $input['thanks']       = 'Thanks for inquery with Himalayan Frontiers.'; 
-            $email = 'narender2709@gmail.com';
+
+            $email = $inquery->email;
+
             Notification::route('mail', $email)->notify(new InqueryReply($input));
-            //Notification::send($email, new InqueryReply($input));
-            //Notification::send($email, new NewBooking($email));
+            
             $response = ['message' => 'Reply Sended Successfully.', 'alert-type' => 'success'];
         }
         return redirect()->route('admin.inqueries.index')->with($response);
