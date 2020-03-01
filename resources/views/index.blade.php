@@ -250,23 +250,21 @@
     <div id="demo" class="carousel slide" data-ride="carousel">
 
   <!-- Indicators -->
-  <ul class="carousel-indicators">
+  <!--ul class="carousel-indicators">
     <li data-target="#demo" data-slide-to="0" class="active"></li>
     <li data-target="#demo" data-slide-to="1"></li>
     <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
+  </!ul-->
   
   <!-- The slideshow -->
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="carousel-item">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="carousel-item">
-     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
+    @forelse($testimonials as $key=>$testimonial)
+        <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
+            {!! $testimonial->description !!}
+        </div>
+        @empty
+
+    @endforelse   
   </div>
   
   <!-- Left and right controls -->

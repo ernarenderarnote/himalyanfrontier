@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        Inqueries
+        Contact Us
     </div>
 
     <div class="card-body">
@@ -23,12 +23,6 @@
                             Subject
                         </th>
                         <th>
-                            Message
-                        </th>
-                        <th>
-                            Itinerary
-                        </th>
-                        <th>
                             Status
                         </th>
                         <th>
@@ -37,22 +31,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($inqueries as $inquery)
-                        <tr data-entry-id="{{ $inquery->id }}">
+                    @forelse($contacts as $contact)
+                        <tr data-entry-id="{{ $contact->id }}">
                         <td></td>
-                        <td>{{$inquery->name}}</td>
-                        <td>{{$inquery->email}}</td>
-                        <td>{{$inquery->subject}}</td>
-                        <td>{{$inquery->message}}</td>
-                        <td>{{$inquery->itinerary->title ? $inquery->itinerary->title : ''}}</td>
-                        <td>{{$inquery->status ? $inquery->status : 'Pending'}}</td>
+                        <td>{{$contact->name}}</td>
+                        <td>{{$contact->email}}</td>
+                        <td>{{$contact->subject}}</td>
+                        <td>{{$contact->status ? $contact->status : 'Unchecked'}}</td>
                         <td>
                                
-                            <a class="btn btn-xs btn-primary" href="{{ route('admin.inqueries.show', $inquery->id) }}">
+                            <a class="btn btn-xs btn-primary" href="{{ route('admin.contact-us.show', $contact->id) }}">
                                 View/Reply
                             </a>
                             
-                            <form action="{{ route('admin.inqueries.destroy', $inquery->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                            <form action="{{ route('admin.contact-us.destroy', $contact->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -75,7 +67,7 @@ $(function () {
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.inqueries.massDestroy') }}",
+    url: "{{ route('admin.contact_us.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {

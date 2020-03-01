@@ -30,27 +30,46 @@
         </div>
         <div class="col-md-7 col-sm-7">
             <div class="custom_form45">
-                <form action="/action_page.php">
-    <div class="form-group">
-        <label for="email">Your Name:</label>
-        <input type="email" class="form-control" id="email">
-    </div>
-    <div class="form-group">
-        <label for="email">Your Email:</label>
-        <input type="email" class="form-control" id="email">
-    </div>
-    <div class="form-group">
-        <label for="email">Subject:</label>
-        <input type="email" class="form-control" id="email">
-    </div>
-        <div class="form-group">
-        <label for="email">Your Message:</label>
-    <textarea id="w3mission" rows="4" cols="50">
-    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
-    </textarea>
-    </div>
-    <div class="custom_btn"><button type="submit" class="btn btn-default">Send</button><div>
-    </form>
+                <form action="{{route('ContactUs.store')}}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" name="name" class="form-control" id="" value="{{ old('name') }}">
+                        @if($errors->has('name'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('name') }}
+                            </em>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email:</label>
+                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                        @if($errors->has('email'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('email') }}
+                            </em>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" name="subject" class="form-control" value="{{ old('subject') }}">
+                        @if($errors->has('subject'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('subject') }}
+                            </em>
+                        @endif
+                    </div>
+                        <div class="form-group">
+                        <label for="message">Your Message:</label>
+                        <textarea id="w3mission" name="message" rows="4" cols="50">{{ old('message') }}</textarea>
+                        @if($errors->has('message'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('message') }}
+                            </em>
+                        @endif
+                    </div>
+                    <div class="custom_btn"><button type="submit" class="btn btn-default">Send</button><div>
+                </form>
             </div>
         </div>
         </div>

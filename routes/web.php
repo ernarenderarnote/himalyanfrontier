@@ -68,6 +68,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('blogs', 'BlogsController');
 
+    Route::delete('testimonials/destroy', 'TestimonialsController@massDestroy')->name('testimonials.massDestroy');
+
+    Route::resource('testimonials', 'TestimonialsController');
+
     Route::delete('booking/destroy', 'BookingController@massDestroy')->name('booking.massDestroy');
     
     Route::resource('booking', 'BookingController');
@@ -79,6 +83,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('inqueries/destroy', 'InqueriesController@massDestroy')->name('inqueries.massDestroy');
     
     Route::resource('inqueries', 'InqueriesController');
+
+    Route::delete('contact-us/destroy', 'ContactUsController@massDestroy')->name('contact_us.massDestroy');
+    
+    Route::resource('contact-us', 'ContactUsController');
 
     Route::match(['get','post'],'/payment_settings', [ 'as' => 'paymentSettings', "uses" => "PaymentSettingsController@index"] );
 
@@ -143,3 +151,5 @@ Route::match(['get','post'],'/modification-of-prices', [ "as" =>"modificationOfP
 Route::match(['get','post'],'/payment-methods', [ "as" =>"PaymentMethods", 'uses' => "PaymentMethodsController@index"]);
 
 Route::match(['get','post'],'/contact-us', [ "as" =>"ContactUs", 'uses' => "ContactUsController@index"]);
+
+Route::match(['get','post'],'/contact-us/store', [ "as" =>"ContactUs.store", 'uses' => "ContactUsController@store"]);

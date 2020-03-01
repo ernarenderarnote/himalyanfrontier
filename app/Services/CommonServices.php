@@ -14,6 +14,10 @@ class CommonServices {
 	public function newInqueries(){
 		return auth()->user()->unreadNotifications()->whereType('App\Notifications\NewInquery')->count();
 	}
+	public function newContactUs(){
+		return auth()->user()->unreadNotifications()->whereType('App\Notifications\ContactUsNotification')->count();
+	}
+
 	public function cards(){
 		return CreditCard::whereUserId(auth()->user()->getUser()->id)->get();
 	}

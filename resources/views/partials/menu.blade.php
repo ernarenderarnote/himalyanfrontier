@@ -41,6 +41,14 @@
                     {{ trans('global.currency.title') }}
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route("admin.contact-us.index") }}" class="nav-link {{ request()->is('admin/contact-us') || request()->is('admin/contact-us/*') ? 'active' : '' }}">
+                    <i class="fa fa-envelope nav-icon">
+
+                    </i>
+                    Contact Us
+                </a>
+            </li>
             <!--currency end-->
             <li class="nav-item">
                 <a href="{{ route("admin.destinations.index") }}" class="nav-link {{ request()->is('admin/destinations') || request()->is('admin/destinations/*') ? 'active' : '' }}">
@@ -52,7 +60,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route("admin.inqueries.index") }}" class="nav-link {{ request()->is('admin/inqueries') || request()->is('admin/inqueries/*') ? 'active' : '' }}">
-                    <i class="fa fa-envelope nav-icon"></i>
+                    <i class="fa fa-question-circle nav-icon"></i>
                     {{ trans('global.inquery.title') }}
                 </a>
             </li>
@@ -78,6 +86,14 @@
 
                     </i>
                     Sliders
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route("admin.testimonials.index") }}" class="nav-link {{ request()->is('admin/testimonials/index') || request()->is('admin/testimonials/*') ? 'active' : '' }}">
+                    <i class="fa fa-quote-left nav-icon">
+
+                    </i>
+                    Testimonials
                 </a>
             </li>
             <li class="nav-item">
