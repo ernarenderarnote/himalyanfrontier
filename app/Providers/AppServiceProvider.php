@@ -8,10 +8,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Services\CommonServices;
+use App\Services\MenuServices;
 use View;
 use App\Activity;
 use App\Destination;
 use App\Currency;
+use App\Itinerary;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,11 +33,12 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
+    {    
         View::share('defaultCurrency', Currency::where('is_default','1')->first() );
         View::share('activities', Activity::all() );
         View::share('destinations', Destination::all() );
         View::share('commonServices', new CommonServices);
+        View::share('menus', new MenuServices);
         $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
         $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
          // Enable pagination

@@ -12,6 +12,7 @@ use App\Currency;
 use App\ItinerarySchedule;
 use App\Slider;
 use App\Testimonial;
+use App\Blog;
 
 class HomeController extends Controller
 {
@@ -75,8 +76,13 @@ class HomeController extends Controller
         $testimonials = Testimonial::where('is_active','1')
         ->where('deleted_at',NULL)
         ->get(); 
+        
+        $blog = Blog::where('is_active','1')
+        ->where('deleted_at',NULL)
+        ->orderBy('created_at', 'desc')
+        ->first();
 
-        return view('index', compact('itineraries','fixedPrograms','upcomingPrograms','slide','testimonials'));
+        return view('index', compact('blog','itineraries','fixedPrograms','upcomingPrograms','slide','testimonials'));
     }
 
     public function activity(Request $request){

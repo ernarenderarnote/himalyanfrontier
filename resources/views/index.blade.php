@@ -311,15 +311,13 @@
 <div class="programs-main">
    <div class="container">
       <h3 class="videos">Around the trip: Blog & Videos</h3>
-      <p class="dummy">Lorem Ipsum is simply dummy text of the printing</p>
+      <p class="dummy">{{$blog->title}}</p>
       <div class="row">
-         <div class="col-md-4">
-            <img src="images/Quand partir sri lanka.jpg" class="normal">
-            <p class="dummy-simply">Lorem Ipsum is simply dummy text of the printing and
-               typesetting industry. Lorem Ipsum has been the industry's standard.
-               <br>
-            <div class="read-btn-ipsum">
-               <button>Read More</button>
+         <div class="col-md-4 blog-img-container">
+            <img src="{{ url('/storage/images/blogs/featureImages/'.$blog->thumbnails) }}" class="normal img-thumbnail">
+            <p class="dummy-simply">{!! substr(strip_tags($blog->description),0,300 ) !!}</p>
+            <div class="read-btn">
+               <a  href="{{route('blogs',$blog->slug)}}">Read More</a>
             </div>
          </div>
          <div class="col-md-8">

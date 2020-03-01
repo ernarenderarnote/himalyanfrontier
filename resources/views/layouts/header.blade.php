@@ -1,4 +1,6 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet"> 
+
+
 <!-- top-bar -->
 <div class="top-bar py-2 bg-li">
     <div class="container">
@@ -80,59 +82,90 @@
         </div>
     </div>
 </div>
-<div class="main-row">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- nav -->
-				<div class="nav_w3ls mx-lg-auto">
-					<nav class="custom_nav">
-						<label for="drop" class="toggle">Menu</label>
-						<input type="checkbox" id="drop" />
-						<ul class="menu mx-lg-auto">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Destinations <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-								   @foreach($destinations as $destination)
-								    <li><a href="{{url('advanced-search?destination='.$destination->slug)}}">{{ $destination->title }}</a></li>
-								   @endforeach
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a href="#about" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Activities <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-								   @foreach($activities as $activity)
-								    <li><a href="{{url('advanced-search?activity='.$activity->slug)}}">{{ $activity->title }}</a></li>
-								   @endforeach
-								</ul>
-							</li>
-                            <li><a href="{{url('advanced-search?itinerary_type=fixed_departure')}}">Fixed Departures</a></li>
-                            <li><a href="{{url('advanced-search?itinerary_type=hot_deal')}}">Hot Deals</a></li>
-							<li><a href="{{route('aboutUs')}}">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            @if (Route::has('login'))
-                        
-                                @auth
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello,{{Auth::user()->full_name}} <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
-                                        <li><a href="{{route('bookingHistory')}}">Booking History</a></li>
-                                        <li><a href="{{route('transectionsHistory')}}">Transection History</a></li>
-                                        <li><a href="">My Profile</a></li>
-                                        <li><a href="" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li>   
-                                        </ul>
-                                    </li>
-                                @else
-                                    <li><a href="{{ route('login') }}">Login</a></li>    
-                                @endauth
-                            @endif
+<div class="main-row custom_header">
+<div class="navbar navbar-light bg-light navbar-static-top navbar-expand-md">
+    <div class="container">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">☰</button>
+             
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                
+               <li class="dropdown menu-large nav-item"> <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Activities</a>
+                    <ul class="dropdown-menu megamenu">
+                        <div class="row">
+                            @foreach($menus->activities() as $key=>$value)
+                                <li class="col-md-3 dropdown-item">
+                                    <ul>
+                                        <li class="dropdown-header">{{$key}}</li>
+                                        @foreach($value as $k=>$v)
+                                            <li><a href="{{url('advanced-search?activity='.$v)}}">{{ $k }}</a></li>
+                                        @endforeach
+                                        <li class="divider"></li>
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </div>
+                    </ul>
+                </li>
+                <li class="dropdown menu-large nav-item"> <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Fixed Departures</a>
+                    <ul class="dropdown-menu megamenu">
+                        <!-- <div class="row"> -->
+                            <!-- <li class="col-md-12 dropdown-item"> -->
+                                <ul>
+                                    <li class="dropdown-header">Fixed Departure Programs</li>
+                                    <div class="custom-drop-menu">
+                                            @foreach($menus->fixedDeparture() as $diparture)
+                                                <li class="col-md-4"><a href="{{ route('activity.slug', ['slug'=>$diparture->slug]) }}">{{ $diparture->title }}</a>
+                                            @endforeach    
+                                        </li>
+                                    </div>
+                                </ul>
+                        <!--  </li> -->
+                        <!-- </div> -->
+                    </ul>
+                </li>
+                <li class="dropdown menu-large nav-item"> <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Hot Deals</a>
+                    <ul class="dropdown-menu megamenu">
+                        <!-- <div class="row"> -->
+                            <!-- <li class="col-md-12 dropdown-item"> -->
+                                <ul>
+                                    <li class="dropdown-header">Hot Deals</li>
+                                    <div class="custom-drop-menu">
+                                            @foreach($menus->hotDeals() as $hotDeal)
+                                                <li class="col-md-4"><a href="{{ route('activity.slug', ['slug'=>$hotDeal->slug]) }}">{{ $hotDeal->title }}</a>
+                                            @endforeach    
+                                        </li>
+                                    </div>
+                                </ul>
+                        <!--  </li> -->
+                        <!-- </div> -->
+                    </ul>
+                </li>
+                </li>
+                  <li class="nav-item"><a href="{{route('aboutUs')}}" class="nav-link">About Us</a>
+                </li>
+                  <li class="nav-item"><a href="{{route('ContactUs')}}" class="nav-link">Contact Us</a></li>
+                  
+                    @if (Route::has('login'))
                             
-						</ul>
-					</nav>
-				</div>
-				<!-- //nav -->
-			</div>
-		</div>
-	</div>
+                        @auth
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello,{{Auth::user()->full_name}} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                                <li><a href="{{route('bookingHistory')}}">Booking History</a></li>
+                                <li><a href="{{route('transectionsHistory')}}">Transection History</a></li>
+                                <li><a href="">My Profile</a></li>
+                                <li><a href="" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li>   
+                                </ul>
+                            </li>
+                        @else
+                            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a>
+                        @endauth
+                    @endif
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 </div>
