@@ -17,7 +17,8 @@
         "laravel/tinker": "^1.0",
         "softon/indipay": "^1.1",
         "twilio/sdk": "^5.39",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "cohensive/embed": "5.5.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
