@@ -70,11 +70,18 @@
                 </div>
                 </div>
                 <div class="col-md-4">
-                <div class="contacts">
+                <div class="contacts desktop_view">
                     <span class="expert">TALK TO AN EXPERT</span>
                     <div class="headerPhoneNumber">
                         <a class="displayByWETGDestination isWEAU" href="tel:+91- 9816043615" onclick="ga('send', 'event', 'Top Header', 'Call - Expert', 'Talk to an Expert - Call', 20);" title="9780135414">+91- 9816043615</a>       
                     </div>
+                    <span class="email"> <a class="btn-email-us" href="javascript:;" data-toggle="modal" data-target="#askAnExpertModal" onclick="ga('send', 'event', 'Top Header', 'Click', 'Talk to an Expert - Email', 10);" title="Email Us">EMAIL US</a></span> 
+                </div>
+                  <div class="contacts mobile_view3">
+                    <span class="expert">TALK TO AN EXPERT</span>
+                    <span class="headerPhoneNumber">
+                        <a class="displayByWETGDestination isWEAU" href="tel:+91- 9816043615" onclick="ga('send', 'event', 'Top Header', 'Call - Expert', 'Talk to an Expert - Call', 20);" title="9780135414">+91- 9816043615</a>       
+                    </span>
                     <span class="email"> <a class="btn-email-us" href="javascript:;" data-toggle="modal" data-target="#askAnExpertModal" onclick="ga('send', 'event', 'Top Header', 'Click', 'Talk to an Expert - Email', 10);" title="Email Us">EMAIL US</a></span> 
                 </div>
                 </div>

@@ -215,9 +215,9 @@
           </div>
           <div class="clear"></div>
         </div>
-        <div class="payment-inner col-sm-12">
+        <div class="payment-inner col-sm-12 custom_payment5">
           <h4>Payment Details</h4>
-          <div class="row col-md-12">
+          <div class="row col-md-12 custom_activty6">
             <div class="col-sm-4 form-group">
               <label>Activity Name: </label>
               <input type="hidden" name="activity_id" value="{{$itinerary->id}}">
@@ -236,8 +236,8 @@
                 </em>
               @endif
             </div>
-            <div class="col-sm-4  form-group text-center">
-              <label>Amount  (persons x activity-fee) </label>
+            <div class="col-sm-4  form-group text-center custom_free8">
+              <label>Ammount  (persons x activity-fee) </label>
               <input type="hidden" name="currency_id" value="{{ $itinerary->converted_currency_id }}">
               <input type="hidden" name="activity_price" value="{{$itinerary->converted_price}}">
               <p class="fee-div"><strong class="participant-number">1</strong> X <strong class="activity-price">{{$itinerary->converted_price}}</strong> = <strong> {{$itinerary->currency_symbol}}</strong> <strong class="price-total">{{$itinerary->converted_price}}</strong></p>
@@ -246,14 +246,15 @@
                 <strong> {{$itinerary->currency_symbol}}</strong>
                 <strong class="amount-including-tax">{{ round( ($itinerary->converted_price/100) * isset($bank_charges) ? $bank_charges : 3.07 ,2) }}</strong>
               </p>
-              <p><strong>Total Amount</strong> 
+              <p><strong>Total Ammount</strong> 
                 <strong> {{$itinerary->currency_symbol}}</strong>
                 <strong class="total_incl_tax"> {{ round($itinerary->converted_price +  ($itinerary->converted_price/100)*3.07 ,2) }}  </strong>
               </p>
+              <div class="custom_book4"> <button type="submit" name="submit" id="sendcontact" class="btn btn-lg btn-booking pull-right">Book Now</button></div>
             </div>
             <div class="col-sm-12 m-b-20">
               <div class="col-sm-12 p-l-0 p-r-0 m-b-10">
-                <div class="checkbox-step m-t-10">
+                <div class="checkbox-step custom_chek7 m-t-10">
                   <label class="checkbox-inline">
                     <input type="checkbox" name="agree" class="termsconditions" value="0" aria-required="true"> &nbsp;I have read and accept the  <a class="booking-terms" href="https://www.ridingsolo.in/terms/details/1" target="_blank">Terms &amp; Conditions</a></label>
                     @if($errors->has('agree'))
@@ -263,7 +264,7 @@
                     @endif                
                 </div>
               </div>
-              <button type="submit" name="submit" id="sendcontact" class="btn btn-lg btn-booking pull-right">Book Now</button>
+             
               <div class="clear"></div>
             </div>
           </div>

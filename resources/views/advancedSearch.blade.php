@@ -40,9 +40,9 @@
         @endif
     @endif
     <br/>
-	<div class="container">
+	<div class="container custom_flex">
 		<div class="row">
-			<div class="col-md-3 col-sm-3 left_side_bar">
+			<div class="col-md-3 col-sm-12 left_side_bar">
 				<div class="left_side">
 					<form method="get" class="advanced_serch_form" action="{{route('advanced-search')}}">
 						<h3>Find your Adventure</h3>

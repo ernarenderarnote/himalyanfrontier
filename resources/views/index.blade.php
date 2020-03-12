@@ -51,7 +51,7 @@
 @endif
 <!-- //banner slider -->
 <!-- banner bottom grids -->
-<section class="banner-bottom-w3layouts" id="services">
+<section class="banner-bottom-w3layouts custom_form99" id="services">
     <form method="get" action="{{route('advanced-search')}}">
 	    <div class="sb-bar">
 			<div class="sb-destinations-section sb-section">
@@ -111,11 +111,11 @@
    <div class="section-1">
    <div class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(&quot;https://www.himalayanfrontiers.com/wp-content/uploads/2014/12/grey-bg.png&quot;);">
       <br>
-      <div class="section">
+      <div class="section custom_trvel8">
          <br>
          <div class="container">
             <div class="row">
-               <div class="col-md-4">
+               <div class="col-md-4 col-sm-12">
                   <div class="content_wrapper homeab" style="padding-right: 20px; text-align: justify;">
                      <h3 class="heading">Why travel with<br>
                         <span class="red_heading">Himalayan Frontiers</span>
@@ -131,10 +131,10 @@
                   </div>
                </div>
                <br>
-				<div class="col-md-8">
+				<div class="col-md-8 col-sm-12">
 					<div class="row">
                         @forelse($itineraries as $itinerary)
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-sm-4">
                                 <div class="true-image"> 
                                 <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}" data-post_id="1641" class="hover-effect popup-gallery"><img src="{{ url('/storage/images/itinerary/featureImages/'.$itinerary->feature_img) }}"></a>                              
                                 </div>
@@ -279,7 +279,7 @@
 </div>
 </div>
 </div>
-<div class="programs">
+<div class="programs custom_pr0gre33">
 <div class="container">
         <h2 class="upcoming-programs">Upcoming Programs</h2>
         <div class="row">

@@ -1,7 +1,7 @@
 <div class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-3 col-sm-12">
                 <h3 class="mb-sm-4 mb-3 pb-3">Quick Links</h3>
                 <ul class="list-unstyled">
                     <li>
@@ -25,7 +25,7 @@
                 </ul>
             </div>
             
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-3 col-sm-12">
             <h3 class="mb-sm-4 mb-3 pb-3">Useful Links</h3>
             <ul class="list-unstyled">
             <li>
@@ -44,7 +44,7 @@
             <br>
             <br>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-3 col-sm-12">
             <div class="touch">
             <div id="travcontactwidget-2" class="contact-box small-box widget_travcontactwidget">
             <h3 class="mb-sm-4 mb-3 pb-3">Get in Touch</h3>
@@ -58,7 +58,7 @@
             </div>
             </div>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-3 col-sm-12">
                 <h3 class="mb-sm-4 mb-3 pb-3">Secure Online Payments</h3>
                 <img src="{{url('images/neew.png')}}">
             </div>

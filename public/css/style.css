@@ -43,30 +43,84 @@ body a:hover {
     margin-bottom: 50px;
 }
 .bg-li {
-	background-image: url(../images/Stuart_Range.jpg) !important;
+	background-image: url(../images/top_bg.jpg) !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
 }
+
+
+
 /***********mega menu css*************/
 .navbar-light {
   color: #fff;
   background-color: #ccc6c6;
   border-color: #aca1a2;
 }
-.dropdown-menu.megamenu.show ul li a {
-    color: #000 !important;
+.left.carousel-control span {
+	left: 25px;
+}
+.about_outer.terms h4 {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.mobile_view3{
+  display:none;   
+}
+.box_outer54 p {
+	text-align: center !important;
+}
+.custom_free8 {
+	color: #000 !important;
+	font-size: 17px !important;
+}
+.custom_free8 p {
+	font-size: 16px;
+}
+.checkbox-step.custom_chek7 {
+	position: absolute;
+	top: -110px;
+}
+.custom_book4 {
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: center;
+}
+.custom_book4 #sendcontact {
+	margin: 13px auto;
+	text-align: center;
+	display: block;
+	float: inherit !important;
 }
 .nav.navbar-nav {
     margin: 0 auto;
     text-align: center;
 }
+.dropdown-menu.megamenu.show ul li a {
+	padding-left: 0;
+	text-transform: capitalize;
+	font-size: 15px;
+	font-weight: 500;
+	color: #555 !important;
+	line-height: 27px;
+}
+.custom-drop-menu li a {
+	padding-left: 0px !important;
+	margin-left: 0px !important;
+}
 .nav.navbar-nav li {
     margin: 0 auto;
 }
 .dropdown-header {
-    font-size: 20px;
-    padding: 6px 19px;
-    color: red;
+	font-size: 22px;
+	padding: 6px 0px;
+	color: red;
+	font-weight: 600;
+	text-transform: uppercase;
+	border-bottom: 2px solid red;
+	margin-bottom: 10px !important;
+}
+.dropdown-item li a {
+	margin: 0px !important;
 }
 .navbar-expand-md .navbar-nav .dropdown-menu {
     position: absolute;
@@ -3685,13 +3739,13 @@ color:
 }
 a.right.carousel-control span {
     position: absolute;
-    top: 190px;
+    top: 210px;
     font-size: 40px;
 }
 a.left.carousel-control span {
-    position: absolute;
-    top: 190px;
-    font-size: 40px;
+	position: absolute;
+	top: 210px;
+	font-size: 40px;
 }
 .btn_ouer button {
     width: 100%;
@@ -4187,4 +4241,202 @@ background-color: red;
 .custom-drop-menu li a {
     text-transform: none !important;
 }
+	@media only screen and (max-width: 1199px) {
+    
+  .search-w3layouts {
+	margin-right: 0px !important;
+}
+.programs-again.upcoming-class {
+	margin-top: 60px !important;
+}
+.left_side {
+    position: inherit !important;
+}
+}
+@media only screen and (max-width: 991px) {
+ .programs-again.upcoming-class {
+	min-height: auto !important;
+	max-height: auto !important;
+} 
+a.right.carousel-control span {
+	position: absolute;
+	top: 210px;
+	font-size: 40px;
+	right: 23px;
+}
+.custom_flex .col-md-9 {
+    flex: 100% !important;
+    max-width: 100% !important;
+}
+.left_side_bar {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 100% !important;
+}
+.programs-again.upcoming-class {
+	margin-top: 0px !important;
+}
+  .nav.navbar-nav li {
+	padding: 0px !important;
+	margin: 0px !important;
+} 
+.custom_trvel8 .col-md-8.col-sm-12 {
+	max-width: 100% !important;
+	flex: 100% !important;
+}
+.btn.custom_btn8 {
+	display: block !important;
+	padding-right: 0px;
+	float: left;
+	margin-bottom: 30px;
+	margin-top: 10px;
+}
+.nav.navbar-nav li a {
+	padding: 15px 0px !important;
+}
+
+footer .col-md-3 {
+	flex: 100% !important;
+	max-width: 100% !important;
 	
+}
+.dropdown-toggle::after {
+	margin-left: 0px !important;
+}
+.custom_trvel8 .col-md-4.col-sm-12 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 33.333333%;
+	flex: 100% !important;
+	max-width: 100% !important;
+}
+.custom_pr0gre33 .upcoming-class {
+	min-height: auto !important;
+	max-height: inherit !important;
+}
+.programs.custom_pr0gre33 {
+	padding-bottom: 30px !important;
+}
+}
+@media only screen and (max-width: 767px) {
+ .margin_bottom1 {
+    margin-bottom: 20px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+} 
+
+.heading_outer {
+    border-right: transparent !important;
+    text-align: left;
+}
+.heading_outer a h3 {
+    margin-top: 20px !important;
+    margin-bottom: 5px !important;
+}
+.no_padding4 {
+    padding-left: 15px !important;
+}
+ .section.custom_trvel8 .col-md-4.col-sm-4 {
+	width: 100% !important;
+	max-width: 100% !important;
+	flex: inherit;
+	margin-bottom: 20px !important;
+}  
+.carousel-item.active img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+.custom_form99 .sb-bar {
+    display: inherit !important;
+    padding: 20px !important;
+}
+.custom_form99 .sb-section input[type="submit"] {
+    margin-top: 0px;
+}
+.navbar-toggler {
+    color: #fff !important;
+}
+p.team-row {
+    color: #ffffff;
+    padding-left: 0;
+    padding-top: 13px;
+    text-align: center;
+    margin-top: -20px;
+}
+.banner-bottom-w3layouts {
+    margin-top: 10px;
+}
+.search-w3layouts {
+    margin-top: 0px !important;
+}
+.desktop_view{
+    display:none;
+}
+.mobile_view3{
+  display:block;   
+}
+.contacts.mobile_view3 {
+    background: transparent !important;
+    float: inherit;
+    padding: 0px !important;
+    text-align: center;
+}
+.contacts.mobile_view3 .headerPhoneNumber {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 200 !important;
+    font-size: 14px;
+}
+.content_wrapper.homeab {
+    padding-right: 0px !important;
+}
+.left.carousel-control span {
+	top: 130px !important;
+}
+.right.carousel-control span {
+	top: 130px !important;
+}
+.itinerary-tab-container ul.tabs li {
+	padding-right: 3px;
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+}
+.itinerary-tab-container .nav {
+	padding: 10px !important;
+}
+.sub {
+	padding-top: 10px;
+}
+.sub img {
+	width: 150px;
+	height: 120px;
+	object-fit: cover;
+}
+.sub h3 {
+	margin-top: -15px;
+	text-align: center !important;
+}
+.read-more.custom_read {
+	float: inherit;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+}
+@media only screen and (max-width: 480px) {
+.carousel-item.active img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}  
+.right.carousel-control span {
+	top: 80px !important;
+}
+.left.carousel-control span{
+  	top: 80px !important;  
+    
+}
+  .card-body.mx-auto {
+	width: 100% !important;
+}  
+}
