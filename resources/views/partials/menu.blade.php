@@ -89,6 +89,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route("admin.youtube-slider.index") }}" class="nav-link {{ request()->is('admin/youtube-slider/index') || request()->is('admin/youtube-slider/*') ? 'active' : '' }}">
+                    <i class="fa fa-youtube-play nav-icon">
+
+                    </i>
+                    Youtube Sliders
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route("admin.testimonials.index") }}" class="nav-link {{ request()->is('admin/testimonials/index') || request()->is('admin/testimonials/*') ? 'active' : '' }}">
                     <i class="fa fa-quote-left nav-icon">
 

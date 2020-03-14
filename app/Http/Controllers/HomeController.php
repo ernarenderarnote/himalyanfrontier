@@ -13,6 +13,7 @@ use App\ItinerarySchedule;
 use App\Slider;
 use App\Testimonial;
 use App\Blog;
+use App\YoutubeSlider;
 
 class HomeController extends Controller
 {
@@ -81,8 +82,10 @@ class HomeController extends Controller
         ->where('deleted_at',NULL)
         ->orderBy('created_at', 'desc')
         ->first();
+            
+        $youtubeSliders = YoutubeSlider::where('deleted_at',NULL)->get(); 
 
-        return view('index', compact('blog','itineraries','fixedPrograms','upcomingPrograms','slide','testimonials'));
+        return view('index', compact('blog','itineraries','fixedPrograms','upcomingPrograms','slide','testimonials','youtubeSliders'));
     }
 
     public function activity(Request $request){
@@ -283,6 +286,16 @@ class HomeController extends Controller
             })
             ->get($required_params)->paginate(10);
         }
+
+        if ($request->isMethod('post')) {
+            $itineraries = Itinerary::with(['destinations', 'activities'])
+            ->where(function($q) use($search) {
+                $q->orWhere('description', 'like', '%' . $search . '%')
+                  ->orWhere('title', 'like', '%' . $search . '%');
+            })
+            ->get($required_params)->paginate(10);
+        }
+
         $itineraries->appends(request()->all())->render();
         return view('advancedSearch', compact('itineraries', 'destinations', 'activities'));
     }

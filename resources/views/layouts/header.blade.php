@@ -61,11 +61,10 @@
                 </div>
                 <div class="col-md-4">
                 <div class="search-w3layouts" style="margin-right:-190px; float: right; width: 100%;">
-                    <form action="#" method="post" class="search-bottom-wthree d-flex my-md-0 my-2">
-                        <input class="search col" type="search" placeholder="Search Here..."
-                            required="">
-                        <button class="form-control btn col-2" type="submit"><span
-                            class="fa fa-search"></span></button>
+                    <form action="{{route('advanced-search')}}" method="post" class="search-bottom-wthree d-flex my-md-0 my-2">
+                        @csrf
+                        <input class="search col" name='s' type="search" placeholder="Search Here...">
+                        <button class="form-control btn col-2" type="submit"><span class="fa fa-search"></span></button>
                     </form>
                 </div>
                 </div>
@@ -101,16 +100,42 @@
                     <ul class="dropdown-menu megamenu">
                         <div class="row">
                             @foreach($menus->activities() as $key=>$value)
-                                <li class="col-md-3 dropdown-item">
-                                    <ul>
-                                        <li class="dropdown-header">{{$key}}</li>
-                                        @foreach($value as $k=>$v)
-                                            <li><a href="{{url('advanced-search?activity='.$v)}}">{{ $k }}</a></li>
-                                        @endforeach
-                                        <li class="divider"></li>
-                                    </ul>
-                                </li>
+                                @if(strtolower($key) == 'india')
+                                    <li class="col-md-6 dropdown-item">
+                                        <ul>
+                                            
+                                            <li class="dropdown-header">{{$key}}</li>
+                                            <div class="row">
+                                                @foreach($value as $k=>$v)
+                                                    <div class="col-md-6">
+                                                        <li class="activity-menu"><a href="{{url('advanced-search?s=&destination='.strtolower($key).'&activity='.$v.'&rating_from=1&rating_to=4')}}">{{ $k }}</a></li> 
+                                                    </div>
+                                                    
+                                                @endforeach
+                                            </div>
+                                                
+                                            <li class="divider"></li>
+                                            
+                                        </ul>
+                                    </li>
+                                @endif
                             @endforeach
+                            <li class="col-md-6 dropdown-item">
+                                @foreach($menus->activities() as $key=>$value)
+                                    @if(strtolower($key) != 'india')
+                                        <ul> 
+                                            <li class="dropdown-header">{{$key}}</li>
+                                            
+                                                @foreach($value as $k=>$v)
+                                                    <li class="activity-menu"><a href="{{url('advanced-search?s=&destination='.strtolower($key).'&activity='.$v.'&rating_from=1&rating_to=4')}}">{{ $k }}</a></li>
+                                                @endforeach
+                                                
+                                            <li class="divider"></li>
+                                            
+                                        </ul>
+                                    @endif
+                                @endforeach
+                            </li>
                         </div>
                     </ul>
                 </li>

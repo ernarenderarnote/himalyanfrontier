@@ -4440,3 +4440,10 @@ p.team-row {
 	width: 100% !important;
 }  
 }
+
+li.activity-menu {
+    list-style: none;
+}
+.rvs-nav-item-thumb{
+	display:inline-block;
+}

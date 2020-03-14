@@ -141,24 +141,24 @@ $(document).ready(function(){
 
 //search filter script
 $('document').ready(function(){
-    $('input[name="destination"]').on('change', function(){
+    $('.advanced_serch_form input[name="destination"]').on('change', function(){
         $('input[name="itinerary_type"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
-    $('input[name="activity"]').on('change', function(){
+    $('.advanced_serch_form input[name="activity"]').on('change', function(){
         $('input[name="itinerary_type"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
-    $('input[name="itinerary_type"]').on('change', function(){
+    $('.advanced_serch_form input[name="itinerary_type"]').on('change', function(){
         $('input[name="activity"]:checked').removeAttr('checked');
         $('input[name="destination"]:checked').removeAttr('checked');
         $('input[name="date"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
-    $('input[name="s"]').on('focusout', function(){
+    $('.advanced_serch_form input[name="s"]').on('focusout', function(){
         $('.advanced_serch_form').submit();
     });
-    $('.daate input[name="date"]').on('change', function(){
+    $('.advanced_serch_form input[name="date"]').on('change', function(){
         $('input[name="itinerary_type"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
@@ -320,6 +320,8 @@ $(function(){
 });
 
 $(document).ready(function() {   
+	$('.rvs-container').rvslider();
+	
     $("#payment-form").validate({
       ignore: "",
       rules: {

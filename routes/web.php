@@ -97,6 +97,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('slides', 'SliderController');
     
     Route::match(['post'],'/slides/default/{id}', [ 'as' => 'slides.default', "uses" => "SliderController@setDefault"] );
+
+    Route::delete('youtube-slider/destroy', 'YoutubeSliderController@massDestroy')->name('youtube-slider.massDestroy');
+    
+    Route::resource('youtube-slider', 'YoutubeSliderController');
+
 });
 
 Route::match(['get','post'],'/profile', [ 'as' => 'profile', "uses" => "ProfileController@index",  'middleware' => ['auth'] ] );

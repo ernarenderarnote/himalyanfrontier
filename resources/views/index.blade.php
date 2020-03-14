@@ -260,7 +260,7 @@
   <div class="carousel-inner">
     @forelse($testimonials as $key=>$testimonial)
         <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
-            {!! $testimonial->description !!}
+            {!! substr($testimonial->description,0,300 ) !!}
         </div>
         @empty
 
@@ -321,9 +321,34 @@
             </div>
          </div>
          <div class="col-md-8">
-            <div class="standars">
-               <iframe width="100%" height="70%" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-               </iframe>
+                <div class="rvs-container rvs-horizontal rvs-light rvs-orange-highlight rvs-youtube-play rvs-xs rvs-sm rvs-md rvs-lg rvs-animate">
+                <div class="rvs-item-container">
+                    <div class="rvs-item-stage">
+                        @forelse($youtubeSliders as $youtubeSlider)
+                            <div class="rvs-item" style="background-image: url({{$youtubeSlider->thumbnail_url}})">
+                                <p class="rvs-item-text">{{$youtubeSlider->title}}<small>by HimalayanFrontiers</small></p>
+                                <a href="{{$youtubeSlider->youtube_url}}" class="rvs-play-video"></a>
+                            </div>
+                            @empty
+
+                        @endforelse    
+                    </div>
+                </div>
+                <div class="rvs-nav-container rvs-bottom-center">
+                    <a class="rvs-nav-prev"></a>
+                    <div class="rvs-nav-stage">
+                        @forelse($youtubeSliders as $youtubeSlider)
+                            <a class="rvs-nav-item">
+                                <span class="rvs-nav-item-thumb" style="background-image: url({{$youtubeSlider->thumbnail_url}});display:inline-block;margin-top: -4px;"></span>
+                                <h4 class="rvs-nav-item-title">{{$youtubeSlider->title}}</h4>
+                                <small class="rvs-nav-item-credits">by HimalayanFrontiers</small>
+                            </a>
+                            @empty
+
+                        @endforelse 
+                    </div>
+                    <a class="rvs-nav-next"></a>
+                </div>
             </div>
          </div>
       </div>
