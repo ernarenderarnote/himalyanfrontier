@@ -84,7 +84,17 @@
 <script src="{{ asset('js/jQuery.lazyload.js') }}"></script>
 <script src="{{ asset('build/js/intlTelInput.js') }}"></script>
 <!--script src="{{ asset('js/app.js') }}"></script-->
+<script>
+    $(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
 
+    if (scroll >= 200) {
+        $(".custom_header").addClass("darkHeader");
+    } else {
+        $(".custom_header").removeClass("darkHeader");
+    }
+});
+</script>
 <script>
     $(document).ready(function() {
         var owl = $('.owl-carousel');

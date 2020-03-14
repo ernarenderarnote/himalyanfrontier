@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "bugsnag/bugsnag-laravel": "^2.15",
+        "cohensive/embed": "^5.5",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
@@ -17,8 +18,7 @@
         "laravel/tinker": "^1.0",
         "softon/indipay": "^1.1",
         "twilio/sdk": "^5.39",
-        "yajra/laravel-datatables-oracle": "~9.0",
-        "cohensive/embed": "5.5.*"
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

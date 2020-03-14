@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TwilioProvider::class,
         Softon\Indipay\IndipayServiceProvider::class,
+        Cohensive\Embed\EmbedServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'Bugsnag'      => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Indipay' => Softon\Indipay\Facades\Indipay::class,
+        'Embed' => Cohensive\Embed\Facades\Embed::class,
 
     ],
 
