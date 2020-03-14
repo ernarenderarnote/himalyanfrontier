@@ -134,7 +134,7 @@
 				<div class="col-md-8 col-sm-12">
 					<div class="row">
                         @forelse($itineraries as $itinerary)
-                            <div class="col-md-4 col-sm-4">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="true-image"> 
                                 <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}" data-post_id="1641" class="hover-effect popup-gallery"><img src="{{ url('/storage/images/itinerary/featureImages/'.$itinerary->feature_img) }}"></a>                              
                                 </div>

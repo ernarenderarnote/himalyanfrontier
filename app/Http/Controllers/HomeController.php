@@ -49,7 +49,7 @@ class HomeController extends Controller
             ->where('deleted_at',NULL)
             ->where('status','active')
             ->orderBy('created_at', 'desc')
-            ->take(3)
+            ->take(2)
             ->get();
 
         $fixedPrograms    = Itinerary::with('destinations','activities','currency')
