@@ -7,17 +7,19 @@
         <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
             <!-- Wrapper for slides -->
             <div class='carousel-inner'>
+				<div class="banner-activity-name">{{$activity->title}}</div>
                 <div class='carousel-item active'>
                     @if($activity->thumbnails)
                         <img src="{{ url('/storage/images/activity/featureImages/'.$activity->thumbnails) }}" alt='' />
-                    @endif
+					@endif
                 </div>
                 @if($activity->gallery_img)
                     @forelse(json_decode($activity->gallery_img) as $key=>$gallery)
                         
                         <div class='carousel-item'>
-                            <img src="{{ url('/storage/images/activity/galleryImages/'.$gallery) }}" >
-                        </div>
+							<img src="{{ url('/storage/images/activity/galleryImages/'.$gallery) }}" >
+							
+						</div>
                         @empty
 
                     @endforelse
@@ -163,7 +165,18 @@
 															<span class="fa fa-star"></span>
 														@endif
 													@endfor       
-													<p>Grade</p>
+													
+													<p>
+														@if($itinerary->rating == 1)
+															Easy
+														@elseif($itinerary->rating ==2 )
+															Moderate
+														@elseif($itinerary->rating == 3)
+															Streneous
+														@else
+															Difficult
+														@endif
+													</p>
 												@endif
 											</p>
 										</div>

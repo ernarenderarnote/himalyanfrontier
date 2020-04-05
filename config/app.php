@@ -180,6 +180,7 @@ return [
         App\Providers\TwilioProvider::class,
         Softon\Indipay\IndipayServiceProvider::class,
         Cohensive\Embed\EmbedServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -235,6 +236,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Indipay' => Softon\Indipay\Facades\Indipay::class,
         'Embed' => Cohensive\Embed\Facades\Embed::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

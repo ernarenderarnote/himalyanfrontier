@@ -236,7 +236,19 @@
                             <input name="fixed_departure" type="checkbox" value="1" class="custom-control-input" id="defaultUnchecked1">
                             <label class="custom-control-label" for="defaultUnchecked1">Is Fixed Departure?</label>
                         </div>
-                        
+                        <div class="custom-control custom-checkbox">
+                            <input type="hidden" name="is_homepage" value="0">
+                            <input name="is_homepage" type="checkbox" value="1" class="custom-control-input" id="defaultUnchecked2">
+                            <label class="custom-control-label" for="defaultUnchecked2">Display in Homepage?</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="widget_section">Itinerary Panel</label>
+                            <select class="form-control" name="widget_section">
+                                <option value="introduction">Introduction</option>
+                                <option value="fixed_departure">Fixed Departure</option>
+                                <option value="upcoming">Upcoming Program</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="status">Activity Status</label>
                             <select class="form-control" name="status">
@@ -277,11 +289,11 @@
                     </div>  
                     <div class="custom-control custom-radio">
                         <input type="radio" value="3" class="custom-control-input" id="customRadioDifficult" name="rating">
-                        <label class="custom-control-label" for="customRadioDifficult">Difficult</label>
+                        <label class="custom-control-label" for="customRadioDifficult">Streneous</label>
                     </div>
                     <div class="custom-control custom-radio">
                         <input type="radio" value="4" class="custom-control-input" id="customRadioHard" name="rating">
-                        <label class="custom-control-label" for="customRadioHard">Hard</label>
+                        <label class="custom-control-label" for="customRadioHard">Difficult</label>
                     </div>
                 </div>        
             </div>

@@ -1,6 +1,5 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet"> 
 
-
 <!-- top-bar -->
 <div class="top-bar py-2 bg-li">
     <div class="container">
@@ -24,22 +23,22 @@
                     <!-- social icons -->
                     <ul class="top-right-info">
                         <li class="mr-1 soci-effe facebook">
-                            <a href="#">
+                            <a target="_blank" href="https://www.facebook.com/pages/Himalayan-Frontiers/545184642249434">
                             <i class="fa fa-facebook"></i>
                             </a>
                         </li>
                         <li class="mr-1 soci-effe twitter">
-                            <a href="#">
+                            <a target="_blank" href="https://www.google.com/url?q=https://instagram.com/himalayanfrontiers&sa=D&source=hangouts&ust=1586115488341000&usg=AFQjCNH5VWgL8SYN-f3JuQrxM9AWGgW8yw">
                             <i class="fa fa-instagram"></i>
                             </a>
                         </li>
                         <li class="mr-1 soci-effe google-plus">
-                            <a href="#">
+                            <a target="_blank" href="https://www.youtube.com/channel/UChP5K9svZJQvNuGqm_gGC3g">
                             <i class="fa fa-youtube-play"></i>
                             </a>
                         </li>
                         <li class="soci-effe dribbble">
-                            <a href="#">
+                            <a target="_blank" href=" https://www.linkedin.com/company/himalayan-frontiers-cultural-and-adventure-tours-private-limited/about/">
                             <i class="fa fa-linkedin"></i>
                             </a>
                         </li>
@@ -63,8 +62,9 @@
                 <div class="search-w3layouts" style="margin-right:-190px; float: right; width: 100%;">
                     <form action="{{route('advanced-search')}}" method="post" class="search-bottom-wthree d-flex my-md-0 my-2">
                         @csrf
-                        <input class="search col" name='s' type="search" placeholder="Search Here...">
-                        <button class="form-control btn col-2" type="submit"><span class="fa fa-search"></span></button>
+                        <input class="search col" name='s' type="search" placeholder="Search Here..." autocomplete="off">
+                        <button class="form-control btn col-2 auto-search-icon" type="submit"><span class="fa fa-search"></span></button>
+                        <div id="suggesstion-box"></div>
                     </form>
                 </div>
                 </div>
@@ -118,11 +118,9 @@
                                             
                                         </ul>
                                     </li>
-                                @endif
-                            @endforeach
-                            <li class="col-md-6 dropdown-item">
-                                @foreach($menus->activities() as $key=>$value)
-                                    @if(strtolower($key) != 'india')
+                                    @else
+                                    <li class="col-md-3 dropdown-item">
+                                    
                                         <ul> 
                                             <li class="dropdown-header">{{$key}}</li>
                                             
@@ -133,9 +131,12 @@
                                             <li class="divider"></li>
                                             
                                         </ul>
-                                    @endif
-                                @endforeach
-                            </li>
+                                    
+                                </li>
+                                @endif
+
+                            @endforeach
+                            
                         </div>
                     </ul>
                 </li>

@@ -45,7 +45,9 @@ class Itinerary extends Model
         'gallery_img',
         'subtitle',
         'rating',
-        'currency_id'
+        'currency_id',
+        'is_homepage',
+        'widget_section',
     ];
 
     public function destinations()
@@ -153,9 +155,11 @@ class Itinerary extends Model
         if( $this->cost_exclude != ''){
             $str = $this->cost_exclude;
             $strToReplace   = ["<p>","</p>"];
-            $strFromReplace = ["<li><i class='fa fa-check' aria-hidden='true'></i><p>","</p></li>"];
+            $strFromReplace = ["<li><i class='fa fa-close' style='color:red;' aria-hidden='true'></i><p>","</p></li>"];
             $costsExcluded = str_replace($strToReplace, $strFromReplace, $str);
         }
         return $costsExcluded;
     }
+
+    
 }

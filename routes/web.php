@@ -5,8 +5,9 @@ Route::get('/','HomeController@Index')->name('home');
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
-
-//adminlogin
+Auth::routes(['register' => false,'login'=>false]);
+Route::match(['get','post'],'/login', 'Auth\LoginController@login')->name('login');
+//adminlogin    
 Route::match(['get'],'/administrator', [ "as" =>"admin", 'uses' => "Auth\LoginController@adminLogin" ]);
 Route::group([ 'prefix' => 'auth', "as" => "auth." , "namespace" => "Auth"],function()
 {  
@@ -14,10 +15,12 @@ Route::group([ 'prefix' => 'auth', "as" => "auth." , "namespace" => "Auth"],func
     Route::match(['get','post'],'/login/otp', [ "as" =>"login.otp", 'uses' => "LoginController@loginotp" ]);
     Route::match(['get'],'/login/resendotp', [ "as" =>"login.resendotp", 'uses' => "LoginController@resendOtp" ]);
     Route::match(['post'],'/admin', [ "as" =>"admin", 'uses' => "LoginController@admin" ]);
+    Route::get('/logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
 });   
 //Auth::routes();
-Auth::routes(['register' => false]);
-
+//Auth::routes(['register' => false]);
+//Auth::routes(['login' => false]);
+//Route::match(['get','post'],'/logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
 Route::group(["namespace" => "Dashboard" , "middleware" => ["auth","info"]], function()
 {
 	Route::get('/dashboard', [ "as" =>"dashboard", 'uses' => "DashboardController@index" ]);
@@ -76,6 +79,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     
     Route::resource('booking', 'BookingController');
 
+    Route::match(['get','post'],'/booking-show/{booking_id}/{notification_id}', [ 'as' => 'booking.display', "uses" => "BookingController@display"] );
+    
     Route::delete('transections/destroy', 'TransectionsController@massDestroy')->name('transections.massDestroy');
     
     Route::resource('transections', 'TransectionsController');
@@ -84,9 +89,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     
     Route::resource('inqueries', 'InqueriesController');
 
+    Route::match(['get','post'],'/inquery-show/{id}/{notification_id}', [ 'as' => 'inquery.display', "uses" => "InqueriesController@display"] );
+
     Route::delete('contact-us/destroy', 'ContactUsController@massDestroy')->name('contact_us.massDestroy');
     
     Route::resource('contact-us', 'ContactUsController');
+
+    Route::match(['get','post'],'/contact-us-show/{id}/{notification_id}', [ 'as' => 'contactUs.display', "uses" => "ContactUsController@display"] );
 
     Route::match(['get','post'],'/payment_settings', [ 'as' => 'paymentSettings', "uses" => "PaymentSettingsController@index"] );
 
@@ -102,6 +111,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     
     Route::resource('youtube-slider', 'YoutubeSliderController');
 
+    Route::delete('invoices/destroy', 'InvoiceController@massDestroy')->name('invoices.massDestroy');
+    
+    Route::resource('invoices', 'InvoiceController');
+
+    Route::match(['post'],'/invoices/calculate-price', [ 'as' => 'invoices.calculatePrice', "uses" => "InvoiceController@CalculatePrice" ] );
+
+    Route::match(['get'],'/invoices/downloadPDF/{id}', [ 'as' => 'invoices.downloadPdf', "uses" => "InvoiceController@downloadPDF" ] );
+
+    
 });
 
 Route::match(['get','post'],'/profile', [ 'as' => 'profile', "uses" => "ProfileController@index",  'middleware' => ['auth'] ] );
@@ -119,6 +137,10 @@ Route::match(['get','post'],'/advanced-search', [ "as" =>"advanced-search", 'use
 
 Route::match(['get','post'],'/booking', [ "as" =>"booking", 'uses' => "BookingController@index", 'middleware' => ['auth']]);
 
+Route::match(['get','post'],'/booking/online-payment', [ "as" =>"onlinepayment", 'uses' => "BookingController@onlinePayment", 'middleware' => ['auth']]);
+
+Route::get('get-state-list','BookingController@getStateList');
+
 Route::match(['post'],'/makePayment', [ "as" =>"makePayment", 'uses' => "BookingController@makePayment", 'middleware' => ['auth']]);
 
 Route::match(['post'],'/sendinquery', [ "as" =>"sendinquery", 'uses' => "InqueryController@store"]);
@@ -130,6 +152,8 @@ Route::match(['get','post'],'/payment_failed/{id}/{itinerary_id}/{payment_mode}'
 Route::match(['get','post'],'/booking-history', [ "as" =>"bookingHistory", 'middleware' => ['auth'],'uses' => "BookingHistoryController@index"]);
 
 Route::match(['get','post'],'/booking-details/{order_id}', [ "as" =>"bookingDetails", 'middleware' => ['auth'],'uses' => "BookingHistoryController@bookingDetails"]);
+
+Route::match(['post'],'/direct-payment', [ "as" =>"directPayment", 'middleware' => ['auth'],'uses' => "BookingController@storeDirectPayment"]);
 
 Route::match(['get','post'],'/complete-payment/{order_id}', [ "as" =>"completePayment", 'middleware' => ['auth'],'uses' => "BookingController@completePayment"]);
 
@@ -158,3 +182,9 @@ Route::match(['get','post'],'/payment-methods', [ "as" =>"PaymentMethods", 'uses
 Route::match(['get','post'],'/contact-us', [ "as" =>"ContactUs", 'uses' => "ContactUsController@index"]);
 
 Route::match(['get','post'],'/contact-us/store', [ "as" =>"ContactUs.store", 'uses' => "ContactUsController@store"]);
+
+Route::match(['get','post'],'/payment-success/{payment_mode}/{order_status}', [ "as" =>"successDirectPayment", 'uses' => "BookingController@directPaymentSuccess"]);
+
+Route::match(['get','post'],'/payment-failed/{payment_mode}', [ "as" =>"failedDirectPayment", 'uses' => "BookingController@directPaymentFailed"]);
+
+Route::match(['get','post'],'/auto-search', [ "as" =>"auto-search", 'uses' => "HomeController@autoSearchData" ]);

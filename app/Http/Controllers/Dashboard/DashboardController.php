@@ -33,7 +33,7 @@ class DashboardController extends Controller
 
     public function userDashboard()
     {
-        return view('userDashboard');
+        return view('index');
     }
 }
 

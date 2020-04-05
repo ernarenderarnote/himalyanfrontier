@@ -256,7 +256,7 @@
               <div class="col-sm-12 p-l-0 p-r-0 m-b-10">
                 <div class="checkbox-step custom_chek7 m-t-10">
                   <label class="checkbox-inline">
-                    <input type="checkbox" name="agree" class="termsconditions" value="0" aria-required="true"> &nbsp;I have read and accept the  <a class="booking-terms" href="https://www.ridingsolo.in/terms/details/1" target="_blank">Terms &amp; Conditions</a></label>
+                    <input type="checkbox" name="agree" class="termsconditions" value="0" aria-required="true"> &nbsp;I have read and accept the  <a class="booking-terms" href="{{route('termsConditions')}}" target="_blank">Terms &amp; Conditions</a></label>
                     @if($errors->has('agree'))
                       <em class="invalid-feedback">
                        {{ $errors->first('agree') }}
@@ -280,4 +280,28 @@
     </div>
   </div>
 </div>  
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 @endsection

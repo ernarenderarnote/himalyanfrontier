@@ -72,27 +72,54 @@
 			  <i class="fa fa-cart-arrow-down"></i>
 			  <span class="badge badge-pill badge-danger">{{$commonServices->newOrders()}}</span>
 			  </a>
-			  <!--div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+			  <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
 				 <div class="dropdown-header text-center">
-					<strong>You have 5 notifications</strong>
+					<strong>You have {{$commonServices->newOrders()}} new booking</strong>
 				 </div>
-				 <a class="dropdown-item" href="#">
-				 <i class="icon-user-follow text-success"></i> New user registered</a>
-				 <a class="dropdown-item" href="#">
-				 <i class="icon-user-unfollow text-danger"></i> User deleted</a>
-				 <a class="dropdown-item" href="#">
-				 <i class="icon-chart text-info"></i> Sales report is ready</a>
-				 <a class="dropdown-item" href="#">
-				 <i class="icon-basket-loaded text-primary"></i> New client</a>
-				 <a class="dropdown-item" href="#">
-				 <i class="icon-speedometer text-warning"></i> Server overloaded</a>
-			  </div-->
+				@php 
+			    
+					$orders = $commonServices->newOrdersAll(); 
+				
+				@endphp		
+				@foreach($orders as $order )
+					
+					<a class="dropdown-item" href="{{ route('admin.booking.display',[$order['order_id'],$order['notification_id']])}}">
+						<div class="message">
+							<p>{{ $order['itinerary_name'] }}</p>
+						</div>
+					</a>
+				@endforeach
+				 <a class="dropdown-item text-center" href="{{route('admin.booking.index')}}">
+				 <strong>View all Bookings</strong>
+				 </a>
+			  </div>
 		   </li>
 		   <li class="nav-item dropdown d-md-down-none">
 			  <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 			  <i class="fa fa-question-circle"></i>
 			  <span class="badge badge-pill badge-danger">{{$commonServices->newInqueries()}}</span>
 			  </a>
+			  <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+				 <div class="dropdown-header text-center">
+					<strong>You have {{$commonServices->newInqueries()}} Inqueries</strong>
+				 </div>
+				@php 
+			    
+					$inqueries = $commonServices->newInqueriesAll(); 
+				
+				@endphp		
+				@foreach($inqueries as $inquery )
+					
+					<a class="dropdown-item" href="{{ route('admin.inquery.display',[$inquery['inquery_id'],$inquery['notification_id']])}}">
+						<div class="message">
+							<p>{{ $inquery['inquery_msg'] }}</p>
+						</div>
+					</a>
+				@endforeach
+				 <a class="dropdown-item text-center" href="{{ route("admin.inqueries.index") }}">
+				 <strong>View all Inqueries</strong>
+				 </a>
+			  </div>
 		   </li>
 		   
 		   <li class="nav-item dropdown d-md-down-none">
@@ -102,75 +129,22 @@
 			  </a>
 			  <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
 				 <div class="dropdown-header text-center">
-					<strong>You have 4 messages</strong>
+					<strong>You have {{$commonServices->newContactUs()}} messages</strong>
 				 </div>
-				 <a class="dropdown-item" href="#">
-					<div class="message">
-					   <div class="py-3 mr-3 float-left">
-						  <div class="avatar">
-							 <img class="img-avatar" src="{{url('storage/images/1577210338.png')}}" alt="admin@bootstrapmaster.com">
-							 <span class="avatar-status badge-success"></span>
-						  </div>
-					   </div>
-					   <div>
-						  <small class="text-muted">John Doe</small>
-						  <small class="text-muted float-right mt-1">Just now</small>
-					   </div>
-					   <div class="text-truncate font-weight-bold">
-						  <span class="fa fa-exclamation text-danger"></span> Important message
-					   </div>
-					   <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</div>
-					</div>
-				 </a>
-				 <a class="dropdown-item" href="#">
-					<div class="message">
-					   <div class="py-3 mr-3 float-left">
-						  <div class="avatar">
-							 <img class="img-avatar" src="{{url('storage/images/1577210338.png')}}" alt="admin@bootstrapmaster.com">
-							 <span class="avatar-status badge-warning"></span>
-						  </div>
-					   </div>
-					   <div>
-						  <small class="text-muted">John Doe</small>
-						  <small class="text-muted float-right mt-1">5 minutes ago</small>
-					   </div>
-					   <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-					   <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</div>
-					</div>
-				 </a>
-				 <a class="dropdown-item" href="#">
-					<div class="message">
-					   <div class="py-3 mr-3 float-left">
-						  <div class="avatar">
-							 <img class="img-avatar" src="{{url('storage/images/1577210338.png')}}" alt="admin@bootstrapmaster.com">
-							 <span class="avatar-status badge-danger"></span>
-						  </div>
-					   </div>
-					   <div>
-						  <small class="text-muted">John Doe</small>
-						  <small class="text-muted float-right mt-1">1:52 PM</small>
-					   </div>
-					   <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-					   <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</div>
-					</div>
-				 </a>
-				 <a class="dropdown-item" href="#">
-					<div class="message">
-					   <div class="py-3 mr-3 float-left">
-						  <div class="avatar">
-							 <img class="img-avatar" src="{{url('storage/images/1577210338.png')}}" alt="admin@bootstrapmaster.com">
-							 <span class="avatar-status badge-info"></span>
-						  </div>
-					   </div>
-					   <div>
-						  <small class="text-muted">John Doe</small>
-						  <small class="text-muted float-right mt-1">4:03 PM</small>
-					   </div>
-					   <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-					   <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</div>
-					</div>
-				 </a>
-				 <a class="dropdown-item text-center" href="#">
+				@php 
+			    
+					$contactMessages = $commonServices->newContactMessages(); 
+				
+				@endphp		
+				@foreach($contactMessages as $contact )
+					
+					<a class="dropdown-item" href="{{ route('admin.contactUs.display',[$contact['contact_id'],$contact['notification_id']])}}">
+						<div class="message">
+							<p>{{ $contact['contact_msg'] }}</p>
+						</div>
+					</a>
+				@endforeach
+				 <a class="dropdown-item text-center" href="{{ route("admin.contact-us.index") }}">
 				 <strong>View all messages</strong>
 				 </a>
 			  </div>
@@ -185,10 +159,7 @@
 				 </div>
 				 <a class="dropdown-item" href="{{route('admin.profile')}}">
 				 <i class="fa fa-user"></i> Profile</a>
-				 <a class="dropdown-item" href="#">
-				 <i class="fa fa-usd"></i> Payments
-				 <span class="badge badge-dark">42</span>
-				 </a>
+				 
 				 <div class="dropdown-divider"></div>
 				
 				 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">

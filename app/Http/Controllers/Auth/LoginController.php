@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\LoginOtpRequest;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use Validator;
 use Redirect;
@@ -14,7 +15,7 @@ use App\User;
 use Auth;
 use Hash;
 use App\Token;
-
+use Session;
 class LoginController extends Controller
 {
     /*
@@ -36,6 +37,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/dashboard';
+    protected $intendToUrl = '';
 
     /**
      * Create a new controller instance.
@@ -45,6 +47,7 @@ class LoginController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
+       // $this->intendToUrl = '';
         $this->middleware('guest')->except('logout');
     }
 
@@ -53,7 +56,7 @@ class LoginController extends Controller
      * @return void
      */
     public function login(Request $request){
-       
+        
         if ($request->isMethod('post')) {
 
             $this->validate($request, $this->stepOneRules(), $this->stepOneMsg());
@@ -114,7 +117,7 @@ class LoginController extends Controller
                     
                     return view('auth.otp')->with('mobile_number',$mobile_number);
                 }else{
-                    $user->forceDelete();;
+                    $user->forceDelete();
                 }
                 
             }
@@ -124,7 +127,10 @@ class LoginController extends Controller
                 'error' => true,
                 'msg' => 'Unable to Send Otp'
             ]);
-		}
+		}else{
+            Session::put('url.intended',URL::previous());
+            return view('auth.login');
+        }
     }
 
     public function resendOtp(Request $request){
@@ -167,13 +173,15 @@ class LoginController extends Controller
     }
 
     public function loginotp(Request $request){
+        
         if ($request->isMethod('post')) {
+            
             $this->validate($request, $this->otpRules(), $this->otpMsg());
             // throttle for too many attempts
             if (! session()->has("token_id", "user_id")) {
                 return response()->json([
                     'error' => false,
-                    'redirect_url' => $this->redirectTo
+                    'redirect_url' => Session::get('url.intended')
                 ]);
             }
             $token = Token::find(session()->get("token_id"));
@@ -193,7 +201,7 @@ class LoginController extends Controller
             session()->forget('token_id', 'user_id'); 
 			return response()->json([
                 'error' => false,
-                'redirect_url' => $this->redirectTo
+                'redirect_url' => Session::get('url.intended')
             ]);
 		}
         

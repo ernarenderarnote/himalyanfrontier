@@ -22,5 +22,7 @@ class VerifyCsrfToken extends Middleware
         'http://www.newfrontier.himalayanfrontiers.com/payment_success',
         'http://www.newfrontier.himalayanfrontiers.com/payment_failed',
         'payment_success/*',
+        'payment-success/*',
+        'payment-failed/*',
     ];
 }

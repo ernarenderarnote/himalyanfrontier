@@ -109,4 +109,13 @@ class BookingController extends Controller
 
         return response(null, 204);
     }
+
+    public function display(Request $request,$booking_id,$notification_id){
+        $booking = Booking::with('itinerary','currency','user','currency')->where('id',$booking_id)->first();
+        $notification = $request->user()->notifications()->where('id', $notification_id)->first();
+        if($notification) {
+            $notification->markAsRead();
+        }
+        return view('admin.bookings.show', compact('booking'));
+    }
 }

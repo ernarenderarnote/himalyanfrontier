@@ -10,14 +10,43 @@
                     {{ trans('global.dashboard') }}
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route("admin.activities.index") }}" class="nav-link {{ request()->is('admin/activities') || request()->is('admin/activities/*') ? 'active' : '' }}">
-                    <i class="fa fa-cubes nav-icon">
+            
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link  nav-dropdown-toggle">
+                    <i class="fa fa-braille nav-icon">
 
                     </i>
-                    {{ trans('global.activity.title') }}
+                    Itinerary Structure
                 </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a href="{{ route("admin.activities.index") }}" class="nav-link {{ request()->is('admin/activities') || request()->is('admin/activities/*') ? 'active' : '' }}">
+                            <i class="fa fa-cubes nav-icon">
+
+                            </i>
+                            {{ trans('global.activity.title') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.destinations.index") }}" class="nav-link {{ request()->is('admin/destinations') || request()->is('admin/destinations/*') ? 'active' : '' }}">
+                            <i class="fa fa-map-marker nav-icon">
+
+                            </i>
+                            {{ trans('global.destination.title') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.itineraries.index") }}" class="nav-link {{ request()->is('admin/itineraries') || request()->is('admin/itineraries/*') ? 'active' : '' }}">
+                            <i class="fa fa-database nav-icon">
+
+                            </i>
+                            {{ trans('global.itinerary.title') }}
+                        </a>
+                    </li>
+                </ul>
             </li>
+
+            
             <li class="nav-item">
                 <a href="{{ route("admin.blogs.index") }}" class="nav-link {{ request()->is('admin/blogs') || request()->is('admin/blogs/*') ? 'active' : '' }}">
                     <i class="fa fa-rss-square nav-icon"></i>
@@ -50,12 +79,11 @@
                 </a>
             </li>
             <!--currency end-->
+            
             <li class="nav-item">
-                <a href="{{ route("admin.destinations.index") }}" class="nav-link {{ request()->is('admin/destinations') || request()->is('admin/destinations/*') ? 'active' : '' }}">
-                    <i class="fa fa-map-marker nav-icon">
-
-                    </i>
-                    {{ trans('global.destination.title') }}
+                <a href="{{ route("admin.invoices.index") }}" class="nav-link {{ request()->is('admin/invoices') || request()->is('admin/invoices/*') ? 'active' : '' }}">
+                    <i class="fas fa-file-invoice nav-icon"></i>
+                    Invoices
                 </a>
             </li>
             <li class="nav-item">
@@ -64,14 +92,7 @@
                     {{ trans('global.inquery.title') }}
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route("admin.itineraries.index") }}" class="nav-link {{ request()->is('admin/itineraries') || request()->is('admin/itineraries/*') ? 'active' : '' }}">
-                    <i class="fa fa-database nav-icon">
-
-                    </i>
-                    {{ trans('global.itinerary.title') }}
-                </a>
-            </li>
+            
             <li class="nav-item">
                 <a href="{{ route("admin.paymentSettings") }}" class="nav-link {{ request()->is('admin/paymentSettings') || request()->is('admin/paymentSettings/*') ? 'active' : '' }}">
                     <i class="fas fa-wrench nav-icon">

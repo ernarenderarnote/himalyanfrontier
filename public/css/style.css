@@ -4516,3 +4516,59 @@ li.activity-menu {
 .rvs-nav-item-thumb{
 	display:inline-block;
 }
+div#suggesstion-box {
+    position: absolute;
+    top: 66px;
+    width: 77%;
+	display: inline-block;
+    background-clip: padding-box;
+	border: 1px solid rgba(0,0,0,.15);
+	background-color: #fff;
+    background-clip: padding-box;
+	border: 1px solid rgba(0,0,0,.15);
+	z-index: 9999999;
+}
+#search-list li{
+	cursor:pointer;
+	z-index:99999999999999999999999;
+	list-style:none;
+	padding:0 10px;
+}
+#search-list li:hover{
+	cursor:pointer;
+	z-index:99999999999999999999999;
+	background:#064068;
+	color:#fff;
+	padding:0 10px;
+}
+.auto-search-icon{
+	z-index:10000;
+}
+.banner-activity-name {
+    margin-top: 0px;
+    position: absolute;
+    display: block;
+    z-index: 9999999;
+    padding: 20px;
+    background: #fff;
+    opacity: 0.6;
+    font-size: 24px;
+    font-weight: bold;
+}
+.tesimonial-btns {
+    padding: 0 auto;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.tesimonial-btns a {
+    background: #fdb714;
+    text-align: center;
+    padding: 8px 12px;
+    border: 1px solid #fff;
+}
+.tesimonial-btns a:hover {
+    background: #fdb714;
+    text-align: center;
+    padding: 8px 12px;
+    border: 1px solid #fff;
+}

@@ -16,6 +16,9 @@ class StoreTestimonialRequest extends FormRequest
                 'required',
                 Rule::unique('testimonials')->whereNull('deleted_at'),
             ],
+            'author' => [
+                'required',
+            ],
         ];
     }
 }
