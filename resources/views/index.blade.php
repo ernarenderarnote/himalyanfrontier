@@ -203,7 +203,7 @@
                                 <img src="{{ url('/storage/images/itinerary/featureImages/'.$fixedProgram->feature_img) }}">
                             </a>
                         </div>
-                        <div class="amet">
+                        <div class="amet custom_p99">
                             <div class="left_r45">
                             <h4>{{$fixedProgram->title}}</h4>
                             <ul class="features check">
@@ -298,14 +298,14 @@
         <h2 class="upcoming-programs">Upcoming Programs</h2>
         <div class="row">
             @forelse($upcomingPrograms as $program)
-                <div class="col-md-4 mb-5">
+                <div class="col-md-4 mb-5 margin_bot4">
                     <div class="programs-again upcoming-class">
                         <div class="true-image">
                             <a href="{{ route('activity.slug', ['slug'=>$program->slug]) }}" data-post_id="1641" class="hover-effect popup-gallery">
                                 <img src="{{ url('/storage/images/itinerary/featureImages/'.$program->feature_img) }}">
                             </a>
                         </div>
-                        <div class="amet">
+                        <div class="amet custom_p99">
                             <div class="left_r45">
                             <h4>{{$program->title}}</h4><br/>   
                             <p>{!! substr(strip_tags($program->description),0,300 ) !!}...</p>

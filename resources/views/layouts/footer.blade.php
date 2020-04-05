@@ -102,6 +102,19 @@
     }
 });
 </script>
+
+<script>
+    $(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+
+    if (scroll >= 200) {
+        $(".right_bar4").addClass("fix_right");
+    } else {
+        $(".right_bar4").removeClass("fix_right");
+    }
+});
+</script>
+
 <script>
     $(document).ready(function() {
         var owl = $('.owl-carousel');
