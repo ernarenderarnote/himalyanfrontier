@@ -67,10 +67,10 @@
                             <div class="col-md-4 col-sm-4">
                                 <div class="left562">
                                     <p>Travel Date </p>
-                                    <input class="datepicker" type="text" name="travel_date" value="{{ old('travel_name', isset($invoice) ? $invoice->travel_name : '') }}"  placeholder="Select Due travel date">
-                                    @if($errors->has('travel_name'))
+                                    <input class="datepicker" type="text" name="travel_date" value="{{ old('travel_date', isset($invoice) ? $invoice->travel_date : '') }}"  placeholder="Select Due travel date">
+                                    @if($errors->has('travel_date'))
                                         <em class="invalid-feedback">
-                                            {{ $errors->first('travel_name') }}
+                                            {{ $errors->first('travel_date') }}
                                         </em>
                                     @endif
                                 </div>
@@ -106,38 +106,6 @@
                                     @if($errors->has('travel_location'))
                                         <em class="invalid-feedback">
                                             {{ $errors->first('travel_location') }}
-                                        </em>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="left562">
-                                    <p>Travel Type</p>
-                                    <select id="travel_type" value="{{ old('travel_type', isset($invoice) ? $invoice->travel_type : '') }}" name="travel_type">
-                                        <option value="volvo">Volvo</option>
-                                        <option value="saab">Saab</option>
-                                        <option value="mercedes">Mercedes</option>
-                                        <option value="audi">Audi</option>
-                                    </select>
-                                    @if($errors->has('travel_type'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('travel_type') }}
-                                        </em>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="left562">
-                                    <p>Customer Type</p>
-                                    <select id="cars" name="customer_type">
-                                        <option value="volvo">Volvo</option>
-                                        <option value="saab">Saab</option>
-                                        <option value="mercedes">Mercedes</option>
-                                        <option value="audi">Audi</option>
-                                    </select>
-                                    @if($errors->has('customer_type'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('customer_type') }}
                                         </em>
                                     @endif
                                 </div>

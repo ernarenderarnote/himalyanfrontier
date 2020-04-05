@@ -1,9 +1,16 @@
 @extends('layouts.frontend')
 @section('content')
-    <div class="container">
-        <h1>419</h1>
-        <!-- <h2>{!! $exception->getMessage() !!}</h2> -->
-        <h3>The page is not available to Inactivity</h3>
-        <h3>Countinue to Himalayan Frontiers</h3>
-    </div>
+<section class="thank_outer">
+	<div class="container">
+		<div class="inner_thanks imgp">
+    		<img src="{{url('images/himalayn_frontiers_logo_vector2017__1_-pdf_720.png')}}"></p>
+    		<h4>419</h4>
+            <h3>The page you were looking for could<br> is expired due to inactivity.</h3>
+
+            <div class="back_outer5">
+                <a href="{{url('/')}}">Back To Home</a>
+            </div>
+		</div>
+	</div>
+</section>
 @endsection

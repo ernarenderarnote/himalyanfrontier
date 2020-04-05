@@ -108,38 +108,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="left562">
-                                    <p>Travel Type</p>
-                                    <select id="travel_type" value="{{ old('travel_type', isset($invoice) ? $invoice->travel_type : '') }}" name="travel_type">
-                                        <option value="volvo">Volvo</option>
-                                        <option value="saab">Saab</option>
-                                        <option value="mercedes">Mercedes</option>
-                                        <option value="audi">Audi</option>
-                                    </select>
-                                    @if($errors->has('travel_type'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('travel_type') }}
-                                        </em>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="left562">
-                                    <p>Customer Type</p>
-                                    <select id="cars" name="customer_type" value="{{ old('customer_type', isset($invoice) ? $invoice->customer_type : '') }}">
-                                        <option value="volvo">Volvo</option>
-                                        <option value="saab">Saab</option>
-                                        <option value="mercedes">Mercedes</option>
-                                        <option value="audi">Audi</option>
-                                    </select>
-                                    @if($errors->has('customer_type'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('customer_type') }}
-                                        </em>
-                                    @endif
-                                </div>
-                            </div>
+                            
                             <div class="col-md-3 col-sm-3">
                                 <div class="left562">
                                     <p>Currency</p>

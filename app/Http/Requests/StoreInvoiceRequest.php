@@ -36,12 +36,6 @@ class StoreInvoiceRequest extends FormRequest
             'travel_location'=> [
                 'required',
             ],
-            'travel_type'=> [
-                'required',
-            ],
-            'customer_type'=> [
-                'required',
-            ],
             'currency'=> [
                 'required',
             ],

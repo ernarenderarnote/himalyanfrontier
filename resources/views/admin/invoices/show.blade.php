@@ -73,7 +73,7 @@ table.price_details tr td {
     padding: 50px;
     //page-break-inside: auto;
 ">
-<div><img src="http://newfrontier.himalayanfrontiers.com/images/himalayn_frontiers_logo_vector2017__1_-pdf_720.png" alt="" class="img-fluid logo-img mt-1" style="
+<div><img src="{{url('images/himalayn_frontiers_logo_vector2017__1_-pdf_720.png')}}" alt="" class="img-fluid logo-img mt-1" style="
     width: 40%;
     margin-bottom: 10px;
     margin-top: 0px;
@@ -143,14 +143,10 @@ Tax Details
   <table class="inovo_detials">
 	<tr>
 	<th>Travel Location</th>
-	<th>Travel Type</th>
-	<th>Customer Type</th>
 	<th>Currency</th>
 	</tr>
 	 <tr>
  <td>{{$invoice->travel_location}}</td>
-  <td>{{$invoice->travel_type}}</td>
-   <td>{{$invoice->customer_type}}</td>
    <td>{{$invoice->currency}}</td>
  </tr>
  </table>
