@@ -147,6 +147,7 @@
                             <!-- <li class="col-md-12 dropdown-item"> -->
                                 <ul>
                                     <li class="dropdown-header">Fixed Departure Programs</li>
+                                    <div class="custom_border_fixed_departure"></div>
                                     <div class="custom-drop-menu">
                                             @foreach($menus->fixedDeparture() as $diparture)
                                                 <li class="col-md-4"><a href="{{ route('activity.slug', ['slug'=>$diparture->slug]) }}">{{ $diparture->title }}</a>
@@ -164,6 +165,7 @@
                             <!-- <li class="col-md-12 dropdown-item"> -->
                                 <ul>
                                     <li class="dropdown-header">Hot Deals</li>
+                                    <div class="custom_border_hot_deals"></div>
                                     <div class="custom-drop-menu">
                                             @foreach($menus->hotDeals() as $hotDeal)
                                                 <li class="col-md-4"><a href="{{ route('activity.slug', ['slug'=>$hotDeal->slug]) }}">{{ $hotDeal->title }}</a>
