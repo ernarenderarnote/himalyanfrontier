@@ -4572,3 +4572,35 @@ div#suggesstion-box {
     padding: 8px 12px;
     border: 1px solid #fff;
 }
+.thank_outer {   
+	margin: 70px auto;
+	text-align: center;
+}
+.inner_thanks.imgp img {
+width: 30%;
+}
+.back_outer5 a {
+background-color: green;
+color: #fff;
+padding: 13px 30px;
+font-size: 17px;
+border-radius: 4px;
+margin-top: 10px;
+display: inline-block;
+}  
+
+.inner_thanks.imgp h3 {
+font-size: 36px;
+line-height: 40px;
+margin-bottom: 20px;
+}
+.inner_thanks.imgp h4 {
+font-size: 120px;
+color: red;
+font-weight: 200;
+}
+
+
+.back_outer5 a:hover {
+text-decoration:none;
+}
