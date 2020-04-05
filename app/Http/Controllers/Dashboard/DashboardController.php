@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
     public function adminDashboard()
     {
-		return redirect('admin/');
+		return redirect('admin');
     }
 
     public function userDashboard()

@@ -52,7 +52,7 @@ class InvoiceController extends Controller
 
         if( empty($invoice) ){
 
-            $invoice_id = '1000000000';
+            $invoice_id = '100';
            
         }else{
             
