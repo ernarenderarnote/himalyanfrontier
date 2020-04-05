@@ -105,6 +105,7 @@
                                         <ul>
                                             
                                             <li class="dropdown-header">{{$key}}</li>
+                                            <div class="custom_border_{{$key}}"></div>
                                             <div class="row">
                                                 @foreach($value as $k=>$v)
                                                     <div class="col-md-6">
@@ -123,7 +124,7 @@
                                     
                                         <ul> 
                                             <li class="dropdown-header">{{$key}}</li>
-                                            
+                                            <div class="custom_border_{{$key}}"></div>
                                                 @foreach($value as $k=>$v)
                                                     <li class="activity-menu"><a href="{{url('advanced-search?s=&destination='.strtolower($key).'&activity='.$v.'&rating_from=1&rating_to=4')}}">{{ $k }}</a></li>
                                                 @endforeach
