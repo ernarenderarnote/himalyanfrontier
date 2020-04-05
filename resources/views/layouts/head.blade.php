@@ -4,7 +4,8 @@
 
 <meta name="keywords"
     content="himalaya" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">    
+    <meta name="csrf-token" content="{{ csrf_token() }}">  
+    <meta name="app-url" content="{{ URL::to('/') }}">  
 <script>
     addEventListener("load", function () {
     setTimeout(hideURLbar, 0);

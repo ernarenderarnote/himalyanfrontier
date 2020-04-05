@@ -51,6 +51,30 @@
                   </div>
                </div>
             </div>
+            <div class="row">
+              <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-danger">
+                     <div class="card-body pb-0">
+                        <div class="btn-group float-right widget-icon">
+                          <i class="fas fa-money nav-icon"></i>
+                        </div>
+                        <div class="text-value">{{$pending_payments}}</div>
+                     </div>
+                     <div class="widget-title">Pending Orders</div>
+                  </div>
+               </div>
+               <div class="col-sm-6 col-lg-3">
+                  <div class="card text-white bg-danger">
+                     <div class="card-body pb-0">
+                        <div class="btn-group float-right widget-icon">
+                          <i class="fas fa-money nav-icon"></i>
+                        </div>
+                        <div class="text-value">{{$direct_payments}}</div>
+                     </div>
+                     <div class="widget-title">Direct Payments</div>
+                  </div>
+               </div>
+            </div> 
          </div>
       </div>
    </div>

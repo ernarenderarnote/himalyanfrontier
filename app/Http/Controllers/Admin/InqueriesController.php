@@ -119,4 +119,17 @@ class InqueriesController extends Controller
 
         return response(null, 204);
     }
+
+    public function display(Request $request,$id,$notification_id){
+        
+        $inquery = Inquery::with('itinerary')->where('id',$id)->first();
+        
+        $notification = $request->user()->notifications()->where('id', $notification_id)->first();
+        
+        if($notification) {
+            $notification->markAsRead();
+        }
+
+        return view('admin.inqueries.show', compact('inquery'));
+    }
 }

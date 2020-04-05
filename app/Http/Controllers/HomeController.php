@@ -48,7 +48,9 @@ class HomeController extends Controller
         $itineraries      = Itinerary::with('destinations','activities','currency')
             ->where('deleted_at',NULL)
             ->where('status','active')
-            ->orderBy('created_at', 'desc')
+            ->where('is_homepage','1')
+            ->where('widget_section','introduction')
+            ->orderBy('updated_at', 'desc')
             ->take(2)
             ->get();
 
@@ -56,11 +58,13 @@ class HomeController extends Controller
                 ->where('deleted_at',NULL)
                 ->where('status','active')
                 ->where('fixed_diparture', '1')
-                ->orderBy('created_at', 'desc')
+                ->where('is_homepage','1')
+                ->where('widget_section','fixed_departure')
+                ->orderBy('updated_at', 'desc')
                 ->take(6)
                 ->get();
         
-        $upcomingPrograms = Itinerary::whereHas('schedule', function($query){
+        /* $upcomingPrograms = Itinerary::whereHas('schedule', function($query){
             $query->where('from_date', '>', date('Y-m-d'));
              })
             ->with('destinations','activities','currency')
@@ -68,7 +72,15 @@ class HomeController extends Controller
             ->where('status','active')
             ->orderBy('created_at', 'desc')
             ->take(6)
-            ->get();
+            ->get(); */
+            $upcomingPrograms = Itinerary::with('destinations','activities','currency')
+                ->where('deleted_at',NULL)
+                ->where('status','active')
+                ->where('is_homepage','1')
+                ->where('widget_section','upcoming')
+                ->orderBy('updated_at', 'desc')
+                ->take(6)
+                ->get();    
         
         $slide = Slider::where('is_default','1')
             ->where('deleted_at',NULL)
@@ -94,15 +106,21 @@ class HomeController extends Controller
             $query->orderBy('from_date','asc');
             }])->where('slug',$request->slug)
             ->first();
-        
+            
+            $activity_ids = '';
+            foreach($activity->activities as $activity_type){
+                $activity_ids = $activity_type->id;
+            }
+            
         $currencies = Currency::all();
         
-        $similar_tours = Itinerary::where('deleted_at',NULL)
-            ->where('status','active')
+        $similar_tours = Activity::with(['itinerary' => function ($query) {
+            $query->take(3);}])
+            ->where('deleted_at',NULL)
+            ->where('id',$activity_ids)
             ->orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
-
+            ->first();
+      
         return view('single',compact('activity', 'similar_tours', 'currencies'));
     }
 
@@ -309,4 +327,14 @@ class HomeController extends Controller
         return view('booking');
     }
 
+    public function autoSearchData(Request $request){
+        $search =  $request->keyword;
+        $itineraries = Itinerary::with(['destinations', 'activities'])
+        ->where(function($q) use($search) {
+            $q->orWhere('description', 'like', '%' . $search . '%')
+              ->orWhere('title', 'like', '%' . $search . '%');
+        })
+        ->get()->take(10);
+        return view('autoSearch',compact('itineraries'));
+    }
 }

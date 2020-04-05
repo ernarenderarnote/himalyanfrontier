@@ -118,4 +118,17 @@ class ContactUsController extends Controller
 
         return response(null, 204);
     }
+
+    public function display(Request $request,$id,$notification_id){
+        
+        $contact_us = ContactUs::where('id',$id)->first();
+        
+        $notification = $request->user()->notifications()->where('id', $notification_id)->first();
+        
+        if($notification) {
+            $notification->markAsRead();
+        }
+
+        return view('admin.contactUs.show', compact('contact_us'));
+    }
 }

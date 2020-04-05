@@ -9,6 +9,7 @@ use Softon\Indipay\Facades\Indipay;
 use App\Notifications\NewBooking;
 use App\Notifications\PendingBooking;
 use App\Notifications\CancelBooking;
+use App\Http\Requests\StorePaymentRequest;
 use Validator;
 use Notification;
 use App\Itinerary;
@@ -21,6 +22,9 @@ use App\Booking;
 use App\Transections;
 use App\PaymentSettings;
 use Auth;
+use App\Country;
+use App\State;
+use App\DirectPayment;
 
 class BookingController extends Controller
 {
@@ -597,5 +601,207 @@ class BookingController extends Controller
                 ->first();
                 
         Notification::send($users, new CancelBooking($booking));
+    }
+
+    public function onlinePayment(Request $request){
+        $countries = Country::get()->pluck("name","id");
+        $currencies  = Currency::get()->pluck("name","id");
+        return view('onlinePayment',compact('countries','currencies'));
+    }
+
+    public function getStateList(Request $request)
+    {
+        $states = State::where("country_id",$request->country_id)
+        ->pluck("name","id");
+        return response()->json($states);
+    }
+
+    public function storeDirectPayment(StorePaymentRequest $request){
+       // dd($request->all());
+        $currency = Currency::where('id',$request->currency_id)->first();
+        $payment_method = "direct-payment";
+        $country = Country::where('id',$request->country_id)->first();
+        $state = State::where('id',$request->state)->first();
+        $booking_status     = base64_encode('completed');
+        $parameters = [
+                            
+            'merchant_id' => env("INDIPAY_MERCHANT_ID", 8376),
+
+            //'currency' => $currency_code,
+            'currency' => 'INR',
+
+            'redirect_url' =>  route('successDirectPayment',[ $payment_method, $booking_status ]),
+            
+            'cancel_url' => route('failedDirectPayment',[$payment_method,  $booking_status  ]),
+
+            'language' => 'English',
+
+            'order_id' => '1000',
+            
+            'billing_name' => $request->first_name.' '.$request->last_name,
+            
+            'billing_address' => $request->address,
+            
+            'billing_city' => $request->city,
+            
+            'billing_state' => $state->name,
+
+            'billing_country' => $country->name,
+            
+            'billing_zip' => $request->zip_code,
+            
+            'billing_tel' => $request->phone_number,
+            
+            'billing_email' => $request->email_address,
+
+            'amount' => $request->amount,
+            
+        ];
+        
+        $order = Indipay::prepare($parameters);
+
+        return Indipay::process($order);
+
+    }
+
+    public function directPaymentSuccess(Request $request, $abc,$ncd){
+
+        $response = Indipay::response($request);
+        
+        $transections = new Transections();
+        
+        $transections->user_id    = Auth::user()->id;
+
+
+        $transections->order_id   = $response['order_id'];
+
+        $transections->billing_name = $response['billing_name'];
+
+        $transections->billing_address = $response['billing_address'];
+
+        $transections->city = $response['billing_city'];
+
+        $transections->state = $response['billing_state'];
+
+        $transections->zip = $response['billing_zip'];
+
+        $transections->country = $response['billing_country'];
+
+        $transections->telephone = $response['billing_tel'];
+
+        $transections->email = $response['billing_email'];
+
+        $transections->trans_date = $response['trans_date'];
+
+        $transections->tracking_id = $response['tracking_id'];
+
+        $transections->bank_ref_no = $response['bank_ref_no'];
+
+        $transections->order_status = $response['order_status'];
+
+        $transections->payment_mode = $response['payment_mode'];
+
+        $transections->card_name = $response['card_name'];
+
+        $transections->currency = $response['currency'];
+
+        $transections->mer_amount = $response['amount'];
+
+        $transections->save();
+
+        if($response['order_status'] === "Success"){
+            $directPayment = new DirectPayment();    
+            $directPayment->first_name = $response['billing_name'];
+            $directPayment->email_address = $response['billing_email'];
+            $directPayment->country_id  = $response['billing_country'];
+            $directPayment->state = $response['billing_state'];
+            $directPayment->city = $response['billing_city'];
+            $directPayment->zip_code= $response['billing_zip'];
+            $directPayment->phone_number= $response['billing_tel'];
+            $directPayment->address = $response['billing_address'];
+            $directPayment->currency = $response['currency'];
+            $directPayment->amount = $response['amount'];
+            $directPayment->status = $response['order_status'];
+
+            $directPayment->save();
+
+            //$this->sendOrderNotifications( $booking );
+
+            $response_status = ['message' => 'Booking process successfully completed.', 'alert-type' => 'success'];
+        
+        }
+        
+    	else if($response['order_status'] === "Aborted"){
+
+    		$directPayment = new DirectPayment();    
+            $directPayment->first_name = $response['billing_name'];
+            $directPayment->email_address = $response['billing_email'];
+            $directPayment->country_id  = $response['billing_country'];
+            $directPayment->state = $response['billing_state'];
+            $directPayment->city = $response['billing_city'];
+            $directPayment->zip_code= $response['billing_zip'];
+            $directPayment->phone_number= $response['billing_tel'];
+            $directPayment->address = $response['billing_address'];
+            $directPayment->currency = $response['currency'];
+            $directPayment->amount = $response['amount'];
+            $directPayment->status = $response['order_status'];
+            $directPayment->save();
+            //$this->sendOrderNotifications( $booking );
+
+            $response_status = ['message' => 'Booking process failed due to aborted payment response.', 'alert-type' => 'danger'];
+        
+        }
+    	else if($response['order_status'] === "Failure")
+    	{
+            $directPayment = new DirectPayment();    
+            $directPayment->first_name = $response['billing_name'];
+            $directPayment->email_address = $response['billing_email'];
+            $directPayment->country_id  = $response['billing_country'];
+            $directPayment->state = $response['billing_state'];
+            $directPayment->city = $response['billing_city'];
+            $directPayment->zip_code= $response['billing_zip'];
+            $directPayment->phone_number= $response['billing_tel'];
+            $directPayment->address = $response['billing_address'];
+            $directPayment->currency = $response['currency'];
+            $directPayment->amount = $response['amount'];
+            $directPayment->status = $response['order_status'];
+            $directPayment->save();
+            //$this->sendOrderNotifications( $booking );
+
+            $response_status = ['message' => 'Booking process failed due to the transaction has been declined.', 'alert-type' => 'danger'];
+            
+    	}
+    	else
+    	{
+            $directPayment = new DirectPayment();    
+            $directPayment->first_name = $response['billing_name'];
+            $directPayment->email_address = $response['billing_email'];
+            $directPayment->country_id  = $response['billing_country'];
+            $directPayment->state = $response['billing_state'];
+            $directPayment->city = $response['billing_city'];
+            $directPayment->zip_code= $response['billing_zip'];
+            $directPayment->phone_number= $response['billing_tel'];
+            $directPayment->address = $response['billing_address'];
+            $directPayment->currency = $response['currency'];
+            $directPayment->amount = $response['amount'];
+            $directPayment->status = $response['order_status'];
+            
+            $directPayment->save();
+            
+            //$this->sendOrderNotifications( $booking );
+
+            $response_status = ['message' => 'Booking process failed Security Error. Illegal access detected.', 'alert-type' => 'danger'];
+        }
+        if($response['order_status'] === "Success"){
+            return view('paymentSuccess')->with($response_status);
+        }else{
+            return view('paymentFail')->with($response_status);
+        }
+        
+    
+    }
+
+    public function directPaymentFailed(Request $request){
+        dd($request->all());
     }
 }

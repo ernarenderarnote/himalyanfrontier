@@ -17,8 +17,8 @@ class InqueryController extends Controller
     $input = $request->all();
         
     $itinerary = Itinerary::where('id',$request->itinerary_id)->first()->title;
-
-    if( Inquery::create($input) ){
+    $input = Inquery::create($input);
+    if( $input ){
         $input['activity_name'] = $itinerary;
         $user = User::getUserWithRole('Admin')
                 ->first();

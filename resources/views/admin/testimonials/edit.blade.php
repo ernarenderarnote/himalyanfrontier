@@ -20,6 +20,15 @@
                 @endif
 
             </div>
+            <div class="form-group {{ $errors->has('author') ? 'has-error' : '' }}">
+                <label for="description">Author</label>
+                <textarea id="description" name="author" class="form-control summernote">{{ old('author', isset($testimonial) ? $testimonial->author : '') }}</textarea>
+                @if($errors->has('author'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('author') }}
+                    </em>
+                @endif
+            </div>
             <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control summernote">{{ old('description', isset($testimonial) ? $testimonial->description : '') }}</textarea>

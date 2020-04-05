@@ -16,6 +16,9 @@ class UpdateTestimonialRequest extends FormRequest
                 'required',
                 Rule::unique('testimonials')->ignore($this->testimonial),
             ],
+            'author' => [
+                'required',
+            ],
         ];
     }
 }

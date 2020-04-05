@@ -157,7 +157,17 @@
                                             <span class="fa fa-star"></span>
                                         @endif
                                     @endfor       
-                                        <span class="review effect">Grade</span>
+                                        <span class="review effect">
+                                            @if($itinerary->rating == 1)
+                                                Easy
+                                            @elseif($itinerary->rating ==2 )
+                                                Moderate
+                                            @elseif($itinerary->rating == 3)
+                                                Streneous
+                                            @else
+                                                Difficult
+                                            @endif
+                                        </span>
                                     @endif
                                     </div>
                                 </div>
@@ -261,6 +271,10 @@
     @forelse($testimonials as $key=>$testimonial)
         <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
             {!! substr($testimonial->description,0,300 ) !!}
+            <div class="tesimonial-btns">
+                <a href="{{route('testimonials')}}" class="btn btn-primary">Read More</a>
+                <a target"_blank" href="https://www.tripadvisor.in/Attraction_Review-g297618-d18454699-Reviews-Himalayan_Frontiers_Culture_Adventure_Tours_P_Ltd-Manali_Manali_Tehsil_Kullu_Dis.html" class="btn btn-primary">View All</a>
+            </div>
         </div>
         @empty
 

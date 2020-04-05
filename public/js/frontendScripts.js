@@ -547,3 +547,36 @@ function calculatePrice(participant, activity_price){
         'tax_price'       : tax_partial_price.toFixed(2)
     };
 }
+
+//autocomplete search
+// AJAX call for autocomplete 
+$(document).ready(function(){
+	$(".search").keyup(function(){
+        
+       var _token  = $('meta[name="csrf-token"]').attr('content');
+       var _appurl = $('meta[name="app-url"]').attr('content');
+       var _loader = _appurl+'/images/LoaderIcon.gif';
+       
+        if($(this).val().length >= 3 ){
+            $.ajax({
+                headers: {'x-csrf-token': _token},
+                type: "POST",
+                url: "/auto-search",
+                data:'keyword='+$(this).val(),
+                beforeSend: function(){
+                    $(".search").css("background","#FFF url("+_loader+") no-repeat 260px");
+                },
+                success: function(data){
+                    $("#suggesstion-box").show();
+                    $("#suggesstion-box").html(data);
+                    $(".search").css("background","#FFF");
+                }
+            });
+        }
+	});
+});
+//To select country name
+function selectResult(val) {
+    $(".search").val(val);
+    $("#suggesstion-box").hide();
+}

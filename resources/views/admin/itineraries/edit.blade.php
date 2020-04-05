@@ -285,7 +285,19 @@
                             <input name="fixed_diparture" type="checkbox" value="1" class="custom-control-input" id="defaultUnchecked1" {{ $itinerary->fixed_diparture == '1' ? 'checked' : '' }}>
                             <label class="custom-control-label" for="defaultUnchecked1">Is Fixed Departure?</label>
                         </div>
-                        
+                        <div class="custom-control custom-checkbox">
+                            <input type="hidden" name="is_homepage" value="0">
+                            <input name="is_homepage" type="checkbox" value="1" class="custom-control-input" id="defaultUnchecked2" {{ $itinerary->is_homepage == '1' ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="defaultUnchecked2">Display in Homepage?</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="widget_section">Itinerary Panel</label>
+                            <select class="form-control" name="widget_section">
+                                <option value="introduction" {{ $itinerary->widget_section == 'introduction' ? 'selected' : '' }}>Introduction</option>
+                                <option value="fixed_departure" {{ $itinerary->widget_section == 'fixed_departure' ? 'selected' : '' }}>Fixed Departure</option>
+                                <option value="upcoming" {{ $itinerary->widget_section == 'upcoming' ? 'selected' : '' }}>Upcoming Program</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="status">Activity Status</label>
                             <select class="form-control" name="status">
@@ -325,11 +337,11 @@
                     </div>  
                     <div class="custom-control custom-radio">
                         <input type="radio" value="3" class="custom-control-input" id="customRadioDifficult" name="rating" {{$itinerary->rating == '3'  ? 'checked' : ''}}>
-                        <label class="custom-control-label" for="customRadioDifficult">Difficult</label>
+                        <label class="custom-control-label" for="customRadioDifficult">Streneous</label>
                     </div>
                     <div class="custom-control custom-radio">
                         <input type="radio" value="4" class="custom-control-input" id="customRadioHard" name="rating" {{$itinerary->rating == '4'  ? 'checked' : ''}}>
-                        <label class="custom-control-label" for="customRadioHard">Hard</label>
+                        <label class="custom-control-label" for="customRadioHard">Difficult</label>
                     </div>
                 </div>        
             </div>

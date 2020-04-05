@@ -17,8 +17,8 @@ class ContactUsController extends Controller
 
     public function store(StoreContactUsRequest $request){
         $input = $request->all();
-
-        if( ContactUs::create($input) ){
+        $input = ContactUs::create($input);
+        if( $input ){
             
             $user = User::getUserWithRole('Admin')
                 ->first();

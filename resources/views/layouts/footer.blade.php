@@ -54,13 +54,20 @@
             <span class="contact-icon"><i class="fa fa-envelope" aria-hidden="true"></i>
             <a class="contact-email" href="mailto:info@himalayanfrontiers.com">  info@himalayanfrontiers.com</a></span>
             </address>
-            <img src="{{url('images/trip.png')}}" class="responsive-main">
+                <a href="https://www.tripadvisor.in/Attraction_Review-g297618-d18454699-Reviews-Himalayan_Frontiers_Culture_Adventure_Tours_P_Ltd-Manali_Manali_Tehsil_Kullu_Dis.html" target="_blank">
+                    <img src="{{url('images/trip.png')}}" class="responsive-main">
+                </a>    
             </div>
             </div>
             </div>
             <div class="col-md-3 col-sm-12">
                 <h3 class="mb-sm-4 mb-3 pb-3">Secure Online Payments</h3>
                 <img src="{{url('images/neew.png')}}">
+                <ul>
+                    <li style="list-style:none;">
+                        <a href="{{route('onlinepayment')}}">Secure Online Payments</a>
+                    </li>
+                </ul>    
             </div>
         </div>
     </div>

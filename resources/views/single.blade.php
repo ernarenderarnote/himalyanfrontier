@@ -311,29 +311,31 @@
 						<div class="trak-k">
 							 <h4>SIMILAR TOURS</h4>
 						</div>
-                    </div>
-                    @forelse($similar_tours as $similar_tour)
-                        <div class="tim">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="sub">
-                                        <img width="64" height="64" src="{{ url('/storage/images/itinerary/featureImages/'.$similar_tour->feature_img) }}" alt='' />
-                                    </div>
-                                </div>
-                                <div class="col-md-10">
-                                    <div class="sub">
-                                        <h3>{{$similar_tour->title}}</h3>
-                                        <div class="read-more custom_read">
-                                            <a class="button btn-small full-width text-center" href="{{ route('activity.slug', ['slug'=>$similar_tour->slug]) }}">Read more</a>
-                                        </div>
-                                    </div>
-                            </div>
-                            
-                            </div>
-                        </div>
-                        <br>
-                        @empty
-                    @endforelse        
+					</div>
+					@if($similar_tours->itinerary)
+						@forelse($similar_tours->itinerary as $similar_tour)
+							<div class="tim">
+								<div class="row">
+									<div class="col-md-2">
+										<div class="sub">
+											<img width="64" height="64" src="{{ url('/storage/images/itinerary/featureImages/'.$similar_tour->feature_img) }}" alt='' />
+										</div>
+									</div>
+									<div class="col-md-10">
+										<div class="sub">
+											<h3>{{$similar_tour->title}}</h3>
+											<div class="read-more custom_read">
+												<a class="button btn-small full-width text-center" href="{{ route('activity.slug', ['slug'=>$similar_tour->slug]) }}">Read more</a>
+											</div>
+										</div>
+								</div>
+								
+								</div>
+							</div>
+							<br>
+							@empty
+						@endforelse  
+					@endif	      
 				</div>
 			</div>
 		</div>
