@@ -24,7 +24,7 @@ class ItinerariesController extends Controller
                 $itineraries = Itinerary::with('destinations','activities','currency')
                 ->where('is_homepage','1')
                 ->get();
-                $itinerary_type = '';
+                $itinerary_type = 'homepage_itinerary';
             }
             elseif($request->itinerary_type == 'hot_deal'){
                 $itineraries = Itinerary::with('destinations','activities','currency')
