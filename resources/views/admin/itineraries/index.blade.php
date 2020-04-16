@@ -152,11 +152,13 @@
     }
   }
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+  
 @can('itinerary_delete')
   dtButtons.push(deleteButton)
 @endcan
 
-  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons });
+  $('body .dataTables_filter').append('helo');
 })
 
 </script>

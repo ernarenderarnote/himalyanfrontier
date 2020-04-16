@@ -50,7 +50,7 @@ class HomeController extends Controller
             ->where('status','active')
             ->where('is_homepage','1')
             ->where('widget_section','introduction')
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('homepage_position', 'asc')
             ->take(2)
             ->get();
 
@@ -60,7 +60,7 @@ class HomeController extends Controller
                 ->where('fixed_diparture', '1')
                 ->where('is_homepage','1')
                 ->where('widget_section','fixed_departure')
-                ->orderBy('updated_at', 'desc')
+                ->orderBy('homepage_position', 'asc')
                 ->take(6)
                 ->get();
         
@@ -78,7 +78,7 @@ class HomeController extends Controller
                 ->where('status','active')
                 ->where('is_homepage','1')
                 ->where('widget_section','upcoming')
-                ->orderBy('updated_at', 'desc')
+                ->orderBy('homepage_position', 'asc')
                 ->take(6)
                 ->get();    
         
@@ -249,6 +249,7 @@ class HomeController extends Controller
                       ->orWhere('title', 'like', '%' . $search . '%');
                 })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])
+                ->orderBy('search_position', 'asc')
                 ->get($required_params)
                 ->paginate(10);
 
@@ -262,6 +263,7 @@ class HomeController extends Controller
                       ->orWhere('title', 'like', '%' . $search . '%');
                 })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])
+                ->orderBy('search_position', 'asc')
                 ->get($required_params)
                 ->paginate(10);
 
@@ -293,6 +295,7 @@ class HomeController extends Controller
                       ->orWhere('title', 'like', '%' . $search . '%');
                 })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])
+                ->orderBy('search_position', 'asc')
                 ->get($required_params)
                 ->paginate(10);;
 

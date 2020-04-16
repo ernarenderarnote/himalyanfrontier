@@ -48,6 +48,8 @@ class Itinerary extends Model
         'currency_id',
         'is_homepage',
         'widget_section',
+        'homepage_position',
+        'search_position',
     ];
 
     public function destinations()

@@ -304,10 +304,20 @@
                                 <option value="active" {{ $itinerary->status=='active' ? 'selected' : '' }}>Active</option>
                                 <option value="in_active" {{ $itinerary->status=='in_active' ? 'selected' : '' }}>In Active</option>
                             </select>
-                        </div>    
+                        </div> 
+                        <div class="form-group">
+                            <label for="status">Homepage Position</label>
+                            <input type="number" min="0" class="form-control" name="homepage_position">
+                        </div> 
+
+                        <div class="form-group">
+                            <label for="status">Search Position</label>
+                            <input type="number" min="0" class="form-control" name="search_position">
+                        </div>   
                     </div>
 
                     <div class="col-md-12">
+                        
                         <hr/>
 
                     </div>
