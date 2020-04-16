@@ -136,13 +136,35 @@
 			</div>
 			<div class="col-md-4">
 				<div class="trak-v">
-				   <h4>{{$activity->title}}<i class="fa fa-star" aria-hidden="true"></i></h4>
-                   <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                    @forelse($activity->destinations as $itineraryDestination)
+				   <h4>{{$activity->title}}</h4>
+				   <i class="fa fa-map-marker" aria-hidden="true"></i> 
+				   @forelse($activity->destinations as $itineraryDestination)
                         <span>{{$itineraryDestination->title}}</span>
                         @empty
 
-                    @endforelse  
+                    @endforelse 
+				   @if(isset($activity->rating))
+				   		@for($i=1; $i<5; $i++)
+							@if ($i <= $activity->rating )
+								<span class="fa fa-star checked"></span>
+							@else
+								<span class="fa fa-star"></span>
+							@endif
+						@endfor
+						<span class="review effect">
+							@if($activity->rating == 1)
+								(Easy)
+							@elseif($activity->rating ==2 )
+								(Moderate)
+							@elseif($activity->rating == 3)
+								(Streneous)
+							@else
+								(Difficult)
+							@endif
+						</span>   
+					@endif	
+                  
+                     
                    
                     <ul class="itinerary-points">
                         {!! $activity->front_activity_points !!}
