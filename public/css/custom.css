@@ -538,3 +538,9 @@ button.mb-xs.mr-xs.btn.btn-danger.removemore {
 .create_invoice {
     margin-bottom: 40px;
 }
+select.itinerary-filter.form-control {
+    width: 186px;
+    position: absolute;
+    top: 0;
+    right: -190px;
+}

@@ -307,12 +307,12 @@
                         </div> 
                         <div class="form-group">
                             <label for="status">Homepage Position</label>
-                            <input type="number" min="0" class="form-control" name="homepage_position">
+                            <input type="number" min="0" class="form-control" value="{{ $itinerary->homepage_position }}" name="homepage_position">
                         </div> 
 
                         <div class="form-group">
                             <label for="status">Search Position</label>
-                            <input type="number" min="0" class="form-control" name="search_position">
+                            <input type="number" min="0" class="form-control" value="{{ $itinerary->search_position }}" name="search_position">
                         </div>   
                     </div>
 

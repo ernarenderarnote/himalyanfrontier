@@ -15,12 +15,36 @@ use App\ItinerarySchedule;
 
 class ItinerariesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         abort_unless(\Gate::allows('itinerary_access'), 403);
-
-        $itineraries = Itinerary::with('destinations','activities','currency')->get();
-        return view('admin.itineraries.index', compact('itineraries'));
+        $itinerary_type = '';
+        if($request->has('itinerary_type') ){
+            if($request->itinerary_type == 'homepage_itinerary'){
+                $itineraries = Itinerary::with('destinations','activities','currency')
+                ->where('is_homepage','1')
+                ->get();
+                $itinerary_type = '';
+            }
+            elseif($request->itinerary_type == 'hot_deal'){
+                $itineraries = Itinerary::with('destinations','activities','currency')
+                ->where('hot_deal','1')
+                ->get();
+                $itinerary_type = 'hot_deal';
+            }
+            elseif($request->itinerary_type == 'fixed_departure'){
+                $itineraries = Itinerary::with('destinations','activities','currency')
+                ->where('fixed_diparture','1')
+                ->get();
+                $itinerary_type = 'fixed_departure';
+            }else{
+                $itineraries = Itinerary::with('destinations','activities','currency')->get();
+            }
+        }else{
+            $itineraries = Itinerary::with('destinations','activities','currency')->get();
+        }
+        
+        return view('admin.itineraries.index', compact('itineraries','itinerary_type'));
     }
 
     public function create()
@@ -260,4 +284,5 @@ class ItinerariesController extends Controller
         ItinerarySchedule::where('id', $request->id )->delete();
         return response(null, 204);
     }
+    
 }

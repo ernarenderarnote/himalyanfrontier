@@ -156,11 +156,31 @@
 @can('itinerary_delete')
   dtButtons.push(deleteButton)
 @endcan
-
-  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons });
-  $('body .dataTables_filter').append('helo');
+    
+    var itineraryFilter = '';
+        itineraryFilter += '<form method="post" action="{{ route('admin.itineraries.type') }}">';
+        itineraryFilter += '<input type="hidden" name="_token" value="{{ csrf_token() }}">';
+        itineraryFilter += '<select name="itinerary_type" class="itinerary-filter form-control">';
+        itineraryFilter += '<option value="">Filter Itinerary</option>';
+        itineraryFilter += '<option value="homepage_itinerary" {{ $itinerary_type == "homepage_itinerary" ? "selected" : "" }}>Homepage Itinerary</option>';
+        itineraryFilter += '<option value="hot_deal" {{ $itinerary_type == "hot_deal" ? "selected" : "" }} >Hot Deal</option>';
+        itineraryFilter += '<option value="fixed_departure" {{ $itinerary_type == "fixed_departure" ? "selected" : "" }} >Fixed Departure</option>';
+        itineraryFilter += '</select>';
+        itineraryFilter += '</form>';
+  $('.datatable:not(.ajaxTable)').DataTable({
+    buttons: dtButtons, 
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+	'fnDrawCallback': function (oSettings) {
+		$('.dt-buttons').each(function () {
+			$(this).append(itineraryFilter);
+		});
+	} } );
 })
-
+$('.app-body').on('change','.itinerary-filter', function(){
+    
+    $(this).closest('form').submit();  
+   
+});
 </script>
 @endsection
 @endsection

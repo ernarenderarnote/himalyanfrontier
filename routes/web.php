@@ -47,9 +47,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('users', 'UsersController');
 
+    Route::match(['get','post'],'/itineraries/filter/', [ 'as' => 'itineraries.type', "uses" => "ItinerariesController@index"] );
+    
     Route::delete('itineraries/destroy', 'ItinerariesController@massDestroy')->name('itineraries.massDestroy');
 
     Route::resource('itineraries', 'ItinerariesController');
+
 
     Route::delete('itinerarySchedule/destory/', 'ItinerariesController@scheduleDestroy')->name('itineraries.scheduleDestroy');
 

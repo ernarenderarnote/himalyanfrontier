@@ -119,25 +119,25 @@
                                             
                                         </ul>
                                     </li>
-                                    @else
-                                    <li class="col-md-3 dropdown-item">
-                                    
-                                        <ul> 
-                                            <li class="dropdown-header">{{$key}}</li>
-                                            <div class="custom_border_{{$key}}"></div>
-                                                @foreach($value as $k=>$v)
-                                                    <li class="activity-menu"><a href="{{url('advanced-search?s=&destination='.strtolower($key).'&activity='.$v.'&rating_from=1&rating_to=4')}}">{{ $k }}</a></li>
-                                                @endforeach
-                                                
-                                            <li class="divider"></li>
-                                            
-                                        </ul>
-                                    
-                                </li>
-                                @endif
-
+                                @endif   
                             @endforeach
-                            
+                            <li class="col-md-6 dropdown-item">
+                            @foreach($menus->activities() as $key=>$value)
+                                @if(strtolower($key) == 'nepal' || strtolower($key) == 'bhutan' )
+                                
+                                    <ul> 
+                                        <li class="dropdown-header">{{$key}}</li>
+                                        <div class="custom_border_{{$key}}"></div>
+                                            @foreach($value as $k=>$v)
+                                                <li class="activity-menu"><a href="{{url('advanced-search?s=&destination='.strtolower($key).'&activity='.$v.'&rating_from=1&rating_to=4')}}">{{ $k }}</a></li>
+                                            @endforeach
+                                            
+                                        <li class="divider"></li>
+                                        
+                                    </ul>
+                                @endif
+                            @endforeach
+                            </li>
                         </div>
                     </ul>
                 </li>
@@ -191,7 +191,7 @@
                                 <li><a href="{{route('dashboard')}}">Dashboard</a></li>
                                 <li><a href="{{route('bookingHistory')}}">Booking History</a></li>
                                 <li><a href="{{route('transectionsHistory')}}">Transection History</a></li>
-                                <li><a href="">My Profile</a></li>
+                                <li><a href="{{route('profile')}}">My Profile</a></li>
                                 <li><a href="" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li>   
                                 </ul>
                             </li>
