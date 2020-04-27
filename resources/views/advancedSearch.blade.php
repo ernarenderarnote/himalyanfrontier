@@ -126,7 +126,7 @@
 				</div>
 			</div>
          
-			<div class="col-md-9 col-sm-12">
+			<div class="col-md-9 col-sm-12 sidebar-right">
 				@if($get_activity)
 				  
 				@endif

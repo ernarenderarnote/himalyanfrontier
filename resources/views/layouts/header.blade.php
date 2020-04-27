@@ -119,25 +119,22 @@
                                             
                                         </ul>
                                     </li>
+                                    @elseif(strtolower($key) == 'nepal' || strtolower($key) == 'bhutan' )
+                                    <li class="col-md-3 dropdown-item">
+                                        <ul> 
+                                            <li class="dropdown-header">{{$key}}</li>
+                                            <div class="custom_border_{{$key}}"></div>
+                                                @foreach($value as $k=>$v)
+                                                    <li class="activity-menu"><a href="{{url('advanced-search?s=&destination='.strtolower($key).'&activity='.$v.'&rating_from=1&rating_to=4')}}">{{ $k }}</a></li>
+                                                @endforeach
+                                                
+                                            <li class="divider"></li>
+                                            
+                                        </ul>
+                                    </li>    
                                 @endif   
                             @endforeach
-                            <li class="col-md-6 dropdown-item">
-                            @foreach($menus->activities() as $key=>$value)
-                                @if(strtolower($key) == 'nepal' || strtolower($key) == 'bhutan' )
-                                
-                                    <ul> 
-                                        <li class="dropdown-header">{{$key}}</li>
-                                        <div class="custom_border_{{$key}}"></div>
-                                            @foreach($value as $k=>$v)
-                                                <li class="activity-menu"><a href="{{url('advanced-search?s=&destination='.strtolower($key).'&activity='.$v.'&rating_from=1&rating_to=4')}}">{{ $k }}</a></li>
-                                            @endforeach
-                                            
-                                        <li class="divider"></li>
-                                        
-                                    </ul>
-                                @endif
-                            @endforeach
-                            </li>
+                            
                         </div>
                     </ul>
                 </li>

@@ -67,6 +67,7 @@ class ItinerariesController extends Controller
         $input['slug'] = \Str::slug($request->title);
         
         $general_info = array();
+        dd($input['general_information']);
         foreach($input['general_information'] as $general_infos){
             if ( isset($general_infos['title']) || isset($general_infos['description']) ) {
                 if ($general_infos['title'] != '' || $general_infos['description'] != '' ) {
@@ -167,7 +168,6 @@ class ItinerariesController extends Controller
         $input['slug'] = \Str::slug($request->title);
         $general_info = array();
         foreach($input['general_information'] as $general_infos){
-    
             if ( isset($general_infos['title']) || isset($general_infos['description']) ) {
                 if($general_infos['title'] != '' || $general_infos['description'] != ''){
                     $general_info[] = array(
@@ -177,6 +177,7 @@ class ItinerariesController extends Controller
                 }    
             }
         }
+
         if(count($general_info) > 1){
             $input['general_information'] = json_encode($general_info);
         }else{

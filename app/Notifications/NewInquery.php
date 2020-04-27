@@ -42,7 +42,7 @@ class NewInquery extends Notification
     {
         return (new MailMessage)
                     ->subject('New Inquery about activty '.$this->details['activity_name'])
-                    ->line($this->details['name'].' posted new inquery about activty '.$this->details['activity_name'] )
+                    ->line($this->details['name'].' posted a new inquery about activity '.$this->details['activity_name'] )
                     ->line('Phone Number: '.$this->details['phone'])
                     ->line('Email: '.$this->details['email'])
                     ->line('Inquery: '.$this->details['message']);

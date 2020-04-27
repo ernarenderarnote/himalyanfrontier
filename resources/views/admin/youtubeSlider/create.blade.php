@@ -36,6 +36,17 @@
                     </em>
                 @endif
             </div>
+            <div class="form-group">
+                <label for="status">Position</label>
+                <input type="number" min="0" class="form-control" value="" name="position">
+            </div>
+            <div class="form-group">
+                <div class="custom-control custom-switch">
+                <input type="hidden" class="custom-control-input" id="" name="is_active" value="0">    
+                <input type="checkbox" class="custom-control-input" id="switch1" name="is_active" value="1">
+                <label class="custom-control-label" for="switch1">Active</label>
+                </div>
+            </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

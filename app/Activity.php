@@ -22,6 +22,7 @@ class Activity extends Model
         'description',
         'thumbnails',
         'gallery_img',
+        'position',
 		'is_active',
 		'created_at',
         'updated_at',

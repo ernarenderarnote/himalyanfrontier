@@ -140,11 +140,12 @@
                             <div class="panel-group" id="accordion">
                                 @if(isset($itinerary->general_information) && $itinerary->general_information !='' )
                                     @foreach(json_decode($itinerary->general_information) as $key=>$general_info )
+                                      
                                         <div class="panel panel-default template">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
                                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#accordian{{$key}}">
-                                                        <input type="text"  name="general_information[{{$key}}]['title']" value="{{$general_info->title}}">
+                                                        <input type="text"  name="general_information[{{$key}}][title]" value="{{$general_info->title}}">
                                                     </a>
                                                     <button type="button" class="close accordian-close pull-right" >
                                                         <span aria-hidden="true">&times;</span>
@@ -154,7 +155,7 @@
                                             </div>
                                             <div id="accordian{{$key}}" class="panel-collapse collapse in">
                                                 <div class="panel-body">
-                                                    <textarea name="general_information['{{$key}}']['description']" class="summernote">{{$general_info->description}}</textarea>
+                                                    <textarea name="general_information[{{$key}}][description]" class="summernote">{{$general_info->description}}</textarea>
                                                 </div>
                                             </div>
                                         </div>

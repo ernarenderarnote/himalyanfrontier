@@ -75,6 +75,10 @@
             </div>
             <!--Gallery Images End -->
             <div class="form-group">
+                <label for="status">Activity Position</label>
+                <input type="number" min="0" class="form-control" value="{{ $activity->position }}" name="position">
+            </div> 
+            <div class="form-group">
                 <div class="custom-control custom-switch">
                 <input type="hidden" class="custom-control-input" id="" name="is_active" value="0">    
                 @if( $activity->is_active == 1 )
