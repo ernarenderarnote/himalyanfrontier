@@ -123,7 +123,7 @@
                                             </div>
                                             <div id="accordian{{$key}}" class="panel-collapse collapse in">
                                                 <div class="panel-body">
-                                                    {{$general_info->description}}
+                                                    {!! $general_info->description !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -136,13 +136,35 @@
 			</div>
 			<div class="col-md-4">
 				<div class="trak-v">
-				   <h4>{{$activity->title}}<i class="fa fa-star" aria-hidden="true"></i></h4>
-                   <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                    @forelse($activity->destinations as $itineraryDestination)
+				   <h4>{{$activity->title}}</h4>
+				   <i class="fa fa-map-marker" aria-hidden="true"></i> 
+				   @forelse($activity->destinations as $itineraryDestination)
                         <span>{{$itineraryDestination->title}}</span>
                         @empty
 
-                    @endforelse  
+                    @endforelse 
+				   @if(isset($activity->rating))
+				   		@for($i=1; $i<5; $i++)
+							@if ($i <= $activity->rating )
+								<span class="fa fa-star checked"></span>
+							@else
+								<span class="fa fa-star"></span>
+							@endif
+						@endfor
+						<span class="review effect">
+							@if($activity->rating == 1)
+								(Easy)
+							@elseif($activity->rating ==2 )
+								(Moderate)
+							@elseif($activity->rating == 3)
+								(Streneous)
+							@else
+								(Difficult)
+							@endif
+						</span>   
+					@endif	
+                  
+                     
                    
                     <ul class="itinerary-points">
                         {!! $activity->front_activity_points !!}
@@ -230,7 +252,9 @@
 									<form action="{{route('booking')}}" method="POST">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">	
 										<input type="hidden" name="activity_id" value="{{$activity->id}}">	
-										<button type="submit">BOOK NOW</button>	
+										@if($activity->converted_price)
+											<button type="submit">BOOK NOW</button>
+										@endif		
 									</form>	
 								</div>					
 							</div>				
@@ -266,8 +290,12 @@
 				<div class="grand-more">
 				   <div class="nos">
 						<div class="trak-k">
+						@if($activity->converted_price)
 							<h4>SEND INQUIRY</h4>
-						
+							
+						@else
+							<h4>Contact us for Price</h4>
+						@endif
 						<form action="{{route('sendinquery')}}" method="post">
 							@csrf
 							<input type="text" id="fname" name="name" placeholder="Your name..">

@@ -95,7 +95,10 @@ class HomeController extends Controller
         ->orderBy('created_at', 'desc')
         ->first();
             
-        $youtubeSliders = YoutubeSlider::where('deleted_at',NULL)->get(); 
+        $youtubeSliders = YoutubeSlider::where('deleted_at',NULL)
+                ->where('is_active','1')
+                ->orderBy('position','asc')
+                ->get(); 
 
         return view('index', compact('blog','itineraries','fixedPrograms','upcomingPrograms','slide','testimonials','youtubeSliders'));
     }

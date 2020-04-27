@@ -20,7 +20,9 @@ class YoutubeSlider extends Model
         'title',
         'slug', 
         'thumbnail_url',
-        'youtube_url'
+        'youtube_url',
+        'position',
+        'is_active'
     ];
 
     public function getEmbededVideoHtmlAttribute()
