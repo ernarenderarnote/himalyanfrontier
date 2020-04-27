@@ -374,22 +374,25 @@
       <div class="row">
           <div class="col-md-3 col-sm-3">
               <div class="box1_outer99">
-                 <a href="#"><img src="https://www.himalayanfrontiers.com/wp-content/uploads/2015/12/lato.jpg"> </a>
+                 <a href="#"><img src="{{url('images/lato.png')}}" alt="" class="img-fluid logo-img mt-1"> </a>
               </div>
           </div>
           <div class="col-md-3 col-sm-3">
               <div class="box1_outer99">
-                 <a href="#"><img src="https://www.himalayanfrontiers.com/wp-content/uploads/2015/12/atoai.jpg"> </a>
+                 <a href="#">
+<img src="{{url('images/atoai.png')}}" alt="" class="img-fluid logo-img mt-1"> </a>
               </div>
           </div>
           <div class="col-md-3 col-sm-3">
               <div class="box1_outer99">
-                <a href="#"> <img src="https://www.himalayanfrontiers.com/wp-content/uploads/2015/12/imf_logo1.gif"></a> 
+                <a href="#"> <img src="{{url('images/fountion.png')}}" alt="" class="img-fluid logo-img mt-1"></a> 
               </div>
           </div>
           <div class="col-md-3 col-sm-3">
               <div class="box1_outer99">
-                 <a href="#"><img src="https://www.himalayanfrontiers.com/wp-content/uploads/2015/12/hp-tourism-logo.jpg"> </a>
+                 <a href="#">
+                 <img src="{{url('images/hp-tourism-logo.png')}}" alt="" class="img-fluid logo-img mt-1">
+                 </a>
               </div>
           </div>
           

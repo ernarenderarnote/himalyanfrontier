@@ -138,7 +138,23 @@ class SliderController extends Controller
             $input['photo'] = json_encode($images_uploaded);    
         }elseif($request->has('gallery_upload_img') && !null == $request->gallery_upload_img){
             $input['photo'] = json_encode($request->gallery_upload_img);
-        }
+        }else{
+			$sliderImages =  $request->file('photo');
+
+            $images_name = array();
+
+            foreach($sliderImages as $sliderImage){
+
+                $images_name[] = $sliderImage->getClientOriginalName();
+
+                $imagesname = $sliderImage->getClientOriginalName();
+
+                $sliderImage->storeAs('images/sliders/', $imagesname);
+
+            }
+            $images_uploaded = $images_name;
+			$input['photo']  = json_encode($images_uploaded);
+		}
 
         if( $slide->update($input) ){
             $response = ['message' => 'Slider Updated Successfully.', 'alert-type' => 'success'];

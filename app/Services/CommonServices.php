@@ -77,15 +77,17 @@ class CommonServices {
 			foreach($orders as $order ){
 				
 				$itinerary_id =  $order['itinerary_id'];  
-				$itinerary    = Itinerary::where('id',$itinerary_id)->first()->title;	
-				$new_booking[] = array(
-					'notification_id' => $d['id'],
-					'order_id' => $order['id'],
-					'itinerary_name' => $itinerary,
-				);		
+				$itinerary    = Itinerary::where('id',$itinerary_id)->first();
+				if($itinerary){
+					$new_booking[] = array(
+						'notification_id' => $d['id'],
+						'order_id' => $order['id'],
+						'itinerary_name' => $itinerary->title,
+					);	
+				}	
+					
 			}
 		}
-		
 		return $new_booking;
 	}
 
