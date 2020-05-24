@@ -51,10 +51,51 @@ body a:hover {
 
 
 /***********mega menu css*************/
-.carousel-item img {
+.single_product7.advanced-search-page .carousel-item img {
+    width: 100%;
+    height: 400px !important;
+    /* object-fit: cover; */
+}
+.custom_silder5 p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.custom_border_Bhutan {
+    border: 2px solid red;    
+    width: 50%;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+#carousel-custom .carousel-item img {
     width: 100% !important;
-    height: 300px !important;
-    object-fit: cover;
+    height: 400px !important;
+    object-fit: cover !important;
+}
+.custom_border_hot_deals {
+    border: 2px solid red;
+    width: 14%;
+        margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.custom_border_fixed_departure {
+    border: 2px solid red;
+    width: 23%;
+        margin-top: -10px;
+    margin-bottom: 10px;
+}
+.custom_border_Nepal {
+    border: 2px solid red;
+    width: 23%;
+        margin-top: -10px;
+    margin-bottom: 10px;
+}
+.custom_border_India {
+    width: 78% !important;
+    border: 2px solid red;
+    margin-top: -10px;
+    margin-bottom: 10px;
 }
 
 
@@ -167,7 +208,6 @@ body a:hover {
 	color: red;
 	font-weight: 600;
 	text-transform: uppercase;
-	border-bottom: 2px solid red;
 	margin-bottom: 10px !important;
 }
 .dropdown-item li a {
@@ -176,7 +216,7 @@ body a:hover {
 .navbar-expand-md .navbar-nav .dropdown-menu {
     position: absolute;
     left: 120px;
-    width: 90%;
+    width: 100%;
     top: 40px;
 }
 .left562 input {
@@ -278,6 +318,24 @@ body a:hover {
   color: #428bca;
   font-size: 18px;
 }
+
+
+/*@media screen and (min-device-width: 1400px) and (max-device-width: 1920px) { 
+ .carousel-item img {
+    width: 100% !important;
+    height: 500px !important;
+    object-fit: cover;
+}*/
+.single-page #carousel-custom .carousel-item img {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+}
+     
+}
+
+
+
 
 @media (max-width: 768px) {
   .megamenu {
@@ -453,12 +511,16 @@ a.contact-email {
     margin-bottom: 50px;
     text-align: center;
 }*/
+
 .box1_outer99 {
     margin: 0 auto;
     text-align: center;
 }
 .custom_silder5 {
     margin-top: 30px;
+    clear: both;
+    display: inline-block;
+    text-align: center;
 }
 .btn.custom_btn8 a {
     background-color: red;
@@ -1737,10 +1799,10 @@ h2.widgettitle {
 /* banner bottom grids */
 
 .banner-bottom-w3layouts {
-    margin-top: 20px;
+    margin-top: 5px;
     padding-right: 5%;
     padding-left: 5%;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .about-in .serv-cont-wthree {
@@ -4299,6 +4361,16 @@ background-color: red;
 .custom-drop-menu li a {
     text-transform: none !important;
 }
+
+	@media only screen and (max-width: 1400px) {
+	    
+	 #demo .carousel-item img {
+    width: 100% !important;
+    height: 350px !important;
+    object-fit: cover;
+}   
+	    
+	}
 	@media only screen and (max-width: 1199px) {
     
   .search-w3layouts {
@@ -4559,6 +4631,7 @@ div#suggesstion-box {
     padding: 0 auto;
     text-align: center;
     padding-bottom: 10px;
+    margin-bottom: 30px;
 }
 .tesimonial-btns a {
     background: #fdb714;

@@ -40,6 +40,11 @@
                         <a href="javascript:void(0)" onclick="$('#pro-image').click()">Upload Image</a>
                         <input type="file" id="pro-image" value="{{ $slider->photo }}" name="photo[]" style="display:none;" class="form-control" multiple>
                     </fieldset>
+					@if($errors->has('photo'))
+						<em class="invalid-feedback">
+							{{ $errors->first('photo') }}
+						</em>
+					@endif
                 </div>        
             </div>
             <!--Gallery Images End -->
