@@ -23,6 +23,7 @@ class ItinerariesController extends Controller
             if($request->itinerary_type == 'homepage_itinerary'){
                 $itineraries = Itinerary::with('destinations','activities','currency')
                 ->where('is_homepage','1')
+                ->orderBy('homepage_position', 'asc')
                 ->get();
                 $itinerary_type = 'homepage_itinerary';
             }
@@ -286,4 +287,14 @@ class ItinerariesController extends Controller
         return response(null, 204);
     }
     
+    public function homepageItineraryPosition(Request $request){
+
+        foreach ($request->order as $order) {
+            $itineray = Itinerary::where("id", $order['id'])->first();
+            $itineray->homepage_position = $order['position'];
+            $itineray->save();
+        }
+       
+        return response(['status' => 'success']);
+    }
 }

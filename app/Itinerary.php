@@ -72,6 +72,11 @@ class Itinerary extends Model
         $selected_currency = session()->get('selected_currency');
         if( $selected_currency ){
             $price = $this->getExchangeRate($selected_currency);
+        }else{
+            $currency = Currency::where('is_default','1')->first();
+            if($currency){
+                $price = $this->getExchangeRate($currency->code);
+            }
         }
         return round($price, 2);
 
@@ -90,6 +95,11 @@ class Itinerary extends Model
             $currency = Currency::where('code',$selected_currency)->first();
             $symbol   = $currency->symbol;
            
+        }else{
+            $currency = Currency::where('is_default','1')->first();
+            if($currency){
+                $symbol   = $currency->symbol;
+            }
         }
         return $symbol;
     }

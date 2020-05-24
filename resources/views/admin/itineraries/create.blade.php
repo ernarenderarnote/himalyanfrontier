@@ -241,14 +241,14 @@
                             <input name="is_homepage" type="checkbox" value="1" class="custom-control-input" id="defaultUnchecked2">
                             <label class="custom-control-label" for="defaultUnchecked2">Display in Homepage?</label>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="widget_section">Itinerary Panel</label>
                             <select class="form-control" name="widget_section">
                                 <option value="introduction">Introduction</option>
                                 <option value="fixed_departure">Fixed Departure</option>
                                 <option value="upcoming">Upcoming Program</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="status">Activity Status</label>
                             <select class="form-control" name="status">
@@ -256,7 +256,7 @@
                                 <option value="in_active">In Active</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="status">Homepage Position</label>
                             <input type="number" min="0" class="form-control" name="homepage_position">
                         </div> 
@@ -264,7 +264,7 @@
                         <div class="form-group">
                             <label for="status">Search Position</label>
                             <input type="number" min="0" class="form-control" name="search_position">
-                        </div>     
+                        </div>   -->   
                     </div>
 
                     <div class="col-md-12">

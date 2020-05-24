@@ -49,7 +49,6 @@ class HomeController extends Controller
             ->where('deleted_at',NULL)
             ->where('status','active')
             ->where('is_homepage','1')
-            ->where('widget_section','introduction')
             ->orderBy('homepage_position', 'asc')
             ->take(2)
             ->get();
@@ -57,11 +56,10 @@ class HomeController extends Controller
         $fixedPrograms    = Itinerary::with('destinations','activities','currency')
                 ->where('deleted_at',NULL)
                 ->where('status','active')
-                ->where('fixed_diparture', '1')
                 ->where('is_homepage','1')
-                ->where('widget_section','fixed_departure')
                 ->orderBy('homepage_position', 'asc')
-                ->take(6)
+                ->offset(2)
+                ->limit(6)
                 ->get();
         
         /* $upcomingPrograms = Itinerary::whereHas('schedule', function($query){
@@ -77,9 +75,9 @@ class HomeController extends Controller
                 ->where('deleted_at',NULL)
                 ->where('status','active')
                 ->where('is_homepage','1')
-                ->where('widget_section','upcoming')
                 ->orderBy('homepage_position', 'asc')
-                ->take(6)
+                ->offset(8)
+                ->limit(6)
                 ->get();    
         
         $slide = Slider::where('is_default','1')
@@ -137,8 +135,15 @@ class HomeController extends Controller
         $ratingTo    = '4';
         $itinerary_date = '';
         $search = '';
-        $destinations = Destination::where('deleted_at',NULL)->where('is_active','1')->get(['slug','title']);
-        $activities   = Activity::where('deleted_at',NULL)->where('is_active','1')->get();
+
+        $destinations = Destination::where('deleted_at',NULL)
+            ->where('is_active','1')
+            ->get(['slug','title']);
+
+        $activities   = Activity::where('deleted_at',NULL)
+            ->where('is_active','1')
+            ->get();
+    
         if($request->has('activity') ){
             if(!empty($request->activity )) {
                 $activity  = $request->activity;
@@ -148,7 +153,26 @@ class HomeController extends Controller
             
             if(!empty($request->destination )) {
                 $destination = $request->destination;
-            }    
+            }
+
+            $iti = Itinerary::with(['destinations', 'activities'])
+                ->whereHas('destinations', function (Builder $query) use ($destination){
+                    $query->where('slug', $destination);
+                })
+                ->where('deleted_at',NULL)
+                ->where('status','active')
+                ->get();
+            $activity_ids = array();
+            foreach($iti as $it){
+                $activities_rel = $it->activities;
+                foreach($activities_rel as $rel){
+                    $activity_ids[] = $rel->id;
+                }
+            }
+            $activities =  Activity::where('deleted_at',NULL)
+            ->where('is_active','1')
+            ->whereIn('id',$activity_ids)
+            ->get();
         }
         if($request->has('itinerary_type')){
             $itinerary_type = $request->itinerary_type;
