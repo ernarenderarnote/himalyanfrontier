@@ -51,6 +51,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     
     Route::delete('itineraries/destroy', 'ItinerariesController@massDestroy')->name('itineraries.massDestroy');
 
+    Route::post('post-sortable','ItinerariesController@homepageItineraryPosition')->name('itineraries.hompage');
+
     Route::resource('itineraries', 'ItinerariesController');
 
 
@@ -147,6 +149,8 @@ Route::get('get-state-list','BookingController@getStateList');
 Route::match(['post'],'/makePayment', [ "as" =>"makePayment", 'uses' => "BookingController@makePayment", 'middleware' => ['auth']]);
 
 Route::match(['post'],'/sendinquery', [ "as" =>"sendinquery", 'uses' => "InqueryController@store"]);
+
+Route::match(['post'],'/pricerequest', [ "as" =>"priceRequest", 'uses' => "InqueryController@priceRequest"]);
 
 Route::match(['get','post'],'/payment_success/{id}/{itinerary_id}/{payment_mode}/{participant}/{order_status}', [ "as" =>"successPayment", 'uses' => "BookingController@paymentSuccess"]);
 

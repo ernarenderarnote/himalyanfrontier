@@ -182,18 +182,20 @@
 										</div>
 										
 										<div class="book_now">
-										<h4><small>Per Person</small><span class="">{{$itinerary->currency_symbol}} {{ $itinerary->converted_price }}</span></h4>
-										<div class="btn_ouer">
-											@if( $itinerary->converted_price )
-												<form action="{{route('booking')}}" method="POST">
-													<input type="hidden" name="_token" value="{{ csrf_token() }}">	
-													<input type="hidden" name="activity_id" value="{{$itinerary->id}}">	
-													<button class="btn" type="submit">BOOK NOW</button>	
-												</form>
+											@if($itinerary->converted_price)
+												<h4><small>Per Person</small><span class="">{{$itinerary->currency_symbol}} {{ $itinerary->converted_price }}</span></h4>
+												<div class="btn_ouer">
+													<form action="{{route('booking')}}" method="POST">
+														<input type="hidden" name="_token" value="{{ csrf_token() }}">	
+														<input type="hidden" name="activity_id" value="{{$itinerary->id}}">	
+														<button class="btn" type="submit">BOOK NOW</button>	
+													</form>	
+												</div>
 											@else
-												<button class="btn btn-request-price">BOOK NOW</button>	
-											@endif			
-										</div>
+												<div class="btn_ouer">
+													<button class="btn contact-price" data-entry-id="{{$itinerary->id}}" type="button">Contact for Price</button>
+												</div>
+											@endif	
 										</div>
 										<div class="btn_ouer read">
 										<a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}">Read More</a>
@@ -211,29 +213,59 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	  aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		  </div>
-		  <div class="modal-body">
-			...
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary">Save changes</button>
-		  </div>
-		</div>
-	  </div>
-	</div>
-
+<!-- Modal -->
+<div class="modal fade" id="contact-price-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contact For Price</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		  <form class="itinerary-price-form" action="{{route('priceRequest')}}" method="post">
+			@csrf
+			<input type="text" id="fname" name="name" placeholder="Your name..">
+			@if($errors->has('name'))
+				<em class="invalid-feedback">
+					{{ $errors->first('name') }}
+				</em>
+			@endif
+			<input type="text" name="email" placeholder="email" >
+			@if($errors->has('email'))
+				<em class="invalid-feedback">
+					{{ $errors->first('email') }}
+				</em>
+			@endif
+			<input type="tel" name="phone" placeholder="phone" >
+			@if($errors->has('phone'))
+				<em class="invalid-feedback">
+					{{ $errors->first('phone') }}
+				</em>
+			@endif
+			<input type="text" name="subject" placeholder="subject" >
+			@if($errors->has('subject'))
+				<em class="invalid-feedback">
+					{{ $errors->first('subject') }}
+				</em>
+			@endif
+			<input type="hidden" name="itinerary_id" value="">
+			<textarea id="desc" name="message" placeholder="Description.." style="height:100px"></textarea>
+			@if($errors->has('description'))
+				<em class="invalid-feedback">
+					{{ $errors->first('description') }}
+				</em>
+			@endif
+			<input type="submit" value="Submit" class="btn">
+		</form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="loader" style="display:none; z-index:9999999999;"><img src="/images/demo_wait.gif"></div>
 </section>
+
 <script>
     $( function() {
     var rating_from = '{{$get_rating_from}}';
@@ -252,5 +284,90 @@
     });
    
   } );
+  
+$(document).ready(function () {
+	$(".contact-price").click(function(e){
+		jQuery.noConflict();
+		var itinerary_id = $(this).attr('data-entry-id');
+		$('input[name="itinerary_id"]').val(itinerary_id);
+		$('#contact-price-modal').modal('show');
+		e.preventDefault();
+	});
+
+	jQuery('.itinerary-price-form').submit(function(e){
+		e.preventDefault();  
+		//jQuery.noConflict();
+		var form = jQuery(this);
+		var data = form.serialize();
+		var action = form.attr('action');
+		var method = form.attr('method');
+		//form validation 
+		jQuery('.itinerary-price-form').validate({
+			ignore: "",
+			rules:{
+				name: {
+					required : true,
+				},
+				email: {
+					required : true,
+					email: true
+				},
+				phone: {
+					required : true,
+					number :true,
+				},
+				subject:{
+					required : true,
+				},
+				message : {
+					required : true,
+				}
+			},
+			messages: {
+				name : {
+					required : 'Please enter your name.',
+				},
+				email : {
+					required : 'Please enter your email',
+					email : 'Email must be a valid email.'
+				},
+				phone : {
+					required : 'Please enter your mobile number',
+					number   : 'Please enter a valid number.'
+				},
+				subject : {
+					required : 'Please enter a subject.',
+				},
+				message : {
+					required : 'Please enter your message.',
+				}
+			},
+		
+		});
+		
+		/*check if form is valid or not*/
+		if (form.valid() === true){
+			jQuery('.loader').show();
+			jQuery.ajax({
+				url: action,
+				cache: false,
+				data:data,
+				type:'POST',
+				success: function(result) {
+					jQuery('.loader').hide();
+					jQuery('#contact-price-modal form')[0].reset();
+					if(result.status == 'success'){
+						toastr.success(result.message);
+					}else{
+						toastr.error("Something went wrong.");
+					}
+					$("#contact-price-modal").modal("hide");
+				}
+			});
+		} 
+		
+	});
+});		
 </script>
+
 @endsection

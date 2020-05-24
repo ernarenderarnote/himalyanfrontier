@@ -158,24 +158,22 @@
                         <!-- </div> -->
                     </ul>
                 </li>
-                <li class="dropdown menu-large nav-item"> <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Hot Deals</a>
+                <!-- <li class="dropdown menu-large nav-item"> <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Hot Deals</a>
                     <ul class="dropdown-menu megamenu">
-                        <!-- <div class="row"> -->
-                            <!-- <li class="col-md-12 dropdown-item"> -->
-                                <ul>
-                                    <li class="dropdown-header">Hot Deals</li>
-                                    <div class="custom_border_hot_deals"></div>
-                                    <div class="custom-drop-menu">
-                                            @foreach($menus->hotDeals() as $hotDeal)
-                                                <li class="col-md-4"><a href="{{ route('activity.slug', ['slug'=>$hotDeal->slug]) }}">{{ $hotDeal->title }}</a>
-                                            @endforeach    
-                                        </li>
-                                    </div>
-                                </ul>
-                        <!--  </li> -->
-                        <!-- </div> -->
+                        
+                        <ul>
+                            <li class="dropdown-header">Hot Deals</li>
+                            <div class="custom_border_hot_deals"></div>
+                            <div class="custom-drop-menu">
+                                    @foreach($menus->hotDeals() as $hotDeal)
+                                        <li class="col-md-4"><a href="{{ route('activity.slug', ['slug'=>$hotDeal->slug]) }}">{{ $hotDeal->title }}</a>
+                                    @endforeach    
+                                </li>
+                            </div>
+                        </ul>
+                    
                     </ul>
-                </li>
+                </li> -->
                 </li>
                   <li class="nav-item"><a href="{{route('aboutUs')}}" class="nav-link">About Us</a>
                 </li>
@@ -184,7 +182,7 @@
                     @if (Route::has('login'))
                             
                         @auth
-                            <li class="dropdown">
+                            <li class="dropdown logged-in-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello,{{Auth::user()->full_name}} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                 <li><a href="{{route('dashboard')}}">Dashboard</a></li>

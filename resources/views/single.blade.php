@@ -242,9 +242,11 @@
 					<div class="nos">					  
 						<div class="tk">							
 							<div class="Date-msain">	
-								<div class="perm">	
+								<div class="perm">
+								@if($activity->converted_price)	
 									<p class="pull-left">Per Person</p>
 									<p class="pull-right">{{$activity->currency_symbol}} {{ $activity->converted_price }}</p>
+								@endif
 								</div>		
 							</div>		
 							<div class="Date-msain">
@@ -294,7 +296,7 @@
 							<h4>SEND INQUIRY</h4>
 							
 						@else
-							<h4>Contact us for Price</h4>
+							<h4>Contact for Price</h4>
 						@endif
 						<form action="{{route('sendinquery')}}" method="post">
 							@csrf

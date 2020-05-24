@@ -143,6 +143,7 @@ $(document).ready(function(){
 $('document').ready(function(){
     $('.advanced_serch_form input[name="destination"]').on('change', function(){
         $('input[name="itinerary_type"]:checked').removeAttr('checked');
+        $('input[name="activity"]:checked').removeAttr('checked');
         $('.advanced_serch_form').submit();
     });
     $('.advanced_serch_form input[name="activity"]').on('change', function(){

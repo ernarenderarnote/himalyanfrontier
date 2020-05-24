@@ -42,9 +42,9 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tablecontents">
                     @foreach($itineraries as $key => $itinerary)
-                        <tr data-entry-id="{{ $itinerary->id }}">
+                        <tr class="sortable_data" data-entry-id="{{ $itinerary->id }}">
                             <td>
 
                             </td>
@@ -100,6 +100,7 @@
         </div>
     </div>
 </div>
+<div class="loader" style="display:none;"><img src="/images/demo_wait.gif"></div>
 @section('scripts')
 @parent
 <script>
@@ -156,7 +157,12 @@
 @can('itinerary_delete')
   dtButtons.push(deleteButton)
 @endcan
-    
+    var fiter_var = "{{ $itinerary_type }}";
+    if( fiter_var == "homepage_itinerary" ){
+        var lengthMenu = [[-1], ['All']];
+    }else{
+        var lengthMenu =  [[10, 25, 50, -1], [10, 25, 50, 'All']];
+    }
     var itineraryFilter = '';
         itineraryFilter += '<form method="post" action="{{ route('admin.itineraries.type') }}">';
         itineraryFilter += '<input type="hidden" name="_token" value="{{ csrf_token() }}">';
@@ -169,7 +175,7 @@
         itineraryFilter += '</form>';
   $('.datatable:not(.ajaxTable)').DataTable({
     buttons: dtButtons, 
-    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "lengthMenu": lengthMenu,
 	'fnDrawCallback': function (oSettings) {
 		$('.dt-buttons').each(function () {
 			$(this).append(itineraryFilter);
@@ -181,6 +187,63 @@ $('.app-body').on('change','.itinerary-filter', function(){
     $(this).closest('form').submit();  
    
 });
+
+var fiter_var = "{{ $itinerary_type }}";
+if( fiter_var == "homepage_itinerary" ){
+    
+    $( "#tablecontents" ).sortable({
+          items: "tr",
+          cursor: 'move',
+          appendTo: "parent",
+          opacity: 1,
+          containment: "document",
+          placeholder: "highlight",
+          helper: fixHelper, 
+          start: function (event, ui) {
+                var rowWidth = $(ui.item).attr('width');
+                $(ui.item).css("width", rowWidth);
+            },
+            out: function (event, ui) {
+                var rowWidth = $(ui.item).attr('width');
+                $(ui.item).css("width", rowWidth);
+        }, 
+          update: function() {
+              sendOrderToServer();
+          } 
+    }).disableSelection();
+    var fixHelper = function(e, ui) {  
+        console.log('here');
+        return ui;  
+    };
+    function sendOrderToServer() {
+        var order = [];
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $('tr.sortable_data').each(function(index,element) {
+            order.push({
+            id: $(this).attr('data-entry-id'),
+            position: index+1
+            });
+        });
+        $('.loader').show();
+        $.ajax({
+            type: "POST", 
+            dataType: "json", 
+            url: "{{ route('admin.itineraries.hompage') }}",
+            data: {
+                    order: order,
+                _token: token
+            },
+            success: function(response) {
+                if (response.status == "success") {
+                    $('.loader').hide();
+                } else {
+                    $('.loader').hide();
+                }
+            }
+        }); 
+    }
+}
+
 </script>
 @endsection
 @endsection
