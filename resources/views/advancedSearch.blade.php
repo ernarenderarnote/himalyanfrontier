@@ -184,11 +184,15 @@
 										<div class="book_now">
 										<h4><small>Per Person</small><span class="">{{$itinerary->currency_symbol}} {{ $itinerary->converted_price }}</span></h4>
 										<div class="btn_ouer">
-											<form action="{{route('booking')}}" method="POST">
-												<input type="hidden" name="_token" value="{{ csrf_token() }}">	
-												<input type="hidden" name="activity_id" value="{{$itinerary->id}}">	
-												<button class="btn" type="submit">BOOK NOW</button>	
-											</form>	
+											@if( $itinerary->converted_price )
+												<form action="{{route('booking')}}" method="POST">
+													<input type="hidden" name="_token" value="{{ csrf_token() }}">	
+													<input type="hidden" name="activity_id" value="{{$itinerary->id}}">	
+													<button class="btn" type="submit">BOOK NOW</button>	
+												</form>
+											@else
+												<button class="btn btn-request-price">BOOK NOW</button>	
+											@endif			
 										</div>
 										</div>
 										<div class="btn_ouer read">
@@ -207,6 +211,28 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	  aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			...
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary">Save changes</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
 </section>
 <script>
     $( function() {

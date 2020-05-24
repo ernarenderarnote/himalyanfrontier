@@ -153,13 +153,13 @@
 						@endfor
 						<span class="review effect">
 							@if($activity->rating == 1)
-								(Easy)
+								Easy
 							@elseif($activity->rating ==2 )
-								(Moderate)
+								Moderate
 							@elseif($activity->rating == 3)
-								(Streneous)
+								Streneous
 							@else
-								(Difficult)
+								Difficult
 							@endif
 						</span>   
 					@endif	

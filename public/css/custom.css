@@ -13,6 +13,11 @@ textarea {
     margin-bottom: 0.333em;
     margin-top: .2rem;
 }
+.four_box3 {
+    background-color: #6c757d!important;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
 
 .dataTables_filter {
     margin-right: .2rem;

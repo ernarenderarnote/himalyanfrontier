@@ -36,5 +36,6 @@
 <link rel="stylesheet" href="{{ asset('build/css/intlTelInput.css') }}">
 <link href="{{ asset('css/toster.css') }}" rel="stylesheet">
 <link href="{{ asset('css/rvslider.css') }}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
 <script src="{{ asset('js/toster.js') }}"></script>
 <script src="{{ asset('js/rvslider.js') }}"></script>

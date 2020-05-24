@@ -118,10 +118,13 @@ body a:hover {
 .dropdown-item:focus {
     outline: inherit !important;
 }
+.box1_outer99 a img {
+    width: 50%;
+}
 .four_box3 {
     background-color: #6c757d!important;
-    padding-top: 30px;
-    padding-bottom: 50px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 .four_box3 h3 {
     color: #fff !important;
@@ -538,7 +541,7 @@ a.contact-email {
     color: #555;
     background-color: #6c757d!important;
     opacity: 0.9;
-    padding-top: 15px;
+    padding-top: 10px;
     padding-bottom: 0px;
     border: 5px solid #f2f2f2;
 }
@@ -782,8 +785,12 @@ h3.videos {
 .programs.custom_pr0gre33 .amet.custom_p99 p {
     height: 200px;
 }
+.itinerary-points {
+    margin-top: 15px;
+}
 .effect {
-	padding-left: 60px !important;
+    padding-left: 60px !important;
+    color: yellow;
 }
 
 .item {
@@ -1799,12 +1806,11 @@ h2.widgettitle {
 /* banner bottom grids */
 
 .banner-bottom-w3layouts {
-    margin-top: 5px;
-    padding-right: 5%;
-    padding-left: 5%;
-    margin-bottom: 5px;
+    margin-top: 10px;
+    padding-right: 8.5%;
+    padding-left: 8.5%;
+    margin-bottom: 10px;
 }
-
 .about-in .serv-cont-wthree {
 	background: #fff;
 	-webkit-box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.06);
@@ -2932,13 +2938,14 @@ i.fa.fa-map-marker {
 
 input[type=text], select, textarea {
   width: 100%;
-  padding: 7px !important;
+  padding: 4px !important;
   border: 1px solid #ccc !important;
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 0px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   resize: vertical;
+  font-size: 14px !important;
 }
 #cost span b {
     font-size: 15px;
@@ -3353,14 +3360,15 @@ ul.itinerary-points p:before {
 }
 
 .sb-section input[type="submit"] {
-	background-color: #e9b02b;
+    background-color: #e9b02b;
     color: white;
-    padding: 8px 0px;
+    padding: 4px 0px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-	margin-top: -15px;
+    margin-top: -15px;
+    font-size: 14px;
 }
 
 .sb-section input[type="submit"]:hover {
@@ -3930,7 +3938,8 @@ a.left.carousel-control span {
 .itinerary-points li p {
     margin-left: 26px;
     margin-top: 0;
-    font-size: 14px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 
@@ -4676,4 +4685,7 @@ font-weight: 200;
 
 .back_outer5 a:hover {
 text-decoration:none;
+}
+.sidebar-right{
+	min-height: 1282px;
 }
