@@ -10,6 +10,7 @@ class MenuServices {
 	public function activities(){
 		$itineraries = Itinerary::with('activities','destinations')
             ->where('deleted_at',NULL)
+            ->where('status','active')
             ->get();
         $results = array();
         foreach($itineraries as $itinerary){

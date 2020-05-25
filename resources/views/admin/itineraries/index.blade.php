@@ -16,7 +16,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable">
+            <table class=" table table-bordered table-striped table-hover datatable" id="sotable-table">
                 <thead>
                     <tr>
                         <th width="10">
@@ -190,27 +190,20 @@ $('.app-body').on('change','.itinerary-filter', function(){
 
 var fiter_var = "{{ $itinerary_type }}";
 if( fiter_var == "homepage_itinerary" ){
-    
     $( "#tablecontents" ).sortable({
           items: "tr",
           cursor: 'move',
           appendTo: "parent",
           opacity: 1,
           containment: "document",
-          placeholder: "highlight",
-          helper: fixHelper, 
-          start: function (event, ui) {
-                var rowWidth = $(ui.item).attr('width');
-                $(ui.item).css("width", rowWidth);
-            },
-            out: function (event, ui) {
-                var rowWidth = $(ui.item).attr('width');
-                $(ui.item).css("width", rowWidth);
-        }, 
+          helper: "clone",
+          placeholder: "ui-state-default",
+          tolerance: "pointer",
           update: function() {
               sendOrderToServer();
           } 
     }).disableSelection();
+
     var fixHelper = function(e, ui) {  
         console.log('here');
         return ui;  

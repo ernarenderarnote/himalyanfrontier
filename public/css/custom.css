@@ -559,3 +559,17 @@ select.itinerary-filter.form-control {
     left: 50%;
     margin: -50px 0px 0px -50px;
 }
+.ui-sortable-helper {
+    background: #e7e7ec !important;
+    color: #b7cdf0;
+    width:100%;
+    display: table; 
+    vertical-align: middle;
+  }
+  .noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
