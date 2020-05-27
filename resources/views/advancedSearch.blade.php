@@ -97,7 +97,7 @@
 									@empty
 								@endforelse
 							</ul>
-							<li class="hot_deal"><input type="radio" name="itinerary_type"  value="hot_deal" {{ $get_itinerary == 'hot_deal' ? 'checked' : '' }}>Hot Deal</li>
+							<!-- <li class="hot_deal"><input type="radio" name="itinerary_type"  value="hot_deal" {{ $get_itinerary == 'hot_deal' ? 'checked' : '' }}>Hot Deal</li> -->
 							<li class="fixed"><input type="radio" name="itinerary_type"  value="fixed_departure" {{ $get_itinerary == 'fixed_departure' ? 'checked' : '' }}>Fixed Departure</li>
 							<h4 class="date4 destinal">Date</h4>
 							<ul class="radei date-li" style="{{ $get_date !='' ? '' : 'display:none'}}">
@@ -183,7 +183,7 @@
 										
 										<div class="book_now">
 											@if($itinerary->converted_price)
-												<h4><small>Per Person</small><span class="">{{$itinerary->currency_symbol}} {{ $itinerary->converted_price }}</span></h4>
+												<h4><span class="">{{$itinerary->currency_symbol}} {{ number_format($itinerary->converted_price,2) }}</span><br/><small>Per Person</small></h4>
 												<div class="btn_ouer">
 													<form action="{{route('booking')}}" method="POST">
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">	

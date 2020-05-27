@@ -132,57 +132,47 @@
                </div>
                <br>
 				<div class="col-md-8 col-sm-12">
-					<div class="row">
-                        @forelse($itineraries as $itinerary)
-                            <div class="col-md-6 col-sm-6">
-                                <div class="true-image"> 
-                                <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}" data-post_id="1641" class="hover-effect popup-gallery"><img src="{{ url('/storage/images/itinerary/featureImages/'.$itinerary->feature_img) }}"></a>                              
-                                </div>
-                                
-                                <div class="amet">
-                                    <div class="left_r45">
-                                <h4 class="yoga">{{$itinerary->title}}</h4>
-                                @forelse($itinerary->destinations as $itineraryDestination)
-                                        <small>{{$itineraryDestination->title}}</small>
-                                        @empty
-
-                                @endforelse                                       
-                                <div class="feedback">
-                                    <div class="five-stars-container" data-toggle="tooltip" title="Difficulty Level"> 
-                                    @if(isset($itinerary->rating))
-                                    @for($i=1; $i<5; $i++)
-                                        @if ($i <= $itinerary->rating )
-                                            <span class="fa fa-star checked"></span>
-                                        @else
-                                            <span class="fa fa-star"></span>
-                                        @endif
-                                    @endfor       
-                                        <span class="review effect">
-                                            @if($itinerary->rating == 1)
-                                                Easy
-                                            @elseif($itinerary->rating ==2 )
-                                                Moderate
-                                            @elseif($itinerary->rating == 3)
-                                                Streneous
-                                            @else
-                                                Difficult
-                                            @endif
-                                        </span>
-                                    @endif
+                    <div class="row">
+                            @forelse($itineraries as $itinerary)
+                                <div class="col-md-6 mb-5">
+                                    <div class="programs-again">
+                                        <div class="true-image">
+                                            <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}" data-post_id="1641" class="hover-effect popup-gallery">
+                                                <img src="{{ url('/storage/images/itinerary/featureImages/'.$itinerary->feature_img) }}">
+                                            </a>
+                                        </div>
+                                        <div class="amet custom_p99">
+                                            <div class="left_r45">
+                                            <h4>{{$itinerary->title}}</h4>
+                                            <ul class="features check">
+                                                {!! $itinerary->activity_points !!}
+                                            </ul>
+                                            <div class="feedback">
+                                                <div class="five-stars-container" data-toggle="tooltip" title="Difficulty Level"> 
+                                                    @if(isset($itinerary->rating))
+                                                    @for($i=1; $i<5; $i++)
+                                                        @if ($i <= $itinerary->rating )
+                                                            <span class="fa fa-star checked"></span>
+                                                        @else
+                                                            <span class="fa fa-star"></span>
+                                                        @endif
+                                                    @endfor       
+                                                        <span class="review effect">Grade</span>
+                                                    @endif
+                                                    </div>
+                                            </div>
+                                            <div class="read-btn">
+                                                <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}">Read More</a>
+                                            </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <ul class="itinerary-points">
-                                    {!! $itinerary->front_activity_points !!}
-                                </ul>
-                                </div>
-                                <div class="read-btn">                                    
-                                    <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}">Read More</a>                                 
-                                </div>
-                                </div>
-                            </div>
-                            @empty
-                        @endforelse      
-					</div>
+                                @empty
+                                
+                            @endforelse    
+                        </div>
+                    </div>
 				</div>
             </div>
          </div>

@@ -26,7 +26,7 @@
                             {{ trans('global.itinerary.fields.name') }}
                         </th>
                         <th>
-                            Avtive
+                            Status
                         </th>
                         <th>
                             Price
