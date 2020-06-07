@@ -6,7 +6,6 @@
     		<img src="{{url('images/himalayn_frontiers_logo_vector2017__1_-pdf_720.png')}}"></p>
     		<h4>404</h4>
             <h3>The page you were looking for could<br> not be found.</h3>
-			{!! $exception->getMessage() !!}
             <div class="back_outer5">
                 <a href="#">Back To Home</a>
             </div>
