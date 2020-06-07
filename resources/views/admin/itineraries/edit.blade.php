@@ -291,16 +291,17 @@
                             <input name="is_homepage" type="checkbox" value="1" class="custom-control-input" id="defaultUnchecked2" {{ $itinerary->is_homepage == '1' ? 'checked' : '' }}>
                             <label class="custom-control-label" for="defaultUnchecked2">Display in Homepage?</label>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="widget_section">Itinerary Panel</label>
+                        <hr/>
+                        <div class="form-group">
+                            <label for="widget_section"><b>Itinerary Panel</b></label>
                             <select class="form-control" name="widget_section">
                                 <option value="introduction" {{ $itinerary->widget_section == 'introduction' ? 'selected' : '' }}>Introduction</option>
                                 <option value="fixed_departure" {{ $itinerary->widget_section == 'fixed_departure' ? 'selected' : '' }}>Fixed Departure</option>
                                 <option value="upcoming" {{ $itinerary->widget_section == 'upcoming' ? 'selected' : '' }}>Upcoming Program</option>
                             </select>
-                        </div> -->
+                        </div>
                         <div class="form-group">
-                            <label for="status">Activity Status</label>
+                            <label for="status"><b>Activity Status</b></label>
                             <select class="form-control" name="status">
                                 <option value="active" {{ $itinerary->status=='active' ? 'selected' : '' }}>Active</option>
                                 <option value="in_active" {{ $itinerary->status=='in_active' ? 'selected' : '' }}>In Active</option>

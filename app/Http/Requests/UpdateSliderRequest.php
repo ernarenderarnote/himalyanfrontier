@@ -18,10 +18,10 @@ class UpdateSliderRequest extends FormRequest
                 Rule::unique('sliders')->ignore($this->slide)->whereNull('deleted_at'),
             ],
 			'photo' => [
-                'required_without:gallery_upload_img,null',
+                'required_without:gallery_upload_img',
             ],
             'photo.*' => [
-				'required_without:gallery_upload_img.*,null',
+				'required_without:gallery_upload_img',
                 'image'
             ]
         ];

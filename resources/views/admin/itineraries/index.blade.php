@@ -26,7 +26,7 @@
                             {{ trans('global.itinerary.fields.name') }}
                         </th>
                         <th>
-                            Status
+                            Type
                         </th>
                         <th>
                             Price
@@ -36,6 +36,9 @@
                         </th>
                         <th>
                             Activities
+                        </th>
+                        <th>
+                            Status
                         </th>
                         <th>
                             &nbsp;
@@ -52,7 +55,13 @@
                                 {{ $itinerary->title ?? '' }}
                             </td>
                             <td>
-                            <span class="badge badge-success">{{ $itinerary->status ?? '' }}</span>
+                                @if($itinerary->fixed_diparture == '1')
+                                    <span class="badge badge-info">Fixed Departure</span>
+                                    @elseif($itinerary->hot_deal == '1')
+                                        <span class="badge badge-info">Hot Deal</span>
+                                    @else
+
+                                @endif
                             </td>
                             <td>
                                 {{ $itinerary->price ? $itinerary->currency->symbol.' '.$itinerary->price : ' '  }}
@@ -60,7 +69,7 @@
                             <td>
                                 @if(isset($itinerary->destinations))
                                     @foreach($itinerary->destinations as $destination)
-                                        <span class="badge badge-success">{{$destination->title}}</span>
+                                        <span class="badge badge-danger">{{$destination->title}}</span>
                                     @endforeach
                                 
                                 @endif
@@ -72,6 +81,9 @@
                                     @endforeach
                                 
                                 @endif
+                            </td>
+                            <td>
+                                <span class="badge badge-success">{{ $itinerary->status ?? '' }}</span>
                             </td>
                             <td>
                                 @can('itinerary_show')
@@ -164,32 +176,60 @@
         var lengthMenu =  [[10, 25, 50, -1], [10, 25, 50, 'All']];
     }
     var itineraryFilter = '';
-        itineraryFilter += '<form method="post" action="{{ route('admin.itineraries.type') }}">';
+        itineraryFilter += '<form method="post" action="{{ route('admin.itineraries.type',['all']) }}">';
         itineraryFilter += '<input type="hidden" name="_token" value="{{ csrf_token() }}">';
+        itineraryFilter += '<input type="hidden" name="filter_type" value="homepage">';
         itineraryFilter += '<select name="itinerary_type" class="itinerary-filter form-control">';
-        itineraryFilter += '<option value="">Filter Itinerary</option>';
-        itineraryFilter += '<option value="homepage_itinerary" {{ $itinerary_type == "homepage_itinerary" ? "selected" : "" }}>Homepage Itinerary</option>';
-        itineraryFilter += '<option value="hot_deal" {{ $itinerary_type == "hot_deal" ? "selected" : "" }} >Hot Deal</option>';
-        itineraryFilter += '<option value="fixed_departure" {{ $itinerary_type == "fixed_departure" ? "selected" : "" }} >Fixed Departure</option>';
+        itineraryFilter += '<option value="">Itinerary</option>';
+        itineraryFilter += '<option value="introduction" {{ $itinerary_type == "introduction" ? "selected" : "" }}>Introduction Itinerary</option>';
+        itineraryFilter += '<option value="fixed-departure" {{ $itinerary_type == "fixed-departure" ? "selected" : "" }} >Fixed Departure</option>';
+        itineraryFilter += '<option value="upcoming-programs" {{ $itinerary_type == "upcoming-programs" ? "selected" : "" }} >Upcoming Programs</option>';
+        itineraryFilter += '<option value="hot-deal" {{ $itinerary_type == "hot-deal" ? "selected" : "" }} >Hot Deal</option>';
         itineraryFilter += '</select>';
         itineraryFilter += '</form>';
+
+    var activityFilter = '';
+        activityFilter += '<form method="post" action="{{ route('admin.itineraries.activity',['all']) }}">';
+        activityFilter += '<input type="hidden" name="_token" value="{{ csrf_token() }}">';
+        activityFilter += '<input type="hidden" name="filter_type" value="activity">';
+        activityFilter += '<select name="itinerary_activity_type" class="itinerary-activity-filter form-control">';
+        activityFilter += '<option value="">Activity</option>';
+        @php if(isset($activities)){
+                foreach($activities as $activity){ @endphp
+                    activityFilter += '<option value="{{$activity->slug}}" {{ $itinerary_type == $activity->slug ? "selected" : "" }} >{{$activity->title}}</option>';
+                @php }
+            }
+        @endphp
+        activityFilter += '</select>';
+        activityFilter += '</form>';    
   $('.datatable:not(.ajaxTable)').DataTable({
     buttons: dtButtons, 
         "lengthMenu": lengthMenu,
 	'fnDrawCallback': function (oSettings) {
 		$('.dt-buttons').each(function () {
-			$(this).append(itineraryFilter);
-		});
+            $('.buttons-colvis').css('display','none');
+			$(this).append(itineraryFilter +' '+activityFilter);
+		}); 
 	} } );
 })
 $('.app-body').on('change','.itinerary-filter', function(){
-    
+    var filter_type = $(this).val();
+    var url = '{{ route("admin.itineraries.type", ":id") }}';
+    url = url.replace(':id', filter_type);
+    $(this).closest('form').attr('action',url);
     $(this).closest('form').submit();  
    
 });
-
-var fiter_var = "{{ $itinerary_type }}";
-if( fiter_var == "homepage_itinerary" ){
+$('.app-body').on('change','.itinerary-activity-filter', function(){
+    var filter_type = $(this).val(); 
+    var url = '{{ route("admin.itineraries.activity", ":id") }}';
+    url = url.replace(':id', filter_type);
+    $(this).closest('form').attr('action',url);
+    $(this).closest('form').submit();  
+   
+});
+var filter_var = "{{ $filter_type }}";
+if( filter_var == "homepage" || filter_var == 'activity'){
     $( "#tablecontents" ).sortable({
           items: "tr",
           cursor: 'move',
@@ -224,7 +264,8 @@ if( fiter_var == "homepage_itinerary" ){
             url: "{{ route('admin.itineraries.hompage') }}",
             data: {
                     order: order,
-                _token: token
+                    _token: token,
+                    filter_type:filter_var
             },
             success: function(response) {
                 if (response.status == "success") {

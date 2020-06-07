@@ -46,15 +46,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
 
     Route::resource('users', 'UsersController');
-
-    Route::match(['get','post'],'/itineraries/filter/', [ 'as' => 'itineraries.type', "uses" => "ItinerariesController@index"] );
     
+    Route::match(['get','post'],'/itineraries/{type?}/', [ 'as' => 'itineraries.type', "uses" => "ItinerariesController@itineraryFilter"] );
+
+    Route::match(['get','post'],'/itineraries/{activity?}/', [ 'as' => 'itineraries.activity', "uses" => "ItinerariesController@activityFilter"] );
+
     Route::delete('itineraries/destroy', 'ItinerariesController@massDestroy')->name('itineraries.massDestroy');
 
     Route::post('post-sortable','ItinerariesController@homepageItineraryPosition')->name('itineraries.hompage');
 
     Route::resource('itineraries', 'ItinerariesController');
-
 
     Route::delete('itinerarySchedule/destory/', 'ItinerariesController@scheduleDestroy')->name('itineraries.scheduleDestroy');
 

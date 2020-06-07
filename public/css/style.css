@@ -219,7 +219,7 @@ body a:hover {
 .navbar-expand-md .navbar-nav .dropdown-menu {
     position: absolute;
     left: 120px;
-    width: 100%;
+    width: 82%;
     top: 40px;
 }
 .left562 input {
@@ -790,7 +790,7 @@ h3.videos {
 }
 .effect {
     padding-left: 60px !important;
-    color: yellow;
+    color: #ff0000;
 }
 
 .item {

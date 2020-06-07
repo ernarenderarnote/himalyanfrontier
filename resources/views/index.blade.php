@@ -156,9 +156,19 @@
                                                             <span class="fa fa-star"></span>
                                                         @endif
                                                     @endfor       
-                                                        <span class="review effect">Grade</span>
+                                                    <span class="review effect">
+                                                        @if($itinerary->rating == 1)
+                                                            Easy
+                                                        @elseif($itinerary->rating ==2 )
+                                                            Moderate
+                                                        @elseif($itinerary->rating == 3)
+                                                            Streneous
+                                                        @else
+                                                            Difficult
+                                                        @endif
+                                                    </span> 
                                                     @endif
-                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="read-btn">
                                                 <a href="{{ route('activity.slug', ['slug'=>$itinerary->slug]) }}">Read More</a>
@@ -208,7 +218,17 @@
                                             <span class="fa fa-star"></span>
                                         @endif
                                     @endfor       
-                                        <span class="review effect">Grade</span>
+                                    <span class="review effect">
+                                        @if($itinerary->rating == 1)
+                                            Easy
+                                        @elseif($itinerary->rating ==2 )
+                                            Moderate
+                                        @elseif($itinerary->rating == 3)
+                                            Streneous
+                                        @else
+                                            Difficult
+                                        @endif
+                                    </span>
                                     @endif
                                     </div>
                             </div>
