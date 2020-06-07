@@ -577,3 +577,9 @@ select.itinerary-filter.form-control {
     -ms-user-select: none;
     user-select: none;
   }
+  select.itinerary-activity-filter.form-control {
+    width: 235px;
+    position: absolute;
+    top: 0;
+    right: -430px;
+}

@@ -49,6 +49,7 @@ class HomeController extends Controller
             ->where('deleted_at',NULL)
             ->where('status','active')
             ->where('is_homepage','1')
+            ->where('widget_section','introduction')
             ->orderBy('homepage_position', 'asc')
             ->take(2)
             ->get();
@@ -57,29 +58,22 @@ class HomeController extends Controller
                 ->where('deleted_at',NULL)
                 ->where('status','active')
                 ->where('is_homepage','1')
+                ->where('widget_section','fixed_departure')
                 ->orderBy('homepage_position', 'asc')
-                ->offset(2)
                 ->limit(6)
                 ->get();
-        
-        /* $upcomingPrograms = Itinerary::whereHas('schedule', function($query){
-            $query->where('from_date', '>', date('Y-m-d'));
-             })
-            ->with('destinations','activities','currency')
+
+               // whereHas('schedule', function($query){
+                //    $query->where('from_date', '>', date('Y-m-d'));
+                 //   })
+        $upcomingPrograms = Itinerary::with('destinations','activities','currency')
             ->where('deleted_at',NULL)
             ->where('status','active')
+            ->where('widget_section','upcoming')
             ->orderBy('created_at', 'desc')
             ->take(6)
-            ->get(); */
-            $upcomingPrograms = Itinerary::with('destinations','activities','currency')
-                ->where('deleted_at',NULL)
-                ->where('status','active')
-                ->where('is_homepage','1')
-                ->orderBy('homepage_position', 'asc')
-                ->offset(8)
-                ->limit(6)
-                ->get();    
-        
+            ->get(); 
+
         $slide = Slider::where('is_default','1')
             ->where('deleted_at',NULL)
             ->first();

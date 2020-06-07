@@ -241,16 +241,17 @@
                             <input name="is_homepage" type="checkbox" value="1" class="custom-control-input" id="defaultUnchecked2">
                             <label class="custom-control-label" for="defaultUnchecked2">Display in Homepage?</label>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="widget_section">Itinerary Panel</label>
+                        <hr/>
+                        <div class="form-group">
+                            <label for="widget_section"><b>Itinerary Panel</b></label>
                             <select class="form-control" name="widget_section">
                                 <option value="introduction">Introduction</option>
                                 <option value="fixed_departure">Fixed Departure</option>
                                 <option value="upcoming">Upcoming Program</option>
                             </select>
-                        </div> -->
+                        </div>
                         <div class="form-group">
-                            <label for="status">Activity Status</label>
+                            <label for="status"><b>Activity Status</b></label>
                             <select class="form-control" name="status">
                                 <option value="active">Active</option>
                                 <option value="in_active">In Active</option>

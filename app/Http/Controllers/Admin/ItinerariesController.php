@@ -18,14 +18,16 @@ class ItinerariesController extends Controller
     public function index(Request $request)
     {
         abort_unless(\Gate::allows('itinerary_access'), 403);
+        $activities = Activity::all();
         $itinerary_type = '';
         if($request->has('itinerary_type') ){
-            if($request->itinerary_type == 'homepage_itinerary'){
+            if($request->itinerary_type == 'introduction'){
                 $itineraries = Itinerary::with('destinations','activities','currency')
                 ->where('is_homepage','1')
+                ->where('widget_section','introduction')
                 ->orderBy('homepage_position', 'asc')
                 ->get();
-                $itinerary_type = 'homepage_itinerary';
+                $itinerary_type = 'introduction';
             }
             elseif($request->itinerary_type == 'hot_deal'){
                 $itineraries = Itinerary::with('destinations','activities','currency')
@@ -36,8 +38,22 @@ class ItinerariesController extends Controller
             elseif($request->itinerary_type == 'fixed_departure'){
                 $itineraries = Itinerary::with('destinations','activities','currency')
                 ->where('fixed_diparture','1')
+                ->where('is_homepage','1')
+                ->where('widget_section','fixed_departure')
+                ->orderBy('homepage_position', 'asc')
                 ->get();
                 $itinerary_type = 'fixed_departure';
+            }
+            elseif($request->itinerary_type == 'upcoming_programs'){
+                $itineraries = Itinerary::whereHas('schedule', function($query){
+                    $query->where('from_date', '>', date('Y-m-d'));
+                    })
+                ->with('destinations','activities','currency')
+                ->where('is_homepage','1')
+                ->where('widget_section','upcoming')
+                ->orderBy('homepage_position', 'asc')
+                ->get();
+                $itinerary_type = 'upcoming_programs';
             }else{
                 $itineraries = Itinerary::with('destinations','activities','currency')->get();
             }
@@ -45,7 +61,7 @@ class ItinerariesController extends Controller
             $itineraries = Itinerary::with('destinations','activities','currency')->get();
         }
         
-        return view('admin.itineraries.index', compact('itineraries','itinerary_type'));
+        return view('admin.itineraries.index', compact('itineraries','itinerary_type','activities'));
     }
 
     public function create()
@@ -288,13 +304,90 @@ class ItinerariesController extends Controller
     }
     
     public function homepageItineraryPosition(Request $request){
-
-        foreach ($request->order as $order) {
-            $itineray = Itinerary::where("id", $order['id'])->first();
-            $itineray->homepage_position = $order['position'];
-            $itineray->save();
+        if($request->filter_type == 'homepage'){
+            foreach ($request->order as $order) {
+                $itineray = Itinerary::where("id", $order['id'])->first();
+                $itineray->homepage_position = $order['position'];
+                $itineray->save();
+            }
         }
+        if($request->filter_type == 'activity'){
+            foreach ($request->order as $order) {
+                $itineray = Itinerary::where("id", $order['id'])->first();
+                $itineray->search_position = $order['position'];
+                $itineray->save();
+            } 
+        }    
        
         return response(['status' => 'success']);
     }
+
+    public function itineraryFilter(Request $request, $type= null){
+        $activities = Activity::all();
+        $itinerary_type = '';
+        $filter_type    = $request->filter_type;
+        if(!empty($type) ){
+            if($request->filter_type == "homepage"){
+                if($type == 'introduction'){
+                    $itineraries = Itinerary::with('destinations','activities','currency')
+                    ->where('is_homepage','1')
+                    ->where('widget_section','introduction')
+                    ->orderBy('homepage_position', 'asc')
+                    ->get();
+                    $itinerary_type = 'introduction';
+                }
+                elseif($type == 'hot_deal'){
+                    $itineraries = Itinerary::with('destinations','activities','currency')
+                    ->where('hot_deal','1')
+                    ->get();
+                    $itinerary_type = 'hot_deal';
+                }
+                elseif($type == 'fixed-departure'){
+                    $itineraries = Itinerary::with('destinations','activities','currency')
+                    ->where('fixed_diparture','1')
+                    ->where('is_homepage','1')
+                    ->where('widget_section','fixed_departure')
+                    ->orderBy('homepage_position', 'asc')
+                    ->get();
+                    $itinerary_type = 'fixed-departure';
+                }
+                elseif($type == 'upcoming-programs'){
+                    $itineraries = Itinerary::with('destinations','activities','currency')
+                    ->where('is_homepage','1')
+                    ->where('widget_section','upcoming')
+                    ->orderBy('homepage_position', 'asc')
+                    ->get();
+                    $itinerary_type = 'upcoming-programs';
+                }else{
+                    $itineraries = Itinerary::with('destinations','activities','currency')->get();
+                }
+            }elseif($request->filter_type =="activity" ){
+                $activity = Activity::with('itinerary')->where('slug',$type)->first();
+                $all_itinerary = $activity->itinerary;
+                if($all_itinerary){
+                    $itinerary_ids = array();
+                    foreach($all_itinerary as $itinerary){
+                        $itinerary_ids[] = $itinerary->id;
+                    }
+                    $itineraries = Itinerary::with('destinations','activities','currency')
+                        ->whereIn('id',$itinerary_ids)
+                        ->orderBy('search_position', 'asc')
+                        ->get();
+                    $itinerary_type = $type;    
+                }else{
+                    $itinerary_type = '';
+                    $itineraries = '';
+                }
+            }else{
+                $itineraries = Itinerary::with('destinations','activities','currency')->get();
+                return redirect()->route('admin.itineraries.index', compact('itineraries'));
+            }    
+        }else{
+            $itineraries = Itinerary::with('destinations','activities','currency')->get();
+        }
+        
+        return view('admin.itineraries.index', compact('itineraries','itinerary_type','activities','filter_type'));
+    }
+
+    
 }
