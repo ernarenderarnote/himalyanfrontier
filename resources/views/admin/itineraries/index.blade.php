@@ -208,6 +208,8 @@
 	'fnDrawCallback': function (oSettings) {
 		$('.dt-buttons').each(function () {
             $('.buttons-colvis').css('display','none');
+            $('.buttons-excel').css('display','none');
+            $('.buttons-print').css('display','none');
 			$(this).append(itineraryFilter +' '+activityFilter);
 		}); 
 	} } );
