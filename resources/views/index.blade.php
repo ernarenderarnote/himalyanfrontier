@@ -123,8 +123,7 @@
                      <p>Himalayan Frontiers, Culture &amp; Adventure tours (Pvt. Ltd.) has 22 years of experience to operate adventure and culture holidays to the less explored and frequently traveled destinations.</p>
                      <br>
                      <p>We propose a large array of trips keeping in mind to meet needs and interests of each individual and different age groups of travelers.</p>
-                     <br> 
-                    <p>We are a team of ex – field men, those started their careers from the beneath of Adventure and culture tourism industry. After 16 years of field experience Himalayan Frontiers has been established in 1996.</p>									
+                     <br> 									
                   </div>
                   <div class="btn custom_btn8">
                     <a href="http://newfrontier.himalayanfrontiers.com/about-us">Read More</a>
