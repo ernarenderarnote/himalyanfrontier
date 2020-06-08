@@ -353,6 +353,8 @@ class ItinerariesController extends Controller
                 }
                 elseif($type == 'upcoming-programs'){
                     $itineraries = Itinerary::with('destinations','activities','currency')
+                    ->where('deleted_at',NULL)
+                    ->where('status','active')
                     ->where('is_homepage','1')
                     ->where('widget_section','upcoming')
                     ->orderBy('homepage_position', 'asc')

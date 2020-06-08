@@ -69,6 +69,7 @@ class HomeController extends Controller
         $upcomingPrograms = Itinerary::with('destinations','activities','currency')
             ->where('deleted_at',NULL)
             ->where('status','active')
+            ->where('is_homepage','1')
             ->where('widget_section','upcoming')
             ->orderBy('homepage_position', 'asc')
             ->take(6)
