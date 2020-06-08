@@ -70,7 +70,7 @@ class HomeController extends Controller
             ->where('deleted_at',NULL)
             ->where('status','active')
             ->where('widget_section','upcoming')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('homepage_position', 'asc')
             ->take(6)
             ->get(); 
 
