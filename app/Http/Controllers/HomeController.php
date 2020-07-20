@@ -85,7 +85,7 @@ class HomeController extends Controller
         
         $blog = Blog::where('is_active','1')
         ->where('deleted_at',NULL)
-        ->orderBy('created_at', 'desc')
+        ->orderBy('position', 'asc')
         ->first();
             
         $youtubeSliders = YoutubeSlider::where('deleted_at',NULL)
@@ -228,6 +228,7 @@ class HomeController extends Controller
                       ->orWhere('title', 'like', '%' . $search . '%');
                 })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])
+                ->orderBy('search_position', 'asc')
                 ->get($required_params)
                 ->paginate(10);
 
@@ -271,7 +272,7 @@ class HomeController extends Controller
                       ->orWhere('title', 'like', '%' . $search . '%');
                 })
                 ->whereBetween('rating', [$ratingFrom, $ratingTo])
-                ->orderBy('search_position', 'asc')
+                ->orderBy('search_country_position', 'asc')
                 ->get($required_params)
                 ->paginate(10);
 

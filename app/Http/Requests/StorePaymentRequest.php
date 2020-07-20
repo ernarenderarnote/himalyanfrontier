@@ -63,12 +63,6 @@ class StorePaymentRequest extends FormRequest
             'state.required'      => 'State is required.',
             'city.required'       => 'City is required.',
             'last_name.required'  => 'Last Name is required.',
-            'last_name.required'  => 'Last Name is required.',
-            'last_name.required'  => 'Last Name is required.',
-            'last_name.required'  => 'Last Name is required.',
-            'last_name.required'  => 'Last Name is required.',
-            'last_name.required'  => 'Last Name is required.',
-
 
         ];
     }

@@ -176,6 +176,7 @@ $('document').ready(function(){
 
     //booking participant add form
     $('select[name="additional_user"]').on('change',function(){
+        $('.loader').show();
         $('.end-participants').html('');
         var numCopies = $(this).val();
         if(numCopies == ''){
@@ -228,10 +229,11 @@ $('document').ready(function(){
             $('.amount-including-tax').html(parseFloat(bank_charges).toFixed(2)) ;
             $('.total_incl_tax').html(total_incl_tax.toFixed(2));
         }
-
+        //$('.loader').hide();
     });
     
     $('select[name="payment_percentage"]').change(function(){
+        $('.loader').show();  
         var participant_count = $('select[name="additional_user"]').val();
         if(participant_count == ''){
             participant_count = 0;
@@ -258,7 +260,7 @@ $('document').ready(function(){
             $('.amount-including-tax').html(parseFloat(bank_charges).toFixed(2));
             $('.total_incl_tax').html(total_incl_tax.toFixed(2));
         }
-
+        $('.loader').hide();
     });
 });    
 /* when document is ready */
@@ -346,14 +348,6 @@ $(document).ready(function() {
         "gender[0]":{
           required:true
         },
-        "height[0]":{
-          required:true,
-          digits:true
-        },
-        "weight[0]":{
-          required:true,
-          digits:true
-        },
         address:{
           required:true
         },
@@ -366,12 +360,6 @@ $(document).ready(function() {
         pin_code:{
           required:true,
           digits:true
-        },
-        source:{
-          required:true
-        },
-        travelexperiance:{
-          required:true
         },
         agree : {
            required : true
@@ -400,12 +388,6 @@ $(document).ready(function() {
         "gender[0]":{
           required:"Please select gender"
         },
-        height:{
-          required:"Please enter height"
-        },
-        weight:{
-          required:"Please enter weight"
-        },
         address:{
           required:"Please enter address"
         },
@@ -418,13 +400,6 @@ $(document).ready(function() {
         pin_code:{
           required:"Please enter pin"
         },
-        source:{
-          required:"Please select option"
-        },
-        travelexperiance:{
-          required:"Please select option"
-        },
-       
         agree:{
           required:"Please check term & conditions"
         },

@@ -357,7 +357,7 @@
                         @endforelse    
                     </div>
                 </div>
-                <div class="rvs-nav-container rvs-bottom-center">
+                <!--<div class="rvs-nav-container rvs-bottom-center">
                     <a class="rvs-nav-prev"></a>
                     <div class="rvs-nav-stage">
                         @forelse($youtubeSliders as $youtubeSlider)
@@ -372,6 +372,7 @@
                     </div>
                     <a class="rvs-nav-next"></a>
                 </div>
+                -->
             </div>
          </div>
       </div>

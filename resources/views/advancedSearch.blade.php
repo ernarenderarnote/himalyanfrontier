@@ -82,7 +82,7 @@
 							@endif
 						@endif
 						<ul class="custom_ul">
-							<li class="search5"> <input type="text" name="s" value="{{$s}}" placeholder="Keyword Search.."></li>
+							<li class="search5"> <input type="hidden" name="s" value="{{$s}}" placeholder="Keyword Search.."></li>
 							<h4 class="destinal">Destination <i class="fa fa-chevron-down" aria-hidden="true"></i></h4>
 							<ul class="radei" style="{{ $get_destination !='' ? '' : 'display:none'}}">
 								@forelse($destinations as $destination)

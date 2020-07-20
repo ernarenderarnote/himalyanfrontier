@@ -15,7 +15,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable">
+            <table class=" table table-bordered table-striped table-hover datatable" id="sotable-table">
                 <thead>
                     <tr>
                         <th width="10">
@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
                     @foreach($youtubeVideos as $key => $youtubeVideo)
-                        <tr data-entry-id="{{ $youtubeVideo->id }}">
+                        <tr class="sortable_data" data-entry-id="{{ $youtubeVideo->id }}">
                             <td>
 
                             </td>
@@ -129,7 +129,51 @@ $(function () {
   dtButtons.push(deleteButton)
 
   $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-})
+});
+$( "#sotable-table" ).sortable({
+        items: "tr",
+        cursor: 'move',
+        appendTo: "parent",
+        opacity: 1,
+        containment: "document",
+        helper: "clone",
+        placeholder: "ui-state-default",
+        tolerance: "pointer",
+        update: function() {
+            sendOrderToServer();
+        } 
+}).disableSelection();
+
+var fixHelper = function(e, ui) {  
+    return ui;  
+};
+function sendOrderToServer() {
+    var order = [];
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $('tr.sortable_data').each(function(index,element) {
+        order.push({
+        id: $(this).attr('data-entry-id'),
+        position: index+1
+        });
+    });
+    $('.loader').show();
+    $.ajax({
+        type: "POST", 
+        dataType: "json", 
+        url: "{{ route('admin.youtube.position') }}",
+        data: {
+                order: order,
+                _token: token,
+        },
+        success: function(response) {
+            if (response.status == "success") {
+                $('.loader').hide();
+            } else {
+                $('.loader').hide();
+            }
+        }
+    }); 
+}
 </script>
 @endsection
 @endsection

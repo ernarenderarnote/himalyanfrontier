@@ -97,7 +97,7 @@
                     </em>
                   @endif
                 </div>
-                <div class="col-sm-2 form-group">
+                <!--<div class="col-sm-2 form-group">
                   <label>Height<span>*</span></label>
                   <input type="text" class="form-control part-height" name="height[0]" placeholder="Height" value="{{ $user->profile->height ?? '' }}">
                   @if($errors->has('height.*'))
@@ -105,7 +105,8 @@
                         {{ $errors->first('height.*') }}
                     </em>
                   @endif
-                </div>
+                </div> -->
+                <!--
                 <div class="col-sm-2 form-group">
                   <label>Weight<span>*</span></label>
                   <input type="text" class="form-control part-weight" name="weight[0]" placeholder="Weight" value="{{ $user->profile->weight ?? '' }}">
@@ -115,6 +116,7 @@
                     </em>
                   @endif
                 </div>
+                -->
               </div>
               
               <div class="clear"></div>
@@ -136,13 +138,18 @@
                   @endif
             </div>
             <div class="col-sm-3 form-group">
+              <label>Country<span>*</span></label>
+              <select id="country" name="country" class="form-control" value="{{ old('country') }}">
+								<option value="" selected disabled>Select</option>
+                @foreach($countries as $key => $country)
+                  <option value="{{$key}}"> {{$country}}</option>
+                @endforeach
+              </select>  
+            </div>
+            <div class="col-sm-3 form-group">
               <label>State<span>*</span></label>
-              <input type="text" class="form-control" name="state" placeholder="State" value="{{ old('state') }}" >
-              @if($errors->has('state'))
-                <em class="invalid-feedback">
-                    {{ $errors->first('state') }}
-                </em>
-              @endif
+              <select class="form-control" id="state" name="state">
+              </select>
             </div>
             <div class="col-sm-3 form-group">
               <label>City<span>*</span></label>
@@ -182,7 +189,7 @@
           <h4>Other Details</h4>
           <div class="row col-md-12">
             <div class="col-sm-3 form-group">
-              <label>How did you find about us?<span>*</span></label>
+              <label>How did you find about us?</label>
               <select class="select-box form-control select-option" name="source">
                 <option value="">Please Select</option>
                 <option value="Internet">Internet</option>
@@ -200,7 +207,7 @@
                   <input type="hidden" class="bank-charges"    value="{{$bank_charges}}">
                   <input type="hidden" class="partial-payment" value="{{$partial_payment}}">
                   <input type="hidden" class="remaining-payment" value="{{$remaining_payment}}">
-              <label>Have you joined activity with us?<span>*</span></label>
+              <label>Have you joined activity with us?</label>
               <select class="select-box form-control select-option" name="travelexperiance" tabindex="-1" aria-hidden="true">
                 <option value="">Please Select</option>
                 <option value="yes">Yes</option>
@@ -304,4 +311,36 @@
     </div>
   </div>
 </div>
+<div class="loader" style="display:none;"><img src="/images/demo_wait.gif"></div>
+<script>
+$(document).ready(function(){
+    $('#country').change(function(){
+    $('.loader').show();
+    var countryID = $(this).val();    
+    if(countryID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('get-state-list')}}?country_id="+countryID,
+           success:function(res){   
+            $('.loader').hide();            
+            if(res){
+                $("#state").empty();
+                $("#state").append('<option>Select</option>');
+                $.each(res,function(key,value){
+                    $("#state").append('<option value="'+key+'">'+value+'</option>');
+                });
+           
+            }else{
+               $("#state").empty();
+            }
+           }
+        });
+    }else{
+        $("#state").empty();
+    }      
+   });
+});
+
+
+</script>   
 @endsection

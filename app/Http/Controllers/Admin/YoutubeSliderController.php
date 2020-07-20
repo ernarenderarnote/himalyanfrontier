@@ -18,7 +18,8 @@ class YoutubeSliderController extends Controller
      */
     public function index()
     {
-        $youtubeVideos =  YoutubeSlider::all();
+        $youtubeVideos =  YoutubeSlider::orderBy('position', 'asc')
+        ->get();
         return view('admin.youtubeSlider.index',compact('youtubeVideos'));
     }
 
@@ -117,5 +118,14 @@ class YoutubeSliderController extends Controller
         YoutubeSlider::whereIn('id', request('ids'))->delete();
 
         return response(null, 204);
+    }
+
+    public function youtubePosition(Request $request){
+        foreach ($request->order as $order) {
+            $youtube = YoutubeSlider::where("id", $order['id'])->first();
+            $youtube->position = $order['position'];
+            $youtube->save();
+        }   
+        return response(['status' => 'success']);
     }
 }

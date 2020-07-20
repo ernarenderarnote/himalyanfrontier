@@ -40,7 +40,7 @@
 									<div class="row">
 										<div class="col-md-4 form-group">
 											<label>Country<span>*</span></label>
-											<select id="country" name="country_id" class="form-control" value="{{ old('category_id') }}">
+											<select id="country" name="country_id" class="form-control" value="{{ old('country_id') }}">
 												<option value="" selected disabled>Select</option>
 												@foreach($countries as $key => $country)
 												<option value="{{$key}}"> {{$country}}</option>

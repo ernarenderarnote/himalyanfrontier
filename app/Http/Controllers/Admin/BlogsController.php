@@ -21,7 +21,8 @@ class BlogsController extends Controller
     {
         abort_unless(\Gate::allows('blog_access'), 403);
 
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('position', 'asc')
+            ->get();
 
         return view('admin.blogs.index', compact('blogs'));
     }
@@ -176,5 +177,14 @@ class BlogsController extends Controller
         Blog::whereIn('id', request('ids'))->delete();
 
         return response(null, 204);
+    }
+
+    public function blogPosition(Request $request){
+        foreach ($request->order as $order) {
+            $blog = Blog::where("id", $order['id'])->first();
+            $blog->position = $order['position'];
+            $blog->save();
+        }   
+        return response(['status' => 'success']);
     }
 }

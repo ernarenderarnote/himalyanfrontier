@@ -1,14 +1,69 @@
 @extends('layouts.admin')
 @section('content')
-@can('itinerary_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.itineraries.create") }}">
-                {{ trans('global.add') }} {{ trans('global.itinerary.title_singular') }}
-            </a>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            @can('itinerary_create')
+                <div style="margin-bottom: 10px;">
+                    <div class="col-md-2">
+                        <a class="btn btn-success" href="{{ route("admin.itineraries.create") }}">
+                            {{ trans('global.add') }} {{ trans('global.itinerary.title_singular') }}
+                        </a>
+                    </div>
+                </div>
+            @endcan
+        </div>  
+        <div class="col-md-3">
+            <form class="horizontal-form" method="post" action="{{ route('admin.itineraries.activity',['all']) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="filter_type" value="homepage">
+                <select name="itinerary" class="form-control itinerary-filters">
+                    <option value="">--Select Itinerary--</option>
+                    <option value="introduction" {{ $itinerary_type == "introduction" ? "selected" : "" }}>Introduction Itinerary</option>
+                    <option value="fixed-departure" {{ $itinerary_type == "fixed-departure" ? "selected" : "" }} >Fixed Departure</option>
+                    <option value="upcoming-programs" {{ $itinerary_type == "upcoming-programs" ? "selected" : "" }} >Upcoming Programs</option>
+                    <option value="hot-deal" {{ $itinerary_type == "hot-deal" ? "selected" : "" }} >Hot Deal</option>
+                </select>
+            </form>    
         </div>
-    </div>
-@endcan
+        <div class="col-md-3">     
+            <form class="activity-filter-form" method="post" action="{{ route('admin.itineraries.activity',['all']) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="filter_type" value="country">
+         
+                    <select name="country" class="form-control destination-filter">
+                        <option value="">--Select Country--</option>
+                        @if(isset($countries))
+                            @foreach($countries as $country)
+                                <option value="{{$country->slug}}" {{ $selected_destination == $country->slug ? "selected" : "" }} >{{$country->title}}</option>
+                            @endforeach
+                        @endif
+                    </select>
+            </form>  
+        </div>   
+        <div class="col-md-3">     
+            <form class="activity-filter-form" method="post" action="{{ route('admin.itineraries.activity',['all']) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="filter_type" value="activity">
+                      
+                        <select name="itinerary_activity_type" class="form-control activity-filters">
+                            <option value="">--Select Activity--</option>
+                            @if($activity_lists && $activity_lists != '')
+                                @foreach($activity_lists as $activity_list)
+                                    <option value="{{$activity_list->slug}}" {{ $itinerary_type == $activity_list->slug ? "selected" : "" }}>{{$activity_list->title}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    <input type="hidden" name="country" id="destination_filter_selected">    
+                   
+                    <!--<div class="col-md-2">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Submit">
+                    </div> -->
+                </form>        
+        </div>           
+    </div> 
+
+</div>
 <div class="card">
     <div class="card-header">
         {{ trans('global.itinerary.title_singular') }} {{ trans('global.list') }}
@@ -116,6 +171,30 @@
 @section('scripts')
 @parent
 <script>
+    /* $('.destination-filter').on('change', function(){
+        alert('hello');
+        $('.loader').show();
+        var token   = $('meta[name="csrf-token"]').attr('content');
+        var country = $(this).val();
+        $.ajax({
+            type: "POST", 
+            url: "{{ route('admin.itineraries.countries') }}",
+            data: {
+                    country:country,
+                    _token: token,
+                    
+            },
+            success: function(response) {
+                $('.activity-filters').html('');
+                if (response) {
+                    $('.activity-filters').append(response);
+                    $('.loader').hide();
+                } else {
+                    $('.loader').hide();
+                }
+            }
+        });
+    }); */
     $(function () {
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
@@ -174,47 +253,13 @@
         var lengthMenu = [[-1], ['All']];
     }else{
         var lengthMenu =  [[10, 25, 50, -1], [10, 25, 50, 'All']];
-    }
-    var itineraryFilter = '';
-        itineraryFilter += '<form method="post" action="{{ route('admin.itineraries.type',['all']) }}">';
-        itineraryFilter += '<input type="hidden" name="_token" value="{{ csrf_token() }}">';
-        itineraryFilter += '<input type="hidden" name="filter_type" value="homepage">';
-        itineraryFilter += '<select name="itinerary_type" class="itinerary-filter form-control">';
-        itineraryFilter += '<option value="">Itinerary</option>';
-        itineraryFilter += '<option value="introduction" {{ $itinerary_type == "introduction" ? "selected" : "" }}>Introduction Itinerary</option>';
-        itineraryFilter += '<option value="fixed-departure" {{ $itinerary_type == "fixed-departure" ? "selected" : "" }} >Fixed Departure</option>';
-        itineraryFilter += '<option value="upcoming-programs" {{ $itinerary_type == "upcoming-programs" ? "selected" : "" }} >Upcoming Programs</option>';
-        itineraryFilter += '<option value="hot-deal" {{ $itinerary_type == "hot-deal" ? "selected" : "" }} >Hot Deal</option>';
-        itineraryFilter += '</select>';
-        itineraryFilter += '</form>';
-
-    var activityFilter = '';
-        activityFilter += '<form method="post" action="{{ route('admin.itineraries.activity',['all']) }}">';
-        activityFilter += '<input type="hidden" name="_token" value="{{ csrf_token() }}">';
-        activityFilter += '<input type="hidden" name="filter_type" value="activity">';
-        activityFilter += '<select name="itinerary_activity_type" class="itinerary-activity-filter form-control">';
-        activityFilter += '<option value="">Activity</option>';
-        @php if(isset($activities)){
-                foreach($activities as $activity){ @endphp
-                    activityFilter += '<option value="{{$activity->slug}}" {{ $itinerary_type == $activity->slug ? "selected" : "" }} >{{$activity->title}}</option>';
-                @php }
-            }
-        @endphp
-        activityFilter += '</select>';
-        activityFilter += '</form>';    
+    }       
   $('.datatable:not(.ajaxTable)').DataTable({
     buttons: dtButtons, 
         "lengthMenu": lengthMenu,
-	'fnDrawCallback': function (oSettings) {
-		$('.dt-buttons').each(function () {
-            $('.buttons-colvis').css('display','none');
-            $('.buttons-excel').css('display','none');
-            $('.buttons-print').css('display','none');
-			$(this).append(itineraryFilter +' '+activityFilter);
-		}); 
-	} } );
-})
-$('.app-body').on('change','.itinerary-filter', function(){
+	} );
+});
+$('.app-body').on('change','.itinerary-filters', function(){
     var filter_type = $(this).val();
     var url = '{{ route("admin.itineraries.type", ":id") }}';
     url = url.replace(':id', filter_type);
@@ -222,16 +267,28 @@ $('.app-body').on('change','.itinerary-filter', function(){
     $(this).closest('form').submit();  
    
 });
-$('.app-body').on('change','.itinerary-activity-filter', function(){
+$('.app-body').on('change','.activity-filters', function(){
     var filter_type = $(this).val(); 
-    var url = '{{ route("admin.itineraries.activity", ":id") }}';
-    url = url.replace(':id', filter_type);
-    $(this).closest('form').attr('action',url);
-    $(this).closest('form').submit();  
-   
+    var destination_value = $('.destination-filter option:selected').val();
+    $('#destination_filter_selected').val(destination_value);
+    if(filter_type !='' ){
+        var url = '{{ route("admin.itineraries.activity", ":id") }}';
+        url = url.replace(':id', filter_type);
+        $('.activity-filter-form').attr('action',url);
+        $('.activity-filter-form').submit();  
+    }
+});
+$('.app-body').on('change','.destination-filter', function(){
+    var filter_type = $(this).val(); 
+    if(filter_type !='' ){
+        var url = '{{ route("admin.itineraries.activity", ":id") }}';
+        url = url.replace(':id', filter_type);
+        $(this).closest('form').attr('action',url);
+        $(this).closest('form').submit();  
+    }
 });
 var filter_var = "{{ $filter_type }}";
-if( filter_var == "homepage" || filter_var == 'activity'){
+if( filter_var == "homepage" || filter_var == 'activity' || filter_var == 'country'){
     $( "#tablecontents" ).sortable({
           items: "tr",
           cursor: 'move',
@@ -278,6 +335,7 @@ if( filter_var == "homepage" || filter_var == 'activity'){
             }
         }); 
     }
+    
 }
 
 </script>

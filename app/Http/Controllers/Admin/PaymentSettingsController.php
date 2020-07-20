@@ -28,6 +28,20 @@ class PaymentSettingsController extends Controller
         $paymentSettings->bank_charges = $request->bank_charges;
         
         $paymentSettings->partial_payment = $request->partial_payment;
+        $additional_fields = array();
+        for($i=0;$i<count($request->field_name);$i++){
+            if($request->field_name[$i] !='' && $request->field_value[$i] != ''){
+                $additional_fields[] = array('field_name'=>$request->field_name[$i],
+                'field_value'=> $request->field_value[$i]
+                ); 
+            }    
+        }
+        if(count($additional_fields) > 0){
+            $paymentSettings->additional_fields = json_encode($additional_fields);
+        }else{
+            $paymentSettings->additional_fields = '';
+        }
+       
 
         if($paymentSettings->save()){
             $response = ['message' => 'Settings Saved.', 'alert-type' => 'success'];

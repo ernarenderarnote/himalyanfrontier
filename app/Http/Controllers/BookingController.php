@@ -76,6 +76,7 @@ class BookingController extends Controller
         $user      = User::with('profile')
                     ->where('id',Auth::user()->id)
                     ->first();
+        $countries = Country::get()->pluck("name","id");
         
         session(['activity_id' => $activity_id]);
 
@@ -91,7 +92,7 @@ class BookingController extends Controller
         if($request->has('schedule_id')){
             $selected_schedule_id  =  $request->schedule_id;
         }
-        return view('booking',compact('itinerary','user','bank_charges','partial_payment','remaining_payment','selected_schedule_id'));
+        return view('booking',compact('itinerary','countries', 'user','bank_charges','partial_payment','remaining_payment','selected_schedule_id'));
     }
 
     public function makePayment(Request $request){
@@ -472,9 +473,7 @@ class BookingController extends Controller
     }
    
     public function paymentFailed(Request $request){
-       echo"<pre>";
-       print_r($request->all());
-       die;
+      
     }
 
     public function completePayment(Request $request, $booking_id){
@@ -617,7 +616,6 @@ class BookingController extends Controller
     }
 
     public function storeDirectPayment(StorePaymentRequest $request){
-       // dd($request->all());
         $currency = Currency::where('id',$request->currency_id)->first();
         $payment_method = "direct-payment";
         $country = Country::where('id',$request->country_id)->first();

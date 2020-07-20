@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyItineraryRequest;
 use App\Http\Requests\StoreItineraryRequest;
 use App\Http\Requests\UpdateItineraryRequest;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Itinerary;
@@ -19,6 +20,7 @@ class ItinerariesController extends Controller
     {
         abort_unless(\Gate::allows('itinerary_access'), 403);
         $activities = Activity::all();
+        $countries  = Destination::all();
         $itinerary_type = '';
         if($request->has('itinerary_type') ){
             if($request->itinerary_type == 'introduction'){
@@ -61,7 +63,7 @@ class ItinerariesController extends Controller
             $itineraries = Itinerary::with('destinations','activities','currency')->get();
         }
         
-        return view('admin.itineraries.index', compact('itineraries','itinerary_type','activities'));
+        return view('admin.itineraries.index', compact('itineraries','itinerary_type','activities','countries'));
     }
 
     public function create()
@@ -318,14 +320,23 @@ class ItinerariesController extends Controller
                 $itineray->save();
             } 
         }    
-       
+        if($request->filter_type == 'country'){
+            foreach ($request->order as $order) {
+                $itineray = Itinerary::where("id", $order['id'])->first();
+                $itineray->search_country_position = $order['position'];
+                $itineray->save();
+            } 
+        } 
         return response(['status' => 'success']);
     }
 
     public function itineraryFilter(Request $request, $type= null){
         $activities = Activity::all();
         $itinerary_type = '';
+        $selected_destination = '';
         $filter_type    = $request->filter_type;
+        $countries  = Destination::all();
+        $activity_lists = '';
         if(!empty($type) ){
             if($request->filter_type == "homepage"){
                 if($type == 'introduction'){
@@ -363,33 +374,103 @@ class ItinerariesController extends Controller
                 }else{
                     $itineraries = Itinerary::with('destinations','activities','currency')->get();
                 }
+            }elseif($request->filter_type =="country" ){
+                $destination = $request->country;
+                $selected_destination = $destination;
+                $itineraries = Itinerary::with(['destinations', 'activities','currency'])
+                ->whereHas('destinations', function (Builder $query) use ($destination){
+                    $query->where('slug', $destination);
+                })
+                ->where('deleted_at',NULL)
+                ->where('status','active')
+                ->orderBy('search_country_position', 'asc')
+                ->get();
+                $itinerary_type = $type;
+                $activity_lists = $this->activityList($destination); 
             }elseif($request->filter_type =="activity" ){
-                $activity = Activity::with('itinerary')->where('slug',$type)->first();
-                $all_itinerary = $activity->itinerary;
-                if($all_itinerary){
-                    $itinerary_ids = array();
-                    foreach($all_itinerary as $itinerary){
-                        $itinerary_ids[] = $itinerary->id;
-                    }
-                    $itineraries = Itinerary::with('destinations','activities','currency')
-                        ->whereIn('id',$itinerary_ids)
-                        ->orderBy('search_position', 'asc')
-                        ->get();
-                    $itinerary_type = $type;    
-                }else{
-                    $itinerary_type = '';
-                    $itineraries = '';
-                }
+                $destination = $request->country;
+                $selected_destination = $destination;
+                $itineraries = Itinerary::with(['destinations', 'activities','currency'])
+                ->whereHas('destinations', function (Builder $query) use ($destination){
+                    $query->where('slug', $destination);
+                })
+                ->whereHas('activities', function (Builder $query) use ($type){
+                    $query->where('slug', $type);
+                })
+                ->where('deleted_at',NULL)
+                ->where('status','active')
+                ->orderBy('search_position', 'asc')
+                ->get();
+                $itinerary_type = $type;
+                $activity_lists = $this->activityList($destination); 
             }else{
-                $itineraries = Itinerary::with('destinations','activities','currency')->get();
+                $itineraries = Itinerary::with(['destinations', 'activities', 'currency'])
+                ->whereHas('destinations', function (Builder $query) use ($destination){
+                    $query->where('slug', $destination);
+                })
+                ->where('deleted_at',NULL)
+                ->where('status','active')
+                ->get();
                 return redirect()->route('admin.itineraries.index', compact('itineraries'));
             }    
         }else{
             $itineraries = Itinerary::with('destinations','activities','currency')->get();
         }
         
-        return view('admin.itineraries.index', compact('itineraries','itinerary_type','activities','filter_type'));
+        return view('admin.itineraries.index', compact('itineraries','itinerary_type','activities','filter_type','countries','activity_lists','selected_destination'));
     }
 
-    
+    public function countryFilter(Request $request){
+        $destination = $request->country;
+        $itineraries = Destination::with('itinerary')->where('slug','india')->get();
+        $iti = Itinerary::with(['destinations', 'activities'])
+                ->whereHas('destinations', function (Builder $query) use ($destination){
+                    $query->where('slug', $destination);
+                })
+                ->where('deleted_at',NULL)
+                ->where('status','active')
+                ->get();
+            $activity_ids = array();
+            foreach($iti as $it){
+                $activities_rel = $it->activities;
+                foreach($activities_rel as $rel){
+                    $activity_ids[] = $rel->id;
+                }
+            }
+            $activities =  Activity::where('deleted_at',NULL)
+            ->where('is_active','1')
+            ->whereIn('id',$activity_ids)
+            ->get();
+            
+            $html  = '';
+            $html .= '<option vlaue="">--Select Activity--</option>';
+            foreach($activities as $activity){
+                $html .= '<option value="'.$activity->slug.'">'.$activity->title.'</option>'; 
+            }
+            return $html;
+    }
+
+    public function activityList($destination){
+        $itineraries = Destination::with('itinerary')->where('slug','india')->get();
+        $iti = Itinerary::with(['destinations', 'activities'])
+                ->whereHas('destinations', function (Builder $query) use ($destination){
+                    $query->where('slug', $destination);
+                })
+                ->where('deleted_at',NULL)
+                ->where('status','active')
+                ->get();
+            $activity_ids = array();
+            foreach($iti as $it){
+                $activities_rel = $it->activities;
+                foreach($activities_rel as $rel){
+                    $activity_ids[] = $rel->id;
+                }
+            }
+            $activities =  Activity::where('deleted_at',NULL)
+            ->where('is_active','1')
+            ->whereIn('id',$activity_ids)
+            ->get();
+            
+            return $activities;
+    }
 }

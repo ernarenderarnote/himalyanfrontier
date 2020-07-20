@@ -47,6 +47,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('users', 'UsersController');
     
+    Route::match(['get','post'],'/itineraries/countries/', [ 'as' => 'itineraries.countries', "uses" => "ItinerariesController@countryFilter"] );
+    
     Route::match(['get','post'],'/itineraries/{type?}/', [ 'as' => 'itineraries.type', "uses" => "ItinerariesController@itineraryFilter"] );
 
     Route::match(['get','post'],'/itineraries/{activity?}/', [ 'as' => 'itineraries.activity', "uses" => "ItinerariesController@activityFilter"] );
@@ -74,6 +76,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('currencies', 'CurrenciesController');
 
     Route::delete('blogs/destroy', 'BlogsController@massDestroy')->name('blogs.massDestroy');
+    
+    Route::post('blog-sortable','BlogsController@blogPosition')->name('blog.position');
 
     Route::resource('blogs', 'BlogsController');
 
@@ -115,6 +119,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::delete('youtube-slider/destroy', 'YoutubeSliderController@massDestroy')->name('youtube-slider.massDestroy');
     
+    Route::post('youtube-sortable','YoutubeSliderController@youtubePosition')->name('youtube.position');
+
     Route::resource('youtube-slider', 'YoutubeSliderController');
 
     Route::delete('invoices/destroy', 'InvoiceController@massDestroy')->name('invoices.massDestroy');
